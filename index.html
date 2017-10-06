@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+		<script src="thirdParty/jquery/jquery-3.2.1.min.js"></script>
+		<script src="js/peter.js"></script>
+		<script src="js/reem.js"></script>
+		<script src="js/calle.js"></script>
+		<script src="js/joshua.js"></script>
+		<script src="js/emil.js"></script>
+		<link rel="stylesheet" href="thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="thirdParty/font-awesome-4.7.0/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="css/peter.css"/>
+		<link rel="stylesheet" href="css/emil.css"/>
+		<link rel="stylesheet" href="css/joshua.css"/>
+		<link rel="stylesheet" href="css/reem.css"/>
 		<title>Swerea</title>
 		<script>
 			//JSON JavaScript Object Notation
@@ -13,7 +21,6 @@
 				"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
 				"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
 			}
-			
 			function el(name, options) {
 				var el = document.createElement(name);
 				if (options.id) {
