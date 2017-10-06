@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+		<title>Swerea</title>
+		<script>
+			//JSON JavaScript Object Notation
+			var filesystem = {
+				"a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
+				"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
+				"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
+			}
+			
+			function el(name, options) {
+				var el = document.createElement(name);
+				if (options.id) {
+					el.id = options.id;
+				}
+				if (options.class) {
+					el.className = options.class;
+				}
+				if (options.html) {
+					el.innerHTML = options.html;
+				}
+				$.each(options, function(key, value) {
+					el.setAttribute(key, value);
+				});
+				return el;
+			}
+			function drawJSONfileSystem(container, JSONObject) {
+				var ul = document.createElement("ul");
+				ul.className = "sub-section";
+				$.each(JSONObject, function(id, value) {
+					if (value == null) {
+						return;
+					}
+					if (value.type != "folder") {
+						return;
+					}
+					var li_el = document.createElement("li");
+					li_el.setAttribute("data-id", id);
+					var p = document.createElement("p");
+					p.innerHTML = value.name;
+					li_el.appendChild(p);
+					li_el.className = "selectable";
+					for (var i=0;i<value.children.length;i++) {
+						drawJSONfileSystem(li_el, filesystem[value[i]]);
+					}
+					li_el.onclick = function() {
+						var id = this.getAttribute("data-id");
+						drawJSONexplorer(filesystem[id]);
+					}
+					ul.appendChild(li_el);
+				});
+				container.appendChild(ul);
+			}
+			function drawJSONexplorer(JSONObject) {
+				var holder = $("#explorer")[0];
+				$(holder).empty();
+				var iconName; 
+				$.each(JSONObject.children, function(id, value) {
+					var item = filesystem[value];
+					if (item.type == "folder") {
+						iconName = "fa-folder-open";
+					}
+					if (item.type == "file") {
+						iconName = "fa-file-o";
+					}
+					var section = el("section", {class:"file"});
+					var h3 = el("h3", {html:item.name});
+					var i = el("i", {class:"fa " + iconName + " fa-5x"});
+					var h5 = el("h5", {html:"Folder Changed" + item.lastModified});
+					section.appendChild(h3);
+					section.appendChild(i);
+					section.appendChild(h5);
+					holder.appendChild(section);
+				});
+			}
+			
+			
+			$(document).ready(function() {
+				$("#layoutBtn .btn").on("click", function() {
+					("#layoutBtn .btn").attr("disabled", false);
+					$(this).attr("disabled", true);
+				});
+				var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
+				$(fileview).empty();
+			 	drawJSONfileSystem(fileview, filesystem);
+			});
+		</script>
+		<style>
+			body {
+				overflow-y:none;
+				height:100%;
+			}
+			.custom-nav {
+				width:100%;
+				height:17.5mm;
+				background:#FDF2E0;
+				color:#fff;
+				padding:2.5mm;
+				
+				border-bottom:1px solid #000;
+			}
+			.custom-breadcrumb {
+				background:#ABFFFE;
+				border-bottom:1px solid #000;
+				margin-bottom:0;
+				border-radius:0;
+			}
+			.custom-breadcrumb li.active {
+				font-weight:bold;
+				font-size:1.5em;
+			}
+			.custom-breadcrumb a {
+				color:#000;
+				font-weight:bold;
+				font-size:1.5em;
+				
+			}
+			.custom-breadcrumb a:hover {
+				color:#005500; 
+			}
+			.custom-no-padding {
+				padding-left:0;
+				padding-right:0;
+			}
+			.custom-logo {
+				height:12mm;
+			}
+			.no-italic {
+				font-style:normal;
+			}
+			.fileview {
+				width:100%;
+				height:100%;
+				overflow-y:auto;
+				padding:0;
+				margin:0;
+				background:#444;
+			}
+			.fileview ul {
+				width:100%;
+				padding:0;
+				margin:0;
+				background:#444;
+			}
+			.fileview li {
+				margin-bottom:2px;
+				list-style:none;
+				margin-top:2px;
+			}
+			.fileview li p {
+				width:100%;
+				height:100%;
+				color:#fff;
+				padding:5px;
+			}
+			
+			.fileview ul {
+				padding:0;
+			} 
+			.selectable:hover {
+				background:#676;
+			}
+			.file {
+				width:200px;
+				height:200px;
+				border:1px solid #444;
+				text-align:center;
+				float:left;
+				display:inline-block;
+				margin-left:2px;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="custom-nav">
+			<section class="container-fluid">
+				<section class="row">
+					<section class="col-md-3 col-sm-4">
+						<img class="custom-logo" src="img/logo.png"/>
+					</section>
+					<section class="col-md-6 col-sm-8">
+					<!--FROM HERE-->
+						 <div class="input-group">
+						  <input type="text" class="form-control input-lg" placeholder="Search for...">
+						  <span class="input-group-btn">
+							<button class="btn btn-default btn-lg" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						  </span>
+						</div><!-- /input-group -->
+					<!--TO HERE-->
+					</section>
+					<section class="col-md-3 hidden-sm">
+						<div class="btn-group pull-right" id="layoutBtn" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default btn-lg"><i class="fa fa-th-large"></i></button>
+						  <button type="button" class="btn btn-default btn-lg"><i class="fa fa-bars"></i></button>
+						</div>
+					</section>
+				</section>
+			</section>
+		</section>
+		<section class="container-fluid">
+			<section class="row">
+				<section class="col-md-12 custom-no-padding">
+					<ol class="breadcrumb custom-breadcrumb">
+					  <li><a href="#">Home</a></li>
+					  <li><a href="#">Library</a></li>
+					  <li class="active">Data</li>
+					</ol>
+				</section>
+			</section>
+			
+			
+			<section class="row">
+				<section class="col-md-3 custom-no-padding">
+					<section class="fileview" id="fileview">
+						
+					</section>
+				</section>
+			<section class="col-md-9">
+				<section class="hidden" id="">
+					
+				</section>
+				<section id="explorer">
+					<section class="file">
+						<h3>Hello World</h3>
+						<i class="fa fa-folder-open fa-5x"></i>
+						<h5>File Changed: 2017-08-11</h5>
+					</section>
+				</section>
+			</section>
+			</section>
+		</section>
+	</body>
+</html>

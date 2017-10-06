@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+		<title>Swerea</title>
+		<script>
+			//JSON JavaScript Object Notation
+			var filesystem = {
+				"a1":{
+					"folder 1":{
+						"notes":{
+							"today":"today"
+						}
+					}, 
+					"folder 2":{
+						"notes":{
+							"today":"today"
+						},
+						"notes 2":{
+							"today":"today"
+						}
+					}	
+				},
+				"a56":{
+					"folder 2":{
+						"notes":{
+							"tommorow":"tommorow"
+						}
+					}
+				},
+				"a2":{
+					"a stupid folder 2":{
+						"notes":{
+							"tommorow":"tommorow"
+						}
+					},
+					"folder 2":{
+						"notes":{
+							"tommorow":"tommorow"
+						}
+					}
+				}
+			}
+			
+			
+			function drawJSONfileSystem(container, JSONObject) {
+				var ul = document.createElement("ul");
+				ul.className = "sub-section";
+				$.each(JSONObject, function(key, value) {
+					var li_el = document.createElement("li");
+					var p = document.createElement("p");
+					p.innerHTML = key;
+					li_el.appendChild(p);
+					if (typeof value == "object") {
+						drawJSONfileSystem(li_el, value);
+					}
+					ul.appendChild(li_el);
+				});
+				container.appendChild(ul);
+			}
+			
+			
+			$(document).ready(function() {
+				$("#layoutBtn .btn").on("click", function() {
+					("#layoutBtn .btn").attr("disabled", false);
+					$(this).attr("disabled", true);
+				});
+				var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
+				$(fileview).empty();
+			 	drawJSONfileSystem(fileview, filesystem);
+			});
+		</script>
+		<style>
+			body {
+				overflow:none;
+			}
+			.custom-nav {
+				width:100%;
+				height:17.5mm;
+				background:#FDF2E0;
+				color:#fff;
+				padding:2.5mm;
+				
+				border-bottom:1px solid #000;
+			}
+			.custom-breadcrumb {
+				background:#ABFFFE;
+				border-bottom:1px solid #000;
+				margin-bottom:0;
+			}
+			.custom-breadcrumb li.active {
+				font-weight:bold;
+				font-size:1.5em;
+			}
+			.custom-breadcrumb a {
+				color:#000;
+				font-weight:bold;
+				font-size:1.5em;
+				
+			}
+			.custom-breadcrumb a:hover {
+				color:#005500; 
+			}
+			.custom-no-padding {
+				padding-left:0;
+				padding-right:0;
+			}
+			.custom-logo {
+				height:12mm;
+			}
+			.no-italic {
+				font-style:normal;
+			}
+			.fileview {
+				width:100%;
+				height:auto;
+				padding:0;
+				margin:0;
+				background:#444;
+			}
+			.fileview ul {
+				width:100%;
+				height:auto;
+				padding:0;
+				margin:0;
+				background:#444;
+			}
+			.fileview * {
+				width:100%;
+				list-style:none;
+				padding:0;
+				margin:0;
+			}
+			.fileview li {
+				margin-bottom:2px;
+				margin-top:2px;
+			}
+			.fileview .sub-section>li:hover {
+				background:#676;
+			}
+			.fileview li p {
+				width:100%;
+				height:100%;
+				color:#fff;
+				padding:5px;
+			}
+			.fileview ul {
+				padding:5px;
+			} 
+		</style>
+	</head>
+	<body>
+		<section class="custom-nav">
+			<section class="container-fluid">
+				<section class="row">
+					<section class="col-md-3 col-sm-4">
+						<img class="custom-logo" src="img/logo.png"/>
+					</section>
+					<section class="col-md-6 col-sm-8">
+					<!--FROM HERE-->
+						 <div class="input-group">
+						  <input type="text" class="form-control input-lg" placeholder="Search for...">
+						  <span class="input-group-btn">
+							<button class="btn btn-default btn-lg" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						  </span>
+						</div><!-- /input-group -->
+					<!--TO HERE-->
+					</section>
+					<section class="col-md-3 hidden-sm">
+						<div class="btn-group pull-right" id="layoutBtn" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default btn-lg"><i class="fa fa-th-large"></i></button>
+						  <button type="button" class="btn btn-default btn-lg"><i class="fa fa-bars"></i></button>
+						</div>
+					</section>
+				</section>
+			</section>
+		</section>
+		<section class="container-fluid">
+			<section class="row">
+				<section class="col-md-12 custom-no-padding">
+					<ol class="breadcrumb custom-breadcrumb">
+					  <li><a href="#">Home</a></li>
+					  <li><a href="#">Library</a></li>
+					  <li class="active">Data</li>
+					</ol>
+				</section>
+			</section>
+			
+			
+			<section class="row">
+				<section class="col-md-3 custom-no-padding">
+					<ul class="fileview" id="fileview">
+						
+					</ul>
+				</section>
+			</section>
+				
+				
+			<!--
+				<section class="col-md-9">
+					<section class="row hidden" id="">
+						
+					</section>
+					<section class="row" id="listview">
+						
+					</section>
+				</section>
+			-->
+			</section>
+		</section>
+	</body>
+</html>

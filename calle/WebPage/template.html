@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>The HTML5 Herald</title>
+	<meta name="description" content="The HTML5 Herald">
+	<meta name="author" content="SitePoint">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+	<!--[if lt IE 9]>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+ 
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	
+</head>
+
+<body>
+	<section class="custom-nav">
+			<section class="container-fluid">
+				<section class="row">
+					<section class="col-md-3 hidden-sm hidden-xs">
+						<img class="custom-logo" src="img/logo.png"/>
+					</section>
+					<section class="col-md-6 col-sm-8 col-xs-8 search-bar">
+					<!--FROM HERE-->
+						 <div class="input-group">
+						  <input type="text" class="form-control input-lg" id="search-field" placeholder="Search for...">
+						  <span class="input-group-btn">
+							<button class="btn btn-default btn-lg" id="search-btn" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						  </span>
+						</div><!-- /input-group -->
+					<!--TO HERE-->
+					</section>
+					<section class="col-md-3 col-sm-4" col-xs- 4>
+						<div class="btn-group pull-right" id="layoutBtn" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default btn-lg" id="grid-btn"><i class="fa fa-th-large"></i></button>
+						  <button type="button" class="btn btn-default btn-lg" id="list-btn"><i class="fa fa-bars"></i></button>
+						</div>
+					</section>
+				</section>
+			</section>
+		</section>
+	
+	<div class="row no-margin">
+		<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 breadcrumb-element" id="breadcrumb">
+			
+			<div class="parallelogram-breadcrumb breadcrumb-edge parallelogram-base btn myBtn btn-xs">
+				<span>S</span>
+			</div>
+			<div class="parallelogram-breadcrumb breadcrumb-base btn myBtn btn-xs" id="root-nav">
+				<span class="hidden">I</span>
+				<p><i class="fa fa-folder-open-o myIcon"  aria-hidden="true"></i></p>
+			</div>
+			
+
+			
+			
+			
+		</div>
+	</div>
+	
+	
+	<div class="row file-row no-margin">
+		<div class="fill-height file-navigator hidden-sm hidden-xs col-md-3 col-lg-3 col-xl-3" id="nav-tree">
+			
+	
+			
+			
+			<!--<div class="dropdown sidepanel-dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Sort
+			  <span class="caret"></span></button>
+			  <ul class="dropdown-menu">
+				<li><a href="#">Name</a></li>
+				<li><a href="#">Date of Creation</a></li>
+				<li><a href="#">Last Modified Date</a></li>
+			  </ul>
+			</div>
+			<div class="dropdown sidepanel-dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Hide
+			  <span class="caret"></span></button>
+			  <ul class="dropdown-menu">
+				<li><a href="#">.STL</a></li>
+				<li><a href="#">.PTR</a></li>
+				<li><a href="#">.CSM</a></li>
+			  </ul>
+			</div>-->
+		</div> 
+		<div class="file-browser col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9" id="file-browser">
+			<p> Hej </p>
+		</div>
+	</div>
+	
+	<script src="script.js"></script> 
+
+</body>
+</html>
