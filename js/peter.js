@@ -3,6 +3,15 @@ var filesystem = {
 	"a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
 	"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
 	"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
+}	
+function search(m) {
+	var found = [];
+	$.each(filesystem, function(key, value) {
+		if  (value.name.indexOf(m) > -1) {
+			found.push(value);
+		}
+	});	
+	console.log(found);
 }
 function el(name, options) {
 	var el = document.createElement(name);
@@ -73,6 +82,16 @@ $(document).ready(function() {
 	$("#layoutBtn .btn").on("click", function() {
 		("#layoutBtn .btn").attr("disabled", false);
 		$(this).attr("disabled", true);
+	});
+	$("#search-box").keyup(function() {
+		$("#clear-btn").attr("disabled", false);
+		if (this.value.length == 0)  {
+			$("#clear-btn").attr("disabled", true);
+		}
+		search(this.value);
+	});
+	$("#clear-btn").click(function() {
+		$("#search-box").val("").focus();
 	});
 	var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
 	$(fileview).empty();
