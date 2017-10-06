@@ -62,7 +62,7 @@ function drawJSONexplorer(JSONObject) {
 		var section = el("section", {class:"file"});
 		var h3 = el("h3", {html:item.name});
 		var i = el("i", {class:"fa " + iconName + " fa-5x"});
-		var h5 = el("h5", {html:"Folder Changed" + item.lastModified});
+		var h5 = el("h5", {html:"Folder Changed: " + moment(item.lastModified*1000).format("YYYY-MM-DD")});
 		section.appendChild(h3);
 		section.appendChild(i);
 		section.appendChild(h5);
