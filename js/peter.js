@@ -70,6 +70,10 @@ function drawJSONexplorer(JSONObject) {
 	});
 }
 $(document).ready(function() {
+	$("#layoutBtn .btn").on("click", function() {
+		("#layoutBtn .btn").attr("disabled", false);
+		$(this).attr("disabled", true);
+	});
 	var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
 	$(fileview).empty();
  	drawJSONfileSystem(fileview, filesystem);
