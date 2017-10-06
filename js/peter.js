@@ -20,14 +20,17 @@ function el(name, options) {
 	});
 	return el;
 }
-function drawJSONfileSystem(container, JSONObject) {
+function drawJSONfileSystem(container, JSONObject, parentid) {
 	var ul = document.createElement("ul");
 	ul.className = "sub-section";
 	$.each(JSONObject, function(id, value) {
-		if (value == null) {
+		if (!value) {
 			return;
 		}
 		if (value.type != "folder") {
+			return;
+		}
+		if (value.parent != parentid){
 			return;
 		}
 		var li_el = document.createElement("li");
@@ -37,7 +40,8 @@ function drawJSONfileSystem(container, JSONObject) {
 		li_el.appendChild(p);
 		li_el.className = "selectable";
 		for (var i=0;i<value.children.length;i++) {
-			drawJSONfileSystem(li_el, filesystem[value[i]]);
+			console.log(filesystem[value.children[i]]);
+			drawJSONfileSystem(li_el, {id:filesystem[value.children[i]]}, id);
 		}
 		li_el.onclick = function() {
 			var id = this.getAttribute("data-id");
@@ -51,6 +55,9 @@ function drawJSONexplorer(JSONObject) {
 	var holder = $("#explorer")[0];
 	$(holder).empty();
 	var iconName; 
+	if (!JSONObject.children){
+		return;
+	}
 	$.each(JSONObject.children, function(id, value) {
 		var item = filesystem[value];
 		if (item.type == "folder") {
@@ -76,5 +83,5 @@ $(document).ready(function() {
 	});
 	var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
 	$(fileview).empty();
- 	drawJSONfileSystem(fileview, filesystem);
+ 	drawJSONfileSystem(fileview, filesystem, null);
 });
