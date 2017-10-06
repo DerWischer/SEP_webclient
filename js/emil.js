@@ -80,12 +80,10 @@ $(document).ready(function() {
 
     // Change to a list view on the explorer
     $("#btnList").on("click", function() {
-        alert("helo");
         $("#explorer .file-block").attr("class", "file-list");
     });
     // Change to a block view on the explorer
     $("#btnBlock").on("click", function() {
-        alert("helo");
         $("#explorer .file-list").attr("class", "file-block");
     });
 
