@@ -1,7 +1,5 @@
+//Returns an array [[ID, FileInPath], ...] containing the steps necessary to reach root from 'startID' 
 function findPathToRoot(startID ,inputFileSystem){
-	
-	console.log(startID);
-	
 	var currFile = inputFileSystem[startID];
 	var path = [[startID, currFile]];
 	
@@ -13,6 +11,7 @@ function findPathToRoot(startID ,inputFileSystem){
 	return path;
 }
 
+//Draws the breadcrumb with the given path
 function RenderBreadCrumbPath(path){
 	var breadCrumb = document.getElementById("breadcrumb");
 	
@@ -34,30 +33,29 @@ function RenderBreadCrumbPath(path){
 $(document).ready(function() {
 	RenderBreadCrumbPath(findPathToRoot("a", filesystem));
 	
-	
+	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
 		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));
 	});
 	
+	//individual breadcrumb is clicked
 	$(".breadcrumb-element").on("click", ".non-root-crumb", function(){
 		var dataId = this.getAttribute("data-id");
 		drawJSONexplorer(filesystem[dataId]);
-		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));
-		
+		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));	
 	});
 	
+	//root folder is clicked
 	$(".breadcrumb-element").on("click", ".breadcrumb-base", function(){
 		drawJSONexplorer(filesystem[root]);
 		RenderBreadCrumbPath(findPathToRoot(root, filesystem));
 	});
-	
-	
-	
 });
 
-var root = "b";
 
+var root = "b";
+RenderBreadCrumbPath(findPathToRoot(root, filesystem));
 
 
 
