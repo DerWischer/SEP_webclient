@@ -1,0 +1,97 @@
+.breadcrumb-element{
+
+	background-color:#f8f8f8;
+}
+
+.breadcrumb-container{
+	
+}
+
+.parallelogram {
+	-webkit-transform: skew(20deg);
+	   -moz-transform: skew(20deg);
+	     -o-transform: skew(20deg);
+	background: #777;
+	
+	
+}
+
+#breadcrumb-base{
+
+}
+
+.parallelogram-breadcrumb {
+	-webkit-transform: skew(-20deg);
+	   -moz-transform: skew(-20deg);
+	     -o-transform: skew(-20deg);
+	height: 100%;
+	float:left;
+	margin-right:4px;
+
+	padding-left:4px;
+	padding-right:4px;
+	background-color:#f5f5f5;
+	
+	border:1px solid #e7e7e7;
+	
+	margin-top:3px
+}
+
+.parallelogram-breadcrumb span {
+	-webkit-transform: skew(20deg);
+	   -moz-transform: skew(20deg);
+	     -o-transform: skew(20deg);
+	float:left;
+	text-align:center;
+	vertical-align:middle;
+	display: inline-block;
+	
+	line-height: 20px;
+
+}
+
+.breadcrumb-base{
+	height:100%;
+	background-color: #ccc;
+	margin-right:4px;
+	margin-left:-5px;
+	float:left;
+	border:1px solid #aaa;
+	border-left:0;
+}
+
+breadcrumb-base span{
+	opacity:0;
+	
+	
+}
+
+.breadcrumb-edge{
+	height:100%;
+	background-color:#ccc;
+	margin-right:0px;
+	margin-left:-20px;
+	border:1px solid #aaa;
+	border-right:0;
+	
+	
+}
+.breadcrumb-edge span{
+	opacity:0;
+	
+}
+
+.breadcrumb-final{
+	/*background-color:#ABFFFE;*/
+}
+.myBtn{
+	font-size:10px;
+	border-radius:0px;
+	
+}
+
+.myIcon {
+	float:left;
+	font-size:20px !important;
+	
+}
