@@ -11,7 +11,7 @@ function findPathToRoot(startID ,inputFileSystem){
 	return path;
 }
 
-//Draws the breadcrumb with the given path
+//Draws the breadcrumb with the given path. INPUT FORMAT: [[RootID, RootFile], ... , [LastID, LastFile]]
 function RenderBreadCrumbPath(path){
 	var breadCrumb = document.getElementById("breadcrumb");
 	
