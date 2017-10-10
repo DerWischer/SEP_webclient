@@ -49,6 +49,14 @@
 					</section>
 					<section class="col-md-6 col-sm-8">
 						 <div class="input-group">
+						  <span class="input-group-btn">
+							<select id="search-type" class="form-control input-lg resizeselect">
+								<option value="all" selected>All</option>
+								<option value="build">Build</i></option>
+								<option value="design">Design</i></option>
+								<option value="customer">Customer</i></option>
+							</select>
+						  </span>
 						  <input type="text" id="search-box" class="form-control input-lg" placeholder="Search for...">
 						  <span class="input-group-btn">
 							<button id="clear-btn" class="btn btn-default btn-lg" type="button" disabled>
@@ -70,7 +78,6 @@
 			<section class="container-fluid">
 				<div class="row no-margin">
 					<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 breadcrumb-element" id="breadcrumb">
-							
 						<div class="parallelogram-breadcrumb breadcrumb-edge parallelogram-base btn myBtn btn-xs">
 							<span>S</span>
 						</div>

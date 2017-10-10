@@ -81,3 +81,11 @@ body {
 	display:inline-block;
 	margin-left:2px;
 }
+.input-group select {
+	min-width: 100px !important;
+	border-radius: 5px 0px 0px 5px !important;
+	-webkit-appearance: none !important;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}

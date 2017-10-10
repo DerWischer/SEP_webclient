@@ -55,7 +55,9 @@
  		{
  			 parent['nodes'] = nodes
  		}
- 		_.each( nodes, function( child ){ unflatten( filesystem, child ) } );
+ 		_.each( nodes, function( child ){ 
+ 			unflatten( filesystem, child ) 
+ 		} );
   }
  	return tree;
  }
