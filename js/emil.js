@@ -53,7 +53,7 @@ function drawJSONfileSystem(container, JSONObject) {
     container.appendChild(ul);
 }
 function drawJSONexplorer(JSONObject) {
-    var holder = $("#explorer")[0];
+    var holder = $("#gridView")[0];
     $(holder).empty();
     var iconName;
     $.each(JSONObject.children, function(id, value) {
@@ -77,7 +77,7 @@ function drawJSONexplorer(JSONObject) {
 }
 
 function displayTable(JSONObject) {
-    var holder = $("#gridview")[0];
+    var holder = $("#tableView")[0];
     $(holder).empty();
     var iconName;
     var table = el("table", {class:"table"});
@@ -108,22 +108,20 @@ function displayTable(JSONObject) {
 
 $(document).ready(function() {
 
-    var gridview = document.getElementById("gridview"); //equivalant to $("#gridview")[0];
-    $(gridview).empty();
+    var gridview = document.getElementById("gridView");
+    var tableView = document.getElementById("tableView");//equivalant to $("#gridview")[0];
    	displayTable(filesystem);
+   	drawJSONfileSystem(gridview, filesystem);
 
-    // Change to a list view on the explorer
+    // Change to a table view on the explorer
     $("#btnList").on("click", function() {
-        //$("#explorer .file-block").attr("class", "file-list");
-        $(gridview).empty();
-        var id = this.getAttribute("data-id");
-        displayTable(filesystem);
+        gridview.className ="hidden";
+        tableView.className = "";
     });
     // Change to a block view on the explorer
     $("#btnBlock").on("click", function() {
-        //$("#explorer .file-list").attr("class", "file-block");
-        $(gridview).empty();
-        //drawJSONfileSystem(gridview, filesystem);
+        tableView.className = "hidden";
+        gridview.className = "";
     });
 
 });
