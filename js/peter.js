@@ -1,9 +1,9 @@
 //JSON JavaScript Object Notation
-var filesystem = {
+/*var filesystem = {
 	"a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
 	"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
 	"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
-}
+}*/
 function search(m) {
 	$(filesystem, function(key, value) {
 		

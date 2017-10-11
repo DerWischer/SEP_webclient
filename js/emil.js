@@ -1,9 +1,9 @@
 //JSON JavaScript Object Notation
-var filesystem = {
+/*var filesystem = {
     "a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
     "b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
     "c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
-}
+}*/
 
 function el(name, options) {
     var el = document.createElement(name);
@@ -77,64 +77,53 @@ function drawJSONexplorer(JSONObject) {
 }
 
 function displayTable(JSONObject) {
-    var holder = $("#explorer")[0];
+    var holder = $("#gridview")[0];
     $(holder).empty();
     var iconName;
     var table = el("table", {class:"table"});
     var thead = el("thead", {});
     var tbody = el("tbody", {});
-    holder.appendChild(table);
-    table.appendChild(thead);
-    table.appendChild(tbody);
-
-    var theadTitle = el("tr", {});
-    thead.appendChild(theadTitle);
-
-    var t0 = el("th", {html:"Row"});
-    var t1 = el("th", {html:"Name"});
-    var t2 = el("th", {html:"Last changed"});
-    theadTitle.appendChild(t0);
-    theadTitle.appendChild(t1);
-    theadTitle.appendChild(t2);
-    var nr = 0;
-
-
-    $.each(JSONObject.children, function(id, value) {
-
-        var item = filesystem[value];
+    var tr = el("tr", {});
+    tr.appendChild(el("th", {html:"Name"}));
+    tr.appendChild(el("th", {html:"Last changed"}));
+    thead.appendChild(tr);
+    table.appendChild(thead);	
+    $.each(JSONObject, function(id, value) {
+    	console.log(value);
+        var item = filesystem[id];
         console.log(item);
         var tr = el("tr", {});
-        var t1 = el("th", {html:"1"});
         var t2 = el("td", {html:item.name});
-        var t3 = el("td", {html:"Folder Changed" + item.lastModified});
-
-        tr.appendChild(t1);
+        var t3 = el("td", {html:moment(item.lastModified*1000).format("YYYY-MM-DD")});
         tr.appendChild(t2);
         tr.appendChild(t3);
 
         tbody.appendChild(tr);
     });
+    table.appendChild(tbody);
+    holder.appendChild(table);
+    $(table).DataTable();
 }
 
 
 $(document).ready(function() {
 
-    var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
-    $(fileview).empty();
-    drawJSONfileSystem(fileview, filesystem);
+    var gridview = document.getElementById("gridview"); //equivalant to $("#gridview")[0];
+    $(gridview).empty();
+   	displayTable(filesystem);
 
     // Change to a list view on the explorer
     $("#btnList").on("click", function() {
         //$("#explorer .file-block").attr("class", "file-list");
-        $(fileview).empty();
+        $(gridview).empty();
         var id = this.getAttribute("data-id");
-        displayTable(filesystem[id]);
+        displayTable(filesystem);
     });
     // Change to a block view on the explorer
     $("#btnBlock").on("click", function() {
         //$("#explorer .file-list").attr("class", "file-block");
-        $(fileview).empty();
-        drawJSONfileSystem(fileview, filesystem);
+        $(gridview).empty();
+        //drawJSONfileSystem(gridview, filesystem);
     });
 
 });
