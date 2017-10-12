@@ -25,7 +25,7 @@ $(document).ready(function() {
   fileview.appendChild(ul);
 
   $(il1).on("click", function () {
-    setFolder(null);
+    setFolder(rootNodeId);
     console.log("set folder to null");
   });
 
