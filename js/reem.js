@@ -4,11 +4,13 @@
  * ========================================================= */
 // <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
-
-
 $(document).ready(function() {
-	$("#sidebar").css("height", $(window).height()-40 + "px");
-	return;
+  $("#sidebar").css("height", $(window).height()-40 + "px");
+  $("#tree li").on("click", function () {
+    setFolder();
+  });
+  return;
+  /*
   var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
   $(fileview).empty();
   //var el = document.createElement("button");
@@ -23,10 +25,8 @@ $(document).ready(function() {
   ul.appendChild(il1);
   ul.appendChild(il2);
   fileview.appendChild(ul);
+  */
 
-  $(il1).on("click", function () {
-    setFolder(rootNodeId);
-    console.log("set folder to null");
-  });
+ 
 
 });

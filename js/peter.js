@@ -1,4 +1,4 @@
-function setFolder(folderId) {
+function setFolder(id) {
 	/*Set the current window folder*/
 	//windows.settings["currentFolder"] = folderId;
 	//Rendering Functions Here
