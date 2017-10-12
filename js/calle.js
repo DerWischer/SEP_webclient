@@ -14,9 +14,6 @@ function findPathToRoot(startID ,inputFileSystem){
 //Draws the breadcrumb with the given path. INPUT FORMAT: [[RootID, RootFile], ... , [LastID, LastFile]]
 function RenderBreadCrumbPath(id){
 	var holder = $("#breadcrumb");
-	
-	console.log(id);
-	
 	$(holder).empty();
 	breadcrumbs = [];
 	var currentFolder = id;
@@ -89,15 +86,10 @@ function HideDropdownElement(){
 
 function CreateSearchCrumb(searchTerm){
 	var holder = $("#breadcrumb");
-	
 	$(holder).empty();
-	
 	var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":ROOT});
 	var span = el("span", {html:"\""+searchTerm+"\""});
 	breadcrumb.appendChild(span);
-		
-	
-
 	holder.append(breadcrumb);
 }
 
