@@ -1,15 +1,6 @@
-//JSON JavaScript Object Notation
-var filesystem = {
-	"a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
-	"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
-	"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
-}
-window.settings = {
-	currentFolder:null
-}
 function setFolder(folderId) {
 	/*Set the current window folder*/
-	windows.settings["currentFolder"] = folderId;
+	//windows.settings["currentFolder"] = folderId;
 	//Rendering Functions Here
 
 	//Calle's breadcrumb rendering
@@ -21,22 +12,6 @@ function search(m) {
 	$(filesystem, function(key, value) {
 
 	});
-}
-function el(name, options) {
-	var el = document.createElement(name);
-	if (options.id) {
-		el.id = options.id;
-	}
-	if (options.class) {
-		el.className = options.class;
-	}
-	if (options.html) {
-		el.innerHTML = options.html;
-	}
-	$.each(options, function(key, value) {
-		el.setAttribute(key, value);
-	});
-	return el;
 }
 function drawJSONfileSystem(container, JSONObject) {
 	var ul = document.createElement("ul");

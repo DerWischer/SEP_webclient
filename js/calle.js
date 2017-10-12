@@ -36,20 +36,17 @@ $(document).ready(function() {
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
-		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));
+		setFolder(dataId);
 	});
 	
 	//individual breadcrumb is clicked
 	$(".breadcrumb-element").on("click", ".non-root-crumb", function(){
-		var dataId = this.getAttribute("data-id");
-		drawJSONexplorer(filesystem[dataId]);
-		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));	
+		setFolder(this.getAttribute("data-id"));
 	});
 	
 	//root folder is clicked
 	$(".breadcrumb-element").on("click", ".breadcrumb-base", function(){
-		drawJSONexplorer(filesystem[root]);
-		RenderBreadCrumbPath(findPathToRoot(root, filesystem));
+		setFolder(root);
 	});
 });
 
