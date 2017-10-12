@@ -15,7 +15,7 @@ function findPathToRoot(startID ,inputFileSystem){
 function RenderBreadCrumbPath(id){
 	var holder = $("#breadcrumb");
 	
-	
+	console.log(id);
 	
 	$(holder).empty();
 	breadcrumbs = [];
@@ -25,9 +25,9 @@ function RenderBreadCrumbPath(id){
 		var span = el("span", {html:filesystem[currentFolder].name});
 		breadcrumb.appendChild(span);
 		breadcrumb.oncontextmenu = function(e) {
+			console.log(this);
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
-			e.stopPropagation();
 		}
 		breadcrumbs.unshift(breadcrumb);
 		currentFolder = getParent(currentFolder).id;
@@ -71,14 +71,14 @@ function createDropdownMenu(elem){
 
 	
 	$.each(children, function(key, value){
-		var listTag = el("li", {});
+		var listTag = el("li", {"class":"dropdown-element", "data-id":value});
 		var tag = el("a", {"href":"#", html:filesystem[value].name});
 		
 		listTag.appendChild(tag);
 		newElem.push(listTag);
 	});
 	
-		var holder = $("#breadcrumb-dropdown");
+	var holder = $("#breadcrumb-dropdown");
 	$(holder).empty();
 	
 	$.each(newElem, function(key, value) {
@@ -111,6 +111,12 @@ $(document).ready(function() {
 	$("#breadcrumb").on("click", ".non-root-crumb", function(){
 		setFolder(this.getAttribute("data-id"));
 	});
+	//breadcrumb dropdown element is clicked
+	$("#breadcrumb-dropdown").on("click", ".dropdown-element", function(){
+		console.log(this.getAttribute("data-id"));
+		setFolder(this.getAttribute("data-id"));
+	});
+	
 	
 	$("#breadcrumb .custom-breadcrumb").on("click", function(){
 		var id = this.getAttribute('data-id');
