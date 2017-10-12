@@ -1,3 +1,35 @@
+var filesystem  = {
+ 	"a": {"text":"a",
+ 		"parent": "b",
+ 		"type": "folder",
+ 		"name": "Folder-A",
+ 		"lastModified": 1507211462,
+ 		"children": ["f"]
+ 	},
+ 	"b": {"text":"b",
+ 		"parent": null,
+ 		"type": "folder",
+ 		"name": "Folder-B",
+ 		"lastModified": 1507211462,
+ 		"children": ["a", "c"]
+ 	},
+ 	"f": {"text":"f",
+ 		"parent": "a",
+ 		"type": "file",
+ 		"name": "File-F",
+ 		"lastModified": 1507211462,
+ 		"children": []
+ 	},
+ 	"c": {"text":"c",
+ 		"parent": "b",
+ 		"type": "file",
+ 		"name": "File-C",
+ 		"lastModified": 1507211462,
+ 		"children": []
+ 	}
+ }
+
+
 //Returns an array [[ID, FileInPath], ...] containing the steps necessary to reach root from 'startID' 
 function findPathToRoot(startID ,inputFileSystem){
 	var currFile = inputFileSystem[startID];
