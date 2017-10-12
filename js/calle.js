@@ -111,18 +111,3 @@ $(document).ready(function() {
 	RenderBreadCrumbPath(ROOT);
 	
 });
-<<<<<<< HEAD
-RenderBreadCrumbPath(ROOT);
-=======
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> cec6e0e073815603c5819b8fd3c6ed8c16225fe0
