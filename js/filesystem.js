@@ -64,11 +64,19 @@ function getParent(id) {
 	}
 	return filesystem[filesystem[id].parent];
 }
-function setFolder(folderId) {
-	var folderId = folderId || ROOT;
-	RenderBreadCrumbPath(folderId);
-   	displayTable(getChildren(folderId));
-   	drawJSONexplorer(getChildren(folderId));
+function setFolder(id) {
+	var id = id || ROOT;
+	if (!filesystem[id]) {
+		return;
+	}
+	if (filesystem[id].type != "folder") {
+		return;
+	}
+	console.log(filesystem[id]);
+	RenderBreadCrumbPath(id);
+	drawJSONexplorer(id, getChildren(id));
+   	displayTable(id, getChildren(id));
+   	
 }
 function el(name, options) {
 	var el = document.createElement(name);
@@ -89,3 +97,6 @@ function el(name, options) {
 	});
 	return el;
 }
+$(document).ready(function() {
+	setFolder(ROOT);
+});
