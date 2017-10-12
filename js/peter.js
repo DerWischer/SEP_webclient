@@ -12,6 +12,7 @@ $(document).ready(function() {
 	});
 	$("#clear-btn").click(function() {
 		$("#search-box").val("").focus();
+		$("#clear-btn").attr("disabled", true);
 	});
 });
 function searchFileSystem(m) {
