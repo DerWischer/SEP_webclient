@@ -14,36 +14,51 @@ function findPathToRoot(startID ,inputFileSystem){
 //Draws the breadcrumb with the given path. INPUT FORMAT: [[RootID, RootFile], ... , [LastID, LastFile]]
 function RenderBreadCrumbPath(id){
 	var holder = $("#breadcrumb");
+	
+	
+	
 	$(holder).empty();
 	breadcrumbs = [];
 	var currentFolder = id;
 	while (currentFolder != ROOT) {
-		console.log("creating element");
-		var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":id});
-		var span = el("span", {html:getParent(currentFolder).name});
+		console.log("creating element" + currentFolder);
+		var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":currentFolder});
+		var span = el("span", {html:filesystem[currentFolder].name});
+		
+		console.log(currentFolder);
 		breadcrumb.appendChild(span);
 		breadcrumbs.unshift(breadcrumb);
+		
+	
 		currentFolder = getParent(currentFolder).id;
 	}
-	$(breadcrumbs, function(key, value) {
-		holder.appendChild(value);
+	
+	//Remove the root
+	//breadcrumbs.shift();
+	
+	console.log(breadcrumbs);
+	
+	$.each(breadcrumbs, function(key, value) {
+		if(value["data-id"] != ROOT)
+			holder.append(value);
+		
 	});
 }
 
 $(document).ready(function() {
-	RenderBreadCrumbPath(null);
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
 		setFolder(dataId);
 	});
-	//individual breadcrumb is clicked
-	$("#breadcrumb .custom-breadcrumb").on("click", function(){
-		setFolder(this.getAttribute("data-id"));
+	//root folder is clicked
+	$("#root-nav").on("click", function(){
+		setFolder(ROOT);
 	});
 	//root folder is clicked
-	$(".custom-breadcrumb:first-child").on("click", function(){
-		setFolder();
+	$("#breadcrumb").on("click", ".non-root-crumb", function(){
+		setFolder(this.getAttribute("data-id"));
+		console.log("event hit");
 	});
 });
 RenderBreadCrumbPath(ROOT);
