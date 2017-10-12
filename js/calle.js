@@ -87,6 +87,21 @@ function HideDropdownElement(){
 	recycledDropdown.style.display = "none";
 }
 
+function CreateSearchCrumb(searchTerm){
+	var holder = $("#breadcrumb");
+	
+	$(holder).empty();
+	
+	var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":ROOT});
+	var span = el("span", {html:"\""+searchTerm+"\""});
+	breadcrumb.appendChild(span);
+		
+	
+
+	holder.append(breadcrumb);
+}
+
+
 
 $(document).ready(function() {
 	
