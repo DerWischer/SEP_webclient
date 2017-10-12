@@ -4,12 +4,9 @@
 	"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
 	"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
 }*/
-window.settings = {
-	currentFolder:null
-}
 function setFolder(folderId) {
 	/*Set the current window folder*/
-	windows.settings["currentFolder"] = folderId;
+	//windows.settings["currentFolder"] = folderId;
 	//Rendering Functions Here
 	
 	//Calle's breadcrumb rendering
