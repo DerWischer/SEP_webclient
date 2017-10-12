@@ -46,7 +46,21 @@ function getChildren(id) {
 function getParent(id) {
 	return filesystem[filesystem[id].parent];
 }
+<<<<<<< HEAD
 function el(name, options) 	{
+=======
+function setFolder(folderId) {
+	/*Set the current window folder*/
+	//windows.settings["currentFolder"] = folderId;
+	//Rendering Functions Here
+	
+	//Calle's breadcrumb rendering
+	RenderBreadCrumbPath(findPathToRoot(folderId, filesystem));
+	
+	//Rendering Function finish
+}
+function el(name, options) {
+>>>>>>> a9d6337556d5e4c59f517f69c4fea20437155402
 	var el = document.createElement(name);
 	if (!options) {
 		return el;
