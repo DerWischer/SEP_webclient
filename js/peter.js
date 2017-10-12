@@ -12,6 +12,8 @@ function setFolder(folderId) {
 	windows.settings["currentFolder"] = folderId;
 	//Rendering Functions Here
 	
+	//Calle's breadcrumb rendering
+	RenderBreadCrumbPath(findPathToRoot(folderId, filesystem));
 	
 	//Rendering Function finish
 }
