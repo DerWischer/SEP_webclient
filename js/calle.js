@@ -27,6 +27,7 @@ function RenderBreadCrumbPath(id){
 		breadcrumb.oncontextmenu = function(e) {
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
+			e.stopPropagation();
 		}
 		breadcrumbs.unshift(breadcrumb);
 		currentFolder = getParent(currentFolder).id;
@@ -92,6 +93,11 @@ function HideDropdownElement(){
 
 
 $(document).ready(function() {
+	
+	$(document).click(function() {
+		HideDropdownElement();
+	});
+	
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
