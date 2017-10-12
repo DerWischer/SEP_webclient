@@ -3,23 +3,13 @@ function drawJSONexplorer(id, childrenObjects) {
     $(holder).empty();
     var iconName;
 	if (childrenObjects.length == 0) {
-		var panel = el("section", {class:"panel"});
+		var panel = el("section", {class:"panel panel-default"});
 		var panelBody = el("section", {class:"panel-body"});
 		panelBody.appendChild(document.createTextNode("There is nothing here"));
 		panel.appendChild(panelBody);
 		holder.appendChild(panel);
 		return;
 	}
-    var getBack = el("section", {"data-id":getParent(id), class:"file-block"});
-    var b1 = el("h3", {html:"back"});
-    var b2 = el("i", {class:" fa fa-folder-open fa-5x"});
-    var b3 = el("h5", {html:"Get back lol"});
-    getBack.appendChild(b1);
-    getBack.appendChild(b2);
-    getBack.appendChild(b3);
-    if (id != ROOT) {
-    	holder.appendChild(getBack);
-    }
     $.each(childrenObjects, function(id, value) {
         var item = value;
         if (item.type == "folder") {
@@ -31,7 +21,7 @@ function drawJSONexplorer(id, childrenObjects) {
         var section = el("section", {"data-id":value.id, class:"file-block"});
         var h3 = el("h3", {html:item.name});
         var i = el("i", {class:"fa " + iconName + " fa-5x"});
-        var h5 = el("h5", {html:"Folder Changed" + item.lastModified});
+        var h5 = el("h5", {html:"Modified: " + moment(item.lastModified*1000).format("YYYY-MM-DD")});
         section.appendChild(h3);
         section.appendChild(i);
         section.appendChild(h5);

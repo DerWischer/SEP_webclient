@@ -49,7 +49,9 @@ var filesystem  = {
 		"children": []
 	}
 }
-
+function exists(id) {
+	return filesystem.hasOwnProperty(id);
+}
 function getChildren(id) {
 	var children = [];
 	$.each(filesystem[id].children, function(index, value) {
@@ -66,13 +68,12 @@ function getParent(id) {
 }
 function setFolder(id) {
 	var id = id || ROOT;
-	if (!filesystem[id]) {
+	if (!exists(id)) {
 		return;
 	}
 	if (filesystem[id].type != "folder") {
 		return;
 	}
-	console.log(filesystem[id]);
 	RenderBreadCrumbPath(id);
 	drawJSONexplorer(id, getChildren(id));
    	displayTable(id, getChildren(id));
