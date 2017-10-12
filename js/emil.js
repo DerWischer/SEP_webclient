@@ -1,9 +1,3 @@
-//JSON JavaScript Object Notation
-/*var filesystem = {
-    "a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
-    "b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
-    "c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
-}*/
 
 function el(name, options) {
     var el = document.createElement(name);
@@ -56,7 +50,7 @@ function drawJSONexplorer(JSONObject) {
     var holder = $("#gridView")[0];
     $(holder).empty();
     var iconName;
-    $.each(JSONObject.children, function(id, value) {
+    $.each(JSONObject, function(id, value) {
         var item = filesystem[value];
         if (item.type == "folder") {
             iconName = "fa-folder-open";
@@ -64,7 +58,7 @@ function drawJSONexplorer(JSONObject) {
         if (item.type == "file") {
             iconName = "fa-file-o";
         }
-        var section = el("section", {class:"file-block"});
+        var section = el("section", {"data-id":id, class:"file-block"});
         var h3 = el("h3", {html:item.name});
         var i = el("i", {class:"fa " + iconName + " fa-5x"});
         var h5 = el("h5", {html:"Folder Changed" + item.lastModified});
@@ -89,10 +83,8 @@ function displayTable(JSONObject) {
     thead.appendChild(tr);
     table.appendChild(thead);	
     $.each(JSONObject, function(id, value) {
-    	console.log(value);
         var item = filesystem[id];
-        console.log(item);
-        var tr = el("tr", {});
+        var tr = el("tr", {"data-id":id});
         var t2 = el("td", {html:item.name});
         var t3 = el("td", {html:moment(item.lastModified*1000).format("YYYY-MM-DD")});
         tr.appendChild(t2);
@@ -123,5 +115,12 @@ $(document).ready(function() {
         tableView.className = "hidden";
         gridview.className = "";
     });
+
+    $("table.table tbody tr").on("click", function() {
+        alert(this.getAttribute("data-id"));
+    })
+    $("section.gridView section").on("click", function() {
+        alert(this.getAttribute("data-id"));
+    })
 
 });
