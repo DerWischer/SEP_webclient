@@ -45,6 +45,27 @@ function RenderBreadCrumbPath(id){
 	});
 }
 
+
+function onBreadcrumbPress(ev){
+	console.log("press");
+}
+
+
+function MoveDropdownItemsToElement(inputElement){
+	var rect = inputElement.getBoundingClientRect();
+	console.log(rect.bottom);
+	
+
+	var recycledDropdown = document.getElementById('breadcrumb-dropdown');
+	//recycledDropdown = $("#breadcrumb-dropdown").get();
+	
+	recycledDropdown.style.left = rect.left;
+	recycledDropdown.style.top = rect.bottom;
+	recycledDropdown.style.display = "none";
+	
+}
+
+
 $(document).ready(function() {
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
@@ -58,10 +79,32 @@ $(document).ready(function() {
 	//root folder is clicked
 	$("#breadcrumb").on("click", ".non-root-crumb", function(){
 		setFolder(this.getAttribute("data-id"));
-		console.log("event hit");
 	});
+	
+	var myElement = document.getElementById('root-nav');
+
+	var mc = new Hammer(myElement);
+
+	mc.on("press", function(ev) {
+		var hitBreadcrumb;
+		if(ev.target === myElement) {
+			MoveDropdownItemsToElement(ev.target);
+		}
+		else{
+			MoveDropdownItemsToElement(ev.target);
+		}
+		
+		
+	});
+	
+	
+	
+	RenderBreadCrumbPath(ROOT);
+	
 });
-RenderBreadCrumbPath(ROOT);
+
+
+
 
 
 
