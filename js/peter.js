@@ -11,15 +11,15 @@ function setFolder(folderId) {
 	/*Set the current window folder*/
 	windows.settings["currentFolder"] = folderId;
 	//Rendering Functions Here
-	
+
 	//Calle's breadcrumb rendering
 	RenderBreadCrumbPath(findPathToRoot(folderId, filesystem));
-	
+
 	//Rendering Function finish
 }
 function search(m) {
 	$(filesystem, function(key, value) {
-		
+
 	});
 }
 function el(name, options) {
@@ -68,7 +68,7 @@ function drawJSONfileSystem(container, JSONObject) {
 function drawJSONexplorer(JSONObject) {
 	var holder = $("#explorer")[0];
 	$(holder).empty();
-	var iconName; 
+	var iconName;
 	$.each(JSONObject.children, function(id, value) {
 		var item = filesystem[value];
 		if (item.type == "folder") {
@@ -88,15 +88,15 @@ function drawJSONexplorer(JSONObject) {
 	});
 }
 $(document).ready(function() {
-	var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
-	$(fileview).empty();
- 	drawJSONfileSystem(fileview, filesystem);
+	//var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
+	//$(fileview).empty();
+ 	//drawJSONfileSystem(fileview, filesystem);
  	$("#search-type").resizeselect();
 });
 (function($, window){
   var arrowWidth = 30;
 
-  $.fn.resizeselect = function(settings) {  
+  $.fn.resizeselect = function(settings) {
     return this.each(function() { setFolder
 
       $(this).change(function(){
@@ -125,6 +125,6 @@ $(document).ready(function() {
   };
 
   // run by default
-  $("select.resizeselect").resizeselect();                       
+  $("select.resizeselect").resizeselect();
 
 })(jQuery, window);
