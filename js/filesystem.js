@@ -1,6 +1,7 @@
-var rootNodeId = "b";
+var ROOT = "b";
 var filesystem  = {
 	"a": {
+		"id":"a",
 		"parent": "b",
 		"type": "folder",
 		"name": "foldera",
@@ -8,6 +9,7 @@ var filesystem  = {
 		"children": ["f"]
 	},
 	"b": {
+		"id":"b",
 		"parent": null,
 		"type": "folder",
 		"name": "folderb",
@@ -15,6 +17,7 @@ var filesystem  = {
 		"children": ["a", "c", "d"]
 	},
 	"d": {
+		"id":"d",
 		"parent": "b",
 		"type": "folder",
 		"name": "folderd",
@@ -22,6 +25,7 @@ var filesystem  = {
 		"children": []
 	},
 	"f": {
+		"id":"f",
 		"parent": "a",
 		"type": "file",
 		"name": "filef",
@@ -29,9 +33,18 @@ var filesystem  = {
 		"children": []
 	},
 	"c": {
+		"id":"c",
 		"parent": "b",
 		"type": "file",
 		"name": "filec",
+		"lastModified": 1507211462,
+		"children": []
+	},
+		"g": {
+		"id":"g",
+		"parent": "a",
+		"type": "folder",
+		"name": "folderg",
 		"lastModified": 1507211462,
 		"children": []
 	}
@@ -46,22 +59,16 @@ function getChildren(id) {
 }
 
 function getParent(id) {
-	if (id == null) {
-		return filesystem;
+	if (!filesystem[id].parent) {
+		return filesystem[id];
 	}
 	return filesystem[filesystem[id].parent];
 }
-
-
-
 function setFolder(folderId) {
-	/*Set the current window folder*/
-	//windows.settings["currentFolder"] = folderId;
-	//Rendering Functions Here
-
-	//Calle's breadcrumb rendering
+	var folderId = folderId || ROOT;
 	RenderBreadCrumbPath(folderId);
-	//Rendering Function finish
+   	displayTable(getChildren(folderId));
+   	drawJSONexplorer(getChildren(folderId));
 }
 function el(name, options) {
 	var el = document.createElement(name);
