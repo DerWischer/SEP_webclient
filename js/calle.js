@@ -63,9 +63,9 @@ function MoveDropdownItemsToElement(inputElement){
 	var recycledDropdown = document.getElementById('breadcrumb-dropdown');
 	//recycledDropdown = $("#breadcrumb-dropdown").get();
 	
-	recycledDropdown.style.left = (rect.left-2)+"px";
+	recycledDropdown.style.left = (rect.left)+"px";
 	recycledDropdown.style.top = rect.bottom+"px";
-	//recycledDropdown.style.display = "none";
+	recycledDropdown.style.display = "block";
 	
 }
 
