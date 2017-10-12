@@ -6,7 +6,7 @@ var filesystem  = {
 		"type": "folder",
 		"name": "Folder-A",
 		"lastModified": 1507211462,
-		"children": ["f"]
+		"children": ["f", "g"]
 	},
 	"b": {
 		"id":"b",
@@ -27,24 +27,72 @@ var filesystem  = {
 	"f": {
 		"id":"f",
 		"parent": "a",
-		"type": "file",
-		"name": "File-F",
+		"type": "folder",
+		"name": "folder-F",
 		"lastModified": 1507211462,
-		"children": []
+		"children": ["c", "h"]
 	},
 	"c": {
 		"id":"c",
-		"parent": "b",
-		"type": "file",
-		"name": "File-C",
+		"parent": "f",
+		"type": "folder",
+		"name": "folder-C",
 		"lastModified": 1507211462,
 		"children": []
 	},
-		"g": {
+	"g": {
 		"id":"g",
 		"parent": "a",
 		"type": "folder",
 		"name": "Folder-G",
+		"lastModified": 1507211462,
+		"children": []
+	},	
+	"h": {
+		"id":"h",
+		"parent": "f",
+		"type": "folder",
+		"name": "Folder-H",
+		"lastModified": 1507211462,
+		"children": ["i"]
+	},
+	"i": {
+		"id":"i",
+		"parent": "h",
+		"type": "folder",
+		"name": "Folder-I",
+		"lastModified": 1507211462,
+		"children": ["j"]
+	},
+	"j": {
+		"id":"j",
+		"parent": "i",
+		"type": "folder",
+		"name": "Folder-J",
+		"lastModified": 1507211462,
+		"children": ["k"]
+	},
+	"k": {
+		"id":"k",
+		"parent": "j",
+		"type": "folder",
+		"name": "Folder-K",
+		"lastModified": 1507211462,
+		"children": ["l", "m"]
+	},
+	"l": {
+		"id":"l",
+		"parent": "k",
+		"type": "folder",
+		"name": "Folder-L",
+		"lastModified": 1507211462,
+		"children": []
+	},
+	"m": {
+		"id":"g",
+		"parent": "k",
+		"type": "folder",
+		"name": "Folder-M",
 		"lastModified": 1507211462,
 		"children": []
 	}
