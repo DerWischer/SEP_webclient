@@ -27,6 +27,7 @@ function RenderBreadCrumbPath(id){
 		breadcrumb.oncontextmenu = function(e) {
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
+			e.stopPropagation();
 		}
 		breadcrumbs.unshift(breadcrumb);
 		currentFolder = getParent(currentFolder).id;
@@ -40,21 +41,63 @@ function RenderBreadCrumbPath(id){
 
 
 function MoveDropdownItemsToElement(inputElement){
+	createDropdownMenu(inputElement);
 	var rect = inputElement.getBoundingClientRect();
-	console.log(rect.bottom);
-	
-
 	var recycledDropdown = document.getElementById('breadcrumb-dropdown');
-	//recycledDropdown = $("#breadcrumb-dropdown").get();
+	
+	
+	
 	
 	recycledDropdown.style.left = (rect.left)+"px";
-	recycledDropdown.style.top = rect.bottom+"px";
-	recycledDropdown.style.display = "block";
+	recycledDropdown.style.top = (rect.bottom)+"px";
 	
+	if(recycledDropdown.childElementCount > 0)
+		recycledDropdown.style.display = "block";
+	else
+		recycledDropdown.style.display = "none";
+	
+		
+	
+	
+}
+
+function createDropdownMenu(elem){
+	var id = elem.getAttribute('data-id');
+	var children = filesystem[id].children;
+	
+	var newElem = [];
+	
+
+
+	
+	$.each(children, function(key, value){
+		var listTag = el("li", {});
+		var tag = el("a", {"href":"#", html:filesystem[value].name});
+		
+		listTag.appendChild(tag);
+		newElem.push(listTag);
+	});
+	
+		var holder = $("#breadcrumb-dropdown");
+	$(holder).empty();
+	
+	$.each(newElem, function(key, value) {
+		holder.append(value);
+	});	
+}
+
+function HideDropdownElement(){
+	var recycledDropdown = document.getElementById('breadcrumb-dropdown');
+	recycledDropdown.style.display = "none";
 }
 
 
 $(document).ready(function() {
+	
+	$(document).click(function() {
+		HideDropdownElement();
+	});
+	
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
@@ -75,8 +118,10 @@ $(document).ready(function() {
 	});
 	var rootCrumb = document.getElementById('root-nav');
 	rootCrumb.oncontextmenu = function(e) {
+		createDropdownMenu(rootCrumb);
 		MoveDropdownItemsToElement(this);
 		e.preventDefault();
 	}
+	
 	RenderBreadCrumbPath(ROOT);
 });

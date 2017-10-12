@@ -4,7 +4,7 @@ var filesystem  = {
 		"id":"a",
 		"parent": "b",
 		"type": "folder",
-		"name": "foldera",
+		"name": "Folder-A",
 		"lastModified": 1507211462,
 		"children": ["f"]
 	},
@@ -12,7 +12,7 @@ var filesystem  = {
 		"id":"b",
 		"parent": null,
 		"type": "folder",
-		"name": "folderb",
+		"name": "Folder-B",
 		"lastModified": 1507211462,
 		"children": ["a", "c", "d"]
 	},
@@ -20,7 +20,7 @@ var filesystem  = {
 		"id":"d",
 		"parent": "b",
 		"type": "folder",
-		"name": "folderd",
+		"name": "Folder-D",
 		"lastModified": 1507211462,
 		"children": []
 	},
@@ -28,7 +28,7 @@ var filesystem  = {
 		"id":"f",
 		"parent": "a",
 		"type": "file",
-		"name": "filef",
+		"name": "File-F",
 		"lastModified": 1507211462,
 		"children": []
 	},
@@ -36,7 +36,7 @@ var filesystem  = {
 		"id":"c",
 		"parent": "b",
 		"type": "file",
-		"name": "filec",
+		"name": "File-C",
 		"lastModified": 1507211462,
 		"children": []
 	},
@@ -44,7 +44,7 @@ var filesystem  = {
 		"id":"g",
 		"parent": "a",
 		"type": "folder",
-		"name": "folderg",
+		"name": "Folder-G",
 		"lastModified": 1507211462,
 		"children": []
 	}
