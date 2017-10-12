@@ -39,6 +39,14 @@ var filesystem  = {
 		"name": "filec",
 		"lastModified": 1507211462,
 		"children": []
+	},
+		"g": {
+		"id":"g",
+		"parent": "a",
+		"type": "folder",
+		"name": "folderg",
+		"lastModified": 1507211462,
+		"children": []
 	}
 }
 
