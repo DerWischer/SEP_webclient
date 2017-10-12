@@ -1,34 +1,34 @@
 var rootNodeId = "b";
 var filesystem  = {
-	"a": {"text":"a",
+	"a": {
 		"parent": "b",
 		"type": "folder",
 		"name": "foldera",
 		"lastModified": 1507211462,
 		"children": ["f"]
 	},
-	"b": {"text":"b",
+	"b": {
 		"parent": null,
 		"type": "folder",
 		"name": "folderb",
 		"lastModified": 1507211462,
 		"children": ["a", "c", "d"]
 	},
-	"d": {"text":"d",
+	"d": {
 		"parent": "b",
 		"type": "folder",
 		"name": "folderd",
 		"lastModified": 1507211462,
 		"children": []
 	},
-	"f": {"text":"f",
+	"f": {
 		"parent": "a",
 		"type": "file",
 		"name": "filef",
 		"lastModified": 1507211462,
 		"children": []
 	},
-	"c": {"text":"c",
+	"c": {
 		"parent": "b",
 		"type": "file",
 		"name": "filec",
@@ -36,6 +36,7 @@ var filesystem  = {
 		"children": []
 	}
 }
+
 function getChildren(id) {
 	var children = [];
 	$.each(filesystem[id].children, function(index, value) {
@@ -59,7 +60,7 @@ function setFolder(folderId) {
 	//Rendering Functions Here
 
 	//Calle's breadcrumb rendering
-	RenderBreadCrumbPath(id);
+	RenderBreadCrumbPath(folderId);
 	//Rendering Function finish
 }
 function el(name, options) {
