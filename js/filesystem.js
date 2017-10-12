@@ -97,6 +97,42 @@ var filesystem  = {
 		"children": []
 	}
 }
+function S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+}
+function generateGuid() {
+	//http://guid.us/GUID/JavaScript
+	return ("a" + S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
+}
+function generateRandomFileSystem() {
+	folderIds = ["a", "b", "m"];
+	possibleChildren = [];
+	for (var i=0;i<20;i++) {
+		id = generateGuid();
+		var type = Math.floor((Math.random() * 2) + 1) == 2 ? "folder" : "file";
+		var children = [];
+		var folder = folderIds.pop();
+		if (!folder) {
+			folder = ROOT;
+		}
+		filesystem[folder].children.push(id);
+		for (var k=0;k<Math.floor((Math.random() * 4) + 1);k++) {
+			if (possibleChildren.length == 0) {
+				continue;
+			}
+			var child = possibleChildren.pop();
+			if (child == folder) {
+				continue;
+			}
+			children.push(child);
+		}
+		possibleChildren.push(id);
+		filesystem[id] = {"id":id, "type":type, "parent":folder, "children":children, "name":generateGuid().split("-")[0], "lastModified":1507211462} 
+		if (type == "folder") {
+			folderIds.push(id);
+		}
+	}
+}
 function exists(id) {
 	return filesystem.hasOwnProperty(id);
 }
@@ -147,5 +183,6 @@ function el(name, options) {
 	return el;
 }
 $(document).ready(function() {
+	generateRandomFileSystem();
 	setFolder(ROOT);
 });
