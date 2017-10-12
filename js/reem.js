@@ -5,6 +5,7 @@
 // <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
 
+
 $(document).ready(function() {
   var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
   $(fileview).empty();
@@ -21,5 +22,9 @@ $(document).ready(function() {
   ul.appendChild(il2);
   fileview.appendChild(ul);
 
+  $(il1).on("click", function () {
+    setFolder(null);
+    console.log("set folder to null");
+  });
 
 });
