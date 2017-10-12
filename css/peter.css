@@ -11,25 +11,6 @@ body {
 	
 	border-bottom:1px solid #000;
 }
-.custom-breadcrumb {
-	background:#ABFFFE;
-	border-bottom:1px solid #000;
-	margin-bottom:0;
-	border-radius:0;
-}
-.custom-breadcrumb li.active {
-	font-weight:bold;
-	font-size:1.5em;
-}
-.custom-breadcrumb a {
-	color:#000;
-	font-weight:bold;
-	font-size:1.5em;
-	
-}
-.custom-breadcrumb a:hover {
-	color:#005500; 
-}
 .custom-no-padding {
 	padding-left:0;
 	padding-right:0;
