@@ -43,6 +43,9 @@ function drawJSONfileSystem(container, JSONObject) {
         }
         ul.appendChild(li_el);
     });
+    if (!container) {
+    	return;
+    }
     container.appendChild(ul);
 }
 function drawJSONexplorer(JSONObject) {
@@ -82,9 +85,7 @@ function displayTable(JSONObject) {
     thead.appendChild(tr);
     table.appendChild(thead);	
     $.each(JSONObject, function(id, value) {
-    	console.log(value);
         var item = filesystem[id];
-        console.log(item);
         var tr = el("tr", {});
         var t2 = el("td", {html:item.name});
         var t3 = el("td", {html:moment(item.lastModified*1000).format("YYYY-MM-DD")});
