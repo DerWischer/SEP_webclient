@@ -4,44 +4,6 @@
  * ========================================================= */
 // <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
- var filesystem  = {
- 	"a": {"text":"a",
- 		"parent": "b",
- 		"type": "folder",
- 		"name": "foldera",
- 		"lastModified": 1507211462,
- 		"children": ["f"]
- 	},
- 	"b": {"text":"b",
- 		"parent": null,
- 		"type": "folder",
- 		"name": "folderb",
- 		"lastModified": 1507211462,
- 		"children": ["a", "c"]
- 	},
- 	"d": {"text":"d",
- 		"parent": null,
- 		"type": "folder",
- 		"name": "folderd",
- 		"lastModified": 1507211462,
- 		"children": []
- 	},
- 	"f": {"text":"f",
- 		"parent": "a",
- 		"type": "file",
- 		"name": "filef",
- 		"lastModified": 1507211462,
- 		"children": []
- 	},
- 	"c": {"text":"c",
- 		"parent": "b",
- 		"type": "file",
- 		"name": "filec",
- 		"lastModified": 1507211462,
- 		"children": []
- 	}
- }
-
  // function to convert from one JSON shape to other (to be input to tree view (left side bar))
  unflatten = function( filesystem, parent, tree )
  {
