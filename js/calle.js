@@ -27,6 +27,10 @@ function RenderBreadCrumbPath(id){
 		
 		console.log(currentFolder);
 		breadcrumb.appendChild(span);
+		breadcrumb.oncontextmenu = function(e) {
+			MoveDropdownItemsToElement(this);
+			e.preventDefault();
+		}
 		breadcrumbs.unshift(breadcrumb);
 		
 	
@@ -67,6 +71,10 @@ function MoveDropdownItemsToElement(inputElement){
 
 
 $(document).ready(function() {
+
+
+	
+	
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
@@ -81,19 +89,22 @@ $(document).ready(function() {
 		setFolder(this.getAttribute("data-id"));
 	});
 	
-	var myElement = document.getElementById('root-nav');
-
-	var mc = new Hammer(myElement);
-
-	mc.on("press", function(ev) {
-		var hitBreadcrumb;
-		if(ev.target === myElement) {
-			MoveDropdownItemsToElement(ev.target);
-		}
-		else{
-			MoveDropdownItemsToElement(ev.target);
-		}
+	$("#breadcrumb .custom-breadcrumb").on("click", function(){
+		var id = this.getAttribute('data-id');
+		alert("click");
+		//MoveDropdownItemsToElement(this);
 	});
+	
+	
+	
+	var rootCrumb = document.getElementById('root-nav');
+	
+	rootCrumb.oncontextmenu = function(e) {
+		MoveDropdownItemsToElement(this);
+		e.preventDefault();
+	}
+	
+	
 	
 	
 	
