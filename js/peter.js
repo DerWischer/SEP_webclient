@@ -8,18 +8,6 @@ function setFolder(id) {
 
 	//Rendering Function finish
 }
-function search(m) {
-	$(filesystem, function(key, value) {
-
-	});
-}
-
-$(document).ready(function() {
-	//var fileview = document.getElementById("fileview"); //equivalant to $("#fileview")[0];
-	//$(fileview).empty();
- 	//drawJSONfileSystem(fileview, filesystem);
- 	$("#search-type").resizeselect();
-});
 (function($, window){
   var arrowWidth = 30;
 

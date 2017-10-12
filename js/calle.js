@@ -21,37 +21,21 @@ function RenderBreadCrumbPath(id){
 	breadcrumbs = [];
 	var currentFolder = id;
 	while (currentFolder != ROOT) {
-		console.log("creating element" + currentFolder);
 		var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":currentFolder});
 		var span = el("span", {html:filesystem[currentFolder].name});
-		
-		console.log(currentFolder);
 		breadcrumb.appendChild(span);
 		breadcrumb.oncontextmenu = function(e) {
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
 		}
 		breadcrumbs.unshift(breadcrumb);
-		
-	
 		currentFolder = getParent(currentFolder).id;
 	}
-	
 	//Remove the root
 	//breadcrumbs.shift();
-	
-	console.log(breadcrumbs);
-	
 	$.each(breadcrumbs, function(key, value) {
-		if(value["data-id"] != ROOT)
-			holder.append(value);
-		
+		holder.append(value);
 	});
-}
-
-
-function onBreadcrumbPress(ev){
-	console.log("press");
 }
 
 
@@ -71,10 +55,6 @@ function MoveDropdownItemsToElement(inputElement){
 
 
 $(document).ready(function() {
-
-
-	
-	
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
@@ -91,23 +71,12 @@ $(document).ready(function() {
 	
 	$("#breadcrumb .custom-breadcrumb").on("click", function(){
 		var id = this.getAttribute('data-id');
-		alert("click");
-		//MoveDropdownItemsToElement(this);
+		setFolder(id);
 	});
-	
-	
-	
 	var rootCrumb = document.getElementById('root-nav');
-	
 	rootCrumb.oncontextmenu = function(e) {
 		MoveDropdownItemsToElement(this);
 		e.preventDefault();
 	}
-	
-	
-	
-	
-	
 	RenderBreadCrumbPath(ROOT);
-	
 });

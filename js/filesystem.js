@@ -67,6 +67,8 @@ function getParent(id) {
 function setFolder(folderId) {
 	var folderId = folderId || ROOT;
 	RenderBreadCrumbPath(folderId);
+   	displayTable(getChildren(folderId));
+   	drawJSONexplorer(getChildren(folderId));
 }
 function el(name, options) {
 	var el = document.createElement(name);

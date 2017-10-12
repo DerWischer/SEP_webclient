@@ -65,7 +65,7 @@ function drawJSONexplorer(childrenObjects) {
     });
 }
 
-function displayTable(JSONObject) {
+function displayTable(childrenObjects) {
     var holder = $("#tableView")[0];
     $(holder).empty();
     var iconName;
@@ -77,14 +77,12 @@ function displayTable(JSONObject) {
     tr.appendChild(el("th", {html:"Last changed"}));
     thead.appendChild(tr);
     table.appendChild(thead);	
-    $.each(JSONObject, function(id, value) {
-        var item = filesystem[id];
-        var tr = el("tr", {"data-id":id});
+    $.each(childrenObjects, function(id, value) {
+        var tr = el("tr", {"data-id":value.id});
         var t2 = el("td", {html:item.name});
-        var t3 = el("td", {html:moment(item.lastModified*1000).format("YYYY-MM-DD")});
+        var t3 = el("td", {html:moment(value.lastModified*1000).format("YYYY-MM-DD")});
         tr.appendChild(t2);
         tr.appendChild(t3);
-
         tbody.appendChild(tr);
     });
     table.appendChild(tbody);
@@ -94,8 +92,6 @@ function displayTable(JSONObject) {
 
 
 $(document).ready(function() {
-   	displayTable(filesystem);
-   	drawJSONexplorer(getChildren(null));
     // Change to a table view on the explorer
     $("#btnList").click(function() {
     	alert("goodbye");
@@ -108,7 +104,6 @@ $(document).ready(function() {
         $("#gridView").removeClass("hidden");
         $("#tableView").addClass("hidden");
     });
-
     $("table.table tbody tr").on("click", function() {
         alert(this.getAttribute("data-id"));
     });
