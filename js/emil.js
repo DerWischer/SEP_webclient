@@ -19,53 +19,48 @@ function el(name, options) {
     });
     return el;
 }
-function drawJSONfileSystem(container, JSONObject) {
-    var ul = document.createElement("ul");
-    ul.className = "sub-section";
-    $.each(JSONObject, function(id, value) {
-        if (value == null) {
-            return;
-        }
-        if (value.type != "folder") {
-            return;
-        }
-        var li_el = document.createElement("li");
-        li_el.setAttribute("data-id", id);
-        var p = document.createElement("p");
-        p.innerHTML = value.name;
-        li_el.appendChild(p);
-        li_el.className = "selectable";
-        for (var i=0;i<value.children.length;i++) {
-            drawJSONfileSystem(li_el, filesystem[value[i]]);
-        }
-        li_el.onclick = function() {
-            var id = this.getAttribute("data-id");
-            drawJSONexplorer(filesystem[id]);
-        }
-        ul.appendChild(li_el);
-    });
-    container.appendChild(ul);
-}
-function drawJSONexplorer(JSONObject) {
+function drawJSONexplorer(childrenObjects) {
     var holder = $("#gridView")[0];
     $(holder).empty();
     var iconName;
-    $.each(JSONObject, function(id, value) {
-        var item = filesystem[value];
+
+    var getBack = el("section", {"data-id":childrenObjects[0].parent, class:"file-block"});
+    var b1 = el("h3", {html:"back"});
+    var b2 = el("i", {class:" fa fa-folder-open fa-5x"});
+    var b3 = el("h5", {html:"Get back lol"});
+    getBack.appendChild(b1);
+    getBack.appendChild(b2);
+    getBack.appendChild(b3);
+    holder.appendChild(getBack);
+    getBack.onclick = function() {
+        var id = this.getAttribute("data-id");
+        if(id == null) {
+            alert("it's null ffs");
+        }
+        else {
+            drawJSONexplorer(getChildren(id));
+        }
+    }
+
+    $.each(childrenObjects, function(id, value) {
+        var item = value;
         if (item.type == "folder") {
             iconName = "fa-folder-open";
         }
         if (item.type == "file") {
             iconName = "fa-file-o";
         }
-        var section = el("section", {"data-id":id, class:"file-block"});
+        var section = el("section", {"data-id":value.text, class:"file-block"});
+        section.onclick = function() {
+            var id = this.getAttribute("data-id");
+            drawJSONexplorer(getChildren(id));
+        }
         var h3 = el("h3", {html:item.name});
         var i = el("i", {class:"fa " + iconName + " fa-5x"});
         var h5 = el("h5", {html:"Folder Changed" + item.lastModified});
         section.appendChild(h3);
         section.appendChild(i);
         section.appendChild(h5);
-
         holder.appendChild(section);
     });
 }
@@ -103,7 +98,7 @@ $(document).ready(function() {
     var gridview = document.getElementById("gridView");
     var tableView = document.getElementById("tableView");//equivalant to $("#gridview")[0];
    	displayTable(filesystem);
-   	drawJSONfileSystem(gridview, filesystem);
+   	drawJSONexplorer(getChildren(null));
 
     // Change to a table view on the explorer
     $("#btnList").on("click", function() {
@@ -118,9 +113,9 @@ $(document).ready(function() {
 
     $("table.table tbody tr").on("click", function() {
         alert(this.getAttribute("data-id"));
-    })
+    });
     $("section.gridView section").on("click", function() {
         alert(this.getAttribute("data-id"));
-    })
+    });
 
 });
