@@ -1,8 +1,8 @@
-//Returns an array [[ID, FileInPath], ...] containing the steps necessary to reach root from 'startID' 
+//Returns an array [[ID, FileInPath], ...] containing the steps necessary to reach root from 'startID'
 function findPathToRoot(startID ,inputFileSystem){
 	var currFile = inputFileSystem[startID];
 	var path = [[startID, currFile]];
-	
+
 	while(currFile["parent"] != null){
 		var nextID = currFile["parent"];
 		currFile = inputFileSystem[nextID];
@@ -31,7 +31,6 @@ function RenderBreadCrumbPath(id){
 }
 
 $(document).ready(function() {
-	RenderBreadCrumbPath(null);
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
@@ -47,11 +46,3 @@ $(document).ready(function() {
 	});
 });
 RenderBreadCrumbPath(ROOT);
-
-
-
-
-
-
-
-
