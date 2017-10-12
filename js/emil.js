@@ -66,7 +66,7 @@ $(document).ready(function() {
         $("#gridView").removeClass("hidden");
         $("#tableView").addClass("hidden");
     });
-    $("table.table tbody tr").on("click", function() {
+    $("#tableView").on("click", "table.table tbody tr", function() {
         setFolder(this.getAttribute("data-id"));
     });
     $("#gridView").on("click", "section.file-block", function() {
