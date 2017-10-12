@@ -1,34 +1,34 @@
 
 	  var filesystem  = {
-	 	"a": {"text":"a",
+	 	"a": {
 	 		"parent": "b",
 	 		"type": "folder",
 	 		"name": "foldera",
 	 		"lastModified": 1507211462,
 	 		"children": ["f"]
 	 	},
-	 	"b": {"text":"b",
+	 	"b": {
 	 		"parent": null,
 	 		"type": "folder",
 	 		"name": "folderb",
 	 		"lastModified": 1507211462,
 	 		"children": ["a", "c"]
 	 	},
-	 	"d": {"text":"d",
+	 	"d": {
 	 		"parent": null,
 	 		"type": "folder",
 	 		"name": "folderd",
 	 		"lastModified": 1507211462,
 	 		"children": []
 	 	},
-	 	"f": {"text":"f",
+	 	"f": {
 	 		"parent": "a",
 	 		"type": "file",
 	 		"name": "filef",
 	 		"lastModified": 1507211462,
 	 		"children": []
 	 	},
-	 	"c": {"text":"c",
+	 	"c": {
 	 		"parent": "b",
 	 		"type": "file",
 	 		"name": "filec",
@@ -46,7 +46,7 @@ function getChildren(id) {
 function getParent(id) {
 	return filesystem[filesystem[id].parent];
 }
-function el(name, options) {
+function el(name, options) 	{
 	var el = document.createElement(name);
 	if (!options) {
 		return el;
