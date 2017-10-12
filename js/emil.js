@@ -94,21 +94,19 @@ function displayTable(JSONObject) {
 
 
 $(document).ready(function() {
-
-    var gridview = document.getElementById("gridView");
-    var tableView = document.getElementById("tableView");//equivalant to $("#gridview")[0];
    	displayTable(filesystem);
    	drawJSONexplorer(getChildren(null));
-
     // Change to a table view on the explorer
-    $("#btnList").on("click", function() {
-        gridview.className ="hidden";
-        tableView.className = "";
+    $("#btnList").click(function() {
+    	alert("goodbye");
+        $("#gridView").addClass("hidden");
+        $("#tableView").removeClass("hidden");
     });
     // Change to a block view on the explorer
-    $("#btnBlock").on("click", function() {
-        tableView.className = "hidden";
-        gridview.className = "";
+    $("#btnBlock").click(function() {
+    	alert("hello");
+        $("#gridView").removeClass("hidden");
+        $("#tableView").addClass("hidden");
     });
 
     $("table.table tbody tr").on("click", function() {
