@@ -63,17 +63,13 @@ function MoveDropdownItemsToElement(inputElement){
 
 function createDropdownMenu(elem){
 	var id = elem.getAttribute('data-id');
-	var children = filesystem[id].children;
-	
 	var newElem = [];
-	
-
-
-	
-	$.each(children, function(key, value){
-		var listTag = el("li", {"class":"dropdown-element", "data-id":value});
-		var tag = el("a", {"href":"#", html:filesystem[value].name});
-		
+	$.each(getChildren(id), function(key, value){
+		if (value.type != "folder") {
+			return;
+		}
+		var listTag = el("li", {"class":"dropdown-element", "data-id":value.id});
+		var tag = el("a", {"href":"#", html:value.name});
 		listTag.appendChild(tag);
 		newElem.push(listTag);
 	});
