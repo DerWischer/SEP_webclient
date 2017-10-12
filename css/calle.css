@@ -2,47 +2,23 @@
 	background-color:#f8f8f8;
 	height:55px;
 }
-
-
-
-
-.breadcrumb-container{
-	
-}
-
-.parallelogram {
-	-webkit-transform: skew(20deg);
-	   -moz-transform: skew(20deg);
-	     -o-transform: skew(20deg);
-	background: #777;
-	
-	
-}
-
-#breadcrumb-base{
-
-}
-
-.parallelogram-breadcrumb {
+.custom-breadcrumb {
 	-webkit-transform: skew(-20deg);
 	   -moz-transform: skew(-20deg);
 	     -o-transform: skew(-20deg);
 	height: 90%;
 	float:left;
 	margin-right:4px;
-
 	padding-left:8px;
 	padding-right:8px;
 	padding-top:8px;
 	padding-bottom:8px;
 	background-color:#f5f5f5;
-	
 	border:1px solid #e7e7e7;
-	
 	margin-top:3px
 }
 
-.parallelogram-breadcrumb span {
+.custom-breadcrumb span {
 	-webkit-transform: skew(20deg);
 	   -moz-transform: skew(20deg);
 	     -o-transform: skew(20deg);
@@ -51,14 +27,11 @@
 	vertical-align:middle;
 	display: inline-block;
 	font-size:25px !important;
-	
 	line-height: 20px;
-
-	
 	font-family: 'Roboto', sans-serif;
 }
 
-.breadcrumb-base{
+.custom-breadcrumb-base{
 	background-color: #ccc;
 	margin-right:4px;
 	margin-left:-20px;
@@ -70,39 +43,26 @@
 }
 
 breadcrumb-base span{
-	opacity:0;
-	
-	
+	opacity:0;	
 }
-
-.breadcrumb-edge{
+.custom-breadcrumb-edge{
 	background-color:#ccc;
 	margin-right:0px;
 	margin-left:-40px;
 	border:1px solid #aaa;
 	border-right:0;
 	float:left;
-	
-	
 }
-.breadcrumb-edge span{
+.custom-breadcrumb-edge span{
 	opacity:0;
-	
-}
-
-.breadcrumb-final{
-	/*background-color:#ABFFFE;*/
 }
 .myBtn{
 	font-size:10px;
 	border-radius:0px;
 	
 }
-
 .myIcon {
 	float:left;
-	
-	
 }
 
 .non-root-crumb{
