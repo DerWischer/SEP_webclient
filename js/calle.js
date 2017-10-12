@@ -30,8 +30,6 @@ function RenderBreadCrumbPath(id){
 		breadcrumb.oncontextmenu = function(e) {
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
-			e.stopPropagation();
-			return false;
 		}
 		breadcrumbs.unshift(breadcrumb);
 		
@@ -66,23 +64,15 @@ function MoveDropdownItemsToElement(inputElement){
 	//recycledDropdown = $("#breadcrumb-dropdown").get();
 	
 	recycledDropdown.style.left = (rect.left)+"px";
-	recycledDropdown.style.top = (rect.bottom+14)+"px";
+	recycledDropdown.style.top = rect.bottom+"px";
 	recycledDropdown.style.display = "block";
 	
-}
-
-function HideDropdownElement(){
-	
-	var recycledDropdown = document.getElementById('breadcrumb-dropdown');
-	recycledDropdown.style.display = "none";
 }
 
 
 $(document).ready(function() {
 
-	$(document).click(function() {
-		HideDropdownElement();
-	});
+
 	
 	
 	//navtree is clicked
@@ -112,8 +102,6 @@ $(document).ready(function() {
 	rootCrumb.oncontextmenu = function(e) {
 		MoveDropdownItemsToElement(this);
 		e.preventDefault();
-		e.stopPropagation();
-		return false;
 	}
 	
 	
