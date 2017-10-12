@@ -30,3 +30,7 @@
   .custom-logo-sidebar {
   	height:7mm;
   }
+
+  .form-control {
+    padding-top:0px;
+  }
