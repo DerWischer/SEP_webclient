@@ -1,9 +1,20 @@
 //JSON JavaScript Object Notation
-/*var filesystem = {
+var filesystem = {
 	"a":{"parent":"b", "type":"folder", "name":"folder1","lastModified":1507211462, "children":[]},
 	"b":{"parent":null, "type":"folder", "name":"folder2","lastModified":1507211462, "children":["a", "c"]},
 	"c":{"parent":"b", "type":"file", "name":"file1","lastModified":1507211462, "children":[]}
-}*/
+}
+window.settings = {
+	currentFolder:null
+}
+function setFolder(folderId) {
+	/*Set the current window folder*/
+	windows.settings["currentFolder"] = folderId;
+	//Rendering Functions Here
+	
+	
+	//Rendering Function finish
+}
 function search(m) {
 	$(filesystem, function(key, value) {
 		
@@ -84,7 +95,7 @@ $(document).ready(function() {
   var arrowWidth = 30;
 
   $.fn.resizeselect = function(settings) {  
-    return this.each(function() { 
+    return this.each(function() { setFolder
 
       $(this).change(function(){
         var $this = $(this);
