@@ -12,41 +12,35 @@ function findPathToRoot(startID ,inputFileSystem){
 }
 
 //Draws the breadcrumb with the given path. INPUT FORMAT: [[RootID, RootFile], ... , [LastID, LastFile]]
-function RenderBreadCrumbPath(path){
-	var breadCrumb = document.getElementById("breadcrumb");
-	
-	//Clear the breadcrumb
-	while ($("#breadcrumb > div").length > 2) {
-		breadCrumb.removeChild(breadCrumb.lastChild);
+function RenderBreadCrumbPath(id){
+	var holder = $("#breadcrumb");
+	$(holder).empty();
+	breadcrumbs = [];
+	while (getParent(id) != null) {
+		var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":id});
+		var span = el("span", {html:filesystem[id].name});
+		breadcrumb.appendChild(span);
+		breadcrumbs.unshift(breadcrumb);
 	}
-
-	for (var i = 0, len = path.length-1; i <= len; i++) {
-		//Skip if root
-		if(path[i][1].parent == null)
-			continue;
-		var breadCrumbElement = "<div class=\"parallelogram-breadcrumb btn btn-xs myBtn non-root-crumb \" id=\"breadcrumbIndex-"+i+"\" data-id=\""+path[i][0]+"\"> <span>"+path[i][1]["name"]+"</span> </div>";
-		breadCrumb.innerHTML += breadCrumbElement;
-		
-	}
+	$(breadcrumbs, function(key, value) {
+		holder.appendChild(value);
+	});
 }
 
 $(document).ready(function() {
-	RenderBreadCrumbPath(findPathToRoot("a", filesystem));
-	
+	RenderBreadCrumbPath(null);
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
 		setFolder(dataId);
 	});
-	
 	//individual breadcrumb is clicked
-	$(".breadcrumb-element").on("click", ".non-root-crumb", function(){
+	$("#breadcrumb .custom-breadcrumb").on("click", function(){
 		setFolder(this.getAttribute("data-id"));
 	});
-	
 	//root folder is clicked
-	$(".breadcrumb-element").on("click", ".breadcrumb-base", function(){
-		setFolder(root);
+	$(".custom-breadcrumb:first-child").on("click", function(){
+		setFolder(null);
 	});
 });
 

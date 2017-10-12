@@ -65,7 +65,7 @@ breadcrumb-base span{
 	float:left;
 }
 
-.non-root-crumb{
+.custom-breadcrumb:first-child {
 	padding-top:15px;
 	padding-bottom:15px;
 }

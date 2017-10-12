@@ -1,13 +1,3 @@
-function setFolder(folderId) {
-	/*Set the current window folder*/
-	//windows.settings["currentFolder"] = folderId;
-	//Rendering Functions Here
-	
-	//Calle's breadcrumb rendering
-	RenderBreadCrumbPath(findPathToRoot(folderId, filesystem));
-	
-	//Rendering Function finish
-}
 function search(m) {
 	$(filesystem, function(key, value) {
 		
