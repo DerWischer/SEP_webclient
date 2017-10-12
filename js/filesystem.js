@@ -51,6 +51,9 @@ function getChildren(id) {
 }
 
 function getParent(id) {
+	if (!filesystem[id].parent) {
+		return filesystem[id];
+	}
 	return filesystem[filesystem[id].parent];
 }
 function setFolder(folderId) {

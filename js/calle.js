@@ -16,12 +16,14 @@ function RenderBreadCrumbPath(id){
 	var holder = $("#breadcrumb");
 	$(holder).empty();
 	breadcrumbs = [];
-	while (getParent(id) != ROOT) {
+	var currentFolder = id;
+	while (currentFolder != ROOT) {
+		console.log("creating element");
 		var breadcrumb = el("div", {"class":"custom-breadcrumb btn btn-xs non-root-crumb", "data-id":id});
-		var span = el("span", {html:getParent(id).name});
+		var span = el("span", {html:getParent(currentFolder).name});
 		breadcrumb.appendChild(span);
 		breadcrumbs.unshift(breadcrumb);
-		id = getParent(id).id;
+		currentFolder = getParent(currentFolder).id;
 	}
 	$(breadcrumbs, function(key, value) {
 		holder.appendChild(value);
@@ -44,10 +46,7 @@ $(document).ready(function() {
 		setFolder();
 	});
 });
-
-
-var root = "b";
-RenderBreadCrumbPath(findPathToRoot(root, filesystem));
+RenderBreadCrumbPath(ROOT);
 
 
 
