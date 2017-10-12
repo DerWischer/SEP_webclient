@@ -1,35 +1,3 @@
-var filesystem  = {
- 	"a": {"text":"a",
- 		"parent": "b",
- 		"type": "folder",
- 		"name": "Folder-A",
- 		"lastModified": 1507211462,
- 		"children": ["f"]
- 	},
- 	"b": {"text":"b",
- 		"parent": null,
- 		"type": "folder",
- 		"name": "Folder-B",
- 		"lastModified": 1507211462,
- 		"children": ["a", "c"]
- 	},
- 	"f": {"text":"f",
- 		"parent": "a",
- 		"type": "file",
- 		"name": "File-F",
- 		"lastModified": 1507211462,
- 		"children": []
- 	},
- 	"c": {"text":"c",
- 		"parent": "b",
- 		"type": "file",
- 		"name": "File-C",
- 		"lastModified": 1507211462,
- 		"children": []
- 	}
- }
-
-
 //Returns an array [[ID, FileInPath], ...] containing the steps necessary to reach root from 'startID' 
 function findPathToRoot(startID ,inputFileSystem){
 	var currFile = inputFileSystem[startID];
@@ -68,20 +36,17 @@ $(document).ready(function() {
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e){
 		var dataId = this.getAttribute("data-id");
-		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));
+		setFolder(dataId);
 	});
 	
 	//individual breadcrumb is clicked
 	$(".breadcrumb-element").on("click", ".non-root-crumb", function(){
-		var dataId = this.getAttribute("data-id");
-		drawJSONexplorer(filesystem[dataId]);
-		RenderBreadCrumbPath(findPathToRoot(dataId, filesystem));	
+		setFolder(this.getAttribute("data-id"));
 	});
 	
 	//root folder is clicked
 	$(".breadcrumb-element").on("click", ".breadcrumb-base", function(){
-		drawJSONexplorer(filesystem[root]);
-		RenderBreadCrumbPath(findPathToRoot(root, filesystem));
+		setFolder(root);
 	});
 });
 
