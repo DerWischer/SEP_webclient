@@ -41,17 +41,16 @@ var fileArr = filesystemToArr(filesystem);
      return listfiles;
    }
 
-   // return array of files names according to lastModified (return files which are under user x responsibility)
-   function getFilesLastModified(filesystem, daycnt){
+
+   // return array of files names according to lastModified date 
+   function getFilesLastModified(filesystem, monthcnt){
      var listfiles = [];
      var cur = new Date();
-     var beforedayscnt = cur.setDate(cur.getDate() - daycnt);
-      console.log(cur);
-      //console.log(cur.getDate() - 10);
+     var beforedayscnt = new Date(cur.setMonth(cur.getMonth() - monthcnt)).toISOString().slice(0,10); // setDate, getDate can be used
+     //console.log(beforedayscnt);
      for (i = 0; i < fileArr.length; i++) {
-
-       if (fileArr[i].lastModified >= beforedayscnt)
-           listfiles.push(fileArr[i].id);
+       if ( fileArr[i].lastModified >= beforedayscnt)
+           listfiles.push(fileArr[i].name);
         }
      return listfiles;
     }
@@ -79,28 +78,35 @@ var fileArr = filesystemToArr(filesystem);
   }
 
  $(document).ready(function() {
-   var fileview = document.getElementById("fileview4");
-   $(fileview).empty();
-   var users =  getFilesUser(filesystem,myuser);
-   for (i = 0; i < users.length; i++) {
-     appendItem(fileview , users[i]);
-    }
-  var fileview = document.getElementById("fileview2");
-    $(fileview).empty();
-    var files =  getFilesStatus(filesystem,"closed");
-    for (i = 0; i < files.length; i++) {
-      appendItem(fileview , files[i]);
-     }
-     var fileview = document.getElementById("fileview3");
-       $(fileview).empty();
-       var files =  getFilesStatus(filesystem,"open");
-       for (i = 0; i < files.length; i++) {
-         appendItem(fileview , files[i]);
-        }
-        var fileview = document.getElementById("fileview1");
-          $(fileview).empty();
-          var files =  getFilesStatus(filesystem,myuser);
-          for (i = 0; i < files.length; i++) {
-            appendItem(fileview , files[i]);
-           }
+      var fileview = document.getElementById("fileview4");
+      $(fileview).empty();
+      var users = getFilesUser(filesystem, myuser);
+      for (i = 0; i < users.length; i++) {
+        appendItem(fileview, users[i]);
+      }
+      var fileview = document.getElementById("fileview2");
+      $(fileview).empty();
+      var files = getFilesStatus(filesystem, "closed");
+      for (i = 0; i < files.length; i++) {
+        appendItem(fileview, files[i]);
+      }
+      var fileview = document.getElementById("fileview3");
+      $(fileview).empty();
+      var files = getFilesStatus(filesystem, "open");
+      for (i = 0; i < files.length; i++) {
+        appendItem(fileview, files[i]);
+      }
+      var fileview = document.getElementById("fileview1");
+      $(fileview).empty();
+      var files = getFilesStatus(filesystem, myuser);
+      for (i = 0; i < files.length; i++) {
+        appendItem(fileview, files[i]);
+      }
+
+      var fileview = document.getElementById("fileview5");
+      $(fileview).empty();
+      var files = getFilesLastModified(filesystem, 1); // 1 means one month
+      for (i = 0; i < files.length; i++) {
+        appendItem(fileview, files[i]);
+      }
  });
