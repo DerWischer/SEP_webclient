@@ -55,7 +55,43 @@ function displayTable(parent, childrenObjects) {
 }
 
 
+// Login functions etc.
+var userData = {
+    "ragnar": {
+        "id":"ragnar",
+        "password":"lol"
+    },
+    "roger": {
+        "id":"roger",
+        "password":"hello"
+    }
+}
+function correctPW(userName, inputPassword) {
+    var user = userData.hasOwnProperty(userName);
+    if(user == true) {
+        var pw = userData[userName].password;
+        if(inputPassword == pw ) {
+            alert("yay");
+        }
+        else {
+            alert("incorrect pw")
+        }
+    }
+    if(user == false) {
+        alert("incorrect username");
+    }
+}
 $(document).ready(function() {
+    //Handles menu drop down
+    $('.dropdown-menu').find('form').click(function (e) {
+        e.stopPropagation();
+    });
+    //Login button
+    $("#btnLogin").click(function() {
+        //alert("Value: " + $("#emailInput").val() + " Password: " + $("#passwordInput").val());
+        correctPW($("#emailInput").val(), $("#passwordInput").val());
+    });
+
     // Change to a table view on the explorer
     $("#btnList").click(function() {
         $("#gridView").addClass("hidden");
