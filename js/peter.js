@@ -22,7 +22,6 @@ function searchFileSystem(m) {
 			found.push(value);
 		}
 	});
-	console.log(found);
 	drawJSONexplorer(null, found);
-	displayTable(null, found);
+	displayList(null, found);
 }

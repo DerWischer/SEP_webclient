@@ -38,7 +38,7 @@
 		<link rel="stylesheet" href="css/calle.css"/>
 		<title>Swerea</title>
 	</head>
-	<body>
+	<body class="no-scroll">
 		<section class="custom-nav">
 			<section class="container-fluid">
 				<section class="row">
@@ -47,14 +47,6 @@
 					</section>
 					<section class="col-md-6 col-sm-8">
 						 <div class="input-group">
-						  <span class="input-group-btn hidden">
-							<select id="search-type" class="form-control input-lg resizeselect">
-								<option value="all" selected>All</option>
-								<option value="build">Build</i></option>
-								<option value="design">Design</i></option>
-								<option value="customer">Customer</i></option>
-							</select>
-						  </span>
 						  <input type="text" id="search-box" class="form-control input-lg" placeholder="Search for...">
 						  <span class="input-group-btn">
 							<button id="clear-btn" class="btn btn-default btn-lg" type="button" disabled>
@@ -118,10 +110,6 @@
 						<section id="breadcrumb">
 
 						</section>
-						<div class="btn-group pull-right" id="layoutBtn" role="group" aria-label="...">
-							<button type="button" id="btnBlock" class="btn btn-default btn-lg"><i class="fa fa-th-large"></i></button>
-							<button type="button" id="btnList" class="btn btn-default btn-lg"><i class="fa fa-bars"></i></button>
-						</div>
 					</div>
 				</div>
 			</section>
@@ -165,14 +153,23 @@
 
 				</section>
 			<section class="col-md-9" style="margin-top:10px;">
-				<section id="gridView">
-
-				</section>
-				<section id="tableView" class="hidden">
-					<section class="file-block">
-						<h3>Hello World</h3>
-						<i class="fa fa-folder-open fa-5x"></i>
-						<h5>File Changed: 2017-08-11</h5>
+				<section id="tableViewport">
+					<section class="container-fluid">
+					<section class="row" style="border-bottom:1px solid #000">
+						<section class="col-lg-1 col-md-1">
+							
+						</section>
+						<section class="col-lg-6 col-md-6">
+							<p><b>Name</b></p>
+						</section>
+						<section class="col-lg-5 col-md-5">
+							<p><b>Date</b></p>
+						</section>
+					</section>
+					</section>
+					<section id="tableView" class="container-fluid fixed-height-400 auto-scroll-y">
+						
+					</section>
 					</section>
 				</section>
 			</section>

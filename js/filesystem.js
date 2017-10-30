@@ -195,8 +195,7 @@ function setFolder(id) {
 		return;
 	}
 	RenderBreadCrumbPath(id);
-	drawJSONexplorer(id, getChildren(id));
-   	displayTable(id, getChildren(id));
+   	displayList(id, getChildren(id));
 
 }
 function el(name, options) {
