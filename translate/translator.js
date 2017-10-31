@@ -3,7 +3,7 @@ var SWEDISH = 1;
 function translatePageText(dictionary) {
 	var dictionary = dictionary || JSON.parse('{"account":"konto", "name":"namn", "date":"datum", "shared with me":"delat med mig"}');
 	$("body .translate").each(function() {
-		$(this).text(dictionary[$(this).text().toLowerCase()]);
+		$(this).text(dictionary[$(this).text().trim().toLowerCase()]);
 	});
 }
 function translatePage(language) {
