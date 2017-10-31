@@ -16,6 +16,8 @@ $(document).ready(function() {
 				return;
 			}
 			showMessage(NO_MESSAGE);
+			$("#name").val(data.name);
+			$("#email").val(data.email);
 		},
 		error:function() {
 			showMessage(DETAILS_ERROR);
