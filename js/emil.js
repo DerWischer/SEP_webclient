@@ -110,8 +110,8 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
-    //Login button
-    $("#btnLogin").click(function() {
+    //Logout button
+    $("#btnLogout").click(function() {
         //alert("Value: " + $("#emailInput").val() + " Password: " + $("#passwordInput").val());
         correctPW($("#emailInput").val(), $("#passwordInput").val());
     });

@@ -57,22 +57,17 @@
 					</section>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+							<a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
 							<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
 								<li>
 									<div class="row">
 										<div class="col-md-12">
 											<form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
 												<div class="form-group">
-													<label class="sr-only" for="emailInput">Email address</label>
-													<input type="text" class="form-control" id="emailInput" placeholder="Email address" required>
+													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block">Change account</button>
 												</div>
 												<div class="form-group">
-													<label class="sr-only" for="passwordInput">Password</label>
-													<input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
-												</div>
-												<div class="form-group">
-													<button type="submit" id="btnLogin" class="btn btn-success btn-block">Sign in</button>
+													<button type="submit" id="btnLogout" class="btn btn-danger btn-block">Logout</button>
 												</div>
 											</form>
 										</div>
@@ -177,6 +172,7 @@
 		</section>
 		<ul id="contextMenu" class="dropdown-menu" role="menu">
 			<li><a id="traceDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#traceModal">Trace</a></li>
+			<li><a id="changeAlert" tabindex="-1" href="#">Alert changes</a></li>
 			<li class="divider"></li>
 			<li><a tabindex="-1" href="#">Something else maybe?</a></li>
 		</ul>
