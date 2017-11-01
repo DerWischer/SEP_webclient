@@ -26,7 +26,6 @@ function displayList(parent, childrenObjects) {
     });
 }
 
-
 // Login functions etc.
 var userData = {
     "ragnar": {
