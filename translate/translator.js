@@ -13,7 +13,7 @@ function translatePage(language) {
 			languageFile = "languages/english.json"; 
 			break;
 		case SWEDISH:
-			languageFile = "https://www.goldstandardresearch.co.uk/swedish.php"; 
+			languageFile = "languages/swedish.json"; 
 			break;
 	}
 	$.ajax({
