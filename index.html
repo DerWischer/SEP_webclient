@@ -57,17 +57,17 @@
 					</section>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+							<a href="http://www.jquery2dotnet.com" class="dropdown-toggle translate" data-toggle="dropdown">Account <b class="caret"></b></a>
 							<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
 								<li>
 									<div class="row">
 										<div class="col-md-12">
 											<form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
 												<div class="form-group">
-													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block">Change account</button>
+													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block translate">Change account</button>
 												</div>
 												<div class="form-group">
-													<button type="submit" id="btnLogout" class="btn btn-danger btn-block">Logout</button>
+													<button type="submit" id="btnLogout" class="btn btn-danger btn-block translate">Logout</button>
 												</div>
 											</form>
 										</div>
@@ -88,8 +88,8 @@
 		</section>
 
 		<ul class="dropdown-menu custom-visible" id="breadcrumb-dropdown">
-			<li><a href="#">Action</a></li>
-			<li><a href="#">Another action</a></li>
+			<li><a class="translate" href="#">Action</a></li>
+			<li><a class="translate" href="#">Another action</a></li>
 		</ul>
 		<section class="container-fluid">
 			<section class="container-fluid">
@@ -108,45 +108,42 @@
 					</div>
 				</div>
 			</section>
-
 		<section class="row">
-				<section class="col-md-3" style="margin-top:10px;">
+			<section class="col-md-3" style="margin-top:10px;">
+				<!-- Sidebar -->
+				<div id="MainMenu">
+					<div class="list-group panel">
+						<a href="#demo1" class="list-group-item list-group-item-success translate" data-toggle="collapse" data-parent="#MainMenu"> My Files <i class="fa fa-caret-down"></i></a>
+						<div class="collapse scroll" id="demo1">
+						   <div id="fileview1" >
+						   </div>
+						</div>
 
-					<!-- Sidebar -->
- 	       <div id="MainMenu">
- 	         <div class="list-group panel">
+						<a href="#demo4" class="list-group-item list-group-item-success translate" data-toggle="collapse" data-parent="#MainMenu"> Shared with me  <i class="fa fa-caret-down"></i></a>
+						<div class="collapse scroll" id="demo4">
+							 <div id="fileview4">
+							</div>
+						</div>
 
- 	           <a href="#demo1" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu"> My Files <i class="fa fa-caret-down"></i></a>
- 	            <div class="collapse scroll" id="demo1">
- 	               <div id="fileview1" >
- 	               </div>
- 	            </div>
+						<a href="#demo2" class="list-group-item list-group-item-success translate" data-toggle="collapse" data-parent="#MainMenu"> Closed Files  <i class="fa fa-caret-down"></i></a>
+						<div class="collapse scroll" id="demo2">
+							 <div id="fileview2">
+							</div>
+						</div>
 
- 	            <a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu"> Shared with me  <i class="fa fa-caret-down"></i></a>
- 	            <div class="collapse scroll" id="demo4">
- 	              <div id="fileview4">
- 	             </div>
- 	            </div>
-
- 	           <a href="#demo2" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu"> Closed Files  <i class="fa fa-caret-down"></i></a>
- 	           <div class="collapse scroll" id="demo2">
- 	             <div id="fileview2">
- 	            </div>
- 	           </div>
-
- 	           <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu"> Opened Files  <i class="fa fa-caret-down"></i></a>
- 	           <div class="collapse scroll" id="demo3">
- 	             <div id="fileview3">
- 	            </div>
- 	           </div>
-
-						 <a href="#demo5" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu"> Last Modified Files <i class="fa fa-caret-down"></i></a>
- 	           <div class="collapse scroll" id="demo5">
- 	             <div id="fileview5">
- 	            </div>
- 	           </div>
-
-				</section>
+						<a href="#demo3" class="list-group-item list-group-item-success translate" data-toggle="collapse" data-parent="#MainMenu"> Opened Files  <i class="fa fa-caret-down"></i></a>
+						<div class="collapse scroll" id="demo3">
+							<div id="fileview3">
+							</div>
+						</div>
+						<a href="#demo5" class="list-group-item list-group-item-success translate" data-toggle="collapse" data-parent="#MainMenu"> Last Modified Files <i class="fa fa-caret-down"></i></a>
+						<div class="collapse scroll" id="demo5">
+							<div id="fileview5">
+							</div>
+						</div>
+				 	</div>
+				</div>
+			</section>
 			<section class="col-md-9" style="margin-top:10px;">
 				<section id="tableViewport">
 					<section class="container-fluid">
@@ -155,10 +152,10 @@
 							
 						</section>
 						<section class="col-lg-6 col-md-6">
-							<p><b>Name</b></p>
+							<p><b class="translate">Name</b></p>
 						</section>
 						<section class="col-lg-5 col-md-5">
-							<p><b>Date</b></p>
+							<p><b class="translate">Date</b></p>
 						</section>
 					</section>
 					</section>
@@ -168,13 +165,13 @@
 					</section>
 				</section>
 			</section>
-			</section>
+		</section>
 		</section>
 		<ul id="contextMenu" class="dropdown-menu" role="menu">
-			<li><a id="traceDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#traceModal">Trace</a></li>
-			<li><a id="changeAlert" tabindex="-1" href="#">Alert changes</a></li>
+			<li><a class="translate" id="traceDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#traceModal">Trace</a></li>
+			<li><a class="translate" id="changeAlert" tabindex="-1" href="#">Alert changes</a></li>
 			<li class="divider"></li>
-			<li><a tabindex="-1" href="#">Something else maybe?</a></li>
+			<li><a class="translate" tabindex="-1" href="#">Something else maybe?</a></li>
 		</ul>
 		<section class="modal fade" id="traceModal" role="dialog">
 			<section class="modal-dialog">
