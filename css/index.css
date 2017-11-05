@@ -111,6 +111,9 @@ breadcrumb-base span{
 	overflow-y:scroll;
 }
   
+  .list-group-submenu{
+   padding-left:18px; 
+  }
   
 /* =========================================================
 * Emil & Peter Styles
