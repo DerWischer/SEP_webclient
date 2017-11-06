@@ -3,8 +3,165 @@
  * =========================================================
  * ========================================================= */
 // <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-
-
+var filesystem  = {
+	"a": {
+		"id":"a",
+		"parent": "b",
+		"type": "folder",
+		"name": "Folder-A",
+		"lastModified": "2011-07-15",
+		"children": ["f", "g"],
+		"status":"open",
+		"user":["reem"],
+		"owner":"mazen"
+	},
+	"b": {
+		"id":"b",
+		"parent": null,
+		"type": "folder",
+		"name": "Folder-B",
+		"lastModified": "1999-07-15",
+		"children": ["a", "c", "d"],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"reem"
+	},
+	"d": {
+		"id":"d",
+		"parent": "b",
+		"type": "folder",
+		"name": "Folder-D",
+		"lastModified": "2000-07-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen","peter"],
+		"owner":"calle"
+	},
+	"f": {
+		"id":"f",
+		"parent": "a",
+		"type": "folder",
+		"name": "folder-F",
+		"lastModified": "2017-07-15",
+		"children": ["c", "h"],
+		"status":"closed",
+		"user":["emil"],
+		"owner":"joushua"
+	},
+	"c": {
+		"id":"c",
+		"parent": "f",
+		"type": "folder",
+		"name": "folder-C",
+		"lastModified": "2017-07-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"peter"
+	},
+	"g": {
+		"id":"g",
+		"parent": "a",
+		"type": "folder",
+		"name": "Folder-G",
+		"lastModified": "2017-10-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"joushua"
+	},
+	"h": {
+		"id":"h",
+		"parent": "f",
+		"type": "folder",
+		"name": "Folder-H",
+		"lastModified": "2017-10-15",
+		"children": ["i"],
+		"status":"closed",
+		"user":["mazen","emil"],
+		"owner":"peter"
+	},
+	"i": {
+		"id":"i",
+		"parent": "h",
+		"type": "folder",
+		"name": "Folder-I",
+		"lastModified": "2017-10-15",
+		"children": ["j"],
+		"status":"closed",
+		"user":[],
+		"owner":"mazen"
+	},
+	"j": {
+		"id":"j",
+		"parent": "i",
+		"type": "folder",
+		"name": "Folder-J",
+		"lastModified": "2017-10-15",
+		"children": ["k"],
+		"status":"open",
+		"user":["reem","mazen"],
+		"owner":"mazen"
+	},
+	"k": {
+		"id":"k",
+		"parent": "j",
+		"type": "folder",
+		"name": "Folder-K",
+		"lastModified": "2017-10-12",
+		"children": ["l", "m"],
+	  "status":"closed",
+	  "user":["calle","peter","mazen"],
+	 "owner":"joushua"
+	},
+	"l": {
+		"id":"l",
+		"parent": "k",
+		"type": "folder",
+		"name": "Folder-L",
+		"lastModified": "2017-09-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"joushua"
+	},
+	"m": {
+		"id":"m",
+		"parent": "k",
+		"type": "CAD",
+		"name": "Folder-M",
+		"lastModified": "2017-09-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"peter"
+		"project_id":"project1",
+	}
+	"material":{
+		"type":"material",
+		"id": "material", 
+		"project_id":"project1" ,
+		"build_id":"B001" ,
+		"name":"carbon",
+		},
+		"project1":{
+		   "customer":"Volvo",
+		   "name":"P01", 
+		   "id":"project1",
+		   "status":null,
+		   "user":null,
+		   "owner":null
+		},
+		"measure":{ 
+			"type":"material_measure",
+			"id": "measure", 
+			"project_id":"12345",
+			"Build_id":"B001",
+			"name":"carbon", 
+			"certificate":"m"
+		}
+}
+else 
 var FileTraceability = 
 {"12345": 
 {
@@ -12,7 +169,7 @@ var FileTraceability =
    "project_name":"P01", 
    "project_id":"12345",
    "id":"12345",
-   "File1":[{ "type":"CAD","id": "1234111", "project_id":"12345","name":"1.prt", "path":"c:-Documents-prt1-1.prt"},
+   "File1":[{ "type":"CAD","id": "m", "project_id":"12345","name":"1.prt", "path":"c:-Documents-prt1-1.prt"},
             { "type":"CAD","id": "123454", "project_id":"12345","name":"2.prt", "path":"c:-Documents-prt1-2.prt"}, 
             { "type":"CAD","id": "123455", "project_id":"12345","name":"3.prt", "path":"c:-Documents-prt1-3.prt"}],
 
