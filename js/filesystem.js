@@ -120,18 +120,161 @@ var filesystem  = {
 		"status":"open",
 		"user":["mazen"],
 		"owner":"joushua"
-	},
+	    },
 	"m": {
 		"id":"m",
 		"parent": "k",
-		"type": "folder",
+		"type": "File",
 		"name": "Folder-M",
 		"lastModified": "2017-09-15",
 		"children": [],
 		"status":"open",
 		"user":["mazen"],
-		"owner":"peter"
-	}
+		"owner":"peter" ,
+		"project_id":"project1"
+	     },
+	"cad1": {
+		"id":"cad1",
+		"parent": "k",
+		"type": "File",
+		"name": "CAD1-M",
+		"lastModified": "2017-09-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"peter",
+		"project_id":"project1",
+		"extention": "CAD"
+	     },
+	"stl1": {
+		"id":"stl1",
+		"parent": "k",
+		"type": "File",
+		"name": "STL1-M",
+		"lastModified": "2017-09-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"peter",
+		"project_id":"project1",
+		"extention": "STL"
+	     },
+	"build1": {
+		"id":"build1",
+		"parent": "k",
+		"type": "File",
+		"name": "Build1",
+		"lastModified": "2017-09-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"peter",
+		"project_id":"project1",
+		"extention": "build"
+	     },
+	"build2": {
+		"id":"build2",
+		"parent": "k",
+		"type": "File",
+		"name": "Build2",
+		"lastModified": "2017-09-15",
+		"children": [],
+		"status":"open",
+		"user":["mazen"],
+		"owner":"peter",
+		"project_id":"project1",
+		"extention": "build"
+	     },
+	"material1":{
+		"type":"File",
+		"id": "material1", 
+		"project_id":"project1" ,
+		"build_id":"build1" ,
+		"name":"material1",
+		"extention": "material"
+		},
+	"material2":{
+		"type":"File",
+		"id": "material2", 
+		"project_id":"project1" ,
+		"build_id":"build2" ,
+		"name":"material2",
+		"extention": "material"
+		}	,
+	"customer1":{
+		   "name":"Volvo",
+		   "project_id":"project1", 
+		   "id":"customer1", 
+           "extention": "customer"
+		   },	
+    "project1":{
+           "type":"File",
+		   "name":"P01", 
+		   "id":"project1",
+           "extention": "project"
+		   },
+	"measure1":{ 
+			"type":"File",
+			"id": "measure1", 
+			"project_id":"project1",
+			"build_id":"build1",
+			"material_id":"material1",
+			"name":"material1 measure", 
+			"certificate":"m",
+			"extention":"measure"
+		},
+	"measure2":{ 
+			"type":"File",
+			"id": "measure2", 
+			"project_id":"project1",
+			"build_id":"build2",
+			"material_id":"material2",
+			"name":"material2 measure", 
+			"certificate":"m",
+			"extention":"measure"
+		},	
+	"image1":{ 
+			"type":"File",
+			"id": "image1", 
+			"project_id":"project1",
+			"build_id":"build1",
+			"name":"image1", 
+			"certificate":"m",
+			"extention":"image"
+		},
+	"image2":{ 
+			"type":"File",
+			"id": "image2", 
+			"project_id":"project1",
+			"build_id":"build2",
+			"name":"image2", 
+			"certificate":"m",
+			"extention":"image"
+		},
+    "slm1":{ 
+			"type":"File",
+			"id": "slm1", 
+			"project_id":"project1",
+			"build_id":"build1",
+			"name":"SLM1", 
+			"extention":"SLM"
+		} ,
+	 "slm2":{ 
+			"type":"File",
+			"id": "slm2", 
+			"project_id":"project1",
+			"build_id":"build1",
+			"name":"SLM2", 
+			"extention":"SLM"
+		},
+	 "slm3":{ 
+			"type":"File",
+			"id": "slm3", 
+			"project_id":"project1",
+			"build_id":"build2",
+			"name":"SLM3", 
+			"extention":"SLM"
+		}	 
 }
 function S4() {
     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
