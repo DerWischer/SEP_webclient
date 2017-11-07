@@ -11,37 +11,37 @@
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta charset="utf-8" />
-	  <link rel="stylesheet" href="thirdParty/font-awesome-4.7.0/css/font-awesome.min.css" />
-	  <title>Swerea</title>
-	  <!-- Bootstrap -->
-	  <link rel="stylesheet" href="thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	  <script src="thirdParty/jquery/jquery-3.2.1.min.js">
-	  </script>
-	  <!-- Include all compiled plugins (below), or include individual files as needed -->
-	  <script src="thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js">
-	  </script>
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<script src="thirdParty/moment-with-locales/moment-with-locales.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
-		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-		<script src="js/filesystem.js"></script>
-		<script src="translate/translator.js"></script>
-		<script src="js/peter.js"></script>
-		<script src="js/reem.js"></script>
-		<script src="js/calle.js"></script>
-		<script src="js/joshua.js"></script>
-		<script src="js/emil.js"></script>
-		<link rel="stylesheet" href="css/index.css"/>
-		<link rel="stylesheet" href="thirdParty\flag-icon-css-master\css\flag-icon.min.css">
-		<title>Swerea</title>
+		<link rel="stylesheet" href="{{ static_url('thirdParty/font-awesome-4.7.0/css/font-awesome.min.css')}}" />		
+	  	<title>Swerea</title>
+	  	<!-- Bootstrap -->
+	  	<link rel="stylesheet" href="{{ static_url('thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css')}}">
+	  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	  	<script src="{{ static_url('thirdParty/jquery/jquery-3.2.1.min.js')}}">
+	  	</script>
+	  	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	  	<script src="{{ static_url('thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js')}}">
+	  	</script>
+			<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+			<script src="{{ static_url('thirdParty/moment-with-locales/moment-with-locales.min.js')}}"></script>
+			<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+			<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+			<script src="{{ static_url('js/filesystem.js')}}"></script>
+			<script src="{{ static_url('translate/translator.js')}}"></script>
+			<script src="{{ static_url('js/peter.js')}}"></script>
+			<script src="{{ static_url('js/reem.js')}}"></script>
+			<script src="{{ static_url('js/calle.js')}}"></script>
+			<script src="{{ static_url('js/joshua.js')}}"></script>
+			<script src="{{ static_url('js/emil.js')}}"></script>
+			<link rel="stylesheet" href="{{ static_url('css/index.css')}}"/>
+			<link rel="stylesheet" href="{{ static_url('thirdParty\flag-icon-css-master\css\flag-icon.min.css')}}">
+			<title>Swerea</title>
 	</head>
 	<body class="no-scroll">
 		<section class="custom-nav">
 			<section class="container-fluid">
 				<section class="row">
 					<section class="col-md-3 col-sm-4">
-						<img class="custom-logo" src="img/ivf_rgb_transparent.png"/>
+						<img class="custom-logo" src="{{ static_url('img/ivf_rgb_transparent.png')}}"/>
 					</section>
 					<section class="col-md-6 col-sm-8">
 						 <div class="input-group">
