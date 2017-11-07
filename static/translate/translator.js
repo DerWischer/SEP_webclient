@@ -32,7 +32,6 @@ function translatePage(language) {
 $(document).ready(function() {
     $("#english-btn").click(function() {
         alert("english");
-        translatePageText();
     });
     $("#swedish-btn").click(function() {
         alert("swedish");
