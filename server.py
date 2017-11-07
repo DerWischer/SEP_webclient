@@ -41,6 +41,8 @@ def make_app():
         ])
 
 if __name__ == "__main__":
+    print ("Server started")
     APP = make_app()
     APP.listen(PORT)
     tornado.ioloop.IOLoop.current().start()
+    
