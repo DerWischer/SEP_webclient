@@ -39,14 +39,11 @@ cur = db.cursor()
 
 ## insert values into octoprint tables
  ##cur.execute('INSERT INTO octoprint.customer VALUES (%s,%s)""", (245,Segma)')
- 
- cursor.execute('commit')
- db.commit()
-
- x.execute("""INSERT INTO anooog1 VALUES (%s,%s)""",(188,90))
- db.commit() 
-
- INSERT INTO octoprint.customer(customer_id,name) VALUES ("245","Segma");
+ #cursor.execute('commit')
+ #db.commit()
+ #x.execute("""INSERT INTO anooog1 VALUES (%s,%s)""",(188,90))
+ #db.commit() 
+ #INSERT INTO octoprint.customer(customer_id,name) VALUES ("245","Segma");
 
 
 cur.execute("SELECT * FROM octoprint.users")
