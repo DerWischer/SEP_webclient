@@ -273,18 +273,15 @@ $(document).ready(function() {
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		setFolder(this.getAttribute("data-id"));
-	});
-	$("#tableView").contextMenu({
-		menuSelector: "#contextMenu",
-		menuSelected: (function(invokedOn, selectedMenu) {
-			// context menu clicked
-			var msg = "You selected the menu item '" + selectedMenu.text() + "' on the value '" + invokedOn.text() + "'";
-			if (selectedMenu.text() == "Trace") {
-				alert(msg);
-				$("#traceModal").modal();
-			}
-		})
-	});
+    });
+    $("#tableView").on("contextmenu", ".row", function(e) {
+        $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden");
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    $(document).on("click", function() {
+        $("#contextMenu").addClass("hidden");
+    });
 });
 //reem
 /* =========================================================
