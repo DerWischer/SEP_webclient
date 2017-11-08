@@ -35,7 +35,7 @@ def create_database_tables():
 	cursor.execute(sql) 
 	sql =  'CREATE TABLE  if not exists log (user_id varchar(10),login date DEFAULT NULL,logout date DEFAULT NULL,file_accessed varchar(1000),FOREIGN KEY (user_id) REFERENCES users(user_id) )'
 	cursor.execute(sql)
-	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), hashvalue varchar(128), size int, created int, updated int)'
+	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), hashvalue varchar(128), size int, created int, updated int changehash varchar(128))'
 	cursor.execute(sql)
 
 def get_database():
@@ -52,10 +52,10 @@ def test_database_1():
 	for row in cur.fetchall() :
 		print(row[0], " ", row[1])
 		
-def file_entry(id, name, path, ext, hashValue, size, created, updated):
+def file_entry(id, name, path, ext, hashValue, size, created, updated , changehash):
 	db = get_database()
 	cur = db.cursor()
-	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", "%s", "%s", %s, %s, %s)' % (id, name, path, ext, hashValue, size, created, updated))
+	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", "%s", "%s", %s, %s, %s, "%s")' % (id, name, path, ext, hashValue, size, created, updated , changehash))
 	cur.execute(sql)
 	cur.close()
 	db.commit()
