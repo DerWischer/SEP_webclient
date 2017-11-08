@@ -313,20 +313,8 @@ function getSLM(project_id,build_id)
 
 
 var myuser = "mazen" ; // example to be replaced with current user
+ 
 
-function filesystemToArr(filesystem){
-   var retVal = [];
-   var keys = Object.keys(filesystem);
-   keys.forEach(function(key) {
-      retVal.push(filesystem[key]);
-   });
-   return retVal;
- }
-
-var fileArr = filesystemToArr(filesystem);
-
-
-  
   // return array of files names according to status ( returen open files,  returen closed files)
  function getstatusFiles(status){
 	var found = [];
@@ -381,7 +369,91 @@ var fileArr = filesystemToArr(filesystem);
  	 return found;
     }
 
-   
+
+	 
+
+
+	function renderSidebarTree(myuser)
+	{
+		var fileview = document.getElementById("fileview4");
+		$(fileview).empty();
+		var users = getUserFile(myuser);
+		for (i = 0; i < users.length; i++) { 
+		   appendItem(fileview, users[i],"1");
+		}
+		
+		// return my files
+		var fileview = document.getElementById("fileview1");
+		$(fileview).empty();
+		var files = getMyFiles(myuser);
+		for (i = 0; i < files.length; i++) {
+		  appendItem(fileview, files[i],"1");
+		}
+		
+		// return opened files
+		var fileview = document.getElementById("fileview3");
+		$(fileview).empty();
+		var files = getstatusFiles("open");
+		for (i = 0; i < files.length; i++) {
+		  appendItem(fileview, files[i],"1");
+		}
+		
+		// return closed files
+		var fileview = document.getElementById("fileview2");
+		$(fileview).empty();
+		var files = getstatusFiles("closed");
+		for (i = 0; i < files.length; i++) {
+		  appendItem(fileview, files[i],"1");
+		}
+		// return last modified files 
+		var fileview = document.getElementById("fileview5");
+		$(fileview).empty();
+		var files = getFilesLastModified(1); // 1 means one month
+		for (i = 0; i < files.length; i++) {
+		  appendItem(fileview, files[i],"1");
+		} 
+		
+		$("#MainMenu").on("click",".list-group-item",function(){
+			setFolder($(this).attr("data-id"));
+		})
+		
+	}
+	
+function renderTraceTree(id)
+{    var project_id =  getProjectId(id);  
+
+	  var fileview = document.getElementById("fileview6");
+      $(fileview).empty();
+      var files = getCADlist(project_id);  
+       for (i = 0; i < files.length; i++) {
+        appendItem(fileview, files[i],"1");
+      }
+	   
+	  var fileview = document.getElementById("fileview11");
+      $(fileview).empty();
+	  var customer = getcustomer(project_id);
+      appendItem(fileview, customer ,"1");
+	  
+       
+	  var fileview = document.getElementById("fileview12");
+      $(fileview).empty();
+      var files = getPRTlist(project_id);  
+      for (i = 0; i < files.length; i++) {
+        appendItem(fileview, files[i],"1"); 
+      }
+	  
+    
+	 var fileview = document.getElementById("demo7");
+     $(fileview).empty();
+	 createBuildNode(fileview,project_id); 
+	  
+	 $("#TraceMenu").on("click",".list-group-item",function(){
+	  setFolder($(this).attr("data-id"));
+	  }) 
+	}
+
+
+   /*
  $(document).ready(function() {
 	  // shared with me
       var fileview = document.getElementById("fileview4");
@@ -429,8 +501,7 @@ var fileArr = filesystemToArr(filesystem);
 	    
 /////// traceability 
 	  var project_id =  getProjectId("cad1");  
-	 
-	  
+
 	  var fileview = document.getElementById("fileview6");
       $(fileview).empty();
       var files = getCADlist(project_id);  
@@ -459,4 +530,4 @@ var fileArr = filesystemToArr(filesystem);
 	 $("#TraceMenu").on("click",".list-group-item",function(){
 	  setFolder($(this).attr("data-id"));
 	  }) 
- });
+ }); */
