@@ -275,7 +275,7 @@ $(document).ready(function() {
 		setFolder(this.getAttribute("data-id"));
     });
     $("#tableView").on("contextmenu", ".row", function(e) {
-        $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden");
+        $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden").attr("data-id", $(e.target).closest(".row").attr("data-id"));
         e.preventDefault();
         e.stopPropagation();
     });
