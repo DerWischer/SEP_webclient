@@ -13,6 +13,10 @@ class IndexHandler(tornado.web.RequestHandler):
 
 class LoginHandler(tornado.web.RequestHandler):
     """ Handles request for the login page"""
+    def post(self):
+    	code = self.get_argument("code")
+    	print (code)
+    	
     def get(self):
         self.render("login.html")
 

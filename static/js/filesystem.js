@@ -61,7 +61,9 @@ $(document).ready(function() {
 				ROOT = key;					
 				return false;
 			}
-		});		
+		});
+	renderSidebarTree("mazen"); 
+	renderTraceTree("cad1"); 		
 	}).fail(function(data){
 		filesystem = null;
 		ROOT = null;		

@@ -1,13 +1,13 @@
 function login() {
 	$.ajax({
-		url:"api/login.php",
+		url:"login",
 		data:{"code":$("#operatorCode").val()},
 		success:function(data) {
 			if (!data.success) {
 				$("#failedLogin").removeClass("hidden");
 				return;
 			}
-			window.location.url = "index.php";
+			window.location.url = "";
 		},
 		error:function() {
 			$("#errorLogin").removeClass("hidden");
