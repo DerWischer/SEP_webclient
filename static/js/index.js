@@ -282,6 +282,9 @@ $(document).ready(function() {
     $(document).on("click", function() {
         $("#contextMenu").addClass("hidden");
     });
+    $("#traceDropdown").on("click", function() {
+        $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
+    });
 });
 //reem
 /* =========================================================
