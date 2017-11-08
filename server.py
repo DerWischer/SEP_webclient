@@ -35,7 +35,8 @@ def make_app():
     """ Defines settings and routes. Returns an application"""
     return tornado.web.Application(static_path=os.path.join(ROOT, "static"), template_path=os.path.join(ROOT, "templates"), compress_response=True,
         handlers=[
-            (r"/(.*)", tornado.web.StaticFileHandler, {"path":"./templates"}),
+            (r"/filesystem", FileSystemHandler),
+            (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(ROOT, "static"), "default_filename": "index.html"})
         ])
 
 if __name__ == "__main__":
