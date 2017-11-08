@@ -40,10 +40,10 @@ def make_app():
         template_path=os.path.join(ROOT, "templates"),
         # set routes and specify handlers
         handlers=[
-            (r"/", IndexHandler),
             (r"/login", LoginHandler),
             (r"/account", AccountHandler),
-            (r"/filesystem", FileSystemHandler)
+            (r"/filesystem", FileSystemHandler),
+            (r"/(.*)", tornado.web.StaticFileHandler, {"path":"templates/index.html"})
         ])
 
 if __name__ == "__main__":
