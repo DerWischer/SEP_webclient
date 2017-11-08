@@ -21,7 +21,8 @@ def filemap(path):
             updated = (math.floor(mktime(time.gmtime(filestat.st_mtime))))
             hashvalue = hashlib.md5(open(filepath,'rb').read()).hexdigest() 
             file_info = {'name' : os.path.splitext(l)[0], 'path' : path, 'hashvalue':hashvalue, 'ext' : os.path.splitext(l)[1], 'size' : filestat.st_size, 'created':created, 'updated':updated}
-            file_info['changehash'] = hashlib.sha512("%s%s%s%s" % (file_info['name'],file_info['ext'],file_info['path'],file_info['hashvalue'])).hexdigest()
+            changehash = hashlib.sha512(("%s%s%s%s" % (file_info['name'],file_info['ext'],file_info['path'],file_info['hashvalue'])).encode('utf-8')).hexdigest() 
+            file_info['changehash'] = changehash
             dir_files.append(file_info)
     return dir_files
 

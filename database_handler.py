@@ -9,12 +9,13 @@ def create_database():
 
 def create_database_tables():
 	db1 = get_database()
+	cursor = db1.cursor()
 	sql = 'USE octoprint'
 	cursor.execute(sql)
 	sql =  'CREATE TABLE if not exists customer(customer_id varchar(10) PRIMARY KEY, name varchar(25)) ;'
-	cursor.execute(sql)            
+	cursor.execute(sql)           
 	sql =  'CREATE TABLE if not exists cad(project_id varchar(10) PRIMARY KEY, id int(36) NOT NULL, customer_id varchar(10), prtfile varchar(1000), info varbinary(5000),FOREIGN KEY (customer_id) REFERENCES customer(customer_id))'
-	cursor.execute(sql)  
+	cursor.execute(sql)
 	sql =  'CREATE TABLE if not exists details(detailed_id varchar(10) PRIMARY KEY ,id int(36) UNIQUE KEY,stlfile varchar(1000) ,project_id varchar(10), FOREIGN KEY (project_id) REFERENCES cad(project_id))'
 	cursor.execute(sql)
 	sql =  'CREATE TABLE if not exists material(material_id varchar(10) PRIMARY KEY,id int(36) UNIQUE KEY, materialpic varbinary(5000))'
@@ -35,7 +36,7 @@ def create_database_tables():
 	cursor.execute(sql) 
 	sql =  'CREATE TABLE  if not exists log (user_id varchar(10),login date DEFAULT NULL,logout date DEFAULT NULL,file_accessed varchar(1000),FOREIGN KEY (user_id) REFERENCES users(user_id) )'
 	cursor.execute(sql)
-	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), hashvalue varchar(128), size int, created int, updated int changehash varchar(128))'
+	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), hashvalue varchar(128), size int, created int, updated int, changehash varchar(128)  UNIQUE KEY )'
 	cursor.execute(sql)
 
 def get_database():
@@ -55,8 +56,11 @@ def test_database_1():
 def file_entry(id, name, path, ext, hashValue, size, created, updated , changehash):
 	db = get_database()
 	cur = db.cursor()
-	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", "%s", "%s", %s, %s, %s, "%s")' % (id, name, path, ext, hashValue, size, created, updated , changehash))
-	cur.execute(sql)
+	try:
+	 sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", "%s", "%s", %s, %s, %s, "%s")' % (id, name, path, ext, hashValue, size, created, updated , changehash))
+	 cur.execute(sql)
+	except:
+		print("Can not add the same file again")
 	cur.close()
-	db.commit()
-	        
+	db.commit()     
+create_database_tables()
