@@ -11,29 +11,30 @@
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" href="{{ static_url('thirdParty/font-awesome-4.7.0/css/font-awesome.min.css')}}" />		
+		<link rel="stylesheet" href="static/thirdParty/font-awesome-4.7.0/css/font-awesome.min.css" />		
 	  	<title>Swerea</title>
 	  	<!-- Bootstrap -->
-	  	<link rel="stylesheet" href="{{ static_url('thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css')}}">
+	  	<link rel="stylesheet" href="static/thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	  	<script src="{{ static_url('thirdParty/jquery/jquery-3.2.1.min.js')}}">
+	  	<script src="static/thirdParty/jquery/jquery-3.2.1.min.js">
 	  	</script>
 	  	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	  	<script src="{{ static_url('thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js')}}">
+	  	<script src="static/thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js">
 	  	</script>
 			<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-			<script src="{{ static_url('thirdParty/moment-with-locales/moment-with-locales.min.js')}}"></script>
+			<script src="static/thirdParty/moment-with-locales/moment-with-locales.min.js"></script>
 			<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
 			<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-			<script src="{{ static_url('js/filesystem.js')}}"></script>
-			<script src="{{ static_url('translate/translator.js')}}"></script>
-			<script src="{{ static_url('js/peter.js')}}"></script>
-			<script src="{{ static_url('js/reem.js')}}"></script>
-			<script src="{{ static_url('js/calle.js')}}"></script>
-			<script src="{{ static_url('js/joshua.js')}}"></script>
-			<script src="{{ static_url('js/emil.js')}}"></script>
-			<link rel="stylesheet" href="{{ static_url('css/index.css')}}"/>
-			<link rel="stylesheet" href="{{ static_url('thirdParty/flag-icon-css-master/css/flag-icon.min.css')}}">
+			<script src="static/js/filesystem.js"></script>
+			<script src="static/translate/swedish.js"></script>
+			<script src="static/translate/translator.js"></script>
+			<script src="static/js/peter.js"></script>
+			<script src="static/js/reem.js"></script>
+			<script src="static/js/calle.js"></script>
+			<script src="static/js/joshua.js"></script>
+			<script src="static/js/emil.js"></script>
+			<link rel="stylesheet" href="static/css/index.css"/>
+			<link rel="stylesheet" href="static/thirdParty/flag-icon-css-master/css/flag-icon.min.css">
 			<title>Swerea</title>
 	</head>
 	<body class="no-scroll">
@@ -41,7 +42,7 @@
 			<section class="container-fluid">
 				<section class="row">
 					<section class="col-md-3 col-sm-4">
-						<img class="custom-logo" src="{{ static_url('img/ivf_rgb_transparent.png')}}"/>
+						<img class="custom-logo" src="static/img/ivf_rgb_transparent.png"/>
 					</section>
 					<section class="col-md-6 col-sm-8">
 						 <div class="input-group">
@@ -71,9 +72,6 @@
 													<button type="submit" id="btnLogout" class="btn btn-danger btn-block"><span class="translate">Logout</span></button>
 												</div>
 												<div class="form-group">
-													<button id="english-btn" class="btn btn-default btn-lg" type="button">
-														<span class="flag-icon flag-icon-gb"></span>
-													</button>
 													<button id="swedish-btn" class="btn btn-info btn-lg" type="button">
 														<span class="flag-icon flag-icon-se"></span>
 													</button>
