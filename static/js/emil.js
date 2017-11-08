@@ -108,16 +108,12 @@ $(document).ready(function() {
     $('.dropdown-menu').find('form').click(function (e) {
         e.stopPropagation();
     });
-
     //Logout button
     $("#btnLogout").click(function() {
         //alert("Value: " + $("#emailInput").val() + " Password: " + $("#passwordInput").val());
         correctPW($("#emailInput").val(), $("#passwordInput").val());
     });
     $("#tableView").on("click", ".listViewItem", function() {
-        setFolder(this.getAttribute("data-id"));
-    });
-    $("#gridView").on("click", "section.file-block", function() {
         setFolder(this.getAttribute("data-id"));
     });
     $("#tableView").contextMenu({
@@ -127,7 +123,8 @@ $(document).ready(function() {
             var msg = "You selected the menu item '" + selectedMenu.text() +
                 "' on the value '" + invokedOn.text() + "'";
             if (selectedMenu.text() == "Trace") {
-               // $("#traceModal").modal();
+                alert(msg);
+               $("#traceModal").modal();
             }
         })
     });
