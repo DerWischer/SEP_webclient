@@ -14,9 +14,9 @@ class IndexHandler(tornado.web.RequestHandler):
 class LoginHandler(tornado.web.RequestHandler):
     """ Handles request for the login page"""
     def post(self):
-    	code = self.get_argument("code")
-    	print (code)
-    	
+        code = self.get_argument("code")
+        print(code)
+
     def get(self):
         self.render("login.html")
 
@@ -33,22 +33,14 @@ class FileSystemHandler(tornado.web.RequestHandler):
 
 def make_app():
     """ Defines settings and routes. Returns an application"""
-    return tornado.web.Application(
-        # path to scripts, img, etc.
-        static_path=os.path.join(ROOT, "static"),
-        # path to html files
-        template_path=os.path.join(ROOT, "templates"),
-        # set routes and specify handlers
+    return tornado.web.Application(static_path=os.path.join(ROOT, "static"), template_path=os.path.join(ROOT, "templates"), compress_response=True,
         handlers=[
-            (r"/login", LoginHandler),
-            (r"/account", AccountHandler),
-            (r"/filesystem", FileSystemHandler),
-            (r"/(.*)", tornado.web.StaticFileHandler, {"path":"templates/index.html"})
+            (r"/(.*)", tornado.web.StaticFileHandler, {"path":"./templates"}),
         ])
 
 if __name__ == "__main__":
-    print ("Server started")
     APP = make_app()
     APP.listen(PORT)
+    print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     
