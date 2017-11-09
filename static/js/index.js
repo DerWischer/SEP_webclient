@@ -155,7 +155,6 @@ function searchFileSystem(m) {
 			found.push(value);
 		}
 	});
-	drawJSONexplorer(null, found);
 	displayList(null, found);
 }
 //emil
@@ -529,12 +528,17 @@ function getstatusFiles(status) {
 	return found;
 }
 // return array of files names according to status ( returen open files,  returen closed files, or owner)
-function getMyFiles(owner) {
+function getMyFiles(user_id) {
 	var found = [];
 	$.each(filesystem, function(key, value) {
-		if (value.owner == owner) found.push(value);
-	});
-	return found;
+		if (value.owner)
+			for (j = 0; j < value.owner.length; j++)
+				if (value.owner[j] == user_id) {
+					found.push(value);
+					break;
+				}
+    });
+    return found;
 }
 // reurn shared with me files
 function getUserFile(user_id) {
@@ -564,15 +568,18 @@ function getFilesLastModified(monthcnt) {
 function renderSidebarTree(myuser) {
 	var fileview = document.getElementById("fileview4");
 	$(fileview).empty();
-	var users = getUserFile(myuser);
-	for (i = 0; i < users.length; i++) {
-		appendItem(fileview, users[i], "1");
+	var files = getUserFile(myuser);
+	for (i = 0; i < files.length; i++) {
+		appendItem(fileview, files[i], "1");
 	}
 	// return my files
 	var fileview = document.getElementById("fileview1");
 	$(fileview).empty();
 	var files = getMyFiles(myuser);
 	for (i = 0; i < files.length; i++) {
+        if (!files[i]) {
+            continue;
+        }
 		appendItem(fileview, files[i], "1");
 	}
 	// return opened files

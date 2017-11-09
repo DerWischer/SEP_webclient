@@ -1,11 +1,14 @@
 import MySQLdb
  
 def create_database():
-	'''create octoprint if not exists'''
-	db1 = MySQLdb.connect(host="localhost",   user="root",  passwd="root") 
+	db1 = MySQLdb.connect(host="localhost", user="root", passwd="") 
+	if db1 == None:
+    		raise Exception("could not connect to database, please check settings")
 	cursor = db1.cursor()
 	sql = 'CREATE DATABASE IF NOT EXISTS octoprint'  
 	cursor.execute(sql)
+	cursor.close()
+	create_database_tables()
 
 def create_database_tables():
 	db1 = get_database()
@@ -36,12 +39,12 @@ def create_database_tables():
 	cursor.execute(sql) 
 	sql =  'CREATE TABLE  if not exists log (user_id varchar(10),login date DEFAULT NULL,logout date DEFAULT NULL,file_accessed varchar(1000),FOREIGN KEY (user_id) REFERENCES users(user_id) )'
 	cursor.execute(sql)
-	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), hashvalue varchar(128), size int, created int, updated int, changehash varchar(128)  UNIQUE KEY )'
+	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), parent varchar(36), hashvalue varchar(128), size int, created int, updated int, changehash varchar(128)  UNIQUE KEY, type varchar(36))'
 	cursor.execute(sql)
 
 def get_database():
 	try:
-		return MySQLdb.connect(host="localhost",   user="root",  passwd="root", db="octoprint")
+		return MySQLdb.connect(host="localhost",   user="root",  passwd="", db="octoprint")
 	except:
 		print ("Warning: could not connect to database, maybe it is not created yet?")
 	
@@ -52,15 +55,53 @@ def test_database_1():
 	# print the first and second columns      
 	for row in cur.fetchall() :
 		print(row[0], " ", row[1])
-		
-def file_entry(id, name, path, ext, hashValue, size, created, updated , changehash):
+
+def getchildren(id):
+	children = []
+	db = get_database() 
+	cur = db.cursor() 
+	cur.execute("SELECT id FROM filesystem WHERE parent = %s",  [id])
+	for row in cur.fetchall():
+		children.append(row[0])
+	return children
+    			
+def get_file_system():
+		db = get_database() 
+		cur = db.cursor() 
+		cur.execute("SELECT id, filename, file_ext, created, updated, type, parent FROM filesystem")
+		# print the first and second columns 
+		rows = {}    
+		for row in cur.fetchall():
+			children = []
+			if row[5] == "folder":
+				children = getchildren(row[0])
+			rows[row[0]] = {
+				"id":row[0],
+				"name":row[1],
+				"file_ext":row[2],
+				"created":row[3],
+				"updated":row[4],
+				"owner":["mazen"],
+				"type":row[5],
+				"parent":row[6],
+				"children": children
+			}
+		return rows
+
+def file_entry(id, name, path, ext, hashValue, size, created, updated , changehash, isfolder, parent):
 	db = get_database()
 	cur = db.cursor()
 	try:
-	 sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", "%s", "%s", %s, %s, %s, "%s")' % (id, name, path, ext, hashValue, size, created, updated , changehash))
-	 cur.execute(sql)
+		type = "file"
+		if isfolder:
+    			type = "folder"
+		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+		cur.execute(sql, [id, name, path, ext, parent, hashValue, size, created, updated , changehash, type])
 	except:
-		print("Can not add the same file again")
+		pass
+		#print("Can not add the same file again")
 	cur.close()
-	db.commit()     
-create_database_tables()
+	db.commit()
+
+def folder_entry(id, name, path):
+	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", true)' % (id, name, path))

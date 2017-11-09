@@ -51,23 +51,27 @@ function el(name, options) {
 }
 
 $(document).ready(function() {
-	var query = $.get("/filesystem")
-	.done(function(data, status){
-		ROOT = null;		
-		filesystem = JSON.parse(data)['sent'];		
-		$.each(filesystem, function(key, fileinfo) {
-			 // iterate over files to find the root node
-			if (fileinfo['parent'] === 'null') {												
-				ROOT = key;					
-				return false;
+	$.ajax({
+		url:"/filesystem",
+		method:"GET",
+		dataType:"JSON",
+		success:function(data) {
+			if (!data.success) {
+				alert("Error collecting filesystem");
+				return;
 			}
-		});
-	renderSidebarTree("mazen"); 
-	renderTraceTree("cad1"); 		
-	}).fail(function(data){
-		filesystem = null;
-		ROOT = null;		
-	}).always(function(data){
-		setFolder(ROOT);		
-	});
+			ROOT = null;			
+			$.each(data.filesystem, function(key, fileinfo) {
+				 // iterate over files to find the root node
+				if (fileinfo['parent'] === null) {												
+					ROOT = key;					
+					return false;
+				}
+			});
+			filesystem = data.filesystem;
+			setFolder(ROOT);
+			renderSidebarTree("mazen"); 
+			renderTraceTree("cad1"); 
+		}
+	});		
 });
