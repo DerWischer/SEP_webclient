@@ -4,7 +4,7 @@ import json
 import uuid
 import tornado.ioloop
 import tornado.web
-import filescanner
+import fileScanner
 import database_handler
 import notifier
 
