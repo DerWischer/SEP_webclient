@@ -8,12 +8,12 @@ import fileScanner
 import database_handler
 import notifier
 
-ROOT = os.path.dirname(__file__)
+ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
 def scan_filesystem():
-    database_handler.create_database()
-    for entry in filescanner.scan_recursive(ROOT):
+    database_handler.create_database()    
+    for entry in fileScanner.scan_recursive(ROOT):
         database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 class LoginHandler(tornado.web.RequestHandler):
@@ -44,7 +44,7 @@ def make_app():
     return tornado.web.Application(static_path=os.path.join(ROOT, "static"), template_path=os.path.join(ROOT, "templates"), compress_response=True,
         handlers=[
             (r"/filesystem", FileSystemHandler),
-            (r"/subscribe", SubscriptionHandler),
+            (r"/subscribe", SubscriptionHandler),            
             (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(ROOT, "static"), "default_filename": "index.html"})
         ])
 
