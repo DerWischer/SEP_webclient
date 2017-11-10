@@ -190,10 +190,12 @@ function displayList(parent, childrenObjects) {
 		var date = el("section", {
 			class: "col-lg-5 col-md-5"
 		});
-		var h4 = el("h4", {
-			html: moment(value.lastModified * 1000).format("YYYY-MM-DD")
-		});
-		date.appendChild(h4);
+        if (value.type == "file") {
+            var h4 = el("h4", {
+                html: moment(value.updated * 1000).format("YYYY-MM-DD")
+            });
+            date.appendChild(h4);
+        }
 		row.appendChild(icon);
 		row.appendChild(name);
 		row.appendChild(date);

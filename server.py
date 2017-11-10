@@ -12,7 +12,11 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
 def scan_filesystem():
+<<<<<<< HEAD
     database_handler.create_database()    
+=======
+    database_handler.create_database()
+>>>>>>> a446d9543169b943790891f11f26f19acb410d75
     for entry in fileScanner.scan_recursive(ROOT):
         database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
