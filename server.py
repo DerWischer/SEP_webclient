@@ -13,7 +13,7 @@ PORT = 8888
 
 def scan_filesystem():
     database_handler.create_database()
-    for entry in filescanner.scan_recursive(ROOT):
+    for entry in fileScanner.scan_recursive(ROOT):
         database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 class LoginHandler(tornado.web.RequestHandler):
