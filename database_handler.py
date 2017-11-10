@@ -1,7 +1,16 @@
 import MySQLdb
- 
+
+def get_db_user():
+	return "root"
+def get_db_password():
+	return "root"
+
+def get_database_name():
+	""" Return the name of the database"""
+	return "octoprint"
+
 def create_database():
-	db1 = MySQLdb.connect(host="localhost", user="root", passwd="") 
+	db1 = get_database("")
 	if db1 == None:
     		raise Exception("could not connect to database, please check settings")
 	cursor = db1.cursor()
@@ -9,6 +18,10 @@ def create_database():
 	cursor.execute(sql)
 	cursor.close()
 	create_database_tables()
+
+def get_database(db_name = get_database_name()):	
+	""" Connects to the database and return the mysql object. Pass an empty string to create the database"""
+	return MySQLdb.connect(host="localhost",   user=get_db_user(),  passwd=get_db_password(), db=db_name)
 
 def create_database_tables():
 	db1 = get_database()
@@ -42,11 +55,7 @@ def create_database_tables():
 	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), parent varchar(36), hashvalue varchar(128), size int, created int, updated int, changehash varchar(128)  UNIQUE KEY, type varchar(36))'
 	cursor.execute(sql)
 
-def get_database():
-	try:
-		return MySQLdb.connect(host="localhost",   user="root",  passwd="", db="octoprint")
-	except:
-		print ("Warning: could not connect to database, maybe it is not created yet?")
+
 	
 def test_database_1():
 	db = get_database() 
