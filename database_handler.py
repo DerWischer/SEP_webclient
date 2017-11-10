@@ -1,9 +1,10 @@
 import MySQLdb
+import dev_config
 
 def get_db_user():
-	return "root"
+	return dev_config.DB_USER
 def get_db_password():
-	return "root"
+	return dev_config.DB_PASSWORD
 
 def get_database_name():
 	""" Return the name of the database"""
