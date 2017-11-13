@@ -286,7 +286,9 @@ $(document).ready(function() {
     $("#traceDropdown").on("click", function() {
         $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
 	});
-	
+	$("#attachedInfoDropdown").on("click", function() {
+        // Do nothing
+	});
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
 		$.post("subscribe", {fileKey: data_id});
