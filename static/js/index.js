@@ -287,7 +287,13 @@ $(document).ready(function() {
         $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
 	});
 	$("#attachedInfoDropdown").on("click", function() {
+<<<<<<< HEAD
 		$("#attachedInfoModalBody").empty();		
+=======
+		$("#attachedInfoModalBody").empty();
+		// TODO Get Alpaca template from server, Render template into modal window
+		//var template = {"schema": {"title":"User Feedback","description":"What do you think about Alpaca?","type":"object","properties": {"name": {"type":"string","title":"Name"},"feedback": {"type":"string","title":"Feedback"},"ranking": {"type":"string","title":"Ranking","enum":['excellent','ok','so so']}}}};				
+>>>>>>> c574d6ec6a1cc7d97fb2642d0bf409891ea18339
 		data_id = $("#contextMenu").attr("data-id");		
 		
 		var options = {"options": { // options for rendinering the questionnaire with AlpacaJS
@@ -309,6 +315,7 @@ $(document).ready(function() {
 			}
 		}};
 	
+<<<<<<< HEAD
 		$.post("filetemplate", {fileId: data_id})
 			.done(function(schema){			
 				$("#attachedInfoModalBody").alpaca({
@@ -318,6 +325,14 @@ $(document).ready(function() {
 			.fail(function(data){
 				alert("It is not possible to attach information here");
 			});
+=======
+		$.post("filetemplate", {fileId: data_id}).done(function(schema){			
+			$("#attachedInfoModalBody").alpaca({
+				"schema": $.parseJSON(schema),
+				"options": options
+			});
+		});				
+>>>>>>> c574d6ec6a1cc7d97fb2642d0bf409891ea18339
 	});
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
