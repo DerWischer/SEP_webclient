@@ -289,54 +289,34 @@ $(document).ready(function() {
 	$("#attachedInfoDropdown").on("click", function() {
 		$("#attachedInfoModalBody").empty();
 		// TODO Get Alpaca template from server, Render template into modal window
+		//var template = {"schema": {"title":"User Feedback","description":"What do you think about Alpaca?","type":"object","properties": {"name": {"type":"string","title":"Name"},"feedback": {"type":"string","title":"Feedback"},"ranking": {"type":"string","title":"Ranking","enum":['excellent','ok','so so']}}}};				
+		data_id = $("#contextMenu").attr("data-id");		
 		
-		data_id = $("#contextMenu").attr("data-id");
-		
-		$.post("filetemplate", {fileId: data_id}).done(function(template){
-			console.log(JSON.stringify(template));
-		});
-
-		var template = {
-			"schema": {
-				"title":"User Feedback",
-				"description":"What do you think about Alpaca?",
-				"type":"object",
-				"properties": {
-					"name": {
-						"type":"string",
-						"title":"Name"
-					},
-					"feedback": {
-						"type":"string",
-						"title":"Feedback"
-					},
-					"ranking": {
-						"type":"string",
-						"title":"Ranking",
-						"enum":['excellent','ok','so so']
-					}
-				}
-			},
-			"options": {
-				"form":{					
-					"buttons":{
-						"submit":{
-							"title": "Send Form Data",
-							"click": function() {
-								var val = this.getValue();
-								if (this.isValid(true)) {
-									$.post("fileinformation", {fileId: data_id, fileInfo: JSON.stringify(val)})
-								} else {
-									alert("Invalid value: " + JSON.stringify(val, null, "  "));
-								}
+		var options = {"options": { // options for rendinering the questionnaire with AlpacaJS
+			"form":{					
+				"buttons":{
+					"submit":{
+						"title": "Send Form Data",
+						"click": function() {
+							var val = this.getValue();
+							if (this.isValid(true)) {
+								$.post("fileinformation", {fileId: data_id, fileInfo: JSON.stringify(val)})
+							} else {
+								// TODO Handle invalid values
+								alert("Invalid value: " + JSON.stringify(val, null, "  "));
 							}
 						}
 					}
 				}
 			}
-		};
-		
-		$("#attachedInfoModalBody").alpaca(template);
+		}};
+	
+		$.post("filetemplate", {fileId: data_id}).done(function(schema){			
+			$("#attachedInfoModalBody").alpaca({
+				"schema": $.parseJSON(schema),
+				"options": options
+			});
+		});				
 	});
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
