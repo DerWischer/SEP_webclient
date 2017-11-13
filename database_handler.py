@@ -131,11 +131,15 @@ def save_file(fileId, fileInfo):
 	db.commit()
 
 def get_Schema(fileId):
-	db = get_database()
-	cur = db.cursor()
-	cur.execute("SELECT a.jsonschema FROM filesystem f join alpacatemplate a  on a.type = f.type and f.id = %s",  [id])
-	rows = {}
-	for row in cur.fetchall():
-    		return(row[0])
-	cur.close()
-	db.commit()
+    db = get_database()
+    cur = db.cursor()
+    print("FileID: " + fileId)
+    cur.execute("SELECT a.jsonschema FROM  alpacatemplate a , filesystem f where  a.type = f.file_ext and f.id = %s",  [fileId])
+    count = cur.rowcount
+    rows = {}
+    if count == 0:
+        return('error')
+    for row in cur.fetchall():
+    	return(str(row[0]))
+    cur.close()
+    db.commit()

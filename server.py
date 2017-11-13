@@ -38,7 +38,9 @@ class SubscriptionHandler(tornado.web.RequestHandler):
 class FileTemplateHandler(tornado.web.RequestHandler):
     def post(self):
         fileId = self.get_argument("fileId")
-        self.write(database_handler.get_Schema(fileId))
+        query = database_handler.get_Schema(fileId)
+        query = json.dumps(query)
+        self.write(query)
 
 class FileInformationHandler(tornado.web.RequestHandler):
     def post(self):
