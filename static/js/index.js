@@ -287,11 +287,60 @@ $(document).ready(function() {
         $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
 	});
 	$("#attachedInfoDropdown").on("click", function() {
-        // Do nothing
+		$("#attachedInfoModalBody").empty();
+		// TODO Get Alpaca template from server, Render template into modal window
+		
+		data_id = $("#contextMenu").attr("data-id");
+		
+		$.post("filetemplate", {fileId: data_id}).done(function(template){
+			console.log(JSON.stringify(template));
+		});
+
+		var template = {
+			"schema": {
+				"title":"User Feedback",
+				"description":"What do you think about Alpaca?",
+				"type":"object",
+				"properties": {
+					"name": {
+						"type":"string",
+						"title":"Name"
+					},
+					"feedback": {
+						"type":"string",
+						"title":"Feedback"
+					},
+					"ranking": {
+						"type":"string",
+						"title":"Ranking",
+						"enum":['excellent','ok','so so']
+					}
+				}
+			},
+			"options": {
+				"form":{					
+					"buttons":{
+						"submit":{
+							"title": "Send Form Data",
+							"click": function() {
+								var val = this.getValue();
+								if (this.isValid(true)) {
+									$.post("fileinformation", {fileId: data_id, info: val})
+								} else {
+									alert("Invalid value: " + JSON.stringify(val, null, "  "));
+								}
+							}
+						}
+					}
+				}
+			}
+		};
+		
+		$("#attachedInfoModalBody").alpaca(template);
 	});
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
-		$.post("subscribe", {fileKey: data_id});
+		$.post("subscribe", {fileKey: data_id});		
 	});	
 });
 //reem
