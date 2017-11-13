@@ -325,7 +325,7 @@ $(document).ready(function() {
 							"click": function() {
 								var val = this.getValue();
 								if (this.isValid(true)) {
-									$.post("fileinformation", {fileId: data_id, info: val})
+									$.post("fileinformation", {fileId: data_id, fileInfo: val})
 								} else {
 									alert("Invalid value: " + JSON.stringify(val, null, "  "));
 								}

@@ -57,7 +57,7 @@ def create_database_tables():
 	cursor.execute(sql)
 	sql = 'CREATE TABLE if not exists fileinformation (id varchar(36) PRIMARY KEY, jsonfile blob)'
 	cursor.execute(sql)
-	sql = 'CREATE TABLE if not exists alpacatemplate (id varchar(36) PRIMARY KEY, jsonschema varchar(1024))'
+	sql = 'CREATE TABLE if not exists alpacatemplate (type varchar(36) PRIMARY KEY, jsonschema varchar(1024))'
 	cursor.execute(sql)
 	
 def test_database_1():
