@@ -12,11 +12,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
 def scan_filesystem():
-<<<<<<< HEAD
     database_handler.create_database()    
-=======
-    database_handler.create_database()
->>>>>>> a446d9543169b943790891f11f26f19acb410d75
     for entry in fileScanner.scan_recursive(ROOT):
         database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
@@ -39,6 +35,17 @@ class SubscriptionHandler(tornado.web.RequestHandler):
         notifier.notify_by_mail(mail_target, "Your subscription", "Some information...")
         self.write("Check your mail!")
 
+class FileTemplateHandler(tornado.web.RequestHandler):
+    def post(self):
+        fileId = self.get_argument("fileId")
+        self.write(database_handler.get_Schema(fileId))
+
+class FileInformationHandler(tornado.web.RequestHandler):
+    def post(self):
+        fileId = self.get_argument("fileId")
+        fileInfo= self.get_argument("fileInfo")
+        self.write(database_handler.save_file(fileId, fileInfo))
+
 def resolve_user_mail():
     """Return the email address of the current user"""
     return "dummy@user.com" # TODO Lookup email in database
@@ -48,7 +55,9 @@ def make_app():
     return tornado.web.Application(static_path=os.path.join(ROOT, "static"), template_path=os.path.join(ROOT, "templates"), compress_response=True,
         handlers=[
             (r"/filesystem", FileSystemHandler),
-            (r"/subscribe", SubscriptionHandler),            
+            (r"/subscribe", SubscriptionHandler),    
+            (r"/fileinformation", FileInformationHandler),  
+            (r"/filetemplate", FileTemplateHandler),        
             (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(ROOT, "static"), "default_filename": "index.html"})
         ])
 

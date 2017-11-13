@@ -55,8 +55,10 @@ def create_database_tables():
 	cursor.execute(sql)
 	sql = 'CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), parent varchar(36), hashvalue varchar(128), size int, created int, updated int, changehash varchar(128)  UNIQUE KEY, type varchar(36))'
 	cursor.execute(sql)
-
-
+	sql = 'CREATE TABLE if not exists fileinformation (id varchar(36) PRIMARY KEY, jsonfile blob)'
+	cursor.execute(sql)
+	sql = 'CREATE TABLE if not exists alpacatemplate (type varchar(36) PRIMARY KEY, jsonschema  varchar(1024))'
+	cursor.execute(sql)
 	
 def test_database_1():
 	db = get_database() 
@@ -95,7 +97,7 @@ def get_file_system():
 				"type":row[5],
 				"parent":row[6],
 				"children": children
-			}
+			} 
 		return rows
 
 def file_entry(id, name, path, ext, hashValue, size, created, updated , changehash, isfolder, parent):
@@ -115,3 +117,25 @@ def file_entry(id, name, path, ext, hashValue, size, created, updated , changeha
 
 def folder_entry(id, name, path):
 	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", true)' % (id, name, path))
+
+def save_file(fileId, fileInfo):
+	db = get_database()
+	cur = db.cursor()
+	try:
+		sql = ('INSERT INTO fileinformation VALUES (%s, %s)')
+		cur.execute(sql, [fileId,fileInfo])
+		return("pass")
+	except:
+		return("failed")
+	cur.close()
+	db.commit()
+
+def get_Schema(fileId):
+	db = get_database()
+	cur = db.cursor()
+	cur.execute("SELECT a.schema FROM filesystem f join alpacatemplate a  on a.type = f.type and f.id = %s",  [id])
+	rows = {}
+	for row in cur.fetchall():
+    		return(row[0])
+	cur.close()
+	db.commit()
