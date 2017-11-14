@@ -310,14 +310,14 @@ $(document).ready(function() {
 		}};
 	
 		$.post("filetemplate", {fileId: data_id})
-			.done(function(schema){
+			.done(function(schema){							
 				console.log($.parseJSON(schema));			
 				$("#attachedInfoModalBody").alpaca({
 					"schema": $.parseJSON(schema),
 					"options": options});
 			})
 			.fail(function(data){
-				alert("It is not possible to attach information here");
+				alert("It is not possible to attach information here: " + data);
 			});
 	});
 	$("#changeAlert").on("click", function() {
