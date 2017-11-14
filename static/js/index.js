@@ -287,39 +287,23 @@ $(document).ready(function() {
         $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
 	});
 	$("#attachedInfoDropdown").on("click", function() {
-		$("#attachedInfoModalBody").empty();		
-		data_id = $("#contextMenu").attr("data-id");		
-		
-		var options = {"options": { // options for rendinering the questionnaire with AlpacaJS
-			"form":{					
-				"buttons":{
-					"submit":{
-						"title": "Send Form Data",
-						"click": function() {
-							var val = this.getValue();
-							if (this.isValid(true)) {
-								$.post("fileinformation", {fileId: data_id, fileInfo: JSON.stringify(val)})
-							} else {
-								// TODO Handle invalid values
-								alert("Invalid value: " + JSON.stringify(val, null, "  "));
-							}
-						}
-					}
-				}
+		$("#attachedInfoModalBody").empty();			
+		$.ajax({
+			url:"filetemplate",
+			data:{"fileId":$("#contextMenu").attr("data-id")},
+			method:"post",
+			dataType:"JSON",
+			success:function(data) {
+				$("#attachedInfoModalBody").alpaca(data);
+			},
+			error:function() {
+				alert("It is not possible to attach information here");
 			}
-		}};
-	
-		$.post("filetemplate", {fileId: data_id})
-			.done(function(schema){							
-				console.log($.parseJSON(schema));			
-				$("#attachedInfoModalBody").alpaca({
-					"schema": $.parseJSON(schema),
-					"options": options});
-			})
-			.fail(function(data){
-				alert("It is not possible to attach information here: " + data);
-			});
+		});
 	});
+
+
+	// send email
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
 		$.post("subscribe", {fileKey: data_id});		
