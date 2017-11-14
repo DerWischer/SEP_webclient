@@ -40,7 +40,7 @@ class FileTemplateHandler(tornado.web.RequestHandler):
         fileId = self.get_argument("fileId")
         ext = database_handler.get_fileExt(fileId)
         print('ext ' + ext)
-        text = ""#'{ "title":"User Feedback", "description":"What do you think about Alpaca?", "type":"object", "properties": { "name": { "type":"string", "title":"Name" }, "feedback": { "type":"string", "title":"Feedback" }, "ranking": { "type":"string", "title":"Ranking", "enum":["excellent","ok","so so"] } } }'
+        text = ""
         with open(os.path.join(ROOT,'static','alpacatemplates','default.json')) as file:
             for line in file:
                 text += line
@@ -70,7 +70,7 @@ def make_app():
 if __name__ == "__main__":
     APP = make_app()
     APP.listen(PORT)
-    #scan_filesystem()
+    scan_filesystem()
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     
