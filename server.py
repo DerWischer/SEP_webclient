@@ -38,9 +38,21 @@ class SubscriptionHandler(tornado.web.RequestHandler):
 class FileTemplateHandler(tornado.web.RequestHandler):
     def post(self):
         fileId = self.get_argument("fileId")
-        query = database_handler.get_Schema(fileId)
-        query = json.dumps(query)
-        self.write(query)
+        ext = database_handler.get_fileExt(fileId)
+        print('ext ' + ext)
+<<<<<<< HEAD
+        jsonfile = 'default.json'
+        #for filename in os.listdir.join(ROOT,'static','alpacatemplates'): 
+           # if filename
+        text = ""#'{ "title":"User Feedback", "description":"What do you think about Alpaca?", "type":"object", "properties": { "name": { "type":"string", "title":"Name" }, "feedback": { "type":"string", "title":"Feedback" }, "ranking": { "type":"string", "title":"Ranking", "enum":["excellent","ok","so so"] } } }'
+        with open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)) as file:
+=======
+        text = ""
+        with open(os.path.join(ROOT,'static','alpacatemplates','default.json')) as file:
+>>>>>>> c2e04a084bc00ccd52063b5fdc3912807fe83574
+            for line in file:
+                text += line
+        self.write(text)
 
 class FileInformationHandler(tornado.web.RequestHandler):
     def post(self):
