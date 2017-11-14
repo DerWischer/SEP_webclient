@@ -162,11 +162,22 @@ function displayList(parent, childrenObjects) {
 	var holder = $("#tableView")[0];
 	$(holder).empty();
 	var iconName;
-	$.each(childrenObjects, function(id, value) {
-		var row = el("section", {
-			"data-id": value.id,
-			class: "row listViewItem"
-		});
+    $.each(childrenObjects, function (id, value) {
+        console.log(value.file_ext);
+        var row = undefined;
+        if (value.file_ext == ".stl") {
+            row = el("section", {
+                "data-id": value.id,
+                class: "row listViewItem",
+                "onclick": "webView.performClick(\"https://drive.google.com/uc?export=download&id=1UR-ldLTkg4B5ZW5vRY2saZ5M3yEj97F6\");"
+            });
+        }
+        else {
+            row = el("section", {
+                "data-id": value.id,
+                class: "row listViewItem"
+            });
+        }
 		if (value.type == "folder") {
 			iconName = "fa fa-folder-open fa-3x";
 		}
@@ -273,7 +284,8 @@ $(document).ready(function() {
 		correctPW($("#emailInput").val(), $("#passwordInput").val());
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
-		setFolder(this.getAttribute("data-id"));
+        setFolder(this.getAttribute("data-id"));
+
     });
     $("#tableView").on("contextmenu", ".row", function(e) {
         $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden").attr("data-id", $(e.target).closest(".row").attr("data-id"));
