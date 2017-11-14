@@ -38,9 +38,13 @@ class SubscriptionHandler(tornado.web.RequestHandler):
 class FileTemplateHandler(tornado.web.RequestHandler):
     def post(self):
         fileId = self.get_argument("fileId")
-        query = database_handler.get_Schema(fileId)
-        query = json.dumps(query)
-        self.write(query)
+        ext = database_handler.get_fileExt(fileId)
+        print('ext ' + ext)
+        text = ""
+        with open(os.path.join(ROOT,'static','alpacatemplates','default.json')) as file:
+            for line in file:
+                text += line
+        self.write(json.dumps(text))
 
 class FileInformationHandler(tornado.web.RequestHandler):
     def post(self):

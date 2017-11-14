@@ -310,7 +310,8 @@ $(document).ready(function() {
 		}};
 	
 		$.post("filetemplate", {fileId: data_id})
-			.done(function(schema){			
+			.done(function(schema){
+				console.log($.parseJSON(schema));			
 				$("#attachedInfoModalBody").alpaca({
 					"schema": $.parseJSON(schema),
 					"options": options});

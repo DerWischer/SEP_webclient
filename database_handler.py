@@ -57,8 +57,6 @@ def create_database_tables():
 	cursor.execute(sql)
 	sql = 'CREATE TABLE if not exists fileinformation (id varchar(36) PRIMARY KEY, jsonfile blob)'
 	cursor.execute(sql)
-	sql = 'CREATE TABLE if not exists alpacatemplate (type varchar(36) PRIMARY KEY, jsonschema varchar(1024))'
-	cursor.execute(sql)
 	
 def test_database_1():
 	db = get_database() 
@@ -130,16 +128,15 @@ def save_file(fileId, fileInfo):
 	cur.close()
 	db.commit()
 
-def get_Schema(fileId):
+def get_fileExt(fileId):
     db = get_database()
     cur = db.cursor()
-    print("FileID: " + fileId)
-    cur.execute("SELECT a.jsonschema FROM  alpacatemplate a , filesystem f where  a.type = f.file_ext and f.id = %s",  [fileId])
+    cur.execute("SELECT f.file_ext FROM   filesystem f where f.id = %s",  [fileId])
     count = cur.rowcount
     rows = {}
     if count == 0:
         return('error')
     for row in cur.fetchall():
-    	return(str(row[0]))
+    	return(row[0])
     cur.close()
     db.commit()
