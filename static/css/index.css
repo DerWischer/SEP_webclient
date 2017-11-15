@@ -265,3 +265,11 @@ breadcrumb-base span{
     text-indent: 1px;
     text-overflow: '';
 }
+#files-list .row {
+	background: #ccc;
+	padding:5px;
+	margin-top:5px;
+}
+input.filename {
+	margin-top:5px;
+}

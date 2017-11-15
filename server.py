@@ -50,6 +50,20 @@ class FileTemplateHandler(tornado.web.RequestHandler):
                 text += line
         self.write(text)
 
+class UploadHandler(tornado.web.RequestHandler):
+    def post(self):
+        i=0
+        filenames = self.request.arguments['filename']
+        print (filenames)
+        for file in self.request.files['file']:
+            extension = os.path.splitext(file['filename'])[1]
+            fname = str(uuid.uuid4())
+            final_filename= fname+extension
+            output_file = open("uploads/" + filenames[i].decode("utf-8"), 'wb')
+            i += 1
+            output_file.write(file['body'])
+        self.finish(json.dumps({"success":True}))
+
 class FileInformationHandler(tornado.web.RequestHandler):
     def post(self):
         fileId = self.get_argument("fileId")
@@ -68,11 +82,16 @@ def make_app():
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
-            (r"/filetemplate", FileTemplateHandler),        
+            (r"/filetemplate", FileTemplateHandler), 
+            (r"/upload", UploadHandler),       
             (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(ROOT, "static"), "default_filename": "index.html"})
         ])
 
+
+
 if __name__ == "__main__":
+    if not os.path.exists("uploads"):
+            os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
     scan_filesystem()

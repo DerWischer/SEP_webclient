@@ -49,8 +49,7 @@ function el(name, options) {
 	});
 	return el;
 }
-
-$(document).ready(function() {
+function refreshFilesystem() {
 	$.ajax({
 		url:"/filesystem",
 		method:"GET",
@@ -74,4 +73,7 @@ $(document).ready(function() {
 			renderTraceTree("cad1"); 
 		}
 	});		
+}
+$(document).ready(function() {
+	refreshFilesystem();
 });
