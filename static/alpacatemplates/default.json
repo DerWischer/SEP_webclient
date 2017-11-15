@@ -48,12 +48,10 @@
     "options":{
         "form":{
             "attributes":{
-                "action": "#",
+                "action": "https://requestb.in/12e67qq1",
                 "method": "post"
             },
             "buttons":{
-                "submit":{},
-                "reset":{}
             }
         },
         "fields":{

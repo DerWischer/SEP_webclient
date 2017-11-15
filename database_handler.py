@@ -1,5 +1,6 @@
 import MySQLdb
 import dev_config
+import json
 
 def get_db_user():
 	return dev_config.DB_USER
@@ -57,7 +58,9 @@ def create_database_tables():
 	cursor.execute(sql)
 	sql = 'CREATE TABLE if not exists fileinformation (id varchar(36) PRIMARY KEY, jsonfile blob)'
 	cursor.execute(sql)
-	
+	#cursor.execute("""INSERT INTO users VALUES (%s,%s,%s,%s,%s,%s)""",('10','rim','123','non','0',''))
+	#db1.commit()
+
 def test_database_1():
 	db = get_database() 
 	cur = db.cursor() 
@@ -117,16 +120,21 @@ def folder_entry(id, name, path):
 	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", true)' % (id, name, path))
 
 def save_file(fileId, fileInfo):
-	db = get_database()
-	cur = db.cursor()
-	try:
-		sql = ('INSERT INTO fileinformation VALUES (%s, %s)')
-		cur.execute(sql, [fileId,fileInfo])
-		return("pass")
-	except:
-		return("failed")
-	cur.close()
-	db.commit()
+    resp_dict = json.loads(fileInfo)
+    print (resp_dict["name"])
+    db = get_database()
+    cur = db.cursor()
+    try:
+        sql = ('INSERT INTO fileinformation VALUES (%s, %s)')
+        cur.execute(sql, [fileId,fileInfo])
+        cur.close()
+        db.commit()
+        return("pass")
+    except:
+        return("failed")
+
+	
+
 
 def get_fileExt(fileId):
     db = get_database()

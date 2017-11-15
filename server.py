@@ -54,6 +54,7 @@ class FileInformationHandler(tornado.web.RequestHandler):
     def post(self):
         fileId = self.get_argument("fileId")
         fileInfo= self.get_argument("fileInfo")
+        print(fileInfo)
         self.write(database_handler.save_file(fileId, fileInfo))
 
 def resolve_user_mail():

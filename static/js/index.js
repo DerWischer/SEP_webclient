@@ -274,6 +274,28 @@ function correctPW(userName, inputPassword) {
 	};
 })(jQuery, window);
 $(document).ready(function() {
+	$("#info_save").on("click", function() {
+		var data = $("#alpaca2").serializeArray();
+		var object={};
+		$.each(data,function(key,value) {
+		  object[value.name] = value.value;
+		  console.log(value.name, value.value);
+		})
+		$.ajax({
+			url:"fileinformation",
+			data:{"fileId":$("#contextMenu").attr("data-id"),"fileInfo":JSON.stringify(object)},
+			method:"post",
+			dataType:"JSON",
+			success:function(data) {
+				alert("save");
+			},
+			error:function() {
+				alert("It is not possible to attach information here");
+			}
+		});
+	});
+
+
 	//Handles menu drop down
 	$('.dropdown-menu').find('form').click(function(e) {
 		e.stopPropagation();
