@@ -106,6 +106,7 @@ def make_app():
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
             (r"/filetemplate", FileTemplateHandler),
+            (r"/upload", UploadHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
             (r"/(.*)", AuthStaticFileHandler, {"path": os.path.join(ROOT, "static")}),
         ])
