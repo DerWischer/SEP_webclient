@@ -237,7 +237,8 @@ function displayList(parent, childrenObjects) {
             row = el("section", {
                 "data-id": value.id,
                 class: "row listViewItem",
-                "onclick": "webView.performClick(\"https://drive.google.com/uc?export=download&id=1UR-ldLTkg4B5ZW5vRY2saZ5M3yEj97F6\");"
+				//Downloadable STL URL goes here
+                "onclick": "webView.performClick(\"https://drive.google.com/uc?export=download&id=1RaS2brY62JzGGERq72NUkiN9KanEgPiT\");"
             });
         }
         else {
