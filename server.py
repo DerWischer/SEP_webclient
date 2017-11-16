@@ -105,15 +105,6 @@ def make_app():
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
-<<<<<<< HEAD
-            (r"/filetemplate", FileTemplateHandler), 
-            (r"/upload", UploadHandler),       
-            (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(ROOT, "static"), "default_filename": "index.html"})
-        ])
-
-
-
-=======
             (r"/filetemplate", FileTemplateHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
             (r"/(.*)", AuthStaticFileHandler, {"path": os.path.join(ROOT, "static")}),
@@ -130,13 +121,12 @@ def scan_filesystem():
         database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 # Main function ---------------------------------------------------------------
->>>>>>> dba0138668fa405b350742d2e28b2d389cc3fc76
 if __name__ == "__main__":
     if not os.path.exists("uploads"):
             os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
-    #scan_filesystem()
+    scan_filesystem()
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     
