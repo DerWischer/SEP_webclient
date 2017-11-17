@@ -7,6 +7,8 @@ import tornado.web
 import fileScanner
 import database_handler
 import notifier
+import MySQLdb
+
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
@@ -22,9 +24,12 @@ class LoginHandler(BaseHandler):
         self.render("login.html")
     def post(self):
         code = self.get_argument("code")        
-        username = "somename"; # TODO Resolve username from code        
-        self.set_secure_cookie("user", username)
-        print("Secure cookie set for user with code: " + code)
+        user_info = database_handler.authenticate_user(code)
+        username = user_info["name"]
+        user_id = user_info["user_id"] # TODO Resolve username from code
+        print("login_handler: "+str(user_id))
+        self.set_secure_cookie("user", user_id)
+        print("Secure cookie set for user: "+ username +" with code: " + code)
         self.redirect("/")      
 
 class FileSystemHandler(BaseHandler):
@@ -127,7 +132,7 @@ if __name__ == "__main__":
             os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
-    scan_filesystem()
+    #scan_filesystem()
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     

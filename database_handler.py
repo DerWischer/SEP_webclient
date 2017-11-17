@@ -133,7 +133,17 @@ def save_file(fileId, fileInfo):
     except:
         return("failed")
 
-	
+def authenticate_user(code):
+	db = get_database()
+	cur = db.cursor()
+	user = cur.execute("SELECT user_id, name FROM users WHERE password = %s", [code])
+	rows = {}
+	for row in cur.fetchall():
+		rows = {
+			"user_id":row[0],
+			"name":row[1]
+		}
+	return rows	
 
 
 def get_fileExt(fileId):
