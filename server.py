@@ -59,7 +59,7 @@ class FileTemplateHandler(BaseHandler):
     def post(self):
         fileId = self.get_argument("fileId")
         ext = database_handler.get_fileExt(fileId)
-        print('ext ' + ext)
+        #print('ext ' + ext)
         jsonfile = 'default.json'
         for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
             if ext == '.svg': 
