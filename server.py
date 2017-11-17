@@ -27,10 +27,15 @@ class LoginHandler(BaseHandler):
         user_info = database_handler.authenticate_user(code)
         username = user_info["name"]
         user_id = user_info["user_id"] # TODO Resolve username from code
-        print("login_handler: "+str(user_id))
+        print("user id: "+str(user_id))
         self.set_secure_cookie("user", user_id)
         print("Secure cookie set for user: "+ username +" with code: " + code)
-        self.redirect("/")      
+        self.redirect("/")
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        self.clear_cookie("user")
+        self.redirect("/")    
 
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
@@ -107,6 +112,7 @@ def make_app():
         login_url="/login",
         handlers=[            
             (r"/login", LoginHandler),
+            (r"/logout", LogoutHandler),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
