@@ -95,9 +95,77 @@ function CreateSearchCrumb(searchTerm) {
 	breadcrumb.appendChild(span);
 	holder.append(breadcrumb);
 }
+function handle_upload() {
+	var fileInput = $('#file-input');
+	data = new FormData();
+	request = new XMLHttpRequest();
+	data.append('ajax', true);
+	/*var notify = $.notify('<strong>Uploading</strong>', {
+		type: 'success',
+		allow_dismiss: false,
+		showProgressbar: true
+	});*/
+	for (var i = 0; i < fileInput.prop("files").length; ++i){
+		// Add file to the data array.
+		data.append('file', fileInput.prop("files")[i]);
+		data.append('filename', $("#fileUpload .form-control")[i].value);
+	}
+	request.upload.addEventListener('progress', function(event) {
+		// If the event can be calculated.
+		if(event.lengthComputable) {
+			var percent = Math.round((event.loaded / event.total) * 100);
+			console.log(percent);
+			//notify.update('progress', percent);
+		}
+	});
+	request.upload.addEventListener('load', function(event){
+		//m.redraw(true);
+	});
+	request.upload.addEventListener('error', function(event){
+		alert("There has been an error");
+	});
+	request.addEventListener('readystatechange', function(event) {
+		if(this.readyState == 4) {
+			if(this.status == 200) {
+				$("#fileUpload").modal("hide");
+				refreshFilesystem();
+			} else {
+				// Log response status
+			}
+		}
+	});
+	request.open('post', 'upload');
+	// Overwrite any cache control in the browser.
+	request.setRequestHeader('Cache-Control', 'no-cache');
+	request.send(data);
+}
 $(document).ready(function() {
 	$(document).click(function() {
 		HideDropdownElement();
+	});
+	$("#fileUpload").modal("show");
+	$("#file-upload-btn").click(function() {
+		$("#file-input").click();
+	});
+	$("#file-input").on("change", function() {
+		$("#files-list").empty();
+		$.each($("#file-input")[0].files, function(key,value) {
+			var row = el("section", {class:"row"});
+			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
+			var btn = el("button", {class:"btn btn-danger btn-lg"});
+			var i = el("i", {class:"fa fa-times fa-1x"});
+			btn.appendChild(i);
+			col.appendChild(btn);
+			//row.appendChild(col);
+			var col = el("section", {class:"col-xs-12 col-sm-12 col-md-12 col-lg-12"});
+			var label = el("input", {class:"form-control input-lg", name:"filename", value:value.name});
+			col.appendChild(label);
+			row.appendChild(col);
+			$("#files-list").append(row);
+		});
+	});
+	$("#file-upload").click(function() {
+		handle_upload();
 	});
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e) {
@@ -169,7 +237,8 @@ function displayList(parent, childrenObjects) {
             row = el("section", {
                 "data-id": value.id,
                 class: "row listViewItem",
-                "onclick": "webView.performClick(\"https://drive.google.com/uc?export=download&id=1UR-ldLTkg4B5ZW5vRY2saZ5M3yEj97F6\");"
+				//Downloadable STL URL goes here
+                "onclick": "webView.performClick(\"https://drive.google.com/uc?export=download&id=1RaS2brY62JzGGERq72NUkiN9KanEgPiT\");"
             });
         }
         else {
@@ -691,82 +760,3 @@ function renderTraceTree(id) {
 		setFolder($(this).attr("data-id"));
 	})
 }
-/*
- $(document).ready(function() {
-	  // shared with me
-      var fileview = document.getElementById("fileview4");
-      $(fileview).empty();
-	  var users = getUserFile(myuser);
-      for (i = 0; i < users.length; i++) { 
-         appendItem(fileview, users[i],"1");
-      }
-	  
-	  // return my files
-	  var fileview = document.getElementById("fileview1");
-      $(fileview).empty();
-      var files = getMyFiles(myuser);
-      for (i = 0; i < files.length; i++) {
-        appendItem(fileview, files[i],"1");
-      }
-	  
-	  // return opened files
-	  var fileview = document.getElementById("fileview3");
-      $(fileview).empty();
-      var files = getstatusFiles("open");
-      for (i = 0; i < files.length; i++) {
-        appendItem(fileview, files[i],"1");
-	  }
-	  
-	  // return closed files
-	  var fileview = document.getElementById("fileview2");
-      $(fileview).empty();
-      var files = getstatusFiles("closed");
-      for (i = 0; i < files.length; i++) {
-        appendItem(fileview, files[i],"1");
-      }
-	  // return last modified files 
-	  var fileview = document.getElementById("fileview5");
-      $(fileview).empty();
-      var files = getFilesLastModified(1); // 1 means one month
-      for (i = 0; i < files.length; i++) {
-        appendItem(fileview, files[i],"1");
-      } 
-	  
-	  $("#MainMenu").on("click",".list-group-item",function(){
-		  setFolder($(this).attr("data-id"));
-	  })
-	  
-	    
-/////// traceability 
-	  var project_id =  getProjectId("cad1");  
-
-	  var fileview = document.getElementById("fileview6");
-      $(fileview).empty();
-      var files = getCADlist(project_id);  
-       for (i = 0; i < files.length; i++) {
-        appendItem(fileview, files[i],"1");
-      }
-	   
-	  var fileview = document.getElementById("fileview11");
-      $(fileview).empty();
-	  var customer = getcustomer(project_id);
-      appendItem(fileview, customer ,"1");
-	  
-       
-	  var fileview = document.getElementById("fileview12");
-      $(fileview).empty();
-      var files = getPRTlist(project_id);  
-      for (i = 0; i < files.length; i++) {
-        appendItem(fileview, files[i],"1"); 
-      }
-	  
-    
-	 var fileview = document.getElementById("demo7");
-     $(fileview).empty();
-	 createBuildNode(fileview,project_id); 
-	  
-	 $("#TraceMenu").on("click",".list-group-item",function(){
-	  setFolder($(this).attr("data-id"));
-	  }) 
- }); */
-//joshua
