@@ -8,6 +8,8 @@ from tornado.httpclient import AsyncHTTPClient
 import fileScanner
 import database_handler
 import notifier
+import MySQLdb
+
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
@@ -23,10 +25,31 @@ class LoginHandler(BaseHandler):
         self.render("login.html")
     def post(self):
         code = self.get_argument("code")        
-        username = "somename"; # TODO Resolve username from code        
-        self.set_secure_cookie("user", username)
-        print("Secure cookie set for user with code: " + code)
-        self.redirect("/")      
+        user_info = database_handler.authenticate_user(code)
+        username = user_info["name"]
+        user_id = user_info["user_id"] # TODO Resolve username from code
+        print("user id: "+str(user_id))
+        self.set_secure_cookie("user", user_id)
+        print("Secure cookie set for user: "+ username +" with code: " + code)
+        self.redirect("/")
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        self.clear_cookie("user")
+        self.redirect("/")    
+
+class AccountHandler(BaseHandler):
+    def get(self):
+        self.render("account.html")
+    def post(self):
+        user_id = self.get_argument("user_id")
+        name = self.get_argument("name")
+        email = self.get_argument("email")
+        code = self.get_argument("code")
+        access_type = self.get_argument("access_type")
+        info = self.get_argument("info")
+
+        print(database_handler.account_entry(user_id, name, email, code, access_type, info))
 
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
@@ -125,6 +148,8 @@ def make_app():
         login_url="/login",
         handlers=[            
             (r"/login", LoginHandler),
+            (r"/logout", LogoutHandler),
+            (r"/account", AccountHandler),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
@@ -151,7 +176,7 @@ if __name__ == "__main__":
             os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
-    scan_filesystem()
+    #scan_filesystem()
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     
