@@ -5,6 +5,7 @@ import uuid
 import tornado.ioloop
 import tornado.web
 import filescanner
+from tornado.httpclient import AsyncHTTPClient 
 import database_handler
 import notifier
 import MySQLdb
@@ -89,6 +90,7 @@ class FileTemplateHandler(BaseHandler):
         self.write(text)
 
 class UploadHandler(tornado.web.RequestHandler):
+    @tornado.web.authenticated
     def post(self):
         i=0
         filenames = self.request.arguments['filename']
@@ -102,6 +104,28 @@ class UploadHandler(tornado.web.RequestHandler):
             output_file.write(file['body'])
         self.finish(json.dumps({"success":True}))
 
+class DownloadHandler(tornado.web.RequestHandler):
+    def streaming_callback(chunk):
+        self.write(chunk)
+        self.flush()
+    def get(self, fileId):
+        path, name, ext = database_handler.get_file_path(fileId);
+        filename = ''.join([name,ext])
+        if not os.path.exists(path):
+            print ("not found")
+            self.finish()
+        else:
+            self.set_header('Content-Type', 'application/octet-stream')
+            self.set_header('Content-Disposition', 'attachment; filename=%s' % filename)
+            self.flush()
+            with open(path, 'r') as f:
+                while True:
+                    data = f.read(4096)
+                    if not data:
+                        break
+                    self.write(data)
+            self.finish()
+    
 class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
     def set_extra_headers(self, path):
         self.set_header("Cache-control", "no-cache")
@@ -111,7 +135,7 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
         print("AuthStaticFileHandler -> " + path)
         if len(path) == 0:
             path="index"
-            print("\tEmptry path. Default -> " + path)                  
+            print("\tEmpty path. Default -> " + path)                  
         super(AuthStaticFileHandler, self).get(path + ".html")
 
 # Create and Run app ----------------------------------------------------------
@@ -132,6 +156,7 @@ def make_app():
             (r"/fileinformation", FileInformationHandler),  
             (r"/filetemplate", FileTemplateHandler),
             (r"/upload", UploadHandler),
+            (r"/download/(.*)", DownloadHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
             (r"/(.*)", AuthStaticFileHandler, {"path": os.path.join(ROOT, "static")}),
         ])

@@ -182,7 +182,6 @@ $(document).ready(function() {
 	});
 	//breadcrumb dropdown element is clicked
 	$("#breadcrumb-dropdown").on("click", ".dropdown-element", function() {
-		console.log(this.getAttribute("data-id"));
 		setFolder(this.getAttribute("data-id"));
 	});
 	$("#breadcrumb .custom-breadcrumb").on("click", function() {
@@ -231,7 +230,6 @@ function displayList(parent, childrenObjects) {
 	$(holder).empty();
 	var iconName;
     $.each(childrenObjects, function (id, value) {
-        console.log(value.file_ext);
         var row = undefined;
         if (value.file_ext == ".stl") {
             row = el("section", {
@@ -375,8 +373,15 @@ $(document).ready(function() {
 		correctPW($("#emailInput").val(), $("#passwordInput").val());
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
-        setFolder(this.getAttribute("data-id"));
-
+		var dataId = this.getAttribute("data-id");
+		if (setFolder(dataId) == false) {
+			//is file
+			console.log("downlaoding");
+			var a = el("a", {href:("/download/" + dataId), target:"_blank"});
+			$("#tableView").append(a);
+			a.click();
+			$("#tableView").remove(a);
+		}
     });
     $("#tableView").on("contextmenu", ".row", function(e) {
         $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden").attr("data-id", $(e.target).closest(".row").attr("data-id"));

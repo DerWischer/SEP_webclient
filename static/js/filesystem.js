@@ -24,7 +24,7 @@ function setFolder(id) {
 		return;
 	}
 	if (filesystem[id].type != "folder") {
-		return;
+		return false;
 	}
 	RenderBreadCrumbPath(id);
    	displayList(id, getChildren(id));

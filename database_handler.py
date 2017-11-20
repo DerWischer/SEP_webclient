@@ -95,17 +95,24 @@ def save_file(fileId, fileInfo):
     except:
         return("failed")
 
+def get_file_path(fileId):
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
+		row = cur.fetchone()
+		cur.close()
+		return row[0],row[1], row[2]
 def authenticate_user(code):
-	db = get_database()
-	cur = db.cursor()
-	user = cur.execute("SELECT id, name FROM users WHERE password = %s", [code])
-	rows = {}
-	for row in cur.fetchall():
-		rows = {
-			"user_id":row[0],
-			"name":row[1]
-		}
-	return rows
+		db = get_database()
+		cur = db.cursor()
+		user = cur.execute("SELECT id, name FROM users WHERE password = %s", [code])
+		rows = {}
+		for row in cur.fetchall():
+			rows = {
+				"user_id":row[0],
+				"name":row[1]
+			}
+		return rows
 
 def account_entry(user_id, name, email, code, access_type, info):
 	deleted = 0
@@ -135,4 +142,3 @@ def get_fileExt(fileId):
     for row in cur.fetchall():
     	return(row[0])
     cur.close()
-    db.commit()
