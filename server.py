@@ -120,7 +120,7 @@ class DownloadHandler(tornado.web.RequestHandler):
             self.flush()
             with open(path, 'r') as f:
                 while True:
-                    data = f.read(4096)
+                    data = f.read(1024)
                     if not data:
                         break
                     self.write(data)
