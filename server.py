@@ -4,7 +4,7 @@ import json
 import uuid
 import tornado.ioloop
 import tornado.web
-import fileScanner
+import filescanner
 import database_handler
 import notifier
 import MySQLdb
@@ -143,7 +143,7 @@ def resolve_user_mail():
 
 def scan_filesystem():
     database_handler.create_database()    
-    for entry in fileScanner.scan_recursive(ROOT):
+    for entry in filescanner.scan_recursive(ROOT):
         database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 # Main function ---------------------------------------------------------------
@@ -152,7 +152,7 @@ if __name__ == "__main__":
             os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
-    #scan_filesystem()
+    scan_filesystem()
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     
