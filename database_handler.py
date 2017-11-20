@@ -133,7 +133,13 @@ def save_file(fileId, fileInfo):
     except:
         return("failed")
 
-	
+def get_file_path(fileId):
+	db = get_database()
+	cur = db.cursor()
+	cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
+	row = cur.fetchone()
+	cur.close()
+	return row[0],row[1], row[2]
 
 
 def get_fileExt(fileId):
@@ -147,4 +153,3 @@ def get_fileExt(fileId):
     for row in cur.fetchall():
     	return(row[0])
     cur.close()
-    db.commit()
