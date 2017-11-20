@@ -48,7 +48,7 @@ def create_database_tables():
 	cursor.execute(sql) 
 	sql =  'CREATE TABLE if not exists postprint(slm_id varchar(10),printedimage varbinary(5000) DEFAULT NULL,supportremoval bit(1) DEFAULT NULL,wedm bit(1) DEFAULT NULL,wedemcomment varchar(100) ,balsting bit(1) DEFAULT NULL,blastingtype varchar(50) ,blastingcomment varchar(100) ,stresstemp varchar(10) ,stresstime varchar(10) ,stressshieldinggas bit(1) DEFAULT NULL,stresscomment varchar(100) ,hardeningtemp varchar(10) ,hardningtime varchar(10) ,hardeningcomment varchar(100) ,temperingtemp varchar(10) ,temperingtime varchar(10) ,temperingcycles varchar(10) ,temperingcomment varchar(100) ,solutiontemp varchar(10) , solutiontime varchar(10) ,solutioncomment varchar(100) ,agingtemp varchar(10) ,agingtime varchar(10) ,agingcycles varchar(10) ,agingcomment varchar(100),  FOREIGN KEY (slm_id) REFERENCES printing(slm_id))'
 	cursor.execute(sql)
-	sql =  'CREATE TABLE if not exists users(user_id varchar(10) PRIMARY KEY ,name varchar(25) ,password varchar(10) ,access_type varchar(10) ,deleted bit(1),information varbinary(5000))'
+	sql =  'CREATE TABLE if not exists users(user_id varchar(10) PRIMARY KEY ,name varchar(25) , email varchar(100),password varchar(10) ,access_type varchar(10) ,deleted bit(1),information varbinary(5000))'
 	cursor.execute(sql)
 	sql =  'CREATE TABLE  if not exists userfiles (user_id varchar(10),detailed_id varchar(10),slm_id varchar(10) ,build_id varchar(10) ,type varchar(10) ,  FOREIGN KEY (user_id) REFERENCES users(user_id), FOREIGN KEY (detailed_id) REFERENCES details(detailed_id) , FOREIGN KEY (build_id) REFERENCES build(build_id), FOREIGN KEY (slm_id) REFERENCES printing(slm_id))'
 	cursor.execute(sql) 
@@ -143,7 +143,23 @@ def authenticate_user(code):
 			"user_id":row[0],
 			"name":row[1]
 		}
-	return rows	
+	return rows
+
+def account_entry(user_id, name, email, code, access_type, info):
+	deleted = 0
+	sql = 'INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)'
+	arg = (user_id, name, email, code, access_type, deleted, info)
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute(sql, arg)
+		db.commit()
+		return("Account created: "+user_id+", "+name+", "+email+", "+code+", "+access_type+", "+info)
+	except:
+		return("Failed to create account")
+	finally:
+		cur.close()
+		db.close()
 
 
 def get_fileExt(fileId):

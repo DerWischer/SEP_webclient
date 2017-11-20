@@ -37,6 +37,19 @@ class LogoutHandler(BaseHandler):
         self.clear_cookie("user")
         self.redirect("/")    
 
+class AccountHandler(BaseHandler):
+    def get(self):
+        self.render("account.html")
+    def post(self):
+        user_id = self.get_argument("user_id")
+        name = self.get_argument("name")
+        email = self.get_argument("email")
+        code = self.get_argument("code")
+        access_type = self.get_argument("access_type")
+        info = self.get_argument("info")
+
+        print(database_handler.account_entry(user_id, name, email, code, access_type, info))
+
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
     @tornado.web.authenticated
@@ -113,6 +126,7 @@ def make_app():
         handlers=[            
             (r"/login", LoginHandler),
             (r"/logout", LogoutHandler),
+            (r"/account", AccountHandler),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
