@@ -110,6 +110,7 @@ function handle_upload() {
 		data.append('file', fileInput.prop("files")[i]);
 		data.append('filename', $("#fileUpload .form-control")[i].value);
 	}
+	data.append('folder', getFolder());
 	request.upload.addEventListener('progress', function(event) {
 		// If the event can be calculated.
 		if(event.lengthComputable) {

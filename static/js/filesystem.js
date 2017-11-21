@@ -1,5 +1,6 @@
 var ROOT;
 var filesystem;
+var current_folder = "ROOT";
 
 function exists(id) {
 	return filesystem.hasOwnProperty(id);
@@ -18,6 +19,9 @@ function getParent(id) {
 	}
 	return filesystem[filesystem[id].parent];
 }
+function getFolder() {
+	return current_folder;
+}
 function setFolder(id) {
 	var id = id || ROOT;
 	if (!exists(id)) {
@@ -26,6 +30,7 @@ function setFolder(id) {
 	if (filesystem[id].type != "folder") {
 		return false;
 	}
+	current_folder = id;
 	RenderBreadCrumbPath(id);
    	displayList(id, getChildren(id));
 
