@@ -159,7 +159,7 @@ $(document).ready(function() {
 			url:"/newFolder",
 			method:"POST",
 			dataType:"JSON",
-			data:{"folder":getFolder(), "name":name},
+			data:{"parent":getFolder(), "name":name},
 			success: function(data) {
 				if (!data.success) {
 					alert("Could not create new folder");

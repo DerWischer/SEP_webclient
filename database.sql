@@ -7,4 +7,4 @@ CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varc
 CREATE TABLE if not exists fileinformation (id varchar(36), type VARCHAR(36), value VARCHAR(100));
 CREATE TABLE if not exists types (id varchar(36) PRIMARY KEY, name varchar(100));
 INSERT INTO users VALUES ("1", "admin", "1111");
-INSERT INTO filesystem VALUES ("ROOT", "uploads", "/uploads", Null, Null, Null, Null, Null, True, Null, "folder");
+INSERT INTO filesystem VALUES ("ROOT", "uploads", "uploads", Null, Null, Null, Null, Null, True, Null, "folder");

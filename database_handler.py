@@ -74,12 +74,27 @@ def file_entry(id, name, path, ext, hashValue, size, created, updated , changeha
 	cur.close()
 	db.commit()
 
-def create_folder(name, parent):
+def get_folder_path_from_id(id):
+	try:
+		db = get_database() 
+		cur = db.cursor() 
+		cur.execute("SELECT path FROM filesystem WHERE id = %s LIMIT 1", [id])
+		for row in cur.fetchone():
+			return row
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
+
+def create_folder(name, path, parent):
 	try:
 		db = get_database()
 		cur = db.cursor()
 		id = str(uuid.uuid4())
-		cur.execute("INSERT INTO filesystem (id, filename, parent, type) VALUES (%s, %s, %s, 'folder')", [id, name, parent])
+		cur.execute("INSERT INTO filesystem (id, filename, path, parent, type) VALUES (%s, %s, %s, %s, 'folder')", [id, name, path, parent])
 		return True
 	except Exception as ex:
 		print (ex)

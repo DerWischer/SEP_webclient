@@ -111,10 +111,24 @@ class UploadHandler(tornado.web.RequestHandler):
 
 class NewFolderHandler(tornado.web.RequestHandler):
     def post(self):
-        parent = self.request.arguments['folder']
-        name = self.request.arguments['name']
-        success = database_handler.create_folder(name, parent)
-        self.finish(json.dumps({"success":success}))
+        name = self.get_argument("name", default=None, strip=False)
+        parent =  self.get_argument("parent", default=None, strip=False)
+        parent_path = database_handler.get_folder_path_from_id(parent)
+        print ("parent path: " + parent_path)
+        if parent_path == None:
+            self.finish(json.dumps({"success":False, "reason":"parent does not exist in database"}))
+            return
+        elif not os.path.exists(parent_path):
+            self.finish(json.dumps({"success":False, "reason":"parent does not exist on filesystem"}))
+            return
+        path = os.path.join(parent_path, name)
+        if os.path.exists(path):
+            self.finish(json.dumps({"success":False, "reason":"path already exists, please check database integrity"}))
+            return
+        os.mkdir(path)
+        success = database_handler.create_folder(name, path, parent)
+        if (success):
+            self.finish(json.dumps({"success":success}))
 
         
 
