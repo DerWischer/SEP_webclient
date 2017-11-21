@@ -155,6 +155,9 @@ $(document).ready(function() {
 	});
 	$("#new-folder-btn").click(function() {
 		var name = prompt("Name of new folder:");
+		if (!name) {
+			return;
+		}
 		$.ajax({
 			url:"/newFolder",
 			method:"POST",

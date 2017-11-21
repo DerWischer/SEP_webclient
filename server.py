@@ -131,12 +131,11 @@ class NewFolderHandler(tornado.web.RequestHandler):
         if (success):
             self.finish(json.dumps({"success":success}))
 
-        
-
 class DownloadHandler(tornado.web.RequestHandler):
     def streaming_callback(chunk):
         self.write(chunk)
         self.flush()
+    @tornado.gen.coroutine
     def get(self, fileId):
         path, name, ext = database_handler.get_file_path(fileId);
         filename = ''.join([name,ext])
@@ -147,12 +146,13 @@ class DownloadHandler(tornado.web.RequestHandler):
             self.set_header('Content-Type', 'application/octet-stream')
             self.set_header('Content-Disposition', 'attachment; filename=%s' % filename)
             self.flush()
-            with open(path, 'r') as f:
+            with open(path, 'rb') as f:
                 while True:
                     data = f.read(1024)
                     if not data:
                         break
                     self.write(data)
+                    yield self.flush()
             self.finish()
     
 class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
