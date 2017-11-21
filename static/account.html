@@ -11,7 +11,7 @@
     <!-- Bootstrap core CSS -->
 		<link href="/static/thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 		
-
+		<script src="/static/js/account.js"></script>
     <!-- Custom styles for this template -->
     <link href="/static/css/account.css" rel="stylesheet">
     <!-- <script src="/static/js/account.js"></script> -->
@@ -21,54 +21,24 @@
     <div class="container-fluid">
     	<section class="row">
     	   <section class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-			  <form action="account" method="post">
+			  <form action="accountUpdate" method="post">
 				<h2 class="form-signin-heading text-center">Operator Account Details</h2>
-				<label for="inputEmail" class="sr-only">Operator Code</label>
-				<section class="panel panel-info" id="getting-details" style="margin-top:5px;">
-					<section class="panel-body">
-						Retriving Details
-					</section>
-				</section>
-				<section class="panel panel-danger hidden" id="details-error" style="margin-top:5px;">
-					<section class="panel-body">
-						Error Retriving Details
-					</section>
-				</section>
-				<section class="panel panel-danger hidden" id="update-error" style="margin-top:5px;">
-					<section class="panel-body">
-						Error Updating Details
-					</section>
-				</section>
-				<section class="panel panel-danger hidden" id="update-success" style="margin-top:5px;">
-					<section class="panel-body">
-						Updated Details
-					</section>
-				</section>
-				  <section class="form-group">
-					  <label for="user_id">User ID</label>
-					  <input type="number" name="user_id" id="user_id" class="form-control input-lg" placeholder="ID" required>
-				  </section>
 				  <section class="form-group">
 					  <label for="name">Username</label>
 					  <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Your Name" required autofocus>
 				  </section>
-				  <section class="form-group">
+				  <!--<section class="form-group">
 					  <label for="email">Email</label>
 					  <input type="text" name="email" id="email" class="form-control input-lg" placeholder="Your Name" required>
-				  </section>
+				  </section>-->
 				  <section class="form-group">
 					  <label for="operatorCode">Operator Code <span class="text-info text-small italic">*Operator Codes cannot be changed here</span></label>
 					  <input type="number" name="code" id="operatorCode" class="form-control input-lg" placeholder="Operator Code">
 				  </section>
-				  <section class="form-group">
+				  <!--<section class="form-group">
 					  <label for="access_type">Type of access</label>
 					  <input type="text" name="access_type" id="access_type" class="form-control input-lg" placeholder="non" required>
-				  </section>
-
-				  <section class="form-group">
-					  <label for="info">Information</label>
-					  <input type="text" name="info" id="info" class="form-control input-lg" placeholder="Additional information" required>
-				  </section>
+					</section>-->
 				<button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px;">Update Details</button>
 			  </form>
 		  </section>

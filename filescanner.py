@@ -73,3 +73,21 @@ def scan_recursive(folder_path):
             dir_files.append(file_info)
     print("Scanning complete")
     return dir_files
+
+def get_file_stats(parentid, filepath, filename):
+    id = str(uuid.uuid4());
+    filestat = os.stat(filepath)
+    file_info = {
+        'id':id,
+        'name': os.path.splitext(filename)[0],
+        'path': filepath,
+        'hashvalue': hashlib.md5(open(filepath, 'rb').read()).hexdigest(),
+        'ext': os.path.splitext(filename)[1],
+        'size': filestat.st_size,
+        'created': math.floor(mktime(gmtime(filestat.st_ctime))),
+        'updated': math.floor(mktime(gmtime(filestat.st_mtime))),
+        'isfolder':False,
+        'parent':parentid
+    }
+    file_info['changehash'] = hashlib.sha512(("%s%s%s%s" % (file_info['name'], file_info['ext'], file_info['path'], file_info['hashvalue'])).encode('utf-8')).hexdigest()
+    return file_info

@@ -12,24 +12,17 @@ def get_database_name():
 	return "octoprint"
 
 def create_database():
-	db1 = get_database("")
-	cursor = db1.cursor()
+	db = get_database("")
+	cursor = db.cursor()
 	with open("database.sql", "r") as sql_file:
 		for line in sql_file:
 			cursor.execute(line)
 	cursor.close()
+	db.commit()
 
 def get_database(db_name = get_database_name()):	
 	""" Connects to the database and return the mysql object. Pass an empty string to create the database"""
 	return MySQLdb.connect(host="localhost",   user=get_db_user(),  passwd=get_db_password(), db=db_name)
-
-def test_database_1():
-	db = get_database() 
-	cur = db.cursor() 
-	cur.execute("SELECT * FROM users")
-	# print the first and second columns      
-	for row in cur.fetchall() :
-		print(row[0], " ", row[1])
 
 def getchildren(id):
 	children = []
@@ -39,6 +32,8 @@ def getchildren(id):
 	for row in cur.fetchall():
 		children.append(row[0])
 	return children
+
+###START OF FILESYSTEM FUNCTIONS
     			
 def get_file_system():
 		db = get_database() 
@@ -102,34 +97,6 @@ def get_file_path(fileId):
 		row = cur.fetchone()
 		cur.close()
 		return row[0],row[1], row[2]
-def authenticate_user(code):
-		db = get_database()
-		cur = db.cursor()
-		user = cur.execute("SELECT id, name FROM users WHERE password = %s", [code])
-		rows = {}
-		for row in cur.fetchall():
-			rows = {
-				"user_id":row[0],
-				"name":row[1]
-			}
-		return rows
-
-def account_entry(user_id, name, email, code, access_type, info):
-	deleted = 0
-	sql = 'INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)'
-	arg = (user_id, name, email, code, access_type, deleted, info)
-	try:
-		db = get_database()
-		cur = db.cursor()
-		cur.execute(sql, arg)
-		db.commit()
-		return("Account created: "+user_id+", "+name+", "+email+", "+code+", "+access_type+", "+info)
-	except:
-		return("Failed to create account")
-	finally:
-		cur.close()
-		db.close()
-
 
 def get_fileExt(fileId):
     db = get_database()
@@ -142,3 +109,45 @@ def get_fileExt(fileId):
     for row in cur.fetchall():
     	return(row[0])
     cur.close()
+
+#### END OF FILE SYSTEM
+
+def authenticate_user(code):
+		db = get_database()
+		cur = db.cursor()
+		user = cur.execute("SELECT id, name FROM users WHERE pin = %s", [code])
+		rows = {}
+		for row in cur.fetchall():
+			rows = {
+				"user_id":row[0],
+				"name":row[1]
+			}
+		return rows
+
+def update_account(id, name, pin):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute('INSERT INTO users VALUES (%s, %s) WHERE id = %s', [name, pin, id])
+		db.commit()
+		return True
+	except:
+		return False
+	finally:
+		cur.close()
+		db.close()
+
+def get_account_details(id):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute('SELECT name FROM users WHERE id = %s LIMIT 1', [id])
+		details = {}
+		for row in cur.fetchone():
+			details["name"] = row
+		return details
+	except:
+		raise Exception("User not found")
+	finally:
+		cur.close()
+		db.close()

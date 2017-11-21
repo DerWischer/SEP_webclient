@@ -39,17 +39,20 @@ class LogoutHandler(BaseHandler):
         self.redirect("/")    
 
 class AccountHandler(BaseHandler):
-    def get(self):
-        self.render("account.html")
+    @tornado.web.authenticated
     def post(self):
-        user_id = self.get_argument("user_id")
+        print (self.get_current_user())
         name = self.get_argument("name")
-        email = self.get_argument("email")
-        code = self.get_argument("code")
-        access_type = self.get_argument("access_type")
-        info = self.get_argument("info")
+        pin = self.get_argument("code")
+        success = database_handler.update_account(self.get_current_user(), name, pin)
+        self.write(json.dumps({"success":success}))
 
-        print(database_handler.account_entry(user_id, name, email, code, access_type, info))
+class GetAccountDetails(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        details = database_handler.get_account_details(self.get_current_user())
+        self.write(json.dumps({"success":True, "name":details["name"]}))
+            
 
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
@@ -90,18 +93,19 @@ class FileTemplateHandler(BaseHandler):
         self.write(text)
 
 class UploadHandler(tornado.web.RequestHandler):
-    @tornado.web.authenticated
     def post(self):
         i=0
         filenames = self.request.arguments['filename']
         print (filenames)
         for file in self.request.files['file']:
             extension = os.path.splitext(file['filename'])[1]
-            fname = str(uuid.uuid4())
-            final_filename= fname+extension
-            output_file = open("uploads/" + filenames[i].decode("utf-8"), 'wb')
+            filename = filenames[i].decode("utf-8")
+            filepath = "uploads/" + filename
+            with open(filepath, 'wb') as output_file:
+                output_file.write(file['body'])
             i += 1
-            output_file.write(file['body'])
+            entry = filescanner.get_file_stats(filepath, filename)
+            database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
 
 class DownloadHandler(tornado.web.RequestHandler):
@@ -150,7 +154,8 @@ def make_app():
         handlers=[            
             (r"/login", LoginHandler),
             (r"/logout", LogoutHandler),
-            (r"/account", AccountHandler),
+            (r"/accountUpdate", AccountHandler),
+            (r"/getAccountDetails", GetAccountDetails),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    
             (r"/fileinformation", FileInformationHandler),  
@@ -166,10 +171,9 @@ def resolve_user_mail():
     """Return the email address of the current user"""
     return "dummy@user.com" # TODO Lookup email in database
 
-def scan_filesystem():
-    database_handler.create_database()    
-    for entry in filescanner.scan_recursive(ROOT):
-        database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
+#def scan_filesystem(): 
+    #for entry in filescanner.scan_recursive(ROOT):
+    #    database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 # Main function ---------------------------------------------------------------
 if __name__ == "__main__":
@@ -177,7 +181,7 @@ if __name__ == "__main__":
             os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
-    scan_filesystem()
+    database_handler.create_database()    
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     

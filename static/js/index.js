@@ -143,7 +143,9 @@ $(document).ready(function() {
 	$(document).click(function() {
 		HideDropdownElement();
 	});
-	$("#fileUpload").modal("show");
+	$("#upload-btn").click(function() {
+		$("#fileUpload").modal("show");
+	});
 	$("#file-upload-btn").click(function() {
 		$("#file-input").click();
 	});
@@ -224,11 +226,31 @@ function searchFileSystem(m) {
 	});
 	displayList(null, found);
 }
+function countJSONKeys(obj) {
+	var count=0;
+	for(var prop in obj) {
+	   if (obj.hasOwnProperty(prop)) {
+		  ++count;
+	   }
+	}
+	return count;
+ }
 //emil
 function displayList(parent, childrenObjects) {
 	var holder = $("#tableView")[0];
 	$(holder).empty();
 	var iconName;
+	console.log(childrenObjects);
+	if (countJSONKeys(childrenObjects) == 0) {
+		var nofilesmessage = el("section", {class:"panel panel-default"});
+		var panelbody = el("section", {class:"panel-body"});
+		var inner = document.createTextNode("No files in this folder");
+		panelbody.appendChild(inner);
+		nofilesmessage.appendChild(panelbody);
+		$("#tableView").append(nofilesmessage);
+		alert("There are no files");
+		return;
+	}
     $.each(childrenObjects, function (id, value) {
         var row = undefined;
         if (value.file_ext == ".stl") {
@@ -251,34 +273,35 @@ function displayList(parent, childrenObjects) {
 		if (value.type == "file") {
 			iconName = "fa fa-file-o fa-3x";
 		}
-		var icon = el("section", {
-			class: "col-lg-1 col-md-1"
-		});
-		var fa = el("i", {
-			class: iconName
-		});
+		var checkbox = el("section", {class:"col-lg-1 col-md-1"});
+		var input = el("input", {type:"checkbox", class:"form-control", "data-id":value.id});
+		checkbox.appendChild(input);
+		var icon = el("section", {class: "col-lg-1 col-md-1"});
+		var fa = el("i", {class: iconName});
 		icon.appendChild(fa);
-		var name = el("section", {
-			class: "col-lg-6 col-md-6"
-		});
-		var h4 = el("h4", {
-			html: value.name
-		});
+		var name = el("section", {class: "col-lg-5 col-md-5"});
+		var h4 = el("h4", {html: value.name});
 		name.appendChild(h4);
-		var date = el("section", {
-			class: "col-lg-5 col-md-5"
-		});
+		var date = el("section", {class: "col-lg-5 col-md-5"});
         if (value.type == "file") {
-            var h4 = el("h4", {
-                html: moment(value.updated * 1000).format("YYYY-MM-DD")
-            });
+            var h4 = el("h4", {html: moment(value.updated * 1000).format("YYYY-MM-DD")});
             date.appendChild(h4);
-        }
+		}
+		row.appendChild(checkbox);
 		row.appendChild(icon);
 		row.appendChild(name);
 		row.appendChild(date);
 		holder.appendChild(row);
 	});
+}
+function findSelectedFiles() {
+	files = [];
+	$("input[type='checkbox']").each(function() {
+		if ($(this).is(":checked")) {
+			files.push($(this).attr("data-id"));
+		}
+	});
+	return files;
 }
 // Login functions etc.
 var userData = {
@@ -541,6 +564,9 @@ function getSLM(project_id, build_id) {
 
 function createHREF(value) {
 	var a = document.createElement('a');
+	if ((!value) || (!value.name) || (!value.id)) { 
+		return el("a", {html:"UNDEFINED"});
+	}
 	var linkText = document.createTextNode(value.name);
 	a.appendChild(linkText);
 	a.setAttribute('href', "#");
@@ -644,7 +670,6 @@ function createsublist(fileview, href_id, project_id, value) {
 
 function createBuildNode(fileview, project_id) {
 	var build_id = getBuildlist(project_id);
-	console.log(build_id);
 	for (t = 0; t < build_id.length; t++) {
 		createsublist(fileview, t, project_id, build_id[t]);
 	}
