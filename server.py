@@ -96,16 +96,17 @@ class UploadHandler(tornado.web.RequestHandler):
     def post(self):
         i=0
         filenames = self.request.arguments['filename']
-        folder_id = self.request.arguments['folder']
+        parent_folder = self.request.arguments['folder']
         print (filenames)
         for file in self.request.files['file']:
             extension = os.path.splitext(file['filename'])[1]
             filename = filenames[i].decode("utf-8")
             i += 1
-            filepath = "uploads/" + filename
+            parent_path = database_handler.get_folder_path_from_id(parent_folder)
+            filepath = os.path.join(parent_path, filename)
             with open(filepath, 'wb') as output_file:
                 output_file.write(file['body'])
-            entry = filescanner.get_file_stats(folder_id, filepath, filename)
+            entry = filescanner.get_file_stats(parent_folder, filepath, filename)
             database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
 
