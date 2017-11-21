@@ -109,6 +109,15 @@ class UploadHandler(tornado.web.RequestHandler):
             database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
 
+class NewFolderHandler(tornado.web.RequestHandler):
+    def post(self):
+        parent = self.request.arguments['folder']
+        name = self.request.arguments['name']
+        success = database_handler.create_folder(name, parent)
+        self.finish(json.dumps({"success":success}))
+
+        
+
 class DownloadHandler(tornado.web.RequestHandler):
     def streaming_callback(chunk):
         self.write(chunk)
@@ -156,6 +165,7 @@ def make_app():
             (r"/login", LoginHandler),
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
+            (r"/newFolder", NewFolderHandler),
             (r"/getAccountDetails", GetAccountDetails),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler),    

@@ -247,6 +247,7 @@
 						<section class="container-fluid">					  							
 							<form action="upload" id="file-upload-form" method="POST" enctype="multipart/form-data">
 								<input id="file-input" type="file" name="file" class="hidden" multiple/>
+								<input id="folder-input" type="file" name="file" class="hidden" multiple webkitdirectory mozdirectory/>
 								<section class="container-fluid" id="files-list">
 								</section>
 							</form>	  
@@ -254,6 +255,7 @@
 					</section>
 					<section class="modal-footer">
 						<input type="button" class="btn btn-info btn-lg pull-left" id="file-upload-btn" value="Upload Files"/>
+						<input type="button" class="btn btn-warning btn-lg pull-left" id="folder-upload-btn" value="Upload Folders"/>
 						<button type="button" class="btn btn-success btn-lg" id="file-upload"><span class="translate">Upload</span></button>
 					</section>
 				</section>
@@ -262,12 +264,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container-fluid">
 				<button id="upload-btn" class="btn btn-default navbar-btn">upload</button>
-				<section class="pull-right">
-						<label class="navbar-label">Link on: </label>
-						<select id="link-on-select" class="form-control navbar-btn">
-							<option>Build Id</option>
-						</select>
-				</section>
+				<button id="new-folder-btn" class="btn btn-default navbar-btn">new folder</button>
 			</div>
 		</nav>
 	</body>

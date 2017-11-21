@@ -1,4 +1,4 @@
-var ROOT;
+var ROOT = "ROOT";
 var filesystem;
 var current_folder = "ROOT";
 
@@ -23,7 +23,7 @@ function getFolder() {
 	return current_folder;
 }
 function setFolder(id) {
-	var id = id || ROOT;
+	var id = id || getFolder();
 	if (!exists(id)) {
 		return;
 	}
@@ -64,16 +64,10 @@ function refreshFilesystem() {
 				alert("Error collecting filesystem");
 				return;
 			}
-			ROOT = null;			
-			$.each(data.filesystem, function(key, fileinfo) {
-				 // iterate over files to find the root node
-				if (fileinfo['parent'] === null) {												
-					ROOT = key;					
-					return false;
-				}
-			});
+			//Here we should set root if root is not statically defined by searching through
+			//the file system and finding the element with no parent
 			filesystem = data.filesystem;
-			setFolder(ROOT);
+			setFolder();
 			renderSidebarTree("mazen"); 
 			renderTraceTree("cad1"); 
 		}

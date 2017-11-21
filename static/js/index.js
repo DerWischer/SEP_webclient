@@ -150,9 +150,45 @@ $(document).ready(function() {
 	$("#file-upload-btn").click(function() {
 		$("#file-input").click();
 	});
+	$("#folder-upload-btn").click(function() {
+		$("#folder-input").click();
+	});
+	$("#new-folder-btn").click(function() {
+		var name = prompt("Name of new folder:");
+		$.ajax({
+			url:"/newFolder",
+			method:"POST",
+			dataType:"JSON",
+			data:{"folder":getFolder(), "name":name},
+			success: function(data) {
+				if (!data.success) {
+					alert("Could not create new folder");
+					return;
+				}
+				refreshFilesystem();
+			}
+		});	
+	});
 	$("#file-input").on("change", function() {
 		$("#files-list").empty();
 		$.each($("#file-input")[0].files, function(key,value) {
+			var row = el("section", {class:"row"});
+			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
+			var btn = el("button", {class:"btn btn-danger btn-lg"});
+			var i = el("i", {class:"fa fa-times fa-1x"});
+			btn.appendChild(i);
+			col.appendChild(btn);
+			//row.appendChild(col);
+			var col = el("section", {class:"col-xs-12 col-sm-12 col-md-12 col-lg-12"});
+			var label = el("input", {class:"form-control input-lg", name:"filename", value:value.name});
+			col.appendChild(label);
+			row.appendChild(col);
+			$("#files-list").append(row);
+		});
+	});
+	$("#folder-input").on("change", function() {
+		$("#files-list").empty();
+		$.each($("#folder-input")[0].files, function(key,value) {
 			var row = el("section", {class:"row"});
 			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
 			var btn = el("button", {class:"btn btn-danger btn-lg"});
@@ -249,7 +285,6 @@ function displayList(parent, childrenObjects) {
 		panelbody.appendChild(inner);
 		nofilesmessage.appendChild(panelbody);
 		$("#tableView").append(nofilesmessage);
-		alert("There are no files");
 		return;
 	}
     $.each(childrenObjects, function (id, value) {
@@ -276,6 +311,9 @@ function displayList(parent, childrenObjects) {
 		}
 		var checkbox = el("section", {class:"col-lg-1 col-md-1"});
 		var input = el("input", {type:"checkbox", class:"form-control", "data-id":value.id});
+		input.onclick = function(e) {
+			e.stopPropagation();
+		}
 		checkbox.appendChild(input);
 		var icon = el("section", {class: "col-lg-1 col-md-1"});
 		var fa = el("i", {class: iconName});
@@ -297,7 +335,7 @@ function displayList(parent, childrenObjects) {
 }
 function findSelectedFiles() {
 	files = [];
-	$("input[type='checkbox']").each(function() {
+	$("input[type='checkbox']").each(function(e) {
 		if ($(this).is(":checked")) {
 			files.push($(this).attr("data-id"));
 		}

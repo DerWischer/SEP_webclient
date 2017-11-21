@@ -1,6 +1,7 @@
 import MySQLdb
 import dev_config
 import json
+import uuid
 
 def get_db_user():
 	return dev_config.DB_USER
@@ -73,12 +74,23 @@ def file_entry(id, name, path, ext, hashValue, size, created, updated , changeha
 	cur.close()
 	db.commit()
 
-def folder_entry(id, name, path):
-	sql = ('INSERT INTO filesystem VALUES ("%s", "%s", "%s", true)' % (id, name, path))
-
+def create_folder(name, parent):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		id = str(uuid.uuid4())
+		cur.execute("INSERT INTO filesystem (id, filename, parent, type) VALUES (%s, %s, %s, 'folder')", [id, name, parent])
+		return True
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.commit()
+	
+	
 def save_file(fileId, fileInfo):
     resp_dict = json.loads(fileInfo)
-    print (resp_dict["name"])
     db = get_database()
     cur = db.cursor()
     try:
