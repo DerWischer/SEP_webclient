@@ -144,20 +144,22 @@ def get_type_id(name):
 
            
 def get_data(fileId):
-    return "{}"
-    db = get_database()
-    cur = db.cursor()
-    cur.execute("SELECT t.name,i.value FROM fileinformation i , types t WHERE i.type = t.id and i.id = %s",  [2147483647])
-    children = '{'
-    curcnt = cur.rowcount 
-    for row in cur.fetchall():
-      curcnt = curcnt -1
-      children =  children+ "'"+row[0]+"'"+":"+"'"+row[1]+"'" 
-      if curcnt != 0: 
-        children =  children+ ","
-    children = children + '}'
-    res = children.strip('"') 
-    return 	res
+    try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("""SELECT fileinformation.id, fileinformation.value, types.name 
+		FROM fileinformation LEFT JOIN types on types.id = fileinformation.type WHERE 
+		fileinformation.id = %s""",  [fileId])
+		json = {}
+		for row in cur.fetchall():
+    		json[row[0]] = row[1]
+		return json.dumps(json)
+	except Exception as ex:
+		print (ex)
+		return "{}"
+	finally:
+		cur.close()
+		db.close()
 
 def get_file_path(fileId):
 		db = get_database()
