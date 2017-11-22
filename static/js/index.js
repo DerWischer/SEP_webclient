@@ -110,6 +110,7 @@ function handle_upload() {
 		data.append('file', fileInput.prop("files")[i]);
 		data.append('filename', $("#fileUpload .form-control")[i].value);
 	}
+	data.append('folder', getFolder());
 	request.upload.addEventListener('progress', function(event) {
 		// If the event can be calculated.
 		if(event.lengthComputable) {
@@ -143,13 +144,54 @@ $(document).ready(function() {
 	$(document).click(function() {
 		HideDropdownElement();
 	});
-	$("#fileUpload").modal("show");
+	$("#upload-btn").click(function() {
+		$("#fileUpload").modal("show");
+	});
 	$("#file-upload-btn").click(function() {
 		$("#file-input").click();
+	});
+	$("#folder-upload-btn").click(function() {
+		$("#folder-input").click();
+	});
+	$("#new-folder-btn").click(function() {
+		var name = prompt("Name of new folder:");
+		if (!name) {
+			return;
+		}
+		$.ajax({
+			url:"/newFolder",
+			method:"POST",
+			dataType:"JSON",
+			data:{"parent":getFolder(), "name":name},
+			success: function(data) {
+				if (!data.success) {
+					alert("Could not create new folder");
+					return;
+				}
+				refreshFilesystem();
+			}
+		});	
 	});
 	$("#file-input").on("change", function() {
 		$("#files-list").empty();
 		$.each($("#file-input")[0].files, function(key,value) {
+			var row = el("section", {class:"row"});
+			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
+			var btn = el("button", {class:"btn btn-danger btn-lg"});
+			var i = el("i", {class:"fa fa-times fa-1x"});
+			btn.appendChild(i);
+			col.appendChild(btn);
+			//row.appendChild(col);
+			var col = el("section", {class:"col-xs-12 col-sm-12 col-md-12 col-lg-12"});
+			var label = el("input", {class:"form-control input-lg", name:"filename", value:value.name});
+			col.appendChild(label);
+			row.appendChild(col);
+			$("#files-list").append(row);
+		});
+	});
+	$("#folder-input").on("change", function() {
+		$("#files-list").empty();
+		$.each($("#folder-input")[0].files, function(key,value) {
 			var row = el("section", {class:"row"});
 			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
 			var btn = el("button", {class:"btn btn-danger btn-lg"});
@@ -182,7 +224,6 @@ $(document).ready(function() {
 	});
 	//breadcrumb dropdown element is clicked
 	$("#breadcrumb-dropdown").on("click", ".dropdown-element", function() {
-		console.log(this.getAttribute("data-id"));
 		setFolder(this.getAttribute("data-id"));
 	});
 	$("#breadcrumb .custom-breadcrumb").on("click", function() {
@@ -225,13 +266,31 @@ function searchFileSystem(m) {
 	});
 	displayList(null, found);
 }
+function countJSONKeys(obj) {
+	var count=0;
+	for(var prop in obj) {
+	   if (obj.hasOwnProperty(prop)) {
+		  ++count;
+	   }
+	}
+	return count;
+ }
 //emil
 function displayList(parent, childrenObjects) {
 	var holder = $("#tableView")[0];
 	$(holder).empty();
 	var iconName;
+	console.log(childrenObjects);
+	if (countJSONKeys(childrenObjects) == 0) {
+		var nofilesmessage = el("section", {class:"panel panel-default"});
+		var panelbody = el("section", {class:"panel-body"});
+		var inner = document.createTextNode("No files in this folder");
+		panelbody.appendChild(inner);
+		nofilesmessage.appendChild(panelbody);
+		$("#tableView").append(nofilesmessage);
+		return;
+	}
     $.each(childrenObjects, function (id, value) {
-        console.log(value.file_ext);
         var row = undefined;
         if (value.file_ext == ".stl") {
             row = el("section", {
@@ -253,34 +312,38 @@ function displayList(parent, childrenObjects) {
 		if (value.type == "file") {
 			iconName = "fa fa-file-o fa-3x";
 		}
-		var icon = el("section", {
-			class: "col-lg-1 col-md-1"
-		});
-		var fa = el("i", {
-			class: iconName
-		});
+		var checkbox = el("section", {class:"col-lg-1 col-md-1"});
+		var input = el("input", {type:"checkbox", class:"form-control", "data-id":value.id});
+		input.onclick = function(e) {
+			e.stopPropagation();
+		}
+		checkbox.appendChild(input);
+		var icon = el("section", {class: "col-lg-1 col-md-1"});
+		var fa = el("i", {class: iconName});
 		icon.appendChild(fa);
-		var name = el("section", {
-			class: "col-lg-6 col-md-6"
-		});
-		var h4 = el("h4", {
-			html: value.name
-		});
+		var name = el("section", {class: "col-lg-5 col-md-5"});
+		var h4 = el("h4", {html: value.name});
 		name.appendChild(h4);
-		var date = el("section", {
-			class: "col-lg-5 col-md-5"
-		});
+		var date = el("section", {class: "col-lg-5 col-md-5"});
         if (value.type == "file") {
-            var h4 = el("h4", {
-                html: moment(value.updated * 1000).format("YYYY-MM-DD")
-            });
+            var h4 = el("h4", {html: moment(value.updated * 1000).format("YYYY-MM-DD")});
             date.appendChild(h4);
-        }
+		}
+		row.appendChild(checkbox);
 		row.appendChild(icon);
 		row.appendChild(name);
 		row.appendChild(date);
 		holder.appendChild(row);
 	});
+}
+function findSelectedFiles() {
+	files = [];
+	$("input[type='checkbox']").each(function(e) {
+		if ($(this).is(":checked")) {
+			files.push($(this).attr("data-id"));
+		}
+	});
+	return files;
 }
 // Login functions etc.
 var userData = {
@@ -374,8 +437,15 @@ $(document).ready(function() {
 		correctPW($("#emailInput").val(), $("#passwordInput").val());
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
-        setFolder(this.getAttribute("data-id"));
-
+		var dataId = this.getAttribute("data-id");
+		if (setFolder(dataId) == false) {
+			//is file
+			console.log("downlaoding");
+			var a = el("a", {href:("/download/" + dataId), target:"_blank"});
+			$("#tableView").append(a);
+			a.click();
+			$("#tableView").remove(a);
+		}
     });
     $("#tableView").on("contextmenu", ".row", function(e) {
         $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden").attr("data-id", $(e.target).closest(".row").attr("data-id"));
@@ -549,6 +619,9 @@ function getSLM(project_id, build_id) {
 
 function createHREF(value) {
 	var a = document.createElement('a');
+	if ((!value) || (!value.name) || (!value.id)) { 
+		return el("a", {html:"UNDEFINED"});
+	}
 	var linkText = document.createTextNode(value.name);
 	a.appendChild(linkText);
 	a.setAttribute('href', "#");
@@ -652,7 +725,6 @@ function createsublist(fileview, href_id, project_id, value) {
 
 function createBuildNode(fileview, project_id) {
 	var build_id = getBuildlist(project_id);
-	console.log(build_id);
 	for (t = 0; t < build_id.length; t++) {
 		createsublist(fileview, t, project_id, build_id[t]);
 	}

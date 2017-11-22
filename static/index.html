@@ -67,19 +67,17 @@
 								<li>
 									<div class="row">
 										<div class="col-md-12">
-											<form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
 												<div class="form-group">
-													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate">Change Account</span></button>
+													<a href="/account"><button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate">Change Account</span></button></a>
 												</div>
 												<div class="form-group">
-													<button type="submit" id="btnLogout" class="btn btn-danger btn-block"><span class="translate">Logout</span></button>
+													<a href="/logout"><button type="submit" class="btn btn-danger btn-block"><span class="translate">Logout</span></button></a>
 												</div>
 												<div class="form-group">
 													<button id="swedish-btn" class="btn btn-info btn-lg" type="button">
 														<span class="flag-icon flag-icon-se"></span>
 													</button>
 												</div>
-											</form>
 										</div>
 									</div>
 								</li>
@@ -251,6 +249,7 @@
 						<section class="container-fluid">					  							
 							<form action="upload" id="file-upload-form" method="POST" enctype="multipart/form-data">
 								<input id="file-input" type="file" name="file" class="hidden" multiple/>
+								<input id="folder-input" type="file" name="file" class="hidden" multiple webkitdirectory mozdirectory/>
 								<section class="container-fluid" id="files-list">
 								</section>
 							</form>	  
@@ -258,10 +257,17 @@
 					</section>
 					<section class="modal-footer">
 						<input type="button" class="btn btn-info btn-lg pull-left" id="file-upload-btn" value="Upload Files"/>
+						<input type="button" class="btn btn-warning btn-lg pull-left" id="folder-upload-btn" value="Upload Folders"/>
 						<button type="button" class="btn btn-success btn-lg" id="file-upload"><span class="translate">Upload</span></button>
 					</section>
 				</section>
 			</section>
 		</section>
+		<nav class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container-fluid">
+				<button id="upload-btn" class="btn btn-default navbar-btn">upload</button>
+				<button id="new-folder-btn" class="btn btn-default navbar-btn">new folder</button>
+			</div>
+		</nav>
 	</body>
 </html>
