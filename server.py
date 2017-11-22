@@ -76,21 +76,49 @@ class FileInformationHandler(BaseHandler):
         print(fileInfo)
         self.write(database_handler.store_fileinformation(fileId, fileInfo))
 
+class FileUpdateInformationHandler(BaseHandler):
+    @tornado.web.authenticated
+    def post(self):
+        fileId = self.get_argument("fileId")
+        fileInfo= self.get_argument("fileInfo")
+        print(fileInfo)
+        self.write(database_handler.update_file(fileId,".svg",fileInfo))
+
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         fileId = self.get_argument("fileId")
         ext = database_handler.get_fileExt(fileId)
-        #print('ext ' + ext)
+        jsondata = database_handler.get_data(fileId)
+        jsonfile = 'slm.json'
+        for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
+            if ext == '.svg': 
+               jsonfile = filename
+        #text = ""#'{ "title":"User Feedback", "description":"What do you think about Alpaca?", "type":"object", "properties": { "name": { "type":"string", "title":"Name" }, "feedback": { "type":"string", "title":"Feedback" }, "ranking": { "type":"string", "title":"Ranking", "enum":["excellent","ok","so so"] } } }'
+        #with open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)) as file:
+        #    for line in file:
+        #        text += line
+        #self.write(text)
+        decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
+        print(jsondata)
+        decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
+        self.write(decoded_json)
+
+class ViewTemplateHandler(BaseHandler):
+    @tornado.web.authenticated
+    def post(self):
+        fileId = self.get_argument("fileId")
+        ext = database_handler.get_fileExt(fileId)
+        jsondata = database_handler.get_data(fileId)
         jsonfile = 'default.json'
         for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
             if ext == '.svg': 
                jsonfile = filename
-        text = ""#'{ "title":"User Feedback", "description":"What do you think about Alpaca?", "type":"object", "properties": { "name": { "type":"string", "title":"Name" }, "feedback": { "type":"string", "title":"Feedback" }, "ranking": { "type":"string", "title":"Ranking", "enum":["excellent","ok","so so"] } } }'
-        with open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)) as file:
-            for line in file:
-                text += line
-        self.write(text)
+        decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
+        print(jsondata)
+        decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
+        self.write(decoded_json)
+    
 
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
@@ -195,9 +223,11 @@ def make_app():
             (r"/newFolder", NewFolderHandler),
             (r"/getAccountDetails", GetAccountDetails),
             (r"/filesystem", FileSystemHandler),
-            (r"/subscribe", SubscriptionHandler),    
+            (r"/subscribe", SubscriptionHandler), 
+            (r"/fileupdateinformation", FileUpdateInformationHandler),     
             (r"/fileinformation", FileInformationHandler),  
             (r"/filetemplate", FileTemplateHandler),
+            (r"/viewtemplate", ViewTemplateHandler),
             (r"/upload", UploadHandler),
             (r"/download/(.*)", DownloadHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
