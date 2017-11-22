@@ -89,28 +89,22 @@ def get_folder_path_from_id(id):
 		db.commit()
 
 
-def store_fileinformation(fileId,ext, fileInfo):
-    res = delete_file(fileId)
-    json_arr = json.loads(fileInfo) 
-    db = get_database()
-    cur = db.cursor()
-    for key in json_arr:
-        keyid = get_type(key)
-        sql = ('INSERT INTO fileinformation VALUES (%s, %s,%s)')
-        cur.execute(sql, [fileId,keyid,json_arr[key]])
-    cur.close()
-    db.commit()
-
-def delete_file(fileId):
-    db = get_database()
-    cur = db.cursor()
-    cur.execute("DELETE FROM fileinformation where id =  %s",  [fileId])
-    count = cur.rowcount
-    if count == 0:
-        return('error')
-    cur.close()
-    db.commit()
-    return('records deleted')
+def store_fileinformation(fileId, fileInfo):
+	try:
+		json_arr = json.loads(fileInfo) 
+		db = get_database()
+		cur = db.cursor()
+		for key in json_arr:
+			keyid = get_type_id(key)
+			sql = ('INSERT fileinformation (id, fileid, type, value) VALUES (UUID(),%s, %s,%s) ON DUPLICATE KEY UPDATE value=%s')
+			cur.execute(sql, [fileId,keyid,json_arr[key], json_arr[key]])
+		return True
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.commit()
 
 def create_folder(name, path, parent):
 	try:
@@ -128,26 +122,29 @@ def create_folder(name, path, parent):
 	
 	 
 	
-def get_type(name):	
-    db = get_database()
-    cur = db.cursor()
-    cur.execute("SELECT t.name,t.id FROM types t WHERE t.name = %s",  [name])
-    curcnt = cur.rowcount
-    if curcnt==0 : 
-        result=''
-        cur.execute("SELECT max(t.id) FROM types t")
-        for row in cur.fetchall():
-           result = int(row[0])+1
-        sql =("INSERT into types (id,name) values (%s,%s)")
-        cur.execute(sql,[str(result),name])
-        cur.close()
-        db.commit()
-        return result
-    for row in cur.fetchall():
-        return (row[0])	
+def get_type_id(name):	
+	'''Returns the id of the type, otherwise type is created and the generated id is returned'''
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT id FROM types WHERE name = %s LIMIT 1",  [name])
+		id = None
+		if cur.rowcount > 0:
+			for row in cur.fetchone():
+				id = row
+		else:
+			id = str(uuid.uuid4())
+			cur.execute("INSERT into types (id, name) values (%s,%s)",[id,name])
+		return id
+	except Exception as ex:
+		print (ex)
+	finally:
+		cur.close()
+		db.commit()
 
            
 def get_data(fileId):
+    return "{}"
     db = get_database()
     cur = db.cursor()
     cur.execute("SELECT t.name,i.value FROM fileinformation i , types t WHERE i.type = t.id and i.id = %s",  [2147483647])

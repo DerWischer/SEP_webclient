@@ -28,9 +28,8 @@ class LoginHandler(BaseHandler):
         user_info = database_handler.authenticate_user(code)
         username = user_info["name"]
         user_id = user_info["user_id"] # TODO Resolve username from code
-        print("user id: "+str(user_id))
         self.set_secure_cookie("user", user_id)
-        print("Secure cookie set for user: "+ username +" with code: " + code)
+        #print("Secure cookie set for user: "+ username +" with code: " + code)
         self.redirect("/")
 
 class LogoutHandler(BaseHandler):
@@ -41,7 +40,6 @@ class LogoutHandler(BaseHandler):
 class AccountHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
-        print (self.get_current_user())
         name = self.get_argument("name")
         pin = self.get_argument("code")
         success = database_handler.update_account(self.get_current_user(), name, pin)
@@ -73,16 +71,15 @@ class FileInformationHandler(BaseHandler):
     def post(self):
         fileId = self.get_argument("fileId")
         fileInfo= self.get_argument("fileInfo")        
-        print(fileInfo)
-        self.write(database_handler.store_fileinformation(fileId, fileInfo))
+        success = database_handler.store_fileinformation(fileId, fileInfo)
+        self.write(json.dumps({"success":success}))
 
 class FileUpdateInformationHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         fileId = self.get_argument("fileId")
         fileInfo= self.get_argument("fileInfo")
-        print(fileInfo)
-        self.write(database_handler.update_file(fileId,".svg",fileInfo))
+        self.write(database_handler.update_file(fileId,".default",fileInfo))
 
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
@@ -90,9 +87,9 @@ class FileTemplateHandler(BaseHandler):
         fileId = self.get_argument("fileId")
         ext = database_handler.get_fileExt(fileId)
         jsondata = database_handler.get_data(fileId)
-        jsonfile = 'slm.json'
+        jsonfile = 'default.json'
         for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
-            if ext == '.svg': 
+            if ext == '.default': 
                jsonfile = filename
         #text = ""#'{ "title":"User Feedback", "description":"What do you think about Alpaca?", "type":"object", "properties": { "name": { "type":"string", "title":"Name" }, "feedback": { "type":"string", "title":"Feedback" }, "ranking": { "type":"string", "title":"Ranking", "enum":["excellent","ok","so so"] } } }'
         #with open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)) as file:
@@ -100,7 +97,6 @@ class FileTemplateHandler(BaseHandler):
         #        text += line
         #self.write(text)
         decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
-        print(jsondata)
         decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
         self.write(decoded_json)
 
@@ -115,7 +111,6 @@ class ViewTemplateHandler(BaseHandler):
             if ext == '.svg': 
                jsonfile = filename
         decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
-        print(jsondata)
         decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
         self.write(decoded_json)
     
@@ -125,7 +120,6 @@ class UploadHandler(tornado.web.RequestHandler):
         i=0
         filenames = self.request.arguments['filename']
         parent_folder = self.request.arguments['folder']
-        print (filenames)
         for file in self.request.files['file']:
             extension = os.path.splitext(file['filename'])[1]
             filename = filenames[i].decode("utf-8")
@@ -143,7 +137,6 @@ class NewFolderHandler(tornado.web.RequestHandler):
         name = self.get_argument("name", default=None, strip=False)
         parent =  self.get_argument("parent", default=None, strip=False)
         parent_path = database_handler.get_folder_path_from_id(parent)
-        print ("parent path: " + parent_path)
         if parent_path == None:
             self.finish(json.dumps({"success":False, "reason":"parent does not exist in database"}))
             return
@@ -168,7 +161,6 @@ class DownloadHandler(tornado.web.RequestHandler):
         path, name, ext = database_handler.get_file_path(fileId);
         filename = ''.join([name,ext])
         if not os.path.exists(path):
-            print ("not found")
             self.finish()
         else:
             self.set_header('Content-Type', 'application/octet-stream')

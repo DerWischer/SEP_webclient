@@ -407,7 +407,7 @@ function correctPW(userName, inputPassword) {
 })(jQuery, window);
 $(document).ready(function() {
 	$("#info_save").on("click", function() {
-		var data = $("#alpaca2").serializeArray();
+		var data = $("#attachedInfoModalBody .alpaca-form").serializeArray();
 		var object={};
 		$.each(data,function(key,value) {
 		  object[value.name] = value.value;
@@ -495,46 +495,6 @@ $(document).ready(function() {
 	});	
 });
 //reem
-/* =========================================================
- * reem.js v1.0.0
- * =========================================================
- * ========================================================= */
-// <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-/*
-var FileTraceability = 
-{"12345": 
-{
-   "name":"Volvo",
-   "project_name":"P01", 
-   "project_id":"12345",
-   "id":"12345",
-   "File1":[{ "type":"CAD","id": "1234111", "project_id":"12345","name":"1.prt", "path":"c:-Documents-prt1-1.prt"},
-            { "type":"CAD","id": "123454", "project_id":"12345","name":"2.prt", "path":"c:-Documents-prt1-2.prt"}, 
-            { "type":"CAD","id": "123455", "project_id":"12345","name":"3.prt", "path":"c:-Documents-prt1-3.prt"}],
-
-   "File2": [{"type":"STL",  "id": "1234","project_id":"12345" ,"name":"1.stl" ,"path":"c:-Documents-stl1-1.stl"} , 
-             {"type":"STL",  "id": "12343","project_id":"12345" ,"name":"2.stl" ,"path":"c:-Documents-stl1-2.stl"} , 
-		     {"type":"STL",  "id": "12344","project_id":"12345" ,"name":"3.stl" ,"path":"c:-Documents-stl1-3.stl"} ],
-
-   "File3": [{"type":"Build", "id": "1234666","project_id":"12345", "name":"B001"} ,
-             {"type":"Build", "id": "1534556","project_id":"12345", "name":"B002"} ],
-
-   "image":[{"type":"Image", "id": "12345645", "project_id":"12345","Build_id":"B001" , "path":"c:-Documents-img1-1.img"} ,
-            {"type":"Image", "id": "12346666645", "project_id":"12345","Build_id":"B002" , "path":"c:-Documents-img1-1.img"} ],
-
-   "material":[{"type":"material","id": "12345621", "project_id":"12345" ,"Build_id":"B001" ,"material_name":"carbon"} ,
-               {"type":"material","id": "1234500041", "project_id":"12345" ,"Build_id":"B002" ,"material_name":"Powder"}],
-
-   "measures":[{ "type":"material_measure","id": "1234588", "project_id":"12345","Build_id":"B001","material_name":"carbon", "measure":"measure1.pdf"},
-               { "type":"material_measure","id": "121234588", "project_id":"12345","Build_id":"B002","material_name":"Powder", "measure":"measure1.pdf"}    ],    
-
-   "File4":[{"type":"SLM", "id": "12345111","project_id":"12345",  "Build_id":"B001", "SLM_id":"Boo1.slm", "name":"B0343",  "path":"c:-Documents-slm1-B001.slm"} ,
-            {"type":"SLM","id": "12345222", "project_id":"12345", "Build_id":"B001", "SLM_id":"Boo2.slm","name":"B0344" ,  "path":"c:-Documents-slm1-B001.slm"} ,
-			{"type":"SLM","id": "1234577722", "project_id":"12345", "Build_id":"B002", "SLM_id":"Boo2.slm","name":"B0344" ,  "path":"c:-Documents-slm1-B002.slm"}]
-}  
-
-} 
-*/
 function getProjectId(id) {
 	var found;
 	$.each(filesystem, function(key, value) {

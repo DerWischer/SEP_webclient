@@ -7,7 +7,6 @@ import uuid
 from pathlib import Path
 
 FOLDER_TO_ID = {}
-print (FOLDER_TO_ID)
 def scan_recursive(folder_path):
     ''' Scans recursively through a folder structure and creates a dictionary for each file '''
     print("Scanning: %s" % folder_path)
