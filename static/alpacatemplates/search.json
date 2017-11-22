@@ -1,0 +1,24 @@
+{
+  "data":{},
+  "schema": {
+    "title": "Advanced Search",
+    "description": "Search for stuff",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "title": "Search"
+        },
+        "filetype": {
+          "type": "select",
+          "title": "File type",
+          "multiple": true,
+          "size": 3,
+          "enum": ["All", "SLM", "Build", "Material", "test1"]
+        }
+      }
+    }
+  }
+}
