@@ -89,18 +89,17 @@ def get_folder_path_from_id(id):
 		db.commit()
 
 
-<<<<<<< HEAD
-def save_file(fileId,ext, fileInfo):
-	res = delete_file(fileId)	
-	json_arr = json.loads(fileInfo) 
-	db = get_database()
-	cur = db.cursor()
-	for key in json_arr:
-		keyid = get_type(key)
-		sql = ('INSERT INTO fileinformation VALUES (%s, %s,%s)')
-		cur.execute(sql, [fileId,keyid,json_arr[key]])
-	cur.close()
-	db.commit()
+def store_fileinformation(fileId,ext, fileInfo):
+    res = delete_file(fileId)
+    json_arr = json.loads(fileInfo) 
+    db = get_database()
+    cur = db.cursor()
+    for key in json_arr:
+        keyid = get_type(key)
+        sql = ('INSERT INTO fileinformation VALUES (%s, %s,%s)')
+        cur.execute(sql, [fileId,keyid,json_arr[key]])
+    cur.close()
+    db.commit()
 
 def delete_file(fileId):
     db = get_database()
@@ -113,8 +112,6 @@ def delete_file(fileId):
     db.commit()
     return('records deleted')
 
-def get_type(name):
-=======
 def create_folder(name, path, parent):
 	try:
 		db = get_database()
@@ -129,10 +126,9 @@ def create_folder(name, path, parent):
 		cur.close()
 		db.commit()
 	
+	 
 	
-def store_fileinformation(fileId, fileInfo):	
-	resp_dict = json.loads(fileInfo)
->>>>>>> c0fa1e5c7213f1be6def86d018f7335694af8e74
+def get_type(name):	
     db = get_database()
     cur = db.cursor()
     cur.execute("SELECT t.name,t.id FROM types t WHERE t.name = %s",  [name])
@@ -150,7 +146,6 @@ def store_fileinformation(fileId, fileInfo):
     for row in cur.fetchall():
         return (row[0])	
 
-<<<<<<< HEAD
            
 def get_data(fileId):
     db = get_database()
@@ -167,7 +162,6 @@ def get_data(fileId):
     res = children.strip('"') 
     return 	res
 
-=======
 def get_file_path(fileId):
 		db = get_database()
 		cur = db.cursor()
@@ -175,7 +169,6 @@ def get_file_path(fileId):
 		row = cur.fetchone()
 		cur.close()
 		return row[0],row[1], row[2]
->>>>>>> c0fa1e5c7213f1be6def86d018f7335694af8e74
 
 def get_fileExt(fileId):
     db = get_database()
@@ -188,9 +181,7 @@ def get_fileExt(fileId):
     for row in cur.fetchall():
     	return(row[0])
     cur.close()
-<<<<<<< HEAD
     db.commit()
-=======
 
 #### END OF FILE SYSTEM
 
@@ -233,4 +224,3 @@ def get_account_details(id):
 	finally:
 		cur.close()
 		db.close()
->>>>>>> c0fa1e5c7213f1be6def86d018f7335694af8e74
