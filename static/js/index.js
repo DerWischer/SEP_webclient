@@ -411,8 +411,7 @@ $(document).ready(function() {
 		var object={};
 		$.each(data,function(key,value) {
 		  object[value.name] = value.value;
-		  console.log(value.name, value.value);
-		})
+		});
 		$.ajax({
 			url:"fileinformation",
 			data:{"fileId":$("#contextMenu").attr("data-id"),"fileInfo":JSON.stringify(object)},
