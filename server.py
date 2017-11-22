@@ -160,11 +160,9 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
         self.set_header("Cache-control", "no-cache")
 
     @tornado.web.authenticated
-    def get(self, path):        
-        print("AuthStaticFileHandler -> " + path)
+    def get(self, path):                
         if len(path) == 0:
-            path="index"
-            print("\tEmpty path. Default -> " + path)                  
+            path="index"            
         super(AuthStaticFileHandler, self).get(path + ".html")
 
 # Create and Run app ----------------------------------------------------------
