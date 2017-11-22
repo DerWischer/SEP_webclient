@@ -81,6 +81,8 @@ class FileUpdateInformationHandler(BaseHandler):
         fileInfo= self.get_argument("fileInfo")
         self.write(database_handler.update_file(fileId,".default",fileInfo))
 
+
+
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
@@ -186,8 +188,14 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
         super(AuthStaticFileHandler, self).get(path + ".html")
 
 class AdvancedSearchHandler(BaseHandler):
-    def post(self):
-        self.get_argument('data')
+    @tornado.web.authenticated
+    def get(self):
+
+        jsonfile = 'search.json'
+
+        decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
+        print(decoded_json)
+        
         # data is a JSON object containing an array of (Type ID, Expression) tuples. 
             # e.g. (01, "ProjectA") where 01 is Type 'Project name', 
             # e.g. (02, "CustomerFoo") where 02 us Type 'Customer name'
@@ -197,7 +205,7 @@ class AdvancedSearchHandler(BaseHandler):
             # If no results: best match strategy if no entries are found
             
         # Return a list of files or folders that match the query
-        self.write("Search not yet implemented")
+        self.write(decoded_json)
 
 # Create and Run app ----------------------------------------------------------
 def make_app():
@@ -208,7 +216,8 @@ def make_app():
         compress_response=True,
         cookie_secret="asecretmessage",
         login_url="/login",
-        handlers=[            
+        handlers=[        
+            (r"/search", AdvancedSearchHandler),    
             (r"/login", LoginHandler),
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
@@ -223,7 +232,7 @@ def make_app():
             (r"/upload", UploadHandler),
             (r"/download/(.*)", DownloadHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
-            (r"/(.*)", AuthStaticFileHandler, {"path": os.path.join(ROOT, "static")}),
+            (r"/(.*)", AuthStaticFileHandler, {"path": os.path.join(ROOT, "static")})
         ])
 
 # Helper methods --------------------------------------------------------------

@@ -141,6 +141,11 @@ function handle_upload() {
 	request.send(data);
 }
 $(document).ready(function() {
+
+	$("#search-btn").click(function() {
+		$("#searchModal").modal("show");
+	});
+
 	$(document).click(function() {
 		HideDropdownElement();
 	});
@@ -469,6 +474,21 @@ $(document).ready(function() {
 			},
 			error:function() {
 				alert("It is not possible to attach information here");
+			}
+		});
+	});
+	$("#search-btn").on("click", function() {
+		$("#searchModal").empty();			
+		$.ajax({
+			url:"search",
+			data:{01: "projecttest"},
+			method:"post",
+			dataType:"JSON",
+			success:function() {
+				$("#searchModal").alpaca(data);
+			},
+			error:function() {
+				alert("Extremely Hard Fail");
 			}
 		});
 	});
