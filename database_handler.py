@@ -144,16 +144,16 @@ def get_type_id(name):
 
            
 def get_data(fileId):
-    try:
+	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("""SELECT fileinformation.id, fileinformation.value, types.name 
+		cur.execute("""SELECT types.name, fileinformation.value
 		FROM fileinformation LEFT JOIN types on types.id = fileinformation.type WHERE 
-		fileinformation.id = %s""",  [fileId])
-		json = {}
+		fileinformation.fileid = %s""",  [fileId])
+		json_dict = {}
 		for row in cur.fetchall():
-    		json[row[0]] = row[1]
-		return json.dumps(json)
+			json_dict[row[0]] = row[1]
+		return json.dumps(json_dict)
 	except Exception as ex:
 		print (ex)
 		return "{}"
