@@ -72,9 +72,9 @@ class FileInformationHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         fileId = self.get_argument("fileId")
-        fileInfo= self.get_argument("fileInfo")
+        fileInfo= self.get_argument("fileInfo")        
         print(fileInfo)
-        self.write(database_handler.save_file(fileId, fileInfo))
+        self.write(database_handler.store_fileinformation(fileId, fileInfo))
 
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
@@ -164,6 +164,20 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
         if len(path) == 0:
             path="index"            
         super(AuthStaticFileHandler, self).get(path + ".html")
+
+class AdvancedSearchHandler(BaseHandler):
+    def post(self):
+        self.get_argument('data')
+        # data is a JSON object containing an array of (Type ID, Expression) tuples. 
+            # e.g. (01, "ProjectA") where 01 is Type 'Project name', 
+            # e.g. (02, "CustomerFoo") where 02 us Type 'Customer name'
+        
+        # Query the database for those tuples 
+            # Simply try to match all tuples
+            # If no results: best match strategy if no entries are found
+            
+        # Return a list of files or folders that match the query
+        self.write("Search not yet implemented")
 
 # Create and Run app ----------------------------------------------------------
 def make_app():

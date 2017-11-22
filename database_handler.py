@@ -104,8 +104,8 @@ def create_folder(name, path, parent):
 		db.commit()
 	
 	
-def save_file(fileId, fileInfo):
-    resp_dict = json.loads(fileInfo)
+def store_fileinformation(fileId, fileInfo):	
+	resp_dict = json.loads(fileInfo)
     db = get_database()
     cur = db.cursor()
     try:
