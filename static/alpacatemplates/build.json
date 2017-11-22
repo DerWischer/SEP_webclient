@@ -1,0 +1,52 @@
+{
+    "data":{},
+    "schema":{
+        "type":"object",
+        "properties":{
+        "name":{
+            "title":"Build name",
+            "description":"Enter file name.",
+            "type":"string",
+            "required":true
+        },
+        "projectname":{
+            "title":"Project Name",
+            "description":"Enter project name.",
+            "type":"string"
+        },
+        "numberofpart":{
+            "title":"Number of parts",
+            "description":"Enter number of parts.",
+            "type":"string"
+        },
+        "printingparam":{
+            "title":"Printing parameter",
+            "description":"Enter number of printing parameter.",
+            "type":"string"
+        },
+        "comment":{
+            "title":"comment",
+            "description":"Enter preprinting comment.",
+            "type":"string"
+        }
+    }
+},
+    "options":{
+        "form":{
+            "attributes":{
+                "action": "#",
+                "method": "post"
+            },
+            "buttons":{
+               
+            }
+        },
+        "fields":{
+            "name":{
+                "hideInitValidationError" : true
+            }     
+        }
+    },
+    "postRender":{},
+    "view":"bootstrap-edit-horizontal"
+}

@@ -1,0 +1,260 @@
+
+{
+    "data":{},
+    "schema":{
+        "type":"object",
+        "properties":{
+        "name":{
+            "title":"SLM name",
+            "description":"Enter file name.",
+            "type":"string",
+            "required":true
+        },
+        "printingstarttime":{
+            "title":"Printing start time",
+            "description":"Enter end time.",
+            "type":"string",
+            "required":true
+        },
+        "printingendtime":{
+            "title":"Printing end time",
+            "description":"Enter end time.",
+            "type":"string",
+            "required":true
+        },
+        "printingoperator":{
+            "title":"Printing operator date",
+            "description":"Enter operator time.",
+            "type":"string",
+            "required":true
+        },
+        "machinetype":{
+            "title":"Type of machine",
+            "type":"string",
+            "enum":[
+                "SLM 125",
+                "SLM 280"
+            ]
+        },
+        "powderweightatstart":{
+            "title":"Powder weight at start",
+            "description":"Enter powder weight at start.",
+            "type":"string"
+        },
+        "powderweightatend":{
+            "title":"Powder weight at end",
+            "description":"Enter powder weight at end.",
+            "type":"string"
+        }, 
+        "powderwasteweight":{
+            "title":"Powder waste weight",
+            "description":"Enter powder waste weight.",
+            "type":"string"
+        }, 
+        "powderused":{
+            "title":"Powder used",
+            "description":"Enter powder used.",
+            "type":"string"
+        }, 
+        "buildplatformmaterial":{
+            "title":"Build platform material",
+            "description":"Enter build platform material.",
+            "type":"string"
+        }, 
+        "buildplatformweight":{
+            "title":"Build platform weight",
+            "description":"Enter build platform weight.",
+            "type":"string"
+        }, 
+        "printtime":{
+            "title":"Calculated print time",
+            "description":"Enter calculated print time.",
+            "type":"string"
+        }, 
+        "powdercondition":{
+            "title":"Powder condition",
+            "type":"string",
+            "enum":[
+                "New",
+                "Reused",
+                "Mixed"
+            ]
+        },
+        "numberoflayers":{
+            "title":"Number of layers",
+            "description":"Enter number of layers.",
+            "type":"string"
+        }, 
+        "dbcfactor":{
+            "title":"DBC factor",
+            "description":"Enter number of layers.",
+            "type":"string"
+        }, 
+        "minexposuretime":{
+            "title":"Min exposure time",
+            "description":"Enter number of layers.",
+            "type":"string"
+        },
+        "comments":{
+            "title":"Printing comments",
+            "description":"Enter printing comments.",
+            "type":"string"
+        },
+        "supportremoval":{
+            "title":"Support Removal",
+            "type":"string",
+            "enum":[
+                "0",
+                "1"
+            ]
+        },
+        "wedm":{
+            "title":"Wedm",
+            "type":"string",
+            "enum":[
+                "0",
+                "1"
+            ]
+        },
+        "wedemcomment":{
+            "title":"Wedemcomment",
+            "description":"Add wedem comments.",
+            "type":"string"
+        },
+        "printedimage":{
+            "title":"Printed image",
+            "description":"Upload the printed image.",
+            "type":"string",
+            "format":"uri"
+        },
+        "balsting":{
+            "title":"Balsting",
+            "type":"string",
+            "enum":[
+                "0",
+                "1"
+            ]
+        },
+        "blastingtype":{
+            "title":"Blastingtype",
+            "description":"Add blasting type.",
+            "type":"string"
+        },
+        "blastingcomment":{
+            "title":"Blasting comment",
+            "description":"Add blasting comment.",
+            "type":"string"
+        },
+        "stresstemp":{
+            "title":"Stress temp",
+            "description":"Add stress temp.",
+            "type":"string"
+        },
+        "stresstime":{
+            "title":"Stress time",
+            "description":"Add stress time.",
+            "type":"string"
+        },
+        "stressshieldinggas":{
+            "title":"Stress shielding gas",
+            "type":"string",
+            "enum":[
+                "0",
+                "1"
+            ]
+        },
+        "stresscomment":{
+            "title":"Stress comment",
+            "description":"Add stress comment.",
+            "type":"string"
+        },
+        "hardningtime":{
+            "title":"Hardning time",
+            "description":"Add hardning time.",
+            "type":"string"
+        },
+        "hardeningcomment":{
+            "title":"Hardning comment",
+            "description":"Add hardning comment.",
+            "type":"string"
+        },
+        "temperingtemp":{
+            "title":"Tempering temp",
+            "description":"Add tempering temp.",
+            "type":"string"
+        },
+        "temperingtime":{
+            "title":"Tempering time",
+            "description":"Add tempering time.",
+            "type":"string"
+        },
+        "temperingcycle":{
+            "title":"Tempering cycle",
+            "description":"Add tempering cycle.",
+            "type":"string"
+        },
+        "temperingcomment":{
+            "title":"Tempering comment",
+            "description":"Add tempering comment.",
+            "type":"string"
+        },
+        "solutiontime":{
+            "title":"Solution time",
+            "description":"Add solution time.",
+            "type":"string"
+        },
+        "solutiontemp":{
+            "title":"Solution temp",
+            "description":"Add solution temp.",
+            "type":"string"
+        },
+        "solutioncomment":{
+            "title":"Solution comment",
+            "description":"Add solution comment.",
+            "type":"string"
+        },
+        "agingtemp":{
+            "title":"Aging temp",
+            "description":"Add aging temp.",
+            "type":"string"
+        },
+        "agingtime":{
+            "title":"Aging time",
+            "description":"Add aging time.",
+            "type":"string"
+        },
+        "agingcycle":{
+            "title":"Aging cycle",
+            "description":"Add aging cycle.",
+            "type":"string"
+        },
+        "agingcomment":{
+            "title":"Aging comment",
+            "description":"Add aging comment.",
+            "type":"string"
+        }
+    }
+},
+    "options":{
+        "form":{
+            "attributes":{
+                "action": "#",
+                "method": "post"
+            },
+            "buttons":{
+               
+            }
+        },
+        "fields":{
+            "name":{
+                "hideInitValidationError" : true
+            },
+            "printedimage":{
+                "type":"file",
+                "styled": true
+            }      
+        }
+    },
+    "postRender":{},
+    "view":"bootstrap-edit-horizontal"
+}

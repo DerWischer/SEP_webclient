@@ -11,41 +11,37 @@
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" href="/static/thirdParty/font-awesome-4.7.0/css/font-awesome.min.css" />		
-	  	<title>Swerea</title>
-	  	<!-- Bootstrap -->
-	  	<link rel="stylesheet" href="/static/thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-	  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	  	<script src="/static/thirdParty/jquery/jquery-3.2.1.min.js">
-	  	</script>
-	  	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	  	<script src="/static/thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js">
-	  	</script>
+	  <link rel="stylesheet" href="thirdParty/font-awesome-4.7.0/css/font-awesome.min.css" />
+	  <title>Swerea</title>
+	  <!-- Bootstrap -->
+	  <link rel="stylesheet" href="thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	  <script src="thirdParty/jquery/jquery-3.2.1.min.js">
+	  </script>
+	  <!-- Include all compiled plugins (below), or include individual files as needed -->
+	  <script src="thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js">
+	  </script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<script src="/static/thirdParty/moment-with-locales/moment-with-locales.min.js"></script>
-		<script src="/static/js/filesystem.js"></script>
-		<script src="/static/translate/swedish.js"></script>
-		<script src="/static/translate/translator.js"></script>
-		<script src="/static/js/index.js"></script>
-		<link rel="stylesheet" href="/static/css/index.css"/>
-		<link rel="stylesheet" href="/static/thirdParty/flag-icon-css-master/css/flag-icon.min.css">
-		
-		<!-- handlebars for alpaca-->			
-		<script src="/static/thirdParty/handlebars/handlebars-v4.0.11.js"></script>		
+		<script src="thirdParty/moment-with-locales/moment-with-locales.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script src="js/filesystem.js"></script>
+		<script src="translate/translator.js"></script>
+		<script src="js/peter.js"></script>
+		<script src="js/reem.js"></script>
+		<script src="js/calle.js"></script>
+		<script src="js/joshua.js"></script>
+		<script src="js/emil.js"></script>
+		<link rel="stylesheet" href="css/index.css"/>
+		<link rel="stylesheet" href="thirdParty\flag-icon-css-master\css\flag-icon.min.css">
 		<title>Swerea</title>
-		<!-- alpaca -->
-		<link type="text/css" href="http://code.cloudcms.com/alpaca/1.5.23/bootstrap/alpaca.min.css" rel="stylesheet" />
-		<script type="text/javascript" src="http://code.cloudcms.com/alpaca/1.5.23/bootstrap/alpaca.min.js"></script>
-		
-		
-		<title>Swerea</title>		
 	</head>
 	<body class="no-scroll">
 		<section class="custom-nav">
 			<section class="container-fluid">
 				<section class="row">
 					<section class="col-md-3 col-sm-4">
-						<img class="custom-logo" src="/static/img/ivf_rgb_transparent.png"/>
+						<img class="custom-logo" src="img/ivf_rgb_transparent.png"/>
 					</section>
 					<section class="col-md-6 col-sm-8">
 						 <div class="input-group">
@@ -54,7 +50,12 @@
 							<button id="clear-btn" class="btn btn-default btn-lg" type="button" disabled>
 								<i class="fa fa-times"></i>
 							</button>
-
+							<button id="english-btn" class="btn btn-default btn-lg" type="button">
+								<span class="flag-icon flag-icon-gb"></span>
+							</button>
+							<button id="swedish-btn" class="btn btn-info btn-lg" type="button">
+								<span class="flag-icon flag-icon-se"></span>
+							</button>
 						  </span>
 						</div>
 					</section>
@@ -69,15 +70,10 @@
 										<div class="col-md-12">
 											<form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
 												<div class="form-group">
-													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate">Change Account</span></button>
+													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate">Change account</span></button>
 												</div>
 												<div class="form-group">
 													<button type="submit" id="btnLogout" class="btn btn-danger btn-block"><span class="translate">Logout</span></button>
-												</div>
-												<div class="form-group">
-													<button id="swedish-btn" class="btn btn-info btn-lg" type="button">
-														<span class="flag-icon flag-icon-se"></span>
-													</button>
 												</div>
 											</form>
 										</div>
@@ -170,16 +166,10 @@
 			</section>
 		</section>
 		</section>
-		<ul id="contextMenu" class="dropdown-menu hidden">
-			<li><a class="translate" id="traceDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#traceModal">
-				<span class="translate">Trace</span></a>
-			</li>
-			<li><a class="translate" id="attachedInfoDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#attachedInfoModal">
-				<span class="translate">Attached Information</span></a>
-			</li>
-
+		<ul id="contextMenu" class="dropdown-menu" role="menu">
+			<li><a class="translate" id="traceDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#traceModal"><span class="translate">Trace</span></a></li>
+			<li><a class="translate" id="changeAlert" tabindex="-1" href="#"><span class="translate">Notify Me Of Changes</span></a></li>
 			<li class="divider"></li>
-			<li><a class="translate" id="changeAlert" tabindex="-1" href="#"><span class="translate">Notify Me Of Changes</span></a></li>			
 			<li><a class="translate" tabindex="-1" href="#">Something else maybe?</a></li>
 		</ul>
 		<section class="modal fade" id="traceModal" role="dialog">
@@ -191,74 +181,38 @@
 					</section>
 					<section class="modal-body">
 						  <!-- tracing part -->
-						<div id="TraceMenu">
-						<div class="list-group panel">
-							<a href="#demo10" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> Company <i class="fa fa-caret-down"></i></a>
-							<div class="collapse scroll" id="demo10">
-							<div id="fileview11" > </div>
-							</div>
+ 	    <div id="TraceMenu">
+ 	        <div class="list-group panel">
 
-							<a href="#demo6" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> CAD Files <i class="fa fa-caret-down"></i></a>
-							<div class="collapse scroll" id="demo6">
-							<div id="fileview6" > </div>
-							</div>
-							
-							<a href="#demo11" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> STL Files <i class="fa fa-caret-down"></i></a>
-							<div class="collapse" id="demo11">
-							<div id="fileview12" > </div>
-							</div>
+			    <a href="#demo10" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> Company <i class="fa fa-caret-down"></i></a>
+ 	            <div class="collapse scroll" id="demo10">
+ 	               <div id="fileview11" > </div>
+ 	            </div>
 
-							<a href="#demo7" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> Build Info <i class="fa fa-caret-down"></i></a>
-							<div class="collapse" id="demo7">			   
-							</div>											
-						</div>
-						</div>						  
+ 	            <a href="#demo6" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> CAD Files <i class="fa fa-caret-down"></i></a>
+ 	            <div class="collapse scroll" id="demo6">
+ 	               <div id="fileview6" > </div>
+ 	            </div>
+				
+				<a href="#demo11" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> STL Files <i class="fa fa-caret-down"></i></a>
+ 	            <div class="collapse" id="demo11">
+ 	               <div id="fileview12" > </div>
+ 	            </div>
+
+ 	            <a href="#demo7" class="list-group-item list-group-item-success paneltrace" data-toggle="collapse" data-parent="#TraceMenu"> Build Info <i class="fa fa-caret-down"></i></a>
+ 	            <div class="collapse" id="demo7">			   
+ 	            </div>
+ 
+				
+			</div>
+ 	    </div>
+						  
+						  
+						  
+						  
 					</section>
 					<section class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="translate">Close</span></button>
-					</section>
-				</section>
-			</section>
-		</section>
-
-		<section class="modal fade" id="attachedInfoModal" role="dialog">
-			<section class="modal-dialog">
-				<section class="modal-content">
-					<section class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"><span class="translate">Attached Information</span></h4>
-					</section>
-					<section id="attachedInfoModalBody" class="modal-body">							  							
-						<p>Here you will see the attached information!</p>			  
-					</section>
-					<section class="modal-footer">
-						<button type="button" class="btn btn-default" id="info_save"><span class="translate">Save</span></button>
-							
-						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="translate">Close</span></button>
-					</section>
-				</section>
-			</section>
-		</section>
-	 
-		<section class="modal fade" id="fileUpload" role="dialog">
-			<section class="modal-dialog">
-				<section class="modal-content">
-					<section class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"><span class="translate">File Upload</span></h4>
-					</section>
-					<section id="attachedInfoModalBody" class="modal-body">	
-						<section class="container-fluid">					  							
-							<form action="upload" id="file-upload-form" method="POST" enctype="multipart/form-data">
-								<input id="file-input" type="file" name="file" class="hidden" multiple/>
-								<section class="container-fluid" id="files-list">
-								</section>
-							</form>	  
-						</section>
-					</section>
-					<section class="modal-footer">
-						<input type="button" class="btn btn-info btn-lg pull-left" id="file-upload-btn" value="Upload Files"/>
-						<button type="button" class="btn btn-success btn-lg" id="file-upload"><span class="translate">Upload</span></button>
 					</section>
 				</section>
 			</section>

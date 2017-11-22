@@ -364,7 +364,6 @@ $(document).ready(function() {
 		});
 	});
 
-
 	//Handles menu drop down
 	$('.dropdown-menu').find('form').click(function(e) {
 		e.stopPropagation();
@@ -404,7 +403,21 @@ $(document).ready(function() {
 			}
 		});
 	});
-
+	$("#viewInfoDropdown").on("click", function() {
+		$("#viewInfoModalBody").empty();			
+		$.ajax({
+			url:"viewtemplate",
+			data:{"fileId":$("#contextMenu").attr("data-id")},
+			method:"post",
+			dataType:"JSON",
+			success:function(data) {
+				$("#viewInfoModalBody").alpaca(data);
+			},
+			error:function() {
+				alert("It is not possible to attach information here");
+			}
+		});
+	});
 
 	// send email
 	$("#changeAlert").on("click", function() {
