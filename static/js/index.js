@@ -142,6 +142,33 @@ $(document).ready(function() {
 	$("#search-btn").click(function() {
 		$("#searchModal").modal("show");
 	});
+	$("#advanced-search-btn").click(function() {
+		var searchJSON = {};
+		$(".search-query").each(function() {
+			var type = $(this).find(".select-type").val();
+			var value = $(this).find(".search-expression").val();
+			searchJSON[type]= value;
+		});
+		$.ajax({
+			url:"/search",
+			dataType:"JSON",
+			method:"POST",
+			data:{"matchall":$("#match-all").is(":checked") ? 1 : 0, "json":JSON.stringify(searchJSON)},
+			success:function(data) {
+				if (!data.success) {
+					alert("could not complete search");
+					return;
+				}
+				$("#searchModal").modal("hide");
+				fileObjects = [];
+				$.each(data.fileIds, function(key, value){
+					fileObjects.push(filesystem[value]);
+				});
+				CreateSearchCrumb("[Custom]");
+				displayList(null, fileObjects);
+			}
+		})
+	});
 	$(document).click(function() {
 		HideDropdownElement();
 	});
@@ -257,7 +284,6 @@ $(document).ready(function() {
 		$("#clear-btn").attr("disabled", true);
 	});
 });
-
 function searchFileSystem(m) {
 	var found = [];
 	$.each(filesystem, function(key, value) {
@@ -378,6 +404,29 @@ function findSelectedFiles() {
 		}
 	};
 })(jQuery, window);
+function scan_for_advanced_search_type_conflicts() {
+	selected_types = [];
+	$("#criteria .select-type").each(function() {
+		if (selected_types.indexOf($(this).val()) > -1) {
+			$("#type-warning").removeClass("hidden");
+			return false;
+		}
+		else {
+			$("#type-warning").addClass("hidden");
+			selected_types.push($(this).val());
+		}
+	});
+}
+function count(obj) {
+	//https://stackoverflow.com/questions/6283466/count-key-values-in-json#6283527
+	var count=0;
+	for(var prop in obj) {
+	   if (obj.hasOwnProperty(prop)) {
+		  ++count;
+	   }
+	}
+	return count;
+ }
 $(document).ready(function() {
 	$("#info_save").on("click", function() {
 		var data = $("#attachedInfoModalBody .alpaca-form").serializeArray();
@@ -391,7 +440,11 @@ $(document).ready(function() {
 			method:"post",
 			dataType:"JSON",
 			success:function(data) {
-				alert("save");
+				if (!data.success) {
+					alert("Could not save data");
+					return;
+				}
+				$("#attachedInfoModal").modal("hide");
 			},
 			error:function() {
 				alert("It is not possible to attach information here");
@@ -403,13 +456,38 @@ $(document).ready(function() {
 		e.stopPropagation();
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
-		var dataId = this.getAttribute("data-id");
-		if (setFolder(dataId) == false) {
-			var a = el("a", {href:("/download/" + dataId), target:"_blank"});
-			$("#tableView").append(a);
-			a.click();
-			$("#tableView").remove(a);
+		if ($(this).hasClass("selected")) {
+			if (setFolder(fileId) == false) {
+				var a = el("a", {href:("/download/" + fileId), target:"_blank"});
+				$("#tableView").append(a);
+				a.click();
+				$("#tableView").remove(a);
+			}
+			return;
 		}
+		$(this).addClass("selected");
+		var fileId = this.getAttribute("data-id");
+		$.ajax({
+			method:"GET",
+			url:"/fileinformation",
+			data:{"fileId":fileId},
+			dataType:"JSON",
+			success:function(data) {
+				if (!data.success) {
+					alert("nerror getting file informatio");
+					return;
+				}
+				$("#info-list").empty();
+				$.each(data.data, function(key, value) {
+					var li = el("li", {class:"file-info-value"});
+					var key = el("b", {html:key, style:"padding-right:5px"});
+					var value = document.createTextNode(value);
+					li.appendChild(key);
+					li.appendChild(value);
+					$("#info-list").append(li);
+				});
+			}
+		});
     });
     $("#tableView").on("contextmenu", ".row", function(e) {
         $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden").attr("data-id", $(e.target).closest(".row").attr("data-id"));
@@ -437,14 +515,57 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$("#dropDownload").on("click", function() {
+		var dataId = $("#contextMenu").attr("data-id");
+		if (setFolder(dataId) == false) {
+		 	// is file
+			console.log("downlaoding");
+		 	var a = el("a", {href:("/download/" + dataId), target:"_blank"});
+		 	$("#tableView").append(a);
+		 	a.click();
+		 	$("#tableView").remove(a);
+		}
+	});
+	$("#addNewType").on("click", function() {
+		var numOfCriteria = $("#criteria .search-query").length;
+		CRITERIA = count(window.types);
+		if (numOfCriteria == CRITERIA-1) {
+			$("#addNewType").html("<span class='translate'>No more unique types!</span>").attr("disabled", true).removeClass("btn-success").addClass("btn-info");
+		}
+		var row = el("section", {class:"row search-query",style:"margin-top:5px;"});
+		var col = el("section",{class:"col-md-4"});
+		var select = el("select", {class:"form-control select-type"});
+		$.each(window.types, function(key, value) {
+			var option = el("option", {html:value, value:key});
+			select.appendChild(option);
+		});
+		col.appendChild(select);
+		row.appendChild(col);
+		var col = el("section",{class:"col-md-8"});
+		var input = el("input", {class:"form-control search-expression", "placeholder":"value", })
+		col.appendChild(input);
+		row.appendChild(col);
+		$("#criteria").append(row);
+		$(input).focus();
+		scan_for_advanced_search_type_conflicts();
+	});
+	$("#criteria").on("change", ".select-type", function() {
+		scan_for_advanced_search_type_conflicts()
+	});
 	$("#search-btn").on("click", function() {
-		$("#searchInfo").empty();			
+		$("#criteria").empty();			
 		$.ajax({
-			url:"search",
+			url:"/types",
 			method:"GET",
 			dataType:"JSON",
 			success:function(data) {
-				$("#searchInfo").alpaca(data);
+				if (!data.success) {
+					alert("Could not get types");
+					return;
+				}
+				window.types = data.types;
+				$("#addNewType").html("<span class='translate'>Add New Type</span>").attr("disabled", false).addClass("btn-success").removeClass("btn-info");				
+				$("#addNewType").click();
 			},
 			error:function() {
 				alert("Extremely Hard Fail");

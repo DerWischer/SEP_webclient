@@ -116,7 +116,7 @@
 			<section class="col-md-9">
 				<section id="tableViewport" style="margin-top:10px;">
 					<section class="container-fluid">
-					<section class="row" style="border-bottom:1px solid #000">
+					<section class="row" style="border-bottom:1px solid rgb(0, 0, 0)">
 						<section class="col-lg-1 col-md-1">
 							
 						</section>
@@ -148,6 +148,9 @@
 			</li>
 			<li><a class="translate" id="attachedInfoDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#attachedInfoModal">
 				<span class="translate">Attached Information</span></a>
+			</li>
+			<li><a class="translate" id="dropDownload" tabindex="-1" href="#" data-toggle="modal">
+				<span class="translate">Download</span></a>
 			</li>
 
 			<li class="divider"></li>
@@ -242,15 +245,32 @@
 				<section class="modal-content">
 					<section class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"><span class="translate">Advanced Search</span></h4>
 					</section>
 					<section id="searchInfo" class="modal-body">
-						<div id="form1"></div>
-						<script type="text/javascript">
-                    
-						</script>
+						<section class="container-fluid">
+							<section class="row">
+								<section class="col-md-4">
+									<h4>Type</h4>
+								</section>			
+								<section class="col-md-8">
+									<h4>Search Term</h4>	
+								</section>				
+							</section>
+							<section id="criteria">
+								
+							</section>
+							<input type="checkbox" id="match-all" checked/>Match All Search Terms
+							<section id="type-warning" class="panel hidden" style="margin-top:5px">
+								<section class="panel-body bg-danger">
+									<span class="translate">You can only have one criteria for each type</span>
+								</section>
+							</section>
+						</section>
 					</section>
 					<section class="modal-footer">
-						<button type="button" class="btn btn-default" id="modalSearch"><span class="translate">search</span></button>
+						<button type="button" class="btn btn-success pull-left" id="addNewType"><span class="translate">Add New Type</span></button>
+						<button type="button" class="btn btn-default" id="advanced-search-btn"><span class="translate">Search</span></button>
 					</section>
 				</section>
 			</section>
