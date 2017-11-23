@@ -1,19 +1,28 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+
 .custom-logo {
     width:100%;
 }
 
 .main-section {
-    padding-top:15px;
-    
+    padding: 15px;
+    padding-left:45px;
+    padding-right:45px;
+    background-color:#fdfdfd;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0;
+    margin: 0; 
 }
+
 
 .full-height {
   height:100%;
