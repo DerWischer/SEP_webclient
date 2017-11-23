@@ -478,14 +478,13 @@ $(document).ready(function() {
 		});
 	});
 	$("#search-btn").on("click", function() {
-		$("#searchModal").empty();			
+		$("#searchInfo").empty();			
 		$.ajax({
 			url:"search",
-			data:{01: "projecttest"},
-			method:"post",
+			method:"GET",
 			dataType:"JSON",
-			success:function() {
-				$("#searchModal").alpaca(data);
+			success:function(data) {
+				$("#searchInfo").alpaca(data);
 			},
 			error:function() {
 				alert("Extremely Hard Fail");

@@ -190,11 +190,12 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
 class AdvancedSearchHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-
         jsonfile = 'search.json'
-
-        decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
-        print(decoded_json)
+        with open(os.path.join("static", "alpacatemplates", "search.json"), "r") as file:
+            self.write(file.read())
+        self.flush();
+    def post(self):
+        self.finish(json.dumps({"success":False}))
         
         # data is a JSON object containing an array of (Type ID, Expression) tuples. 
             # e.g. (01, "ProjectA") where 01 is Type 'Project name', 
@@ -205,7 +206,6 @@ class AdvancedSearchHandler(BaseHandler):
             # If no results: best match strategy if no entries are found
             
         # Return a list of files or folders that match the query
-        self.write(decoded_json)
 
 # Create and Run app ----------------------------------------------------------
 def make_app():
