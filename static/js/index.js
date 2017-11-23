@@ -98,6 +98,7 @@ function handle_upload() {
 	var fileInput = $('#file-input');
 	data = new FormData();
 	request = new XMLHttpRequest();
+	data.append('upload-type', "powder")
 	data.append('ajax', true);
 	/*var notify = $.notify('<strong>Uploading</strong>', {
 		type: 'success',
@@ -457,7 +458,7 @@ $(document).ready(function() {
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		if ($(this).hasClass("selected")) {
-			alert("Hello");
+			var fileId = this.getAttribute("data-id");
 			if (setFolder(fileId) == false) {
 				var a = el("a", {href:("/download/" + fileId), target:"_blank"});
 				$("#tableView").append(a);
