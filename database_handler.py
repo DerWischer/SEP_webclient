@@ -119,9 +119,7 @@ def create_folder(name, path, parent):
 	finally:
 		cur.close()
 		db.commit()
-	
-	 
-	
+		
 def get_type_id(name):	
 	'''Returns the id of the type, otherwise type is created and the generated id is returned'''
 	try:
@@ -141,7 +139,6 @@ def get_type_id(name):
 	finally:
 		cur.close()
 		db.commit()
-
            
 def get_data(fileId):
 	try:
