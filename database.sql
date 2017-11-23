@@ -11,3 +11,5 @@ CREATE TABLE if not exists form_types (id varchar(36) PRIMARY KEY, name varchar(
 CREATE TABLE if not exists form_types_to_attributes (id varchar(36), formid varchar(36), typeid varchar(36), PRIMARY KEY (formid, typeid));
 INSERT IGNORE INTO users VALUES ("1", "admin", "1111");
 INSERT IGNORE INTO filesystem VALUES ("ROOT", "uploads", "uploads", Null, Null, Null, Null, Null, True, Null, "folder");
+INSERT IGNORE INTO filesystem VALUES ("POWDERS", "powders", "uploads/powders", Null, "ROOT", Null, Null, Null, True, Null, "folder");
+INSERT IGNORE INTO filesystem VALUES ("PROJECTS", "projects", "uploads/projects", Null, "ROOT", Null, Null, Null, True, Null, "folder");

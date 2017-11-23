@@ -5,7 +5,6 @@ import uuid
 
 def get_db_user():
 	return dev_config.DB_USER
-
 def get_db_password():
 	return dev_config.DB_PASSWORD
 
@@ -89,22 +88,6 @@ def get_folder_path_from_id(id):
 		cur.close()
 		db.commit()
 
-def get_types():
-	try:
-		db = get_database() 
-		cur = db.cursor() 
-		cur.execute("SELECT id, name FROM types")
-		data = {}
-		for row in cur.fetchall():
-			data[row[0]] = row[1]
-		return data
-	except Exception as ex:
-		print (ex)
-		return None
-	finally:
-		cur.close()
-		db.commit()
-
 
 def store_fileinformation(fileId, fileInfo):
 	try:
@@ -114,6 +97,20 @@ def store_fileinformation(fileId, fileInfo):
 		for key in json_arr:
 			sql = ('INSERT fileinformation (id, fileid, type, value) VALUES (UUID(),%s, %s,%s) ON DUPLICATE KEY UPDATE value=%s')
 			cur.execute(sql, [fileId,key, json_arr[key], json_arr[key]])
+		return True
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.commit()
+
+def create_folder(name, path, parent):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		id = str(uuid.uuid4())
+		cur.execute("INSERT INTO filesystem (id, filename, path, parent, type) VALUES (%s, %s, %s, %s, 'folder')", [id, name, path, parent])
 		return True
 	except Exception as ex:
 		print (ex)
@@ -135,20 +132,6 @@ def get_file_information(fileId):
 	except Exception as ex:
 		print (ex)
 		return None
-	finally:
-		cur.close()
-		db.commit()
-
-def create_folder(name, path, parent):
-	try:
-		db = get_database()
-		cur = db.cursor()
-		id = str(uuid.uuid4())
-		cur.execute("INSERT INTO filesystem (id, filename, path, parent, type) VALUES (%s, %s, %s, %s, 'folder')", [id, name, path, parent])
-		return True
-	except Exception as ex:
-		print (ex)
-		return False
 	finally:
 		cur.close()
 		db.commit()
@@ -220,6 +203,48 @@ def get_data(fileId):
 		cur.close()
 		db.close()
 
+def get_types():
+	try:
+		db = get_database() 
+		cur = db.cursor() 
+		cur.execute("SELECT id, name FROM types")
+		data = {}
+		for row in cur.fetchall():
+			data[row[0]] = row[1]
+		return data
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
+def advanced_search(searchParams, matchall):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		sql = "SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
+		for i in range(len(searchParams)-1):
+			if matchall:
+				sql += " AND (fileinformation.type = %s AND fileinformation.value = %s)"
+			else:
+				sql += " OR (fileinformation.type = %s AND fileinformation.value = %s)"	
+		values = []
+		for key in searchParams.keys():
+			values.append(key)
+			values.append(searchParams[key])
+		cur.execute(sql, values);
+		rows = []
+		for row in cur.fetchall():
+			rows.append(row)
+		return rows
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
 def generate_alpaca(fileid, ext):
 	data = get_data(fileid)
 	schema = {"type":"object"}
@@ -246,79 +271,55 @@ def generate_alpaca(fileid, ext):
 		cur.close()
 		db.close()
 
+def createjson(fileid):
+	json_dict = {}
+	json_dict2 = {}
+	for row in cur.fetchall():
+		json_dict[row[0]] = row[1]
+		json_dict1 = {}
+		json_dict1['Title'] =  row[0]
+		json_dict1['Type'] = 'String'
+		json_dict2[row[0]].append(json.dumps(json_dict1))
+		print(json.dumps(json_dict1))
+	json_prop={}
+	json_prop.append(json.dumps(json_dict2))
+	#print(json.dumps(json_prop))	
+	return json.dumps(json_dict)
+
 def get_file_path(fileId):
-	try:
-		db = get_database()
-		cur = db.cursor()
-		cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
-		row = cur.fetchone()
-		cur.close()
-		return row[0],row[1], row[2]
-	except Exception as ex:
-		print (ex)
-		return None
-	finally:
-		cur.close()
-		db.commit()
+	db = get_database()
+	cur = db.cursor()
+	cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
+	row = cur.fetchone()
+	cur.close()
+	return row[0],row[1], row[2]
 
 def get_fileExt(fileId):
-	try:
-		db = get_database()
-		cur = db.cursor()
-		cur.execute("SELECT f.file_ext FROM   filesystem f where f.id = %s",  [fileId])
-		count = cur.rowcount
-		rows = {}
-		if count == 0:
-			return('error')
-		for row in cur.fetchall():
-			return(row[0])
-	except Exception as ex:
-		print (ex)
-		return None
-	finally:
-		cur.close()
-		db.commit()
-
-def advanced_search(searchParams, matchall):
-	try:
-		db = get_database()
-		cur = db.cursor()
-		sql = "SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
-		for i in range(len(searchParams)-1):
-			if matchall:
-				sql += " AND (fileinformation.type = %s AND fileinformation.value = %s)"
-			else:
-				sql += " OR (fileinformation.type = %s AND fileinformation.value = %s)"	
-		sql += " GROUP BY fileinformation.fileid"
-		values = []
-		for key in searchParams.keys():
-			values.append(key)
-			values.append(searchParams[key])
-		cur.execute(sql, values);
-		rows = []
-		for row in cur.fetchall():
-			rows.append(row)
-		return rows
-	except Exception as ex:
-		print (ex)
-		return None
-	finally:
-		cur.close()
-		db.commit()
+    db = get_database()
+    cur = db.cursor()
+    cur.execute("SELECT f.file_ext FROM   filesystem f where f.id = %s",  [fileId])
+    count = cur.rowcount
+    rows = {}
+    if count == 0:
+        return('error')
+    for row in cur.fetchall():
+    	return(row[0])
+    cur.close()
+    db.commit()
 
 #### END OF FILE SYSTEM
 
 def authenticate_user(code):
-		db = get_database()
-		cur = db.cursor()
-		user = cur.execute("SELECT id, name FROM users WHERE pin = %s", [code])
-		rows = {}
-		for row in cur.fetchall():
-			rows = {
-				"user_id":row[0],
-				"name":row[1]
-			}
-		return rows
+	db = get_database()
+	cur = db.cursor()
+	user = cur.execute("SELECT id, name FROM users WHERE pin = %s", [code])
+	rows = {}
+	for row in cur.fetchall():
+		rows = {
+			"user_id":row[0],
+			"name":row[1]
+		}
+	return rows
 
 def update_account(id, name, pin):
 	try:

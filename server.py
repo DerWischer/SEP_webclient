@@ -124,19 +124,42 @@ class ViewTemplateHandler(BaseHandler):
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
         i=0
+        uploadtype = self.get_argument('upload-type')
         filenames = self.request.arguments['filename']
         parent_folder = self.request.arguments['folder']
         for file in self.request.files['file']:
             extension = os.path.splitext(file['filename'])[1]
             filename = filenames[i].decode("utf-8")
-            i += 1
-            parent_path = database_handler.get_folder_path_from_id(parent_folder)
-            filepath = os.path.join(parent_path, filename)
+            i += 1 # Can i be removed?
+            
+            #parent_path = database_handler.get_folder_path_from_id(parent_folder)
+            #filepath = os.path.join(parent_path, filename)
+            filepath = get_path_for_upload_type(uploadtype, filename)
             with open(filepath, 'wb') as output_file:
                 output_file.write(file['body'])
+            
             entry = filescanner.get_file_stats(parent_folder, filepath, filename)
+            manipulate_file_stats_for_upload_type(uploadtype, entry)
+
             database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
+   
+def get_path_for_upload_type(type, filename):
+        if (type == "powder"):
+            return os.path.join("uploads", "powders", filename)
+        elif (type == "project"):
+            return os.path.join("uploads", "projects", filename)
+        else:
+            return os.path.join("uploads", filename)
+    
+def manipulate_file_stats_for_upload_type(type, stats):
+        if (type == "powder"):
+            stats['ext'] = ".powder"
+            stats['parent'] = "POWDERS"
+        elif (type == "project"):
+            stats['parent'] = "PROJECTS"
+
+            
 
 class NewFolderHandler(tornado.web.RequestHandler):
     def post(self):
@@ -285,6 +308,15 @@ def create_form_type_links():
 if __name__ == "__main__":
     if not os.path.exists("uploads"):
             os.mkdir("uploads")
+    
+    powders_path = os.path.join("uploads", "powders")
+    if not os.path.exists(powders_path):
+            os.mkdir(powders_path)
+    
+    projects_path = os.path.join("uploads", "projects")
+    if not os.path.exists(projects_path):
+            os.mkdir(projects_path)
+
     APP = make_app()
     APP.listen(PORT)
     database_handler.create_database()
