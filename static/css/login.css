@@ -1,7 +1,15 @@
+.custom-logo {
+    width:100%;
+}
+
+.main-section {
+    margin-top:15px;
+}
+
 .form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
