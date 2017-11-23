@@ -3,7 +3,11 @@
 }
 
 .main-section {
-    margin-top:15px;
+    padding-top:15px;
+    background:#000;
+}
+.full-height {
+  height:100%;
 }
 
 .form-signin {

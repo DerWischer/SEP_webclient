@@ -457,6 +457,7 @@ $(document).ready(function() {
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		if ($(this).hasClass("selected")) {
+			alert("Hello");
 			if (setFolder(fileId) == false) {
 				var a = el("a", {href:("/download/" + fileId), target:"_blank"});
 				$("#tableView").append(a);
