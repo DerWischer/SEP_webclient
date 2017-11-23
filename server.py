@@ -96,18 +96,11 @@ class FileTemplateHandler(BaseHandler):
     def post(self):
         fileId = self.get_argument("fileId")
         ext = database_handler.get_fileExt(fileId)
-        jsondata = database_handler.get_data(fileId)
-        jsonfile = 'default.json'
-        for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
-            if ext == '.slm': 
-               jsonfile = 'slm.json'
-            if ext == '.build':  
-               jsonfile = 'build.json' 
-            if ext == '.material':
-               jsonfile = 'material.json' 
-        decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
-        decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
-        self.write(decoded_json)
+        form = database_handler.generate_alpaca(fileId, ext)
+        if form == None:
+            self.finish(json.dumps({"success":False}));
+            return
+        self.finish(json.dumps({"success":True, "form":form}))
 
 class ViewTemplateHandler(BaseHandler):
     @tornado.web.authenticated
@@ -125,7 +118,7 @@ class ViewTemplateHandler(BaseHandler):
                jsonfile = 'material.json'
         decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
         decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
-        self.write(decoded_json)
+        self.finish(json.dumps({"success":True, "data":json.dumps(jsondata)}))
     
 
 class UploadHandler(tornado.web.RequestHandler):
@@ -271,6 +264,19 @@ def resolve_user_mail():
     """Return the email address of the current user"""
     return "dummy@user.com" # TODO Lookup email in database
 
+def create_form_type_links():
+    formid = database_handler.create_form_type(".material")
+    #Insert default attributes for form_types
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "grade")
+    database_handler.create_form_type_to_type_link(formid, "supplier")
+    database_handler.create_form_type_to_type_link(formid, "lot no")
+    database_handler.create_form_type_to_type_link(formid, "amount")
+    database_handler.create_form_type_to_type_link(formid, "chemical composition")
+    database_handler.create_form_type_to_type_link(formid, "physical properties")
+    database_handler.create_form_type_to_type_link(formid, "sieve analysis")
+    print ("Created Default Types")
+    
 #def scan_filesystem(): 
     #for entry in filescanner.scan_recursive(ROOT):
     #    database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
@@ -281,7 +287,8 @@ if __name__ == "__main__":
             os.mkdir("uploads")
     APP = make_app()
     APP.listen(PORT)
-    database_handler.create_database()    
+    database_handler.create_database()
+    create_form_type_links()
     print ("Server started")
     tornado.ioloop.IOLoop.current().start()
     

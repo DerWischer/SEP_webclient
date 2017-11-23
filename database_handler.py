@@ -112,9 +112,8 @@ def store_fileinformation(fileId, fileInfo):
 		db = get_database()
 		cur = db.cursor()
 		for key in json_arr:
-			keyid = get_type_id(key)
 			sql = ('INSERT fileinformation (id, fileid, type, value) VALUES (UUID(),%s, %s,%s) ON DUPLICATE KEY UPDATE value=%s')
-			cur.execute(sql, [fileId,keyid,json_arr[key], json_arr[key]])
+			cur.execute(sql, [fileId,key, json_arr[key], json_arr[key]])
 		return True
 	except Exception as ex:
 		print (ex)
@@ -153,7 +152,36 @@ def create_folder(name, path, parent):
 	finally:
 		cur.close()
 		db.commit()
-		
+
+def create_form_type_to_type_link(formId, type):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		typeid = get_type_id(type)
+		id = str(uuid.uuid4())
+		cur.execute("INSERT INTO form_types_to_attributes (id, formid, typeid) VALUES (%s, %s, %s)", [id, formId, typeid])
+		return id
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.commit()		
+
+def create_form_type(name):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		id = str(uuid.uuid4())
+		cur.execute("INSERT INTO form_types (id, name) VALUES (%s, %s)", [id, name])
+		return id
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.commit()	
+    
 def get_type_id(name):	
 	'''Returns the id of the type, otherwise type is created and the generated id is returned'''
 	try:
@@ -178,16 +206,42 @@ def get_data(fileId):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("""SELECT types.name, fileinformation.value
+		cur.execute("""SELECT types.id, fileinformation.value
 		FROM fileinformation LEFT JOIN types on types.id = fileinformation.type WHERE 
 		fileinformation.fileid = %s""",  [fileId])
 		json_dict = {}
 		for row in cur.fetchall():
 			json_dict[row[0]] = row[1]
-		return json.dumps(json_dict)
+		return json_dict
 	except Exception as ex:
 		print (ex)
 		return "{}"
+	finally:
+		cur.close()
+		db.close()
+
+def generate_alpaca(fileid, ext):
+	data = get_data(fileid)
+	schema = {"type":"object"}
+	properties = {}
+	options = {"form":{}, "fields":{}}
+	postRender= {}
+	view = "bootstrap-edit-horizontal"
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("""SELECT types.id, types.name FROM form_types 
+		LEFT JOIN form_types_to_attributes ON form_types_to_attributes.formid = form_types.id 
+		LEFT JOIN types ON form_types_to_attributes.typeid = types.id 
+		WHERE form_types.name = %s GROUP BY types.id""", [ext])
+		for row in cur.fetchall():
+			properties[row[0]] = {"title":row[1], "description":"", "type":"string"}
+		schema["properties"] = properties
+		form = {"data":data, "schema":schema, "options":options, "postRender":postRender, "view":view}
+		return form
+	except Exception as ex:
+		print (ex)
+		return None
 	finally:
 		cur.close()
 		db.close()

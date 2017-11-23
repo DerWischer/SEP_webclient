@@ -509,7 +509,8 @@ $(document).ready(function() {
 			method:"post",
 			dataType:"JSON",
 			success:function(data) {
-				$("#attachedInfoModalBody").alpaca(data);
+				console.log(data.form);
+				$("#attachedInfoModalBody").alpaca(data.form);
 			},
 			error:function() {
 				alert("It is not possible to attach information here");
