@@ -68,7 +68,6 @@ function refreshFilesystem() {
 			//the file system and finding the element with no parent
 			filesystem = data.filesystem;
 			setFolder();
-			renderSidebarTree("mazen"); 
 			renderTraceTree("cad1"); 
 		}
 	});		

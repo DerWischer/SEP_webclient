@@ -2,6 +2,10 @@
  * Calle Styles
  * =========================================================
  * ========================================================= */
+
+body {
+	overflow: hidden;
+}
 .fa.padding-left-5 {
 	padding-left:0.5em;
 }
@@ -37,6 +41,17 @@
 	margin-top:3px;
 	padding-top:15px;
 	padding-bottom:15px;
+}
+.no-margin {
+	margin:0;
+}
+.no-padding {
+	padding:0;
+}
+.file-info {
+	height:550px;
+	background:#eee;
+	border-left:1px solid #000;
 }
 
 .custom-breadcrumb span {

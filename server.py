@@ -82,8 +82,6 @@ class FileUpdateInformationHandler(BaseHandler):
         fileExt = get_fileExt(fileId)
         self.write(database_handler.update_file(fileId,fileExt,fileInfo))
 
-
-
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):

@@ -28,7 +28,6 @@ function RenderBreadCrumbPath(id) {
 		});
 		breadcrumb.appendChild(span);
 		breadcrumb.oncontextmenu = function(e) {
-			console.log(this);
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
 		}
@@ -115,7 +114,6 @@ function handle_upload() {
 		// If the event can be calculated.
 		if(event.lengthComputable) {
 			var percent = Math.round((event.loaded / event.total) * 100);
-			console.log(percent);
 			//notify.update('progress', percent);
 		}
 	});
@@ -141,11 +139,9 @@ function handle_upload() {
 	request.send(data);
 }
 $(document).ready(function() {
-
 	$("#search-btn").click(function() {
 		$("#searchModal").modal("show");
 	});
-
 	$(document).click(function() {
 		HideDropdownElement();
 	});
@@ -285,7 +281,6 @@ function displayList(parent, childrenObjects) {
 	var holder = $("#tableView")[0];
 	$(holder).empty();
 	var iconName;
-	console.log(childrenObjects);
 	if (countJSONKeys(childrenObjects) == 0) {
 		var nofilesmessage = el("section", {class:"panel panel-default"});
 		var panelbody = el("section", {class:"panel-body"});
@@ -350,32 +345,6 @@ function findSelectedFiles() {
 	});
 	return files;
 }
-// Login functions etc.
-var userData = {
-	"ragnar": {
-		"id": "ragnar",
-		"password": "lol"
-	},
-	"roger": {
-		"id": "roger",
-		"password": "hello"
-	}
-}
-
-function correctPW(userName, inputPassword) {
-	var user = userData.hasOwnProperty(userName);
-	if (user == true) {
-		var pw = userData[userName].password;
-		if (inputPassword == pw) {
-			alert("yay");
-		} else {
-			alert("incorrect pw")
-		}
-	}
-	if (user == false) {
-		alert("incorrect username");
-	}
-}
 (function($, window) {
 	$.fn.contextMenu = function(settings) {
 		return this.each(function() {
@@ -398,7 +367,6 @@ function correctPW(userName, inputPassword) {
 				$(settings.menuSelector).hide();
 			});
 		});
-
 		function getMenuPosition(mouse, direction, scrollDir) {
 			var win = $(window)[direction](),
 				scroll = $(window)[scrollDir](),
@@ -430,21 +398,13 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 	//Handles menu drop down
 	$('.dropdown-menu').find('form').click(function(e) {
 		e.stopPropagation();
 	});
-	//Logout button
-	$("#btnLogout").click(function() {
-		//alert("Value: " + $("#emailInput").val() + " Password: " + $("#passwordInput").val());
-		correctPW($("#emailInput").val(), $("#passwordInput").val());
-	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		var dataId = this.getAttribute("data-id");
 		if (setFolder(dataId) == false) {
-			//is file
-			console.log("downlaoding");
 			var a = el("a", {href:("/download/" + dataId), target:"_blank"});
 			$("#tableView").append(a);
 			a.click();
@@ -506,7 +466,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 	// send email
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
@@ -708,7 +667,6 @@ function createBuildNode(fileview, project_id) {
 	}
 }
 ////////////////////////////////////////////////////////////
-var myuser = "mazen"; // example to be replaced with current user
 // return array of files names according to status ( returen open files,  returen closed files)
 function getstatusFiles(status) {
 	var found = [];
@@ -743,61 +701,6 @@ function getUserFile(user_id) {
 	});
 	return found;
 }
-// return array of files names according to lastModified date 
-function getFilesLastModified(monthcnt) {
-	var found = [];
-	var cur = new Date();
-	var beforedayscnt = new Date(cur.setMonth(cur.getMonth() - monthcnt)).toISOString().slice(0, 10); // setDate, getDate can be used
-	$.each(filesystem, function(key, value) {
-		if (value.lastModified)
-			if (value.lastModified >= beforedayscnt) found.push(value);
-	});
-	return found;
-}
-
-function renderSidebarTree(myuser) {
-	var fileview = document.getElementById("fileview4");
-	$(fileview).empty();
-	var files = getUserFile(myuser);
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	// return my files
-	var fileview = document.getElementById("fileview1");
-	$(fileview).empty();
-	var files = getMyFiles(myuser);
-	for (i = 0; i < files.length; i++) {
-        if (!files[i]) {
-            continue;
-        }
-		appendItem(fileview, files[i], "1");
-	}
-	// return opened files
-	var fileview = document.getElementById("fileview3");
-	$(fileview).empty();
-	var files = getstatusFiles("open");
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	// return closed files
-	var fileview = document.getElementById("fileview2");
-	$(fileview).empty();
-	var files = getstatusFiles("closed");
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	// return last modified files 
-	var fileview = document.getElementById("fileview5");
-	$(fileview).empty();
-	var files = getFilesLastModified(1); // 1 means one month
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	$("#MainMenu").on("click", ".list-group-item", function() {
-		setFolder($(this).attr("data-id"));
-	})
-}
-
 function renderTraceTree(id) {
 	var project_id = getProjectId(id);
 	var fileview = document.getElementById("fileview6");
