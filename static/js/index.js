@@ -463,10 +463,10 @@ $(document).ready(function() {
 		if ($(this).hasClass("selected")) {
 			var fileId = this.getAttribute("data-id");
 			if (setFolder(fileId) == false) {
-				var a = el("a", {href:("/download/" + fileId), target:"_blank"});
-				$("#tableView").append(a);
-				a.click();
-				$("#tableView").remove(a);
+				//var a = el("a", {href:("/download/" + fileId), target:"_blank"});
+				//$("#tableView").append(a);
+				//a.click();
+				//$("#tableView").remove(a);
 			}
 			return;
 		}
