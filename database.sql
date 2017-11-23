@@ -1,4 +1,4 @@
-#DROP DATABASE IF EXISTS octoprint;
+DROP DATABASE IF EXISTS octoprint;
 CREATE DATABASE IF NOT EXISTS octoprint;
 USE octoprint;
 CREATE TABLE if not exists customer(id varchar(36) PRIMARY KEY, name varchar(100));
@@ -8,3 +8,5 @@ CREATE TABLE if not exists fileinformation (id varchar(36), fileid VARCHAR(36), 
 CREATE TABLE if not exists types (id varchar(36) PRIMARY KEY, name varchar(100));
 INSERT IGNORE INTO users VALUES ("1", "admin", "1111");
 INSERT IGNORE INTO filesystem VALUES ("ROOT", "uploads", "uploads", Null, Null, Null, Null, Null, True, Null, "folder");
+INSERT IGNORE INTO filesystem VALUES ("POWDERS", "powders", "uploads/powders", Null, "ROOT", Null, Null, Null, True, Null, "folder");
+INSERT IGNORE INTO filesystem VALUES ("PROJECTS", "projects", "uploads/projects", Null, "ROOT", Null, Null, Null, True, Null, "folder");

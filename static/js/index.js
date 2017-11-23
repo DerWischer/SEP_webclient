@@ -94,11 +94,11 @@ function CreateSearchCrumb(searchTerm) {
 	breadcrumb.appendChild(span);
 	holder.append(breadcrumb);
 }
-function handle_upload() {
+function handle_upload(upload_type) {
 	var fileInput = $('#file-input');
 	data = new FormData();
 	request = new XMLHttpRequest();
-	data.append('upload-type', "powder")
+	data.append('upload-type', upload_type)
 	data.append('ajax', true);
 	/*var notify = $.notify('<strong>Uploading</strong>', {
 		type: 'success',
@@ -236,7 +236,10 @@ $(document).ready(function() {
 		});
 	});
 	$("#file-upload").click(function() {
-		handle_upload();
+		handle_upload("project");
+	});
+	$("#powder-upload-btn").click(function() {
+		handle_upload("powder");
 	});
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e) {
