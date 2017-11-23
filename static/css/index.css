@@ -84,6 +84,10 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+.non-root-crumb {
+    background-color: #ccc !important;
+}
+
 .custom-breadcrumb-base{
 	background-color: #ccc;
 	margin-right:4px;
@@ -124,6 +128,8 @@ breadcrumb-base span{
     color:#9C9B9B;
 }
 
+
+
 .custom-breadcrumb:first-child {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -133,6 +139,7 @@ breadcrumb-base span{
 .panel-default {
     margin-top:15px
 }
+
 
 
 /* =========================================================
@@ -251,7 +258,12 @@ breadcrumb-base span{
     padding: 8px;
 }
 
-.tr:nth-child(even){background-color: #cda8f2
+
+
+
+
+.tr:nth-child(even) {
+    background-color: #cda8f2
 }
 
 .fixed-height-400 {
