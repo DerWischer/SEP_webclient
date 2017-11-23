@@ -17,9 +17,11 @@
 	display:block;
 }
 
-.breadcrumb-element{
-	background-color:#f8f8f8;
-	height:15mm;
+.breadcrumb-element {
+    background-color: #f8f8f8;
+    height: 15mm;
+    width: 100vw;
+    margin-left:-15px;
 }
 .custom-breadcrumb {
 	-webkit-transform: skew(-20deg);
