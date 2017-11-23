@@ -53,9 +53,10 @@ body {
 	padding:0;
 }
 .file-info {
-	height:550px;
-	background:#eee;
-	border-left:1px solid #000;
+    height: 550px;
+    background: #f8f8f8;
+    margin-top:4px;
+    /*border-left: 1px solid #000;*/
 }
 
 .custom-breadcrumb span {
