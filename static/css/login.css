@@ -10,9 +10,9 @@ html, body {
 
 .main-section {
     padding: 15px;
-    padding-left:45px;
-    padding-right:45px;
-    background-color:#fdfdfd;
+    padding-left: 45px;
+    padding-right: 45px;
+    background-color:#f8f8f8;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
