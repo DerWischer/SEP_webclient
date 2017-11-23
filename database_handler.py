@@ -235,6 +235,7 @@ def advanced_search(searchParams, matchall):
 				sql += " AND (fileinformation.type = %s AND fileinformation.value = %s)"
 			else:
 				sql += " OR (fileinformation.type = %s AND fileinformation.value = %s)"	
+		sql += " GROUP BY fileinformation.fileid"
 		values = []
 		for key in searchParams.keys():
 			values.append(key)
