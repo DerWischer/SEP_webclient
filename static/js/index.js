@@ -94,10 +94,11 @@ function CreateSearchCrumb(searchTerm) {
 	breadcrumb.appendChild(span);
 	holder.append(breadcrumb);
 }
-function handle_upload() {
+function handle_upload(upload_type) {
 	var fileInput = $('#file-input');
 	data = new FormData();
 	request = new XMLHttpRequest();
+	data.append('upload-type', upload_type)
 	data.append('ajax', true);
 	/*var notify = $.notify('<strong>Uploading</strong>', {
 		type: 'success',
@@ -235,7 +236,10 @@ $(document).ready(function() {
 		});
 	});
 	$("#file-upload").click(function() {
-		handle_upload();
+		handle_upload("project");
+	});
+	$("#powder-upload-btn").click(function() {
+		handle_upload("powder");
 	});
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e) {
@@ -457,12 +461,12 @@ $(document).ready(function() {
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		if ($(this).hasClass("selected")) {
-			alert("Hello");
+			var fileId = this.getAttribute("data-id");
 			if (setFolder(fileId) == false) {
-				var a = el("a", {href:("/download/" + fileId), target:"_blank"});
-				$("#tableView").append(a);
-				a.click();
-				$("#tableView").remove(a);
+				//var a = el("a", {href:("/download/" + fileId), target:"_blank"});
+				//$("#tableView").append(a);
+				//a.click();
+				//$("#tableView").remove(a);
 			}
 			return;
 		}
@@ -509,7 +513,8 @@ $(document).ready(function() {
 			method:"post",
 			dataType:"JSON",
 			success:function(data) {
-				$("#attachedInfoModalBody").alpaca(data);
+				console.log(data.form);
+				$("#attachedInfoModalBody").alpaca(data.form);
 			},
 			error:function() {
 				alert("It is not possible to attach information here");
@@ -569,7 +574,7 @@ $(document).ready(function() {
 				$("#addNewType").click();
 			},
 			error:function() {
-				alert("Extremely Hard Fail");
+				alert("Could not get types");
 			}
 		});
 	});

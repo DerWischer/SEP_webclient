@@ -1,0 +1,44 @@
+{
+    "data":{},
+    "schema":{
+        "type":"object",
+        "properties":{
+        "material":{
+            "title":"Material",
+            "description":"Enter material.",
+            "type":"string"
+        },
+        "quantity":{
+            "title":"Quantity",
+            "description":"Enter quantity.",
+            "type":"string"
+        },
+        "condition":{
+            "title": "Poweder condition",
+            "enum": ["New", "Reused"]
+        },
+        "temperature": {
+            "title":"Temperature",
+            "description": "Enter temperature",
+            "type": "string"
+        }
+    }
+},
+    "options":{
+        "form":{
+            "attributes":{
+                "action": "https://requestb.in/12e67qq1",
+                "method": "post"
+            },
+            "buttons":{
+            }
+        },
+        "fields":{
+            "name":{
+                "hideInitValidationError" : true
+            }      
+        }
+    },
+    "postRender":{},
+    "view":"bootstrap-edit-horizontal"
+}
