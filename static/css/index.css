@@ -23,6 +23,8 @@
     width: 100vw;
     margin-left:-15px;
 }
+
+
 .custom-breadcrumb {
 	-webkit-transform: skew(-20deg);
 	   -moz-transform: skew(-20deg);
@@ -96,6 +98,10 @@ breadcrumb-base span{
 .custom-breadcrumb:first-child {
 	padding-top:15px;
 	padding-bottom:15px;
+}
+
+.panel-default {
+    margin-top:15px
 }
 
 
