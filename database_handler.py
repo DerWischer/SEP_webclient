@@ -158,29 +158,28 @@ def get_data(fileId):
 		cur.close()
 		db.close()
 
-def createjson(fileid)
-	 
-		json_dict = {}
-		json_dict2 = {}
-		for row in cur.fetchall():
-			json_dict[row[0]] = row[1]
-			json_dict1 = {}
-			json_dict1['Title'] =  row[0]
-			json_dict1['Type'] = 'String'
-			json_dict2[row[0]].append(json.dumps(json_dict1))
-			print(json.dumps(json_dict1))
-		json_prop={}
-		json_prop.append(json.dumps(json_dict2))
-        #print(json.dumps(json_prop))	
-        return json.dumps(json_dict) ''
+def createjson(fileid):
+	json_dict = {}
+	json_dict2 = {}
+	for row in cur.fetchall():
+		json_dict[row[0]] = row[1]
+		json_dict1 = {}
+		json_dict1['Title'] =  row[0]
+		json_dict1['Type'] = 'String'
+		json_dict2[row[0]].append(json.dumps(json_dict1))
+		print(json.dumps(json_dict1))
+	json_prop={}
+	json_prop.append(json.dumps(json_dict2))
+	#print(json.dumps(json_prop))	
+	return json.dumps(json_dict)
 
 def get_file_path(fileId):
-		db = get_database()
-		cur = db.cursor()
-		cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
-		row = cur.fetchone()
-		cur.close()
-		return row[0],row[1], row[2]
+	db = get_database()
+	cur = db.cursor()
+	cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
+	row = cur.fetchone()
+	cur.close()
+	return row[0],row[1], row[2]
 
 def get_fileExt(fileId):
     db = get_database()
@@ -198,16 +197,16 @@ def get_fileExt(fileId):
 #### END OF FILE SYSTEM
 
 def authenticate_user(code):
-		db = get_database()
-		cur = db.cursor()
-		user = cur.execute("SELECT id, name FROM users WHERE pin = %s", [code])
-		rows = {}
-		for row in cur.fetchall():
-			rows = {
-				"user_id":row[0],
-				"name":row[1]
-			}
-		return rows
+	db = get_database()
+	cur = db.cursor()
+	user = cur.execute("SELECT id, name FROM users WHERE pin = %s", [code])
+	rows = {}
+	for row in cur.fetchall():
+		rows = {
+			"user_id":row[0],
+			"name":row[1]
+		}
+	return rows
 
 def update_account(id, name, pin):
 	try:
