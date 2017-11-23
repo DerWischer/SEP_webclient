@@ -28,7 +28,6 @@ function RenderBreadCrumbPath(id) {
 		});
 		breadcrumb.appendChild(span);
 		breadcrumb.oncontextmenu = function(e) {
-			console.log(this);
 			MoveDropdownItemsToElement(this);
 			e.preventDefault();
 		}
@@ -115,7 +114,6 @@ function handle_upload() {
 		// If the event can be calculated.
 		if(event.lengthComputable) {
 			var percent = Math.round((event.loaded / event.total) * 100);
-			console.log(percent);
 			//notify.update('progress', percent);
 		}
 	});
@@ -141,11 +139,36 @@ function handle_upload() {
 	request.send(data);
 }
 $(document).ready(function() {
-
 	$("#search-btn").click(function() {
 		$("#searchModal").modal("show");
 	});
-
+	$("#advanced-search-btn").click(function() {
+		var searchJSON = {};
+		$(".search-query").each(function() {
+			var type = $(this).find(".select-type").val();
+			var value = $(this).find(".search-expression").val();
+			searchJSON[type]= value;
+		});
+		$.ajax({
+			url:"/search",
+			dataType:"JSON",
+			method:"POST",
+			data:{"matchall":$("#match-all").is(":checked") ? 1 : 0, "json":JSON.stringify(searchJSON)},
+			success:function(data) {
+				if (!data.success) {
+					alert("could not complete search");
+					return;
+				}
+				$("#searchModal").modal("hide");
+				fileObjects = [];
+				$.each(data.fileIds, function(key, value){
+					fileObjects.push(filesystem[value]);
+				});
+				CreateSearchCrumb("[Custom]");
+				displayList(null, fileObjects);
+			}
+		})
+	});
 	$(document).click(function() {
 		HideDropdownElement();
 	});
@@ -261,7 +284,6 @@ $(document).ready(function() {
 		$("#clear-btn").attr("disabled", true);
 	});
 });
-
 function searchFileSystem(m) {
 	var found = [];
 	$.each(filesystem, function(key, value) {
@@ -285,7 +307,6 @@ function displayList(parent, childrenObjects) {
 	var holder = $("#tableView")[0];
 	$(holder).empty();
 	var iconName;
-	console.log(childrenObjects);
 	if (countJSONKeys(childrenObjects) == 0) {
 		var nofilesmessage = el("section", {class:"panel panel-default"});
 		var panelbody = el("section", {class:"panel-body"});
@@ -350,32 +371,6 @@ function findSelectedFiles() {
 	});
 	return files;
 }
-// Login functions etc.
-var userData = {
-	"ragnar": {
-		"id": "ragnar",
-		"password": "lol"
-	},
-	"roger": {
-		"id": "roger",
-		"password": "hello"
-	}
-}
-
-function correctPW(userName, inputPassword) {
-	var user = userData.hasOwnProperty(userName);
-	if (user == true) {
-		var pw = userData[userName].password;
-		if (inputPassword == pw) {
-			alert("yay");
-		} else {
-			alert("incorrect pw")
-		}
-	}
-	if (user == false) {
-		alert("incorrect username");
-	}
-}
 (function($, window) {
 	$.fn.contextMenu = function(settings) {
 		return this.each(function() {
@@ -398,7 +393,6 @@ function correctPW(userName, inputPassword) {
 				$(settings.menuSelector).hide();
 			});
 		});
-
 		function getMenuPosition(mouse, direction, scrollDir) {
 			var win = $(window)[direction](),
 				scroll = $(window)[scrollDir](),
@@ -410,6 +404,29 @@ function correctPW(userName, inputPassword) {
 		}
 	};
 })(jQuery, window);
+function scan_for_advanced_search_type_conflicts() {
+	selected_types = [];
+	$("#criteria .select-type").each(function() {
+		if (selected_types.indexOf($(this).val()) > -1) {
+			$("#type-warning").removeClass("hidden");
+			return false;
+		}
+		else {
+			$("#type-warning").addClass("hidden");
+			selected_types.push($(this).val());
+		}
+	});
+}
+function count(obj) {
+	//https://stackoverflow.com/questions/6283466/count-key-values-in-json#6283527
+	var count=0;
+	for(var prop in obj) {
+	   if (obj.hasOwnProperty(prop)) {
+		  ++count;
+	   }
+	}
+	return count;
+ }
 $(document).ready(function() {
 	$("#info_save").on("click", function() {
 		var data = $("#attachedInfoModalBody .alpaca-form").serializeArray();
@@ -423,44 +440,53 @@ $(document).ready(function() {
 			method:"post",
 			dataType:"JSON",
 			success:function(data) {
-				alert("save");
+				if (!data.success) {
+					alert("Could not save data");
+					return;
+				}
+				$("#attachedInfoModal").modal("hide");
 			},
 			error:function() {
 				alert("It is not possible to attach information here");
 			}
 		});
 	});
-
 	//Handles menu drop down
 	$('.dropdown-menu').find('form').click(function(e) {
 		e.stopPropagation();
 	});
-	//Logout button
-	$("#btnLogout").click(function() {
-		//alert("Value: " + $("#emailInput").val() + " Password: " + $("#passwordInput").val());
-		correctPW($("#emailInput").val(), $("#passwordInput").val());
-	});
 	$("#tableView").on("click", ".listViewItem", function() {
-		var dataId = this.getAttribute("data-id");
-		// if (setFolder(dataId) == false) {
-		// 	//is file
-		// 	console.log("downlaoding");
-		// 	var a = el("a", {href:("/download/" + dataId), target:"_blank"});
-		// 	$("#tableView").append(a);
-		// 	a.click();
-		// 	$("#tableView").remove(a);
-		// }
-		$("#attachedInfoSideBar").empty();
+		if ($(this).hasClass("selected")) {
+			alert("Hello");
+			if (setFolder(fileId) == false) {
+				var a = el("a", {href:("/download/" + fileId), target:"_blank"});
+				$("#tableView").append(a);
+				a.click();
+				$("#tableView").remove(a);
+			}
+			return;
+		}
+		$(this).addClass("selected");
+		var fileId = this.getAttribute("data-id");
 		$.ajax({
-			url:"filetemplate",
-			data:{"fileId":dataId},
-			method:"post",
+			method:"GET",
+			url:"/fileinformation",
+			data:{"fileId":fileId},
 			dataType:"JSON",
 			success:function(data) {
-				$("#attachedInfoSideBar").alpaca(data);
-			},
-			error:function() {
-				alert("Something went wrong");
+				if (!data.success) {
+					alert("nerror getting file informatio");
+					return;
+				}
+				$("#info-list").empty();
+				$.each(data.data, function(key, value) {
+					var li = el("li", {class:"file-info-value"});
+					var key = el("b", {html:key, style:"padding-right:5px"});
+					var value = document.createTextNode(value);
+					li.appendChild(key);
+					li.appendChild(value);
+					$("#info-list").append(li);
+				});
 			}
 		});
     });
@@ -501,14 +527,46 @@ $(document).ready(function() {
 		 	$("#tableView").remove(a);
 		}
 	});
+	$("#addNewType").on("click", function() {
+		var numOfCriteria = $("#criteria .search-query").length;
+		CRITERIA = count(window.types);
+		if (numOfCriteria == CRITERIA-1) {
+			$("#addNewType").html("<span class='translate'>No more unique types!</span>").attr("disabled", true).removeClass("btn-success").addClass("btn-info");
+		}
+		var row = el("section", {class:"row search-query",style:"margin-top:5px;"});
+		var col = el("section",{class:"col-md-4"});
+		var select = el("select", {class:"form-control select-type"});
+		$.each(window.types, function(key, value) {
+			var option = el("option", {html:value, value:key});
+			select.appendChild(option);
+		});
+		col.appendChild(select);
+		row.appendChild(col);
+		var col = el("section",{class:"col-md-8"});
+		var input = el("input", {class:"form-control search-expression", "placeholder":"value", })
+		col.appendChild(input);
+		row.appendChild(col);
+		$("#criteria").append(row);
+		$(input).focus();
+		scan_for_advanced_search_type_conflicts();
+	});
+	$("#criteria").on("change", ".select-type", function() {
+		scan_for_advanced_search_type_conflicts()
+	});
 	$("#search-btn").on("click", function() {
-		$("#searchInfo").empty();			
+		$("#criteria").empty();			
 		$.ajax({
-			url:"search",
+			url:"/types",
 			method:"GET",
 			dataType:"JSON",
 			success:function(data) {
-				$("#searchInfo").alpaca(data);
+				if (!data.success) {
+					alert("Could not get types");
+					return;
+				}
+				window.types = data.types;
+				$("#addNewType").html("<span class='translate'>Add New Type</span>").attr("disabled", false).addClass("btn-success").removeClass("btn-info");				
+				$("#addNewType").click();
 			},
 			error:function() {
 				alert("Extremely Hard Fail");
@@ -530,7 +588,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 	// send email
 	$("#changeAlert").on("click", function() {
 		data_id = $("#contextMenu").attr("data-id");
@@ -732,7 +789,6 @@ function createBuildNode(fileview, project_id) {
 	}
 }
 ////////////////////////////////////////////////////////////
-var myuser = "mazen"; // example to be replaced with current user
 // return array of files names according to status ( returen open files,  returen closed files)
 function getstatusFiles(status) {
 	var found = [];
@@ -767,61 +823,6 @@ function getUserFile(user_id) {
 	});
 	return found;
 }
-// return array of files names according to lastModified date 
-function getFilesLastModified(monthcnt) {
-	var found = [];
-	var cur = new Date();
-	var beforedayscnt = new Date(cur.setMonth(cur.getMonth() - monthcnt)).toISOString().slice(0, 10); // setDate, getDate can be used
-	$.each(filesystem, function(key, value) {
-		if (value.lastModified)
-			if (value.lastModified >= beforedayscnt) found.push(value);
-	});
-	return found;
-}
-
-function renderSidebarTree(myuser) {
-	var fileview = document.getElementById("fileview4");
-	$(fileview).empty();
-	var files = getUserFile(myuser);
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	// return my files
-	var fileview = document.getElementById("fileview1");
-	$(fileview).empty();
-	var files = getMyFiles(myuser);
-	for (i = 0; i < files.length; i++) {
-        if (!files[i]) {
-            continue;
-        }
-		appendItem(fileview, files[i], "1");
-	}
-	// return opened files
-	var fileview = document.getElementById("fileview3");
-	$(fileview).empty();
-	var files = getstatusFiles("open");
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	// return closed files
-	var fileview = document.getElementById("fileview2");
-	$(fileview).empty();
-	var files = getstatusFiles("closed");
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	// return last modified files 
-	var fileview = document.getElementById("fileview5");
-	$(fileview).empty();
-	var files = getFilesLastModified(1); // 1 means one month
-	for (i = 0; i < files.length; i++) {
-		appendItem(fileview, files[i], "1");
-	}
-	$("#MainMenu").on("click", ".list-group-item", function() {
-		setFolder($(this).attr("data-id"));
-	})
-}
-
 function renderTraceTree(id) {
 	var project_id = getProjectId(id);
 	var fileview = document.getElementById("fileview6");

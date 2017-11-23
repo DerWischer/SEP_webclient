@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -16,11 +16,14 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-    	<section class="row">
-    	   <section class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <div class="container-fluid full-height">
+    	<section class="row full-height">
+            
+    	   <section class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 main-section full-height">
+            <img class="custom-logo" src="/static/img/ivf_rgb_transparent.png" />
 			  <form action="login" method="post">
 					<h2 class="form-signin-heading">Please sign in</h2>
+                    
 					<label for="operatorCode" class="sr-only">Operator Code</label>
 					<input type="number" name="code" id="operatorCode" class="form-control input-lg" placeholder="Operator Code" required autofocus>
 					<section class="panel panel-warning hidden" id="failedLogin" style="margin-top:5px;">

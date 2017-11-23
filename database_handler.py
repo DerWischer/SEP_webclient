@@ -5,6 +5,7 @@ import uuid
 
 def get_db_user():
 	return dev_config.DB_USER
+
 def get_db_password():
 	return dev_config.DB_PASSWORD
 
@@ -88,6 +89,22 @@ def get_folder_path_from_id(id):
 		cur.close()
 		db.commit()
 
+def get_types():
+	try:
+		db = get_database() 
+		cur = db.cursor() 
+		cur.execute("SELECT id, name FROM types")
+		data = {}
+		for row in cur.fetchall():
+			data[row[0]] = row[1]
+		return data
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
 
 def store_fileinformation(fileId, fileInfo):
 	try:
@@ -102,6 +119,23 @@ def store_fileinformation(fileId, fileInfo):
 	except Exception as ex:
 		print (ex)
 		return False
+	finally:
+		cur.close()
+		db.commit()
+
+def get_file_information(fileId):
+	'''Selects all file data information'''
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s",  [fileId])
+		data = {}
+		for row in cur.fetchall():
+			data[row[0]] = row[1]
+		return data
+	except Exception as ex:
+		print (ex)
+		return None
 	finally:
 		cur.close()
 		db.commit()
@@ -165,25 +199,64 @@ def get_data(fileId):
 		db.close()
 
 def get_file_path(fileId):
+	try:
 		db = get_database()
 		cur = db.cursor()
 		cur.execute("SELECT path, filename, file_ext FROM filesystem where id = %s LIMIT 1",  [fileId])
 		row = cur.fetchone()
 		cur.close()
 		return row[0],row[1], row[2]
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
 
 def get_fileExt(fileId):
-    db = get_database()
-    cur = db.cursor()
-    cur.execute("SELECT f.file_ext FROM   filesystem f where f.id = %s",  [fileId])
-    count = cur.rowcount
-    rows = {}
-    if count == 0:
-        return('error')
-    for row in cur.fetchall():
-    	return(row[0])
-    cur.close()
-    db.commit()
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT f.file_ext FROM   filesystem f where f.id = %s",  [fileId])
+		count = cur.rowcount
+		rows = {}
+		if count == 0:
+			return('error')
+		for row in cur.fetchall():
+			return(row[0])
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
+def advanced_search(searchParams, matchall):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		sql = "SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
+		for i in range(len(searchParams)-1):
+			if matchall:
+				sql += " AND (fileinformation.type = %s AND fileinformation.value = %s)"
+			else:
+				sql += " OR (fileinformation.type = %s AND fileinformation.value = %s)"	
+		sql += " GROUP BY fileinformation.fileid"
+		values = []
+		for key in searchParams.keys():
+			values.append(key)
+			values.append(searchParams[key])
+		cur.execute(sql, values);
+		rows = []
+		for row in cur.fetchall():
+			rows.append(row)
+		return rows
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
 
 #### END OF FILE SYSTEM
 

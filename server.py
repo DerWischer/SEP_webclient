@@ -68,9 +68,18 @@ class SubscriptionHandler(BaseHandler):
 
 class FileInformationHandler(BaseHandler):
     @tornado.web.authenticated
+    def get(self):
+        fileId = self.get_argument("fileId")
+        fileinfo = database_handler.get_file_information(fileId)
+        if fileinfo != None:
+            self.write(json.dumps({"success":True, "data":fileinfo}))
+        else:
+            self.write(json.dumps({"success":False}))
+        
+    @tornado.web.authenticated
     def post(self):
         fileId = self.get_argument("fileId")
-        fileInfo= self.get_argument("fileInfo")        
+        fileInfo = self.get_argument("fileInfo")        
         success = database_handler.store_fileinformation(fileId, fileInfo)
         self.write(json.dumps({"success":success}))
 
@@ -81,8 +90,6 @@ class FileUpdateInformationHandler(BaseHandler):
         fileInfo= self.get_argument("fileInfo")
         fileExt = get_fileExt(fileId)
         self.write(database_handler.update_file(fileId,fileExt,fileInfo))
-
-
 
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
@@ -180,6 +187,16 @@ class DownloadHandler(tornado.web.RequestHandler):
                     self.write(data)
                     yield self.flush()
             self.finish()
+
+class TypesHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        types = database_handler.get_types();
+        if (types == None):
+           self.write(json.dumps({"success":False}));
+        else: 
+            self.write(json.dumps({"success":True, "types":types}));
+        self.finish()
     
 class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
     def set_extra_headers(self, path):
@@ -193,15 +210,24 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
 
 class AdvancedSearchHandler(BaseHandler):
     @tornado.web.authenticated
-    def get(self):
-        jsonfile = 'search.json'
-        with open(os.path.join("static", "alpacatemplates", "search.json"), "r") as file:
-            self.write(file.read())
-        self.flush();
-    def post(self):
-        self.finish(json.dumps({"success":False}))
-        
-        # data is a JSON object containing an array of (Type ID, Expression) tuples. 
+    def post(self):        
+        try:
+            matchall = int(self.get_argument("matchall", default=False))
+            if matchall:
+                matchall = True
+            else:
+                matchall = False
+            searchJson = self.get_argument("json")
+            searchParams = json.loads(searchJson)
+        except ValueError as ex:
+            print (ex)
+            self.finish(json.dumps({"success":False}))
+        fileIds = database_handler.advanced_search(searchParams, matchall)
+        if fileIds == None:
+            self.finish(json.dumps({"success":False}))
+        else:
+            self.finish(json.dumps({"success":True, "fileIds":fileIds}))
+        # data is a JSON obExceptionject containing an array of (Type ID, Expression) tuples. 
             # e.g. (01, "ProjectA") where 01 is Type 'Project name', 
             # e.g. (02, "CustomerFoo") where 02 us Type 'Customer name'
         
@@ -220,7 +246,8 @@ def make_app():
         compress_response=True,
         cookie_secret="asecretmessage",
         login_url="/login",
-        handlers=[        
+        handlers=[
+            (r"/types", TypesHandler),        
             (r"/search", AdvancedSearchHandler),    
             (r"/login", LoginHandler),
             (r"/logout", LogoutHandler),
