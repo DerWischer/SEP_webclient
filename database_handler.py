@@ -119,7 +119,24 @@ def create_folder(name, path, parent):
 	finally:
 		cur.close()
 		db.commit()
-		
+
+def get_file_information(fileId):
+	'''Selects all file data information'''
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s",  [fileId])
+		data = {}
+		for row in cur.fetchall():
+			data[row[0]] = row[1]
+		return data
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
 def get_type_id(name):	
 	'''Returns the id of the type, otherwise type is created and the generated id is returned'''
 	try:
