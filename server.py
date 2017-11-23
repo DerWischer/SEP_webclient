@@ -79,7 +79,8 @@ class FileUpdateInformationHandler(BaseHandler):
     def post(self):
         fileId = self.get_argument("fileId")
         fileInfo= self.get_argument("fileInfo")
-        self.write(database_handler.update_file(fileId,".default",fileInfo))
+        fileExt = get_fileExt(fileId)
+        self.write(database_handler.update_file(fileId,fileExt,fileInfo))
 
 
 
@@ -91,13 +92,12 @@ class FileTemplateHandler(BaseHandler):
         jsondata = database_handler.get_data(fileId)
         jsonfile = 'default.json'
         for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
-            if ext == '.default': 
-               jsonfile = filename
-        #text = ""#'{ "title":"User Feedback", "description":"What do you think about Alpaca?", "type":"object", "properties": { "name": { "type":"string", "title":"Name" }, "feedback": { "type":"string", "title":"Feedback" }, "ranking": { "type":"string", "title":"Ranking", "enum":["excellent","ok","so so"] } } }'
-        #with open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)) as file:
-        #    for line in file:
-        #        text += line
-        #self.write(text)
+            if ext == '.slm': 
+               jsonfile = 'slm.json'
+            if ext == '.build':  
+               jsonfile = 'build.json' 
+            if ext == '.material':
+               jsonfile = 'material.json' 
         decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
         decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
         self.write(decoded_json)
@@ -110,8 +110,12 @@ class ViewTemplateHandler(BaseHandler):
         jsondata = database_handler.get_data(fileId)
         jsonfile = 'default.json'
         for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
-            if ext == '.svg': 
-               jsonfile = filename
+            if ext == '.slm': 
+               jsonfile = 'slm.json'
+            if ext == '.build':  
+               jsonfile = 'build.json' 
+            if ext == '.material':
+               jsonfile = 'material.json'
         decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
         decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
         self.write(decoded_json)
