@@ -4,8 +4,17 @@
 
 .main-section {
     padding-top:15px;
-    background:#000;
+    
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
 .full-height {
   height:100%;
 }
