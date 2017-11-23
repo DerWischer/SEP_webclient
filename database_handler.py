@@ -141,20 +141,26 @@ def get_type_id(name):
 		db.commit()
            
 def get_data(fileId):
-	try:
 		db = get_database()
 		cur = db.cursor()
 		cur.execute("""SELECT types.name, fileinformation.value
 		FROM fileinformation LEFT JOIN types on types.id = fileinformation.type WHERE 
 		fileinformation.fileid = %s""",  [fileId])
 		json_dict = {}
+		json_dict2 = {}
 		for row in cur.fetchall():
 			json_dict[row[0]] = row[1]
-		return json.dumps(json_dict)
-	except Exception as ex:
-		print (ex)
-		return "{}"
-	finally:
+			json_dict1 = {}
+			json_dict1['title'] =  row[0]
+			json_dict1['type'] = 'String'
+			print(json.dumps(json_dict1))
+			json_dict2[row[0]].append(json.dumps(json_dict1))
+			print(json.dumps(json_dict1))
+		#json_prop={}
+		#json_prop
+		#json_prop["properties"].append(json.dumps(json_dict2))
+        #print(json.dumps(json_prop))
+		return json.dumps(json_dict) 
 		cur.close()
 		db.close()
 
