@@ -442,14 +442,27 @@ $(document).ready(function() {
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		var dataId = this.getAttribute("data-id");
-		if (setFolder(dataId) == false) {
-			//is file
-			console.log("downlaoding");
-			var a = el("a", {href:("/download/" + dataId), target:"_blank"});
-			$("#tableView").append(a);
-			a.click();
-			$("#tableView").remove(a);
-		}
+		// if (setFolder(dataId) == false) {
+		// 	//is file
+		// 	console.log("downlaoding");
+		// 	var a = el("a", {href:("/download/" + dataId), target:"_blank"});
+		// 	$("#tableView").append(a);
+		// 	a.click();
+		// 	$("#tableView").remove(a);
+		// }
+		$("#attachedInfoSideBar").empty();
+		$.ajax({
+			url:"filetemplate",
+			data:{"fileId":dataId},
+			method:"post",
+			dataType:"JSON",
+			success:function(data) {
+				$("#attachedInfoSideBar").alpaca(data);
+			},
+			error:function() {
+				alert("Something went wrong");
+			}
+		});
     });
     $("#tableView").on("contextmenu", ".row", function(e) {
         $("#contextMenu").css("top", e.clientY).css("left", e.clientX).css("display", "block").removeClass("hidden").attr("data-id", $(e.target).closest(".row").attr("data-id"));
@@ -476,6 +489,17 @@ $(document).ready(function() {
 				alert("It is not possible to attach information here");
 			}
 		});
+	});
+	$("#dropDownload").on("click", function() {
+		var dataId = $("#contextMenu").attr("data-id");
+		if (setFolder(dataId) == false) {
+		 	// is file
+			console.log("downlaoding");
+		 	var a = el("a", {href:("/download/" + dataId), target:"_blank"});
+		 	$("#tableView").append(a);
+		 	a.click();
+		 	$("#tableView").remove(a);
+		}
 	});
 	$("#search-btn").on("click", function() {
 		$("#searchInfo").empty();			
