@@ -2,6 +2,7 @@ import MySQLdb
 import dev_config
 import json
 import uuid
+import os
 
 def get_db_user():
 	return dev_config.DB_USER
@@ -245,7 +246,27 @@ def advanced_search(searchParams, matchall):
 		cur.close()
 		db.commit()
 
+def form_type_exists(ext):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT 1 FROM form_types WHERE name = %s",  [ext])
+		if (cur.rowcount == 1):
+			return True
+		return False
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.commit()
+
+
 def generate_alpaca(fileid, ext):
+	if not form_type_exists(ext):
+		with open(os.path.join("static", "alpacatemplates", "default.json"), 'r') as file:
+			return json.loads(file.read())
+
 	data = get_data(fileid)
 	schema = {"type":"object"}
 	properties = {}
