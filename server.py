@@ -101,23 +101,7 @@ class FileTemplateHandler(BaseHandler):
             return
         self.finish(json.dumps({"success":True, "form":form}))
 
-class ViewTemplateHandler(BaseHandler):
-    @tornado.web.authenticated
-    def post(self):
-        fileId = self.get_argument("fileId")
-        ext = database_handler.get_fileExt(fileId)
-        jsondata = database_handler.get_data(fileId)
-        jsonfile = 'default.json'
-        for filename in os.listdir(os.path.join(ROOT,'static','alpacatemplates')): 
-            if ext == '.slm': 
-               jsonfile = 'slm.json'
-            if ext == '.build':  
-               jsonfile = 'build.json' 
-            if ext == '.material':
-               jsonfile = 'material.json'
-        decoded_json = json.load(open(os.path.join(ROOT,'static','alpacatemplates',jsonfile)))
-        decoded_json["data"] = json.loads(jsondata.replace("'",'"'))
-        self.finish(json.dumps({"success":True, "data":json.dumps(jsondata)}))
+
     
 
 class UploadHandler(tornado.web.RequestHandler):
@@ -274,7 +258,6 @@ def make_app():
             (r"/fileupdateinformation", FileUpdateInformationHandler),     
             (r"/fileinformation", FileInformationHandler),  
             (r"/filetemplate", FileTemplateHandler),
-            (r"/viewtemplate", ViewTemplateHandler),
             (r"/upload", UploadHandler),
             (r"/download/(.*)", DownloadHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
@@ -353,10 +336,13 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "number of parts")
     database_handler.create_form_type_to_type_link(formid, "printing parameter")
     database_handler.create_form_type_to_type_link(formid, "comment")
-        
+    
+    formid = database_handler.create_form_type(".default")
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "owner")
+    database_handler.create_form_type_to_type_link(formid, "comment")
     print ("Created Default Types")
 
-    
 #def scan_filesystem(): 
     #for entry in filescanner.scan_recursive(ROOT):
     #    database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
