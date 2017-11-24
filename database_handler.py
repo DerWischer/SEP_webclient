@@ -6,8 +6,16 @@ import os
 
 def get_db_user():
 	return dev_config.DB_USER
+
 def get_db_password():
 	return dev_config.DB_PASSWORD
+
+def drop_database():
+	db = get_database("")
+	cursor = db.cursor()
+	cursor.execute("DROP DATABASE IF EXISTS octoprint")
+	cursor.close()
+	db.commit()
 
 def get_database_name():
 	""" Return the name of the database"""

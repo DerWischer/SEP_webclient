@@ -9,8 +9,9 @@ from tornado.httpclient import AsyncHTTPClient
 import database_handler
 import notifier
 import MySQLdb
+import shutil
 
-
+DEVELOPMENT_MODE = True #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
@@ -135,23 +136,29 @@ class UploadHandler(tornado.web.RequestHandler):
                 output_file.flush()
             entry = filescanner.get_file_stats(parent_folder, filepath, filename)
             if uploadtype != "file":
-                manipulate_file_stats_for_upload_type(uploadtype, entry)
-                os.rename(filepath, get_path_for_upload_type(type, filename))
+                newpath = get_path_for_upload_type(uploadtype, filename)
+                print ("newPath: %s" % newpath)
+                if newpath != None:
+                    print ("New Path: %s" % newpath)
+                    print ("Old Path: %s" % filepath)
+                    manipulate_file_stats_for_upload_type(uploadtype, entry)
+                    os.rename(filepath, newpath)
             database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
    
-def get_path_for_upload_type(type, filename):
-        if (type == "powder"):
+def get_path_for_upload_type(uploadtype, filename):
+        if (uploadtype == "powder"):
             return os.path.join("uploads", "powders", filename)
-        elif (type == "project"):
+        elif (uploadtype == "project"):
             return os.path.join("uploads", "projects", filename)
-        else:
-            return os.path.join("uploads", filename)
+        return None
     
-def manipulate_file_stats_for_upload_type(type, stats):
-        if (type == "powder"):
+def manipulate_file_stats_for_upload_type(uploadtype, stats):
+        if uploadtype == "powder":
             stats['ext'] = ".powder"
             stats['parent'] = "POWDERS"
+        elif uploadtype == "project":
+            stats['parent'] = "PROJECTS"
         
 
             
@@ -359,17 +366,18 @@ def create_form_type_links():
 
 # Main function ---------------------------------------------------------------
 if __name__ == "__main__":
+    if DEVELOPMENT_MODE:
+        print ("****************WARNING: DEVELOPMENT MODE IS ACTIVE*******************")
+        shutil.rmtree("uploads")
+        database_handler.drop_database()
     if not os.path.exists("uploads"):
             os.mkdir("uploads")
-    
     powders_path = os.path.join("uploads", "powders")
     if not os.path.exists(powders_path):
             os.mkdir(powders_path)
-    
     projects_path = os.path.join("uploads", "projects")
     if not os.path.exists(projects_path):
             os.mkdir(projects_path)
-
     APP = make_app()
     APP.listen(PORT)
     database_handler.create_database()

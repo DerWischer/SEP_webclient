@@ -1,4 +1,3 @@
-#DROP DATABASE IF EXISTS octoprint;
 CREATE DATABASE IF NOT EXISTS octoprint;
 USE octoprint;
 CREATE TABLE if not exists customer(id varchar(36) PRIMARY KEY, name varchar(100));
