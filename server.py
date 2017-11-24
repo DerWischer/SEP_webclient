@@ -140,6 +140,8 @@ def get_path_for_upload_type(uploadtype, filename):
             return os.path.join("uploads", "powders", filename)
         elif (uploadtype == "project"):
             return os.path.join("uploads", "projects", filename)
+        elif (uploadtype == "customer"):
+            return os.path.join("uploads", "customers", filename)
         return None
     
 def manipulate_file_stats_for_upload_type(uploadtype, stats):
@@ -148,10 +150,10 @@ def manipulate_file_stats_for_upload_type(uploadtype, stats):
             stats['parent'] = "POWDERS"
         elif uploadtype == "project":
             stats['parent'] = "PROJECTS"
+        elif uploadtype == "customer":
+            stats['ext'] = ".customer"
+            stats['parent'] = "CUSTOMERS"
         
-
-            
-
 class NewFolderHandler(tornado.web.RequestHandler):
     def post(self):
         name = self.get_argument("name", default=None, strip=False)
@@ -329,25 +331,23 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "powder condition")
     database_handler.create_form_type_to_type_link(formid, "temperature")
 
+    formid = database_handler.create_form_type(".customer")
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "email")
+    database_handler.create_form_type_to_type_link(formid, "phone")    
+
     formid = database_handler.create_form_type(".build")
     database_handler.create_form_type_to_type_link(formid, "build name")    
     database_handler.create_form_type_to_type_link(formid, "project name")
     database_handler.create_form_type_to_type_link(formid, "number of parts")
     database_handler.create_form_type_to_type_link(formid, "printing parameter")
     database_handler.create_form_type_to_type_link(formid, "comment")
-<<<<<<< HEAD
-    
-    formid = database_handler.create_form_type(".default")
-    database_handler.create_form_type_to_type_link(formid, "name")
-    database_handler.create_form_type_to_type_link(formid, "owner")
-    database_handler.create_form_type_to_type_link(formid, "comment")
-=======
 
     formid = database_handler.create_form_type("default")
     database_handler.create_form_type_to_type_link(formid, "name")    
     database_handler.create_form_type_to_type_link(formid, "owner")
     database_handler.create_form_type_to_type_link(formid, "comment") 
->>>>>>> 662e5eba85b6e957b433dd7d1446dc0ea38eea1a
     print ("Created Default Types")
 
 #def scan_filesystem(): 
@@ -361,16 +361,19 @@ if __name__ == "__main__":
         shutil.rmtree("uploads")
         database_handler.drop_database()
     if not os.path.exists("uploads"):
-            os.mkdir("uploads")
+        os.mkdir("uploads")
     powders_path = os.path.join("uploads", "powders")
     if not os.path.exists(powders_path):
-            os.mkdir(powders_path)
+        os.mkdir(powders_path)
     projects_path = os.path.join("uploads", "projects")
     if not os.path.exists(projects_path):
-            os.mkdir(projects_path)
+        os.mkdir(projects_path)
+    customers_path = os.path.join("uploads", "customers")
+    if not os.path.exists(customers_path):
+        os.mkdir(customers_path)
     trash_path = os.path.join("uploads", "trash")
     if not os.path.exists(trash_path):
-            os.mkdir(trash_path)
+        os.mkdir(trash_path)
     APP = make_app()
     APP.listen(PORT)
     database_handler.create_database()

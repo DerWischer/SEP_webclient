@@ -1,6 +1,5 @@
 CREATE DATABASE IF NOT EXISTS octoprint;
 USE octoprint;
-CREATE TABLE if not exists customer(id varchar(36) PRIMARY KEY, name varchar(100));
 CREATE TABLE if not exists users(id varchar(36) PRIMARY KEY, name varchar(25), pin varchar(5));
 CREATE TABLE if not exists filesystem (id varchar(36) PRIMARY KEY, filename varchar(250), path varchar(1000), file_ext varchar(10), parent varchar(36), hashvalue varchar(128), size int, created int, updated int, changehash varchar(128)  UNIQUE KEY, type varchar(36), deleted int(1) DEFAULT 0);
 CREATE TABLE if not exists fileinformation (id varchar(36), fileid VARCHAR(36), type VARCHAR(36), value VARCHAR(100), PRIMARY KEY (fileid, type));
@@ -12,4 +11,5 @@ INSERT IGNORE INTO users VALUES ("1", "admin", "1111");
 INSERT IGNORE INTO filesystem VALUES ("ROOT", "uploads", "uploads", Null, Null, Null, Null, Null, True, Null, "folder", 0);
 INSERT IGNORE INTO filesystem VALUES ("POWDERS", "powders", "uploads/powders", Null, "ROOT", Null, Null, Null, True, Null, "folder", 0);
 INSERT IGNORE INTO filesystem VALUES ("PROJECTS", "projects", "uploads/projects", Null, "ROOT", Null, Null, Null, True, Null, "folder", 0);
-INSERT IGNORE INTO filesystem VALUES ("TRASH", "Recycle Bin", "uploads/trash", Null, "ROOT", Null, Null, Null, True, Null, "folder", 0);
+INSERT IGNORE INTO filesystem VALUES ("CUSTOMERS", "customers", "uploads/customers", Null, "ROOT", Null, Null, Null, True, Null, "folder", 0);
+INSERT IGNORE INTO filesystem VALUES ("TRASH", "Recycle Bin", "uploads/trash", Null, "ROOT", Null, Null, Null, True, Null, "folder", 2);
