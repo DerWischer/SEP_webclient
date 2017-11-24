@@ -59,7 +59,12 @@ class FileSystemHandler(BaseHandler):
         self.write(json.dumps({"success":True, "filesystem":database_handler.get_file_system()}))
     @tornado.web.authenticated
     def delete(self):
-        self.write("You are deleting")
+        files = json.loads(self.get_argument("files"))
+        failed_files = {}
+        for file in files:
+            if not database_handler.delete_from_filesystem(file):
+                failed_files[file] = {"reason":"Can not delete system file"}
+        self.finish(json.dumps({"success":True, "failed_files":failed_files}))
 
         
 
@@ -378,9 +383,6 @@ if __name__ == "__main__":
     projects_path = os.path.join("uploads", "projects")
     if not os.path.exists(projects_path):
             os.mkdir(projects_path)
-    trash_path = os.path.join("uploads", "trash")
-    if not os.path.exists(trash_path):
-            os.mkdir(trash_path)
     APP = make_app()
     APP.listen(PORT)
     database_handler.create_database()
