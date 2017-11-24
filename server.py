@@ -44,6 +44,7 @@ class AccountHandler(BaseHandler):
         name = self.get_argument("name")
         success = database_handler.update_account(self.get_current_user(), name)
         self.write(json.dumps({"success":success}))
+        self.redirect("/")
 
 class GetAccountDetails(BaseHandler):
     @tornado.web.authenticated
