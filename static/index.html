@@ -46,18 +46,29 @@
 		<section class="custom-nav">
 			<section class="container-fluid">
 				<section class="row">
-					<section class="col-md-3 col-sm-4">
-						<img class="custom-logo" src="/static/img/ivf_rgb_transparent.png"/>
+					<section class="col-md-1">
+						<div id="new-dropdown" class="dropdown">
+							<button id="new-btn" class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Menu</span></button>
+							<ul class="dropdown-menu">
+							<li class="dropdown-header">Upload</li> 
+							<li><a href="#" data-type="file" class="upload-btn">Files</a></li>
+							<li><a href="#" data-type="powder" class="upload-btn">Powder</a></li>
+							<li><a href="#" data-type="project" class="upload-btn">Project</a></li>
+							<!--<li><a href="#" id="upload-folder-btn">Folders</a></li>-->
+							<li class="dropdown-header">Create</li> 
+							<li><a href="#" id="new-folder-btn">Folder</a></li>
+							</ul>
+						</div> 
 					</section>
 					<section class="col-md-6 col-sm-8">
-						 <div class="input-group">
-						  <input type="text" id="search-box" class="form-control input-lg translate" placeholder="Search">
-						  <span class="input-group-btn">
-							  <button id="search-btn" class="btn btn-default btn-lg" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-						  </span>
-						</div>
+						<section class="row">
+							<section class="col-md-12">
+								<input id="search-box" class="form-control input-lg translate" placeholder="Quick Search" type="text"/>
+							</section>
+							<section class="col-md-12">
+								<span id="show-advanced-search" class="pull-right">Cannot find what you are looking for? Try <a>advanced search</a></span>
+							</section>
+						</section>
 					</section>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -83,26 +94,6 @@
 							</ul>
 						</li>
 					</ul>
-				</section>
-				<section class="row">
-					<section class="col-md-1">
-							<div id="new-dropdown" class="dropdown">
-								<button id="new-btn" class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">New</span>
-								<span class="caret"></span></button>
-								<ul class="dropdown-menu">
-								<li class="dropdown-header">Upload</li> 
-								<li><a href="#" data-type="file" class="upload-btn">Files</a></li>
-								<li><a href="#" data-type="powder" class="upload-btn">Powder</a></li>
-								<li><a href="#" data-type="project" class="upload-btn">Project</a></li>
-								<!--<li><a href="#" id="upload-folder-btn">Folders</a></li>-->
-								<li class="dropdown-header">Create</li> 
-								<li><a href="#" id="new-folder-btn">Folder</a></li>
-								</ul>
-							</div> 
-					</section>
-					<section class="col-md-1">
-							<button id="delete-btn" class="btn btn-danger btn-block dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span>								
-					</section>
 				</section>
 			</section>
 		</section>
@@ -154,6 +145,7 @@
 					<ul id="info-list">
 
 					</ul>
+					<button id="delete-btn" class="btn btn-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span>																					
 				</section>
 			</section>
 		</section>

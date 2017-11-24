@@ -159,6 +159,10 @@ breadcrumb-base span{
   .list-group-submenu{
    padding-left:18px; 
   }
+
+  #show-advanced-search {
+	  cursor:pointer;
+  }
   
 /* =========================================================
 * Emil & Peter Styles
