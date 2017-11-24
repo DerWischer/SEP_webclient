@@ -298,7 +298,11 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "chemical composition")
     database_handler.create_form_type_to_type_link(formid, "physical properties")
     database_handler.create_form_type_to_type_link(formid, "sieve analysis")
+    
+    formid = database_handler.create_form_type(".build")
+    database_handler.create_form_type_to_type_link(formid, "name")
     print ("Created Default Types")
+
     
 #def scan_filesystem(): 
     #for entry in filescanner.scan_recursive(ROOT):
