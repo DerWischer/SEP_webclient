@@ -327,7 +327,7 @@ function displayList(parent, childrenObjects) {
                 "data-id": value.id,
                 class: "row listViewItem",
 				//Downloadable STL URL goes here
-                "onclick": "webView.performClick(\"https://drive.google.com/uc?export=download&id=1RaS2brY62JzGGERq72NUkiN9KanEgPiT\");"
+                "onclick": "webView.performClick(\"http://10.0.2.2:8888/download/"+value.id+"\");"
             });
         }
         else {
