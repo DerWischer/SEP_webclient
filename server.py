@@ -41,8 +41,7 @@ class AccountHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         name = self.get_argument("name")
-        pin = self.get_argument("code")
-        success = database_handler.update_account(self.get_current_user(), name, pin)
+        success = database_handler.update_account(self.get_current_user(), name)
         self.write(json.dumps({"success":success}))
 
 class GetAccountDetails(BaseHandler):

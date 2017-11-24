@@ -342,14 +342,15 @@ def authenticate_user(code):
 		}
 	return rows
 
-def update_account(id, name, pin):
+def update_account(id, name):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute('INSERT INTO users VALUES (%s, %s) WHERE id = %s', [name, pin, id])
+		cur.execute("INSERT INTO users (name) VALUES (%s) WHERE id = %s", [name, str(id,'utf-8')])
 		db.commit()
 		return True
-	except:
+	except Exception as ex:
+		print (ex)
 		return False
 	finally:
 		cur.close()
