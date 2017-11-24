@@ -48,7 +48,7 @@ def getchildren(id):
 def get_file_system():
 		db = get_database() 
 		cur = db.cursor() 
-		cur.execute("SELECT id, filename, file_ext, created, updated, type, parent FROM filesystem WHERE deleted != 1")
+		cur.execute("SELECT filesystem.id, filesystem.filename, filesystem.file_ext, filesystem.created, filesystem.updated, filesystem.type, filesystem.parent, users.name FROM filesystem LEFT JOIN users ON users.id = filesystem.owner  WHERE filesystem.deleted != 1")
 		# print the first and second columns 
 		rows = {}    
 		for row in cur.fetchall():
@@ -61,22 +61,22 @@ def get_file_system():
 				"file_ext":row[2],
 				"created":row[3],
 				"updated":row[4],
-				"owner":["mazen"],
 				"type":row[5],
 				"parent":row[6],
+				"owner":row[7],
 				"children": children
 			} 
 		return rows
 
-def file_entry(entry):
+def file_entry(entry, user):
 	db = get_database()
 	cur = db.cursor()
 	try:
 		file_type = "file"
 		if entry["isfolder"]:
     			file_type = "folder"
-		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-		cur.execute(sql, [entry['id'], entry['name'], entry['path'], entry['ext'], entry['parent'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], file_type, 0])
+		sql = ('INSERT INTO filesystem (id, filename, path, file_ext, parent, hashvalue, size, created, updated, type, owner) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+		cur.execute(sql, [entry['id'], entry['name'], entry['path'], entry['ext'], entry['parent'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], file_type, user])
 	except Exception as ex:
 		print (ex)		
 	finally:

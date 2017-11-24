@@ -326,7 +326,10 @@ function displayList(parent, childrenObjects) {
 		var name = el("section", {class: "col-lg-5 col-md-5"});
 		var h4 = el("h4", {html: value.name});
 		name.appendChild(h4);
-		var date = el("section", {class: "col-lg-5 col-md-5"});
+		var owner = el("section", {class: "col-lg-2 col-md-2"});
+		var h4 = el("h4", {html: value.owner}); 
+		owner.appendChild(h4);
+		var date = el("section", {class: "col-lg-3 col-md-3"});
         if (value.type == "file") {
             var h4 = el("h4", {html: moment(value.updated * 1000).format("YYYY-MM-DD")});
             date.appendChild(h4);
@@ -334,6 +337,7 @@ function displayList(parent, childrenObjects) {
 		row.appendChild(checkbox);
 		row.appendChild(icon);
 		row.appendChild(name);
+		row.appendChild(owner);
 		row.appendChild(date);
 		holder.appendChild(row);
 	});

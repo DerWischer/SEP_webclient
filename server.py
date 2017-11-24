@@ -112,10 +112,8 @@ class FileTemplateHandler(BaseHandler):
             return
         self.finish(json.dumps({"success":True, "form":form}))
 
-
-    
-
-class UploadHandler(tornado.web.RequestHandler):
+class UploadHandler(BaseHandler):
+    @tornado.web.authenticated
     def post(self):
         uploadtype = self.get_argument('upload-type') #powder etc.
         parent_folder = self.request.arguments['folder'] #parentfolder
@@ -136,8 +134,8 @@ class UploadHandler(tornado.web.RequestHandler):
                     print ("New Path: %s" % newpath)
                     print ("Old Path: %s" % filepath)
                     manipulate_file_stats_for_upload_type(uploadtype, entry)
-                    os.rename(filepath, newpath)
-            database_handler.file_entry(entry)
+                    shutil.move(filepath, newpath)
+            database_handler.file_entry(entry, self.get_current_user())
         self.finish(json.dumps({"success":True}))
 
 def get_path_for_upload_type(uploadtype, filename):
@@ -262,9 +260,9 @@ def make_app():
         cookie_secret="asecretmessage",
         login_url="/login",
         handlers=[
+            (r"/upload", UploadHandler),
             (r"/types", TypesHandler),        
             (r"/search", AdvancedSearchHandler),    
-            (r"/login", LoginHandler),
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
             (r"/newFolder", NewFolderHandler),
@@ -275,8 +273,8 @@ def make_app():
             (r"/fileupdateinformation", FileUpdateInformationHandler),     
             (r"/fileinformation", FileInformationHandler),  
             (r"/filetemplate", FileTemplateHandler),
-            (r"/upload", UploadHandler),
             (r"/download/(.*)", DownloadHandler),
+            (r"/login", LoginHandler),
             # Watch out: AuthStaticFileHandle must be the last route!
             (r"/(.*)", AuthStaticFileHandler, {"path": os.path.join(ROOT, "static")})
         ])
