@@ -89,12 +89,14 @@
 				</section>
 				<section class="row">
 					<section class="col-md-1">
-							<div class="dropdown">
+							<div id="new-dropdown" class="dropdown">
 								<button id="new-btn" class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">New</span>
 								<span class="caret"></span></button>
 								<ul class="dropdown-menu">
 								<li class="dropdown-header">Upload</li> 
-								<li><a href="#" id="upload-file-btn">Files</a></li>
+								<li><a href="#" data-type="file" class="upload-btn">Files</a></li>
+								<li><a href="#" data-type="powder" class="upload-btn">Powder</a></li>
+								<li><a href="#" data-type="project" class="upload-btn">Project</a></li>
 								<!--<li><a href="#" id="upload-folder-btn">Folders</a></li>-->
 								<li class="dropdown-header">Create</li> 
 								<li><a href="#" id="new-folder-btn">Folder</a></li>

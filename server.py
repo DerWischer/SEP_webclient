@@ -134,6 +134,9 @@ class UploadHandler(tornado.web.RequestHandler):
                 output_file.write(file['body'])
                 output_file.flush()
             entry = filescanner.get_file_stats(parent_folder, filepath, filename)
+            if uploadtype != "file":
+                manipulate_file_stats_for_upload_type(uploadtype, entry)
+                os.rename(filepath, get_path_for_upload_type(type, filename))
             database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
    
@@ -149,8 +152,7 @@ def manipulate_file_stats_for_upload_type(type, stats):
         if (type == "powder"):
             stats['ext'] = ".powder"
             stats['parent'] = "POWDERS"
-        elif (type == "project"):
-            stats['parent'] = "PROJECTS"
+        
 
             
 

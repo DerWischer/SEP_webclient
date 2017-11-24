@@ -98,17 +98,17 @@ function handle_upload(upload_type) {
 	var fileInput = $('#file-input');
 	data = new FormData();
 	request = new XMLHttpRequest();
-	data.append('upload-type', upload_type)
-	data.append('ajax', true);
 	/*var notify = $.notify('<strong>Uploading</strong>', {
 		type: 'success',
 		allow_dismiss: false,
 		showProgressbar: true
 	});*/
 	for (var i = 0; i < fileInput.prop("files").length; ++i){
-		// Add file to the data array.
 		data.append('file', fileInput.prop("files")[i]);
 	}
+	data.append('upload-type', $("#new-dropdown").attr("data-type"));
+	$("#new-dropdown").attr("data-type", "");
+	data.append('ajax', true);
 	data.append('folder', getFolder());
 	request.upload.addEventListener('progress', function(event) {
 		// If the event can be calculated.
@@ -126,6 +126,7 @@ function handle_upload(upload_type) {
 	request.addEventListener('readystatechange', function(event) {
 		if(this.readyState == 4) {
 			if(this.status == 200) {
+				
 				refreshFilesystem();
 			} else {
 				// Log response status
@@ -171,7 +172,8 @@ $(document).ready(function() {
 	$(document).click(function() {
 		HideDropdownElement();
 	});
-	$("#upload-file-btn").click(function() {
+	$(".upload-btn").click(function() {
+		$("#new-dropdown").attr("data-type", $(this).attr("data-type"));
 		$("#file-input").click();
 	});
 	$("#upload-folder-btn").click(function() {
