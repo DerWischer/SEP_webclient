@@ -90,8 +90,7 @@ def generate_customer_file(customer_name):
     }    
     return customer_file
 
-def get_file_stats(parentid, filepath, filename):
-    print("FN: " + filename)
+def get_file_stats(parentid, filepath, filename):    
     id = str(uuid.uuid4())
     filestat = os.stat(filepath)
     file_info = {
