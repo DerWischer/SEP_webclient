@@ -68,20 +68,20 @@ def get_file_system():
 			} 
 		return rows
 
-def file_entry(id, name, path, ext, hashValue, size, created, updated , changehash, isfolder, parent):
+def file_entry(id, name, path, ext, hashValue, size, created, updated, isfolder, parent):
 	db = get_database()
 	cur = db.cursor()
 	try:
 		file_type = "file"
 		if isfolder:
     			file_type = "folder"
-		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-		cur.execute(sql, [id, name, path, ext, parent, hashValue, size, created, updated , changehash, file_type, 0])
-	except:
-		pass
-		#print("Can not add the same file again")
-	cur.close()
-	db.commit()
+		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+		cur.execute(sql, [id, name, path, ext, parent, hashValue, size, created, updated, file_type, 0])
+	except Exception as ex:
+		print (ex)		
+	finally:
+		cur.close()
+		db.commit()
 
 def get_folder_path_from_id(id):
 	try:

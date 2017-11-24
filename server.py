@@ -115,7 +115,7 @@ class UploadHandler(tornado.web.RequestHandler):
         uploadtype = self.get_argument('upload-type') #powder etc.
         parent_folder = self.request.arguments['folder'] #parentfolder
         for file in self.request.files['file']: #eachfile
-            filename, extension = os.path.splitext(file['filename'])
+            filename = file['filename']
             parent_path = database_handler.get_folder_path_from_id(parent_folder)
             if parent_path == None:
                 self.finish(json.dumps({"success":False, "reason":"Parent folder does not exist"}))
@@ -132,9 +132,9 @@ class UploadHandler(tornado.web.RequestHandler):
                     print ("Old Path: %s" % filepath)
                     manipulate_file_stats_for_upload_type(uploadtype, entry)
                     os.rename(filepath, newpath)
-            database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
+            database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
-   
+
 def get_path_for_upload_type(uploadtype, filename):
         if (uploadtype == "powder"):
             return os.path.join("uploads", "powders", filename)
@@ -153,7 +153,17 @@ def manipulate_file_stats_for_upload_type(uploadtype, stats):
         elif uploadtype == "customer":
             stats['ext'] = ".customer"
             stats['parent'] = "CUSTOMERS"
-        
+
+
+class NewCustomerHandler(BaseHandler):    
+    def post(self):
+        """ Add a customer to the database """
+        customer_name = self.get_argument("name")
+        entry = filescanner.generate_customer_file(customer_name)
+        manipulate_file_stats_for_upload_type("customer", entry)
+        database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], entry['isfolder'], entry['parent'])
+        self.finish(json.dumps({"success":True}))
+
 class NewFolderHandler(tornado.web.RequestHandler):
     def post(self):
         name = self.get_argument("name", default=None, strip=False)
@@ -253,6 +263,7 @@ def make_app():
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
             (r"/newFolder", NewFolderHandler),
+            (r"/newCustomer", NewCustomerHandler),
             (r"/getAccountDetails", GetAccountDetails),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler), 
@@ -332,7 +343,6 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "temperature")
 
     formid = database_handler.create_form_type(".customer")
-    database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "email")
     database_handler.create_form_type_to_type_link(formid, "phone")    

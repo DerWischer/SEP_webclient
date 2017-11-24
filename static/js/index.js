@@ -198,6 +198,26 @@ $(document).ready(function() {
 			}
 		});	
 	});
+	$("#new-customer-btn").click(function() {
+		var name = prompt("Name of new customer:");
+		if (!name) {
+			return;
+		}
+		$.ajax({
+			url:"/newCustomer",
+			method:"POST",
+			dataType:"JSON",
+			data:{"name":name},
+			success: function(data) {
+				console.log(data.success);
+				if (!data.success) {
+					alert("Could not create new customer");
+					return;
+				}
+				refreshFilesystem();
+			}
+		});	
+	});	
 	$("#file-input").on("change", function() {
 		alert("about to upload");
 		handle_upload("project");
