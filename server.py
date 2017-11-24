@@ -137,7 +137,7 @@ class UploadHandler(tornado.web.RequestHandler):
                     print ("Old Path: %s" % filepath)
                     manipulate_file_stats_for_upload_type(uploadtype, entry)
                     os.rename(filepath, newpath)
-            database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], entry['isfolder'], entry['parent'])
+            database_handler.file_entry(entry)
         self.finish(json.dumps({"success":True}))
 
 def get_path_for_upload_type(uploadtype, filename):

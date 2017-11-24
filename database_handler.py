@@ -68,15 +68,15 @@ def get_file_system():
 			} 
 		return rows
 
-def file_entry(id, name, path, ext, hashValue, size, created, updated, isfolder, parent):
+def file_entry(entry):
 	db = get_database()
 	cur = db.cursor()
 	try:
 		file_type = "file"
-		if isfolder:
+		if entry["isfolder"]:
     			file_type = "folder"
 		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-		cur.execute(sql, [id, name, path, ext, parent, hashValue, size, created, updated, file_type, 0])
+		cur.execute(sql, [entry['id'], entry['name'], entry['path'], entry['ext'], entry['parent'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], file_type, 0])
 	except Exception as ex:
 		print (ex)		
 	finally:
