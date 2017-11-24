@@ -122,24 +122,18 @@ class ViewTemplateHandler(BaseHandler):
 
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
-        i=0
-        uploadtype = self.get_argument('upload-type')
-        filenames = self.request.arguments['filename']
-        parent_folder = self.request.arguments['folder']
-        for file in self.request.files['file']:
-            extension = os.path.splitext(file['filename'])[1]
-            filename = filenames[i].decode("utf-8")
-            i += 1 # Can i be removed?
-            
-            #parent_path = database_handler.get_folder_path_from_id(parent_folder)
-            #filepath = os.path.join(parent_path, filename)
-            filepath = get_path_for_upload_type(uploadtype, filename)
+        uploadtype = self.get_argument('upload-type') #powder etc.
+        parent_folder = self.request.arguments['folder'] #parentfolder
+        for file in self.request.files['file']: #eachfile
+            filename, extension = os.path.splitext(file['filename'])
+            parent_path = database_handler.get_folder_path_from_id(parent_folder)
+            if parent_path == None:
+                self.finish(json.dumps({"success":False, "reason":"Parent folder does not exist"}))
+            filepath = os.path.join(parent_path, filename)
             with open(filepath, 'wb') as output_file:
                 output_file.write(file['body'])
-            
+                output_file.flush()
             entry = filescanner.get_file_stats(parent_folder, filepath, filename)
-            manipulate_file_stats_for_upload_type(uploadtype, entry)
-
             database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
         self.finish(json.dumps({"success":True}))
    

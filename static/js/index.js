@@ -108,7 +108,6 @@ function handle_upload(upload_type) {
 	for (var i = 0; i < fileInput.prop("files").length; ++i){
 		// Add file to the data array.
 		data.append('file', fileInput.prop("files")[i]);
-		data.append('filename', $("#fileUpload .form-control")[i].value);
 	}
 	data.append('folder', getFolder());
 	request.upload.addEventListener('progress', function(event) {
@@ -127,7 +126,6 @@ function handle_upload(upload_type) {
 	request.addEventListener('readystatechange', function(event) {
 		if(this.readyState == 4) {
 			if(this.status == 200) {
-				$("#fileUpload").modal("hide");
 				refreshFilesystem();
 			} else {
 				// Log response status
@@ -173,13 +171,10 @@ $(document).ready(function() {
 	$(document).click(function() {
 		HideDropdownElement();
 	});
-	$("#upload-btn").click(function() {
-		$("#fileUpload").modal("show");
-	});
-	$("#file-upload-btn").click(function() {
+	$("#upload-file-btn").click(function() {
 		$("#file-input").click();
 	});
-	$("#folder-upload-btn").click(function() {
+	$("#upload-folder-btn").click(function() {
 		$("#folder-input").click();
 	});
 	$("#new-folder-btn").click(function() {
@@ -202,44 +197,11 @@ $(document).ready(function() {
 		});	
 	});
 	$("#file-input").on("change", function() {
-		$("#files-list").empty();
-		$.each($("#file-input")[0].files, function(key,value) {
-			var row = el("section", {class:"row"});
-			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
-			var btn = el("button", {class:"btn btn-danger btn-lg"});
-			var i = el("i", {class:"fa fa-times fa-1x"});
-			btn.appendChild(i);
-			col.appendChild(btn);
-			//row.appendChild(col);
-			var col = el("section", {class:"col-xs-12 col-sm-12 col-md-12 col-lg-12"});
-			var label = el("input", {class:"form-control input-lg", name:"filename", value:value.name});
-			col.appendChild(label);
-			row.appendChild(col);
-			$("#files-list").append(row);
-		});
-	});
-	$("#folder-input").on("change", function() {
-		$("#files-list").empty();
-		$.each($("#folder-input")[0].files, function(key,value) {
-			var row = el("section", {class:"row"});
-			var col = el("section", {class:"col-xs-1 col-sm-1 col-md-1 col-lg-1"});
-			var btn = el("button", {class:"btn btn-danger btn-lg"});
-			var i = el("i", {class:"fa fa-times fa-1x"});
-			btn.appendChild(i);
-			col.appendChild(btn);
-			//row.appendChild(col);
-			var col = el("section", {class:"col-xs-12 col-sm-12 col-md-12 col-lg-12"});
-			var label = el("input", {class:"form-control input-lg", name:"filename", value:value.name});
-			col.appendChild(label);
-			row.appendChild(col);
-			$("#files-list").append(row);
-		});
-	});
-	$("#file-upload").click(function() {
+		alert("about to upload");
 		handle_upload("project");
 	});
-	$("#powder-upload-btn").click(function() {
-		handle_upload("powder");
+	$("#folder-input").on("change", function() {
+		handle_upload("project");
 	});
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e) {

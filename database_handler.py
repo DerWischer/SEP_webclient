@@ -82,6 +82,7 @@ def get_folder_path_from_id(id):
 		cur.execute("SELECT path FROM filesystem WHERE id = %s LIMIT 1", [id])
 		for row in cur.fetchone():
 			return row
+		return None
 	except Exception as ex:
 		print (ex)
 		return None
