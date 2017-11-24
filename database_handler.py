@@ -38,7 +38,7 @@ def getchildren(id):
 	children = []
 	db = get_database() 
 	cur = db.cursor() 
-	cur.execute("SELECT id FROM filesystem WHERE parent = %s",  [id])
+	cur.execute("SELECT id FROM filesystem WHERE parent = %s AND deleted != 1",  [id])
 	for row in cur.fetchall():
 		children.append(row[0])
 	return children
@@ -48,7 +48,7 @@ def getchildren(id):
 def get_file_system():
 		db = get_database() 
 		cur = db.cursor() 
-		cur.execute("SELECT id, filename, file_ext, created, updated, type, parent FROM filesystem")
+		cur.execute("SELECT id, filename, file_ext, created, updated, type, parent FROM filesystem WHERE deleted != 1")
 		# print the first and second columns 
 		rows = {}    
 		for row in cur.fetchall():
@@ -323,17 +323,38 @@ def get_file_path(fileId):
 	return row[0],row[1], row[2]
 
 def get_fileExt(fileId):
-    db = get_database()
-    cur = db.cursor()
-    cur.execute("SELECT f.file_ext FROM   filesystem f where f.id = %s",  [fileId])
-    count = cur.rowcount
-    rows = {}
-    if count == 0:
-        return('error')
-    for row in cur.fetchall():
-    	return(row[0])
-    cur.close()
-    db.commit()
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT f.file_ext FROM filesystem f where f.id = %s",  [fileId])
+		count = cur.rowcount
+		rows = {}
+		if count == 0:
+			return('error')
+		for row in cur.fetchall():
+			return(row[0])
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
+def delete_from_filesystem(fileid):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("UPDATE filesystem SET deleted = 1 WHERE id=%s AND deleted = 0",  [fileid])
+		count = cur.rowcount
+		if count == 1:
+			return True
+		return False
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
 
 #### END OF FILE SYSTEM
 

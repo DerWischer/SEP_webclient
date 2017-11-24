@@ -106,8 +106,8 @@ function handle_upload(upload_type) {
 	for (var i = 0; i < fileInput.prop("files").length; ++i){
 		data.append('file', fileInput.prop("files")[i]);
 	}
-	data.append('upload-type', $("#new-dropdown").attr("data-type"));
-	$("#new-dropdown").attr("data-type", "");
+	data.append('upload-type', $("#file-input").attr("data-type"));
+	$("#file-input").attr("data-type", "");
 	data.append('ajax', true);
 	data.append('folder', getFolder());
 	request.upload.addEventListener('progress', function(event) {
@@ -173,8 +173,7 @@ $(document).ready(function() {
 		HideDropdownElement();
 	});
 	$(".upload-btn").click(function() {
-		$("#new-dropdown").attr("data-type", $(this).attr("data-type"));
-		$("#file-input").click();
+		$("#file-input").attr("data-type", $(this).attr("data-type")).click();
 	});
 	$("#upload-folder-btn").click(function() {
 		$("#folder-input").click();
@@ -219,11 +218,10 @@ $(document).ready(function() {
 		});	
 	});	
 	$("#file-input").on("change", function() {
-		alert("about to upload");
-		handle_upload("project");
+		handle_upload();
 	});
 	$("#folder-input").on("change", function() {
-		handle_upload("project");
+		handle_upload();
 	});
 	//navtree is clicked
 	$("#fileview").on("click", ".selectable", function(e) {
@@ -258,24 +256,17 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#search-box").on('keyup', function(e) {
 		if ($(this).val().length == 0) {
-			$("#clear-btn").attr("disabled", true);
+			setFolder()
 			return;
 		}
-		$("#clear-btn").attr("disabled", false);
-		if (e.keyCode == 13) {
-			CreateSearchCrumb($(this).val());
-			searchFileSystem($(this).val());
-		}
-	});
-	$("#clear-btn").click(function() {
-		$("#search-box").val("").focus();
-		$("#clear-btn").attr("disabled", true);
+		CreateSearchCrumb($(this).val());
+		searchFileSystem($(this).val());
 	});
 });
 function searchFileSystem(m) {
 	var found = [];
 	$.each(filesystem, function(key, value) {
-		if (value.name.indexOf(m) > -1) {
+		if (value.name.toLowerCase().indexOf(m.toLowerCase()) > -1) {
 			found.push(value);
 		}
 	});
@@ -350,9 +341,9 @@ function displayList(parent, childrenObjects) {
 		holder.appendChild(row);
 	});
 }
-function findSelectedFiles() {
+function getSelectedFiles() {
 	files = [];
-	$("input[type='checkbox']").each(function(e) {
+	$("#tableViewport input[type='checkbox']").each(function(e) {
 		if ($(this).is(":checked")) {
 			files.push($(this).attr("data-id"));
 		}
@@ -444,19 +435,21 @@ $(document).ready(function() {
 		e.stopPropagation();
 	});
 	$("#delete-btn").on("click", function() {
+		files = getSelectedFiles();
 		$.ajax({
 			url:"/filesystem",
 			method:"DELETE",
+			data:{"files":JSON.stringify(files)},
 			dataType:"JSON",
 			success:function(data) {
 				if (!data.success) {
 					alert("Could not delete that folder");
 					return;
 				}
+				if (count(data.failed_files) >= 1) {
+					alert("Could not delete one or more files");
+				}
 				refreshFilesystem();
-			},
-			error:function() {
-				alert("You cannot delete that file/folder")
 			}
 		});	
 	});
@@ -577,21 +570,6 @@ $(document).ready(function() {
 			},
 			error:function() {
 				alert("Could not get types");
-			}
-		});
-	});
-	$("#viewInfoDropdown").on("click", function() {
-		$("#viewInfoModalBody").empty();			
-		$.ajax({
-			url:"viewtemplate",
-			data:{"fileId":$("#contextMenu").attr("data-id")},
-			method:"post",
-			dataType:"JSON",
-			success:function(data) {
-				$("#viewInfoModalBody").alpaca(data);
-			},
-			error:function() {
-				alert("It is not possible to attach information here");
 			}
 		});
 	});
