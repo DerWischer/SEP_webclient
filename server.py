@@ -346,7 +346,14 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "quantity")
     database_handler.create_form_type_to_type_link(formid, "powder condition")
     database_handler.create_form_type_to_type_link(formid, "temperature")
-    
+
+    formid = database_handler.create_form_type(".build")
+    database_handler.create_form_type_to_type_link(formid, "build name")    
+    database_handler.create_form_type_to_type_link(formid, "project name")
+    database_handler.create_form_type_to_type_link(formid, "number of parts")
+    database_handler.create_form_type_to_type_link(formid, "printing parameter")
+    database_handler.create_form_type_to_type_link(formid, "comment")
+        
     print ("Created Default Types")
 
     
