@@ -242,10 +242,6 @@ $(document).ready(function() {
 		CreateSearchCrumb($(this).val());
 		searchFileSystem($(this).val());
 	});
-	$("#clear-btn").click(function() {
-		$("#search-box").val("").focus();
-		$("#clear-btn").attr("disabled", true);
-	});
 });
 function searchFileSystem(m) {
 	var found = [];
