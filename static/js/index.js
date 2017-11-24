@@ -139,9 +139,6 @@ function handle_upload(upload_type) {
 	request.send(data);
 }
 $(document).ready(function() {
-	$("#search-btn").click(function() {
-		$("#searchModal").modal("show");
-	});
 	$("#advanced-search-btn").click(function() {
 		var searchJSON = {};
 		$(".search-query").each(function() {
@@ -553,7 +550,7 @@ $(document).ready(function() {
 	$("#criteria").on("change", ".select-type", function() {
 		scan_for_advanced_search_type_conflicts()
 	});
-	$("#search-btn").on("click", function() {
+	$("#show-advanced-search").on("click", function() {
 		$("#criteria").empty();			
 		$.ajax({
 			url:"/types",
@@ -567,6 +564,7 @@ $(document).ready(function() {
 				window.types = data.types;
 				$("#addNewType").html("<span class='translate'>Add New Type</span>").attr("disabled", false).addClass("btn-success").removeClass("btn-info");				
 				$("#addNewType").click();
+				$("#searchModal").modal("show");
 			},
 			error:function() {
 				alert("Could not get types");
@@ -587,122 +585,6 @@ function getProjectId(id) {
 			if (value.id == id) found = value.project_id;
 	});
 	return found;
-}
-
-function getcustomer(project_id) {
-	var found;
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention)
-			if (value.project_id == project_id && value.extention == "customer") found = value;
-	});
-	return found;
-}
-
-function getCADlist(project_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention)
-			if (value.project_id == project_id && value.extention == "CAD") found.push(value);
-	});
-	return found;
-}
-
-function getPRTlist(project_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention)
-			if (value.project_id == project_id && value.extention == "STL") found.push(value);
-	});
-	return found;
-}
-
-function getBuildlist(project_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention)
-			if (value.project_id == project_id && value.extention == "build") found.push(value);
-	});
-	return found;
-}
-
-function getImage(project_id, build_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention && value.build_id)
-			if (value.project_id == project_id && value.extention == "image" && value.build_id == build_id) found.push(value);
-	});
-	return found;
-}
-
-function getMaterial(project_id, build_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention && value.build_id)
-			if (value.project_id == project_id && value.extention == "material" && value.build_id == build_id) found.push(value);
-	});
-	return found;
-}
-
-function getMaterialMeasures(project_id, build_id, material_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention && value.build_id && material_id)
-			if (value.project_id == project_id && value.extention == "measure" && value.build_id == build_id && value.material_id == material_id) found.push(value);
-	});
-	return found;
-}
-
-function getSLM(project_id, build_id) {
-	var found = [];
-	$.each(filesystem, function(key, value) {
-		if (value.project_id && value.extention && value.build_id)
-			if (value.project_id == project_id && value.extention == "SLM" && value.build_id == build_id) found.push(value);
-	});
-	return found;
-}
-
-function createHREF(value) {
-	var a = document.createElement('a');
-	if ((!value) || (!value.name) || (!value.id)) { 
-		return el("a", {html:"UNDEFINED"});
-	}
-	var linkText = document.createTextNode(value.name);
-	a.appendChild(linkText);
-	a.setAttribute('href', "#");
-	a.setAttribute('class', 'list-group-item');
-	a.setAttribute('data-id', value.id);
-	return a;
-}
-
-function createHREFSUB(value) {
-	var a = document.createElement('a');
-	var linkText = document.createTextNode(value.name);
-	a.appendChild(linkText);
-	a.setAttribute('href', "#");
-	a.setAttribute('class', 'list-group-item');
-	a.setAttribute('data-parent', '#SubMenu1');
-	return a;
-}
-
-function appendItem(fileview, value, group) {
-	var ahref;
-	if (group == "1") var ahref = createHREF(value);
-	else if (group == "0") var ahref = createHREFSUB(value);
-	fileview.appendChild(ahref);
-}
-
-function createHREFMAIN(text, id_name, dataparent) {
-	var a = document.createElement('a');
-	var linkText = document.createTextNode(text);
-	var i = document.createElement('i');
-	i.setAttribute('class', 'fa fa-caret-down');
-	a.appendChild(linkText);
-	a.appendChild(i);
-	a.setAttribute('href', id_name);
-	a.setAttribute('class', 'list-group-item');
-	a.setAttribute('data-toggle', 'collapse');
-	a.setAttribute('data-parent', dataparent);
-	return a;
 }
 
 function createDIV(id_name) {
