@@ -4,6 +4,7 @@ import hashlib
 from time import gmtime, mktime
 import math
 import uuid
+import time
 from pathlib import Path
 
 FOLDER_TO_ID = {}
@@ -28,8 +29,7 @@ def scan_recursive(folder_path):
         'created': None,
         'updated': None,
         'isfolder':True,
-        'parent':None,
-        'changehash':hashlib.sha512(os.path.join(folder_path, root_name).encode('utf-8')).hexdigest()
+        'parent':None        
     }
     FOLDER_TO_ID[folder_path] = id
     dir_files.append(file_info)
@@ -47,8 +47,7 @@ def scan_recursive(folder_path):
                 'created': None,
                 'updated': None,
                 'isfolder':True,
-                'parent':FOLDER_TO_ID[os.path.dirname(folderpath)],
-                'changehash':hashlib.sha512(os.path.join(path, dirname).encode('utf-8')).hexdigest()
+                'parent':FOLDER_TO_ID[os.path.dirname(folderpath)],                
             }
             dir_files.append(file_info)
             FOLDER_TO_ID[folderpath] = id
@@ -67,14 +66,32 @@ def scan_recursive(folder_path):
                 'updated': math.floor(mktime(gmtime(filestat.st_mtime))),
                 'isfolder':False,
                 'parent':FOLDER_TO_ID[os.path.dirname(filepath)]
-            }
-            file_info['changehash'] = hashlib.sha512(("%s%s%s%s" % (file_info['name'], file_info['ext'], file_info['path'], file_info['hashvalue'])).encode('utf-8')).hexdigest()
+            }            
             dir_files.append(file_info)
     print("Scanning complete")
     return dir_files
 
+def generate_customer_file(customer_name):
+    """ Generates a file with the specified name, the file extension 'customer', with the parent CUSTOMERS."""    
+    fileId = str(uuid.uuid4())
+    millis = int(round(time.time() * 1000))
+    customer_file = {
+        'id':fileId,
+        'name': customer_name,
+        'path': None,
+        'hashvalue': None,
+        'ext': None,
+        'size': None,
+        'created': None,
+        'updated': None,
+        'isfolder':False,
+        'parent': None
+    }    
+    return customer_file
+
 def get_file_stats(parentid, filepath, filename):
-    id = str(uuid.uuid4());
+    print("FN: " + filename)
+    id = str(uuid.uuid4())
     filestat = os.stat(filepath)
     file_info = {
         'id':id,
@@ -87,6 +104,5 @@ def get_file_stats(parentid, filepath, filename):
         'updated': math.floor(mktime(gmtime(filestat.st_mtime))),
         'isfolder':False,
         'parent':parentid
-    }
-    file_info['changehash'] = hashlib.sha512(("%s%s%s%s" % (file_info['name'], file_info['ext'], file_info['path'], file_info['hashvalue'])).encode('utf-8')).hexdigest()
+    }    
     return file_info
