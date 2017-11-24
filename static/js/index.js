@@ -470,6 +470,7 @@ $(document).ready(function() {
 			}
 			return;
 		}
+		$("#tableView .listViewItem").removeClass("selected");
 		$(this).addClass("selected");
 		var fileId = this.getAttribute("data-id");
 		$.ajax({
