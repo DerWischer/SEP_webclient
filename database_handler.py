@@ -346,7 +346,7 @@ def update_account(id, name):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("INSERT INTO users (name) VALUES (%s) WHERE id = %s", [name, str(id,'utf-8')])
+		cur.execute("UPDATE users SET name=%s WHERE id = %s", [name, str(id,'utf-8')])
 		db.commit()
 		return True
 	except Exception as ex:
