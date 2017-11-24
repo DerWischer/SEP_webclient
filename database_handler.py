@@ -72,11 +72,11 @@ def file_entry(id, name, path, ext, hashValue, size, created, updated , changeha
 	db = get_database()
 	cur = db.cursor()
 	try:
-		type = "file"
+		file_type = "file"
 		if isfolder:
-    			type = "folder"
-		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-		cur.execute(sql, [id, name, path, ext, parent, hashValue, size, created, updated , changehash, type])
+    			file_type = "folder"
+		sql = ('INSERT INTO filesystem VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+		cur.execute(sql, [id, name, path, ext, parent, hashValue, size, created, updated , changehash, file_type, 0])
 	except:
 		pass
 		#print("Can not add the same file again")
@@ -273,9 +273,7 @@ def form_type_exists(ext):
 
 def generate_alpaca(fileid, ext):
 	if not form_type_exists(ext):
-		with open(os.path.join("static", "alpacatemplates", "default.json"), 'r') as file:
-			return json.loads(file.read())
-
+		ext = "default"
 	data = get_data(fileid)
 	schema = {"type":"object"}
 	properties = {}

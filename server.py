@@ -57,6 +57,11 @@ class FileSystemHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):        
         self.write(json.dumps({"success":True, "filesystem":database_handler.get_file_system()}))
+    @tornado.web.authenticated
+    def delete(self):
+        self.write("You are deleting")
+
+        
 
 class SubscriptionHandler(BaseHandler):
     @tornado.web.authenticated
@@ -245,15 +250,6 @@ class AdvancedSearchHandler(BaseHandler):
             self.finish(json.dumps({"success":False}))
         else:
             self.finish(json.dumps({"success":True, "fileIds":fileIds}))
-        # data is a JSON obExceptionject containing an array of (Type ID, Expression) tuples. 
-            # e.g. (01, "ProjectA") where 01 is Type 'Project name', 
-            # e.g. (02, "CustomerFoo") where 02 us Type 'Customer name'
-        
-        # Query the database for those tuples 
-            # Simply try to match all tuples
-            # If no results: best match strategy if no entries are found
-            
-        # Return a list of files or folders that match the query
 
 # Create and Run app ----------------------------------------------------------
 def make_app():
@@ -356,7 +352,11 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "number of parts")
     database_handler.create_form_type_to_type_link(formid, "printing parameter")
     database_handler.create_form_type_to_type_link(formid, "comment")
-        
+
+    formid = database_handler.create_form_type("default")
+    database_handler.create_form_type_to_type_link(formid, "name")    
+    database_handler.create_form_type_to_type_link(formid, "owner")
+    database_handler.create_form_type_to_type_link(formid, "comment") 
     print ("Created Default Types")
 
     
@@ -378,6 +378,9 @@ if __name__ == "__main__":
     projects_path = os.path.join("uploads", "projects")
     if not os.path.exists(projects_path):
             os.mkdir(projects_path)
+    trash_path = os.path.join("uploads", "trash")
+    if not os.path.exists(trash_path):
+            os.mkdir(trash_path)
     APP = make_app()
     APP.listen(PORT)
     database_handler.create_database()

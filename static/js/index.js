@@ -423,6 +423,23 @@ $(document).ready(function() {
 	$('.dropdown-menu').find('form').click(function(e) {
 		e.stopPropagation();
 	});
+	$("#delete-btn").on("click", function() {
+		$.ajax({
+			url:"/filesystem",
+			method:"DELETE",
+			dataType:"JSON",
+			success:function(data) {
+				if (!data.success) {
+					alert("Could not delete that folder");
+					return;
+				}
+				refreshFilesystem();
+			},
+			error:function() {
+				alert("You cannot delete that file/folder")
+			}
+		});	
+	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		if ($(this).hasClass("selected")) {
 			var fileId = this.getAttribute("data-id");
