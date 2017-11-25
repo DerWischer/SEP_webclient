@@ -135,10 +135,7 @@ class UploadHandler(BaseHandler):
             entry = filescanner.get_file_stats(parent_folder, filepath, filename)
             if uploadtype != "file":
                 newpath = get_path_for_upload_type(uploadtype, filename)
-                print ("newPath: %s" % newpath)
                 if newpath != None:
-                    print ("New Path: %s" % newpath)
-                    print ("Old Path: %s" % filepath)
                     manipulate_file_stats_for_upload_type(uploadtype, entry)
                     shutil.move(filepath, newpath)
             database_handler.file_entry(entry, self.get_current_user())
@@ -153,14 +150,15 @@ def get_path_for_upload_type(uploadtype, filename):
             return os.path.join("uploads", "customers", filename)
         return None
     
-def manipulate_file_stats_for_upload_type(uploadtype, stats):
+def manipulate_file_stats_for_upload_type(uploadtype, stats):        
         if uploadtype == "powder":
-            stats['form_id'] = ".powder"
+            stats['form_id'] = database_handler.get_form_type_id_by_name(".powder")
             stats['parent'] = "POWDERS"
         elif uploadtype == "project":
+            stats['form_id'] = database_handler.get_form_type_id_by_name("project")
             stats['parent'] = "PROJECTS"
         elif uploadtype == "customer":
-            stats['form_id'] = ".customer"
+            stats['form_id'] = database_handler.get_form_type_id_by_name(".customer")
             stats['parent'] = "CUSTOMERS"
 
 
@@ -366,6 +364,13 @@ def create_form_type_links():
 
     formid = database_handler.create_form_type("default")
     database_handler.create_form_type_to_type_link(formid, "comment") 
+
+    formid = database_handler.create_form_type("project")
+    database_handler.create_form_type_to_type_link(formid, "project title")
+    database_handler.create_form_type_to_type_link(formid, "customer")
+    database_handler.create_form_type_to_type_link(formid, "material")
+    database_handler.create_form_type_to_type_link(formid, "deadline")
+    
     print ("Created Default Types")
 
 #def scan_filesystem(): 

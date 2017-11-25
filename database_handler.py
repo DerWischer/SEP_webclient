@@ -79,7 +79,7 @@ def enter_file_attributes(entry):
 
 def file_entry(entry, user):
 	db = get_database()
-	cur = db.cursor()
+	cur = db.cursor()	
 	try:
 		file_type = "file"
 		if entry["isfolder"]:
@@ -269,6 +269,9 @@ def form_type_exists(form_id):
 	try:
 		db = get_database()
 		cur = db.cursor()
+
+		fid = get_form_type_id_by_name(form_id)		
+
 		cur.execute("SELECT 1 FROM form_types WHERE name = %s",  [form_id])
 		if (cur.rowcount == 1):
 			return True
@@ -280,10 +283,25 @@ def form_type_exists(form_id):
 		cur.close()
 		db.commit()
 
+def get_form_type_id_by_name(form_name):
+	try:
+		db = get_database()
+		cur = db.cursor()		
+		cur.execute("SELECT id FROM form_types WHERE name = %s LIMIT 1", [form_name])
+		if (cur.rowcount == 1):		
+			return cur.fetchone()[0]
+		else:			
+			cur.execute("SELECT id FROM form_types WHERE name = %s LIMIT 1",  ["default"]) #assumes that 'default' always exists
+			return cur.fetchone()[0]				
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:		
+		cur.close()
+		db.commit()
+
 def generate_alpaca(fileid):
 	form_id = get_form_id_of_file(fileid)
-	if not form_type_exists(form_id):
-		form_id = "default"
 	data = get_data(fileid)
 	schema = {"type":"object"}
 	properties = {}
@@ -296,7 +314,7 @@ def generate_alpaca(fileid):
 		cur.execute("""SELECT types.id, types.name FROM form_types 
 		LEFT JOIN form_types_to_attributes ON form_types_to_attributes.formid = form_types.id 
 		LEFT JOIN types ON form_types_to_attributes.typeid = types.id 
-		WHERE form_types.name = %s GROUP BY types.id ORDER BY types.name""", [form_id])
+		WHERE form_types.id = %s GROUP BY types.id ORDER BY types.name""", [form_id])
 		for row in cur.fetchall():
 			properties[row[0]] = {"title":row[1], "description":"", "type":"string"}
 		schema["properties"] = properties

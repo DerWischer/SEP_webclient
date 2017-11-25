@@ -5,6 +5,7 @@ from time import gmtime, mktime
 import math
 import uuid
 import time
+import database_handler
 from pathlib import Path
 
 FOLDER_TO_ID = {}
@@ -92,6 +93,8 @@ def generate_customer_file(customer_name):
 def get_file_stats(parentid, filepath, filename):    
     id = str(uuid.uuid4())
     filestat = os.stat(filepath)
+    file_ext = os.path.splitext(filename)[1]
+    form_id = database_handler.get_form_type_id_by_name(file_ext)
     file_info = {
         'id':id,
         'name': os.path.splitext(filename)[0],
@@ -103,6 +106,6 @@ def get_file_stats(parentid, filepath, filename):
         'updated': math.floor(mktime(gmtime(filestat.st_mtime))),
         'isfolder':False,
         'parent':parentid,
-        'form_id': os.path.splitext(filename)[1]
+        'form_id': form_id
     }    
     return file_info
