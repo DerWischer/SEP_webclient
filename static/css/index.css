@@ -278,9 +278,9 @@ breadcrumb-base span{
 }
 
 .listViewItem {
-	margin-top:2px;
-	background:#eee;
-	padding:2px;
+	margin-top:2px;	
+	padding:10px;
+	border-bottom: 1px solid #eee;
 	cursor:pointer;
 }
 

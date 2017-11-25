@@ -45,6 +45,7 @@ class AccountHandler(BaseHandler):
         name = self.get_argument("name")
         success = database_handler.update_account(self.get_current_user(), name)
         self.write(json.dumps({"success":success}))
+        self.redirect("/")
 
 class GetAccountDetails(BaseHandler):
     @tornado.web.authenticated
@@ -111,8 +112,8 @@ class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         fileId = self.get_argument("fileId")
-        ext = database_handler.get_fileExt(fileId)
-        form = database_handler.generate_alpaca(fileId, ext)
+        ext = database_handler.get_fileExt(fileId) # get file type
+        form = database_handler.generate_alpaca(fileId, ext) # pass type instead of ext
         if form == None:
             self.finish(json.dumps({"success":False}));
             return
@@ -170,7 +171,7 @@ class NewCustomerHandler(BaseHandler):
         customer_name = self.get_argument("name")
         entry = filescanner.generate_customer_file(customer_name)
         manipulate_file_stats_for_upload_type("customer", entry)
-        database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], entry['isfolder'], entry['parent'])
+        database_handler.file_entry(entry, self.get_current_user())
         self.finish(json.dumps({"success":True}))
 
 class NewFolderHandler(tornado.web.RequestHandler):
