@@ -84,8 +84,8 @@ def file_entry(entry, user):
 		file_type = "file"
 		if entry["isfolder"]:
     			file_type = "folder"
-		sql = ('INSERT INTO filesystem (id, filename, path, file_ext, parent, hashvalue, size, created, updated, type, owner) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-		cur.execute(sql, [entry['id'], entry['name'], entry['path'], entry['ext'], entry['parent'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], file_type, user])
+		sql = ('INSERT INTO filesystem (id, filename, path, file_ext, parent, hashvalue, size, created, updated, type, owner, form_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+		cur.execute(sql, [entry['id'], entry['name'], entry['path'], entry['ext'], entry['parent'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], file_type, user, entry['form_id']])
 		if cur.rowcount > 0:
     			enter_file_attributes(entry)
 	except Exception as ex:
@@ -265,11 +265,11 @@ def advanced_search(searchParams, matchall):
 		cur.close()
 		db.commit()
 
-def form_type_exists(ext):
+def form_type_exists(form_id):	
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT 1 FROM form_types WHERE name = %s",  [ext])
+		cur.execute("SELECT 1 FROM form_types WHERE name = %s",  [form_id])
 		if (cur.rowcount == 1):
 			return True
 		return False
@@ -280,10 +280,10 @@ def form_type_exists(ext):
 		cur.close()
 		db.commit()
 
-
-def generate_alpaca(fileid, ext):
-	if not form_type_exists(ext):
-		ext = "default"
+def generate_alpaca(fileid):
+	form_id = get_form_id_of_file(fileid)
+	if not form_type_exists(form_id):
+		form_id = "default"
 	data = get_data(fileid)
 	schema = {"type":"object"}
 	properties = {}
@@ -296,7 +296,7 @@ def generate_alpaca(fileid, ext):
 		cur.execute("""SELECT types.id, types.name FROM form_types 
 		LEFT JOIN form_types_to_attributes ON form_types_to_attributes.formid = form_types.id 
 		LEFT JOIN types ON form_types_to_attributes.typeid = types.id 
-		WHERE form_types.name = %s GROUP BY types.id ORDER BY types.name""", [ext])
+		WHERE form_types.name = %s GROUP BY types.id ORDER BY types.name""", [form_id])
 		for row in cur.fetchall():
 			properties[row[0]] = {"title":row[1], "description":"", "type":"string"}
 		schema["properties"] = properties
@@ -337,6 +337,24 @@ def get_fileExt(fileId):
 		db = get_database()
 		cur = db.cursor()
 		cur.execute("SELECT f.file_ext FROM filesystem f where f.id = %s",  [fileId])
+		count = cur.rowcount
+		rows = {}
+		if count == 0:
+			return('error')
+		for row in cur.fetchall():
+			return(row[0])
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
+def get_form_id_of_file(fileId):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT f.form_id FROM filesystem f where f.id = %s",  [fileId])
 		count = cur.rowcount
 		rows = {}
 		if count == 0:

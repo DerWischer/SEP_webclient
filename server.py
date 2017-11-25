@@ -111,9 +111,8 @@ class FileUpdateInformationHandler(BaseHandler):
 class FileTemplateHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
-        fileId = self.get_argument("fileId")
-        ext = database_handler.get_fileExt(fileId) # get file type
-        form = database_handler.generate_alpaca(fileId, ext) # pass type instead of ext
+        fileId = self.get_argument("fileId")        
+        form = database_handler.generate_alpaca(fileId)
         if form == None:
             self.finish(json.dumps({"success":False}));
             return
@@ -156,12 +155,12 @@ def get_path_for_upload_type(uploadtype, filename):
     
 def manipulate_file_stats_for_upload_type(uploadtype, stats):
         if uploadtype == "powder":
-            stats['ext'] = ".powder"
+            stats['form_id'] = ".powder"
             stats['parent'] = "POWDERS"
         elif uploadtype == "project":
             stats['parent'] = "PROJECTS"
         elif uploadtype == "customer":
-            stats['ext'] = ".customer"
+            stats['form_id'] = ".customer"
             stats['parent'] = "CUSTOMERS"
 
 

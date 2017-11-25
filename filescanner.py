@@ -73,11 +73,10 @@ def scan_recursive(folder_path):
 
 def generate_customer_file(customer_name):
     """ Generates a file with the specified name, the file extension 'customer', with the parent CUSTOMERS."""    
-    fileId = str(uuid.uuid4())
-    millis = int(round(time.time() * 1000))    
+    fileid = str(uuid.uuid4())
     timestamp = int(time.time())
     customer_file = {
-        'id':fileId,
+        'id':fileid,
         'name': customer_name,
         'path': None,
         'hashvalue': None,
@@ -87,7 +86,7 @@ def generate_customer_file(customer_name):
         'updated': timestamp,
         'isfolder':False,
         'parent': None
-    }    
+    }
     return customer_file
 
 def get_file_stats(parentid, filepath, filename):    
@@ -103,6 +102,7 @@ def get_file_stats(parentid, filepath, filename):
         'created': math.floor(mktime(gmtime(filestat.st_ctime))),
         'updated': math.floor(mktime(gmtime(filestat.st_mtime))),
         'isfolder':False,
-        'parent':parentid
+        'parent':parentid,
+        'form_id': os.path.splitext(filename)[1]
     }    
     return file_info
