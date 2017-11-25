@@ -10,6 +10,7 @@ import database_handler
 import notifier
 import MySQLdb
 import shutil
+import mimetypes
 
 DEVELOPMENT_MODE = True #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -88,10 +89,15 @@ class FileInformationHandler(BaseHandler):
         
     @tornado.web.authenticated
     def post(self):
-        fileId = self.get_argument("fileId")
-        fileInfo = self.get_argument("fileInfo")        
-        success = database_handler.store_fileinformation(fileId, fileInfo)
-        self.write(json.dumps({"success":success}))
+        try:
+            fileId = self.get_argument("fileId")
+            fileInfo = self.get_argument("fileInfo")
+            fileInfoJSON = json.loads(fileInfo)        
+            success = database_handler.store_fileinformation(fileId, fileInfoJSON)
+            self.write(json.dumps({"success":success}))
+        except ValueError as ex:
+            print (ex)
+            self.write(json.dumps({"success":False}))
 
 class FileUpdateInformationHandler(BaseHandler):
     @tornado.web.authenticated
@@ -198,7 +204,8 @@ class DownloadHandler(tornado.web.RequestHandler):
         if not os.path.exists(path):
             self.finish()
         else:
-            self.set_header('Content-Type', 'application/octet-stream')
+            self.set_header('Content-Length', os.path.getsize(path))
+            self.set_header('Content-Type', mimetypes.guess_type(path)[0])
             self.set_header('Content-Disposition', 'attachment; filename=%s' % filename)
             self.flush()
             with open(path, 'rb') as f:
@@ -358,8 +365,6 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "comment")
 
     formid = database_handler.create_form_type("default")
-    database_handler.create_form_type_to_type_link(formid, "name")    
-    database_handler.create_form_type_to_type_link(formid, "owner")
     database_handler.create_form_type_to_type_link(formid, "comment") 
     print ("Created Default Types")
 

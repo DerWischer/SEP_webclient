@@ -68,6 +68,15 @@ def get_file_system():
 			} 
 		return rows
 
+def enter_file_attributes(entry):
+	ignore = ["id", "path", "parent", "hashvalue", "isfolder"]
+	fileInfo = {}
+	for key in entry.keys():
+		if key not in ignore:
+			type_id = get_type_id(key)
+			fileInfo[type_id] = entry[key]
+	store_fileinformation(entry["id"], fileInfo)
+
 def file_entry(entry, user):
 	db = get_database()
 	cur = db.cursor()
@@ -77,6 +86,8 @@ def file_entry(entry, user):
     			file_type = "folder"
 		sql = ('INSERT INTO filesystem (id, filename, path, file_ext, parent, hashvalue, size, created, updated, type, owner) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
 		cur.execute(sql, [entry['id'], entry['name'], entry['path'], entry['ext'], entry['parent'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'], file_type, user])
+		if cur.rowcount > 0:
+    			enter_file_attributes(entry)
 	except Exception as ex:
 		print (ex)		
 	finally:
@@ -101,12 +112,11 @@ def get_folder_path_from_id(id):
 
 def store_fileinformation(fileId, fileInfo):
 	try:
-		json_arr = json.loads(fileInfo) 
 		db = get_database()
 		cur = db.cursor()
-		for key in json_arr:
+		for key in fileInfo:
 			sql = ('INSERT fileinformation (id, fileid, type, value) VALUES (UUID(),%s, %s,%s) ON DUPLICATE KEY UPDATE value=%s')
-			cur.execute(sql, [fileId,key, json_arr[key], json_arr[key]])
+			cur.execute(sql, [fileId,key, fileInfo[key], fileInfo[key]])
 		return True
 	except Exception as ex:
 		print (ex)
