@@ -134,7 +134,7 @@ def get_file_information(fileId):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s",  [fileId])
+		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name",  [fileId])
 		data = {}
 		for row in cur.fetchall():
 			data[row[0]] = row[1]
@@ -217,7 +217,7 @@ def get_types():
 	try:
 		db = get_database() 
 		cur = db.cursor() 
-		cur.execute("SELECT id, name FROM types")
+		cur.execute("SELECT id, name FROM types ORDER by name")
 		data = {}
 		for row in cur.fetchall():
 			data[row[0]] = row[1]
@@ -286,7 +286,7 @@ def generate_alpaca(fileid, ext):
 		cur.execute("""SELECT types.id, types.name FROM form_types 
 		LEFT JOIN form_types_to_attributes ON form_types_to_attributes.formid = form_types.id 
 		LEFT JOIN types ON form_types_to_attributes.typeid = types.id 
-		WHERE form_types.name = %s GROUP BY types.id""", [ext])
+		WHERE form_types.name = %s GROUP BY types.id ORDER BY types.name""", [ext])
 		for row in cur.fetchall():
 			properties[row[0]] = {"title":row[1], "description":"", "type":"string"}
 		schema["properties"] = properties
