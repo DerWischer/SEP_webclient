@@ -266,6 +266,11 @@ function searchFileSystem(m) {
 		if (value.name.toLowerCase().indexOf(m.toLowerCase()) > -1) {
 			found.push(value);
 		}
+		if (typeof value.ext == "string") {
+			if (value.ext.toLowerCase().indexOf(m.toLowerCase()) > -1) {
+				found.push(value);
+			}
+		}
 	});
 	displayList(null, found);
 }
@@ -324,7 +329,12 @@ function displayList(parent, childrenObjects) {
 		var fa = el("i", {class: iconName});
 		icon.appendChild(fa);
 		var name = el("section", {class: "col-lg-5 col-md-5"});
-		var h4 = el("h4", {html: value.name});
+		if (typeof value.ext == "string") {
+			var h4 = el("h4", {html: value.name + value.ext});
+		}
+		else {
+			var h4 = el("h4", {html: value.name});
+		}
 		name.appendChild(h4);
 		var owner = el("section", {class: "col-lg-2 col-md-2"});
 		var h4 = el("h4", {html: value.owner}); 
