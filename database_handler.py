@@ -58,7 +58,7 @@ def get_file_system():
 			rows[row[0]] = {
 				"id":row[0],
 				"name":row[1],
-				"file_ext":row[2],
+				"ext":row[2],
 				"created":row[3],
 				"updated":row[4],
 				"type":row[5],
