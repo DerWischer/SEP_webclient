@@ -21,7 +21,6 @@
 	  	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	  	<script src="/static/thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js">
 	  	</script>
-		<link href="/static/css/responsive_checkout.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<script src="/static/thirdParty/moment-with-locales/moment-with-locales.min.js"></script>
 		<script src="/static/js/filesystem.js"></script>
@@ -51,9 +50,9 @@
 						<ul class="nav nav-pills nav-stacked">
 							<li class="active">
 								<label for="name">Name</label>
-								<input class="form-control" id="new-project-name"/>
+								<input class="form-control" name="name" id="new-project-name"/>
 								<label for="customer">Customer</label>
-								<select class="form-control" id="new-project-customer">
+								<select class="form-control" name="customer" id="new-project-customer">
 
 								</select>
 							</li>
@@ -110,10 +109,10 @@
 									<div class="row">
 										<div class="col-md-12">
 												<div class="form-group">
-													<a href="/account"><button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate">Change Account</span></button></a>
+													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><a href="/account"><span class="translate">Change Account</span></a></button>
 												</div>
 												<div class="form-group">
-													<a href="/logout"><button type="submit" class="btn btn-danger btn-block"><span class="translate">Logout</span></button></a>
+													<button type="submit" class="btn btn-danger btn-block"><a href="/logout"><span class="translate">Logout</span></a></button>
 												</div>
 												<div class="form-group">
 													<button id="swedish-btn" class="btn btn-info btn-lg" type="button">
@@ -178,7 +177,7 @@
 						<ul id="info-list">
 
 						</ul>
-						<button id="delete-btn" class="btn btn-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span>																					
+						<button id="delete-btn" class="btn btn-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span></button>																					
 					</section>
 				</section>
 			</section>
@@ -198,7 +197,6 @@
 			<li><a class="translate" id="changeAlert" tabindex="-1" href="#"><span class="translate">Notify Me Of Changes</span></a></li>			
 			<li><a class="translate" tabindex="-1" href="#">Something else maybe?</a></li>
 		</ul>
-		</section>
 		</section>
 		<!--M0DALS-->
 		<section class="modal fade" id="traceModal" role="dialog">
