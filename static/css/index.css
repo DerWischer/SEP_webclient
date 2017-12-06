@@ -6,6 +6,7 @@
 #sidebar {
 	min-width:250px;
 	max-width:250px;
+	
 }
 #sidebar.active {
 	margin-left:-250px;
@@ -134,6 +135,7 @@ body {
     height: 15mm;
     width: 100vw;
     margin-left:-15px;
+	overflow:hidden;
 }
 
 
