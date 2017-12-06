@@ -132,7 +132,7 @@ class UploadHandler(BaseHandler):
             with open(filepath, 'wb') as output_file:
                 output_file.write(file['body'])
                 output_file.flush()
-            entry = filescanner.get_file_stats(parent_folder, filepath, filename)
+            entry = files.get_file_stats(parent_folder, filepath, filename)
             if uploadtype != "file":
                 newpath = get_path_for_upload_type(uploadtype, filename)
                 if newpath != None:
@@ -166,7 +166,7 @@ class NewCustomerHandler(BaseHandler):
     def post(self):
         """ Add a customer to the database """
         customer_name = self.get_argument("name")
-        entry = filescanner.generate_customer_file(customer_name)
+        entry = files.generate_customer_file(customer_name)
         manipulate_file_stats_for_upload_type("customer", entry)
         database_handler.file_entry(entry, self.get_current_user())
         self.finish(json.dumps({"success":True}))

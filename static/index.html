@@ -21,6 +21,7 @@
 	  	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	  	<script src="/static/thirdParty/bootstrap-3.3.7-dist/js/bootstrap.min.js">
 	  	</script>
+		<link href="/static/css/responsive_checkout.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<script src="/static/thirdParty/moment-with-locales/moment-with-locales.min.js"></script>
 		<script src="/static/js/filesystem.js"></script>
@@ -42,7 +43,17 @@
 	</head>
 	<body class="no-scroll">
 		<input id="file-input" type="file" name="file" class="hidden" multiple/>
-		<input id="folder-input" type="file" name="file" class="hidden" multiple webkitdirectory mozdirectory/>
+		<section class="wrapper">
+		<nav id="sidebar">
+			<section class="siderbar-header">
+				Hello World
+			</section>
+			<ul class="list-unstyled components">
+				<li class="active">Page 1</li>	
+				<li>Page 2</li>
+			</ul>		
+		</nav>
+		<section class="full-height">
 		<section class="custom-nav">
 			<section class="container-fluid">
 				<section class="row">
@@ -58,6 +69,9 @@
 							<li class="dropdown-header">Create</li> 
 							<li><a href="#" id="new-folder-btn">Folder</a></li>
 							<li><a href="#" id="new-customer-btn">Customer</a></li>
+							<li class="dropdown-header">Wizard</li> 
+							<li><a href="#" id="project-wizard-btn">Project</a></li>
+							<li><a href="#" id="sidebarCollapse">Project Sidebar</a></li>
 							</ul>
 						</div> 
 					</section>
@@ -103,7 +117,6 @@
 			<li><a class="translate" href="#">Action</a></li>
 			<li><a class="translate" href="#">Another action</a></li>
 		</ul>
-		<section class="container-fluid">
 			<section class="container-fluid">
 				<div class="row no-margin">
 					<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 breadcrumb-element">
@@ -119,40 +132,39 @@
 						</section>
 					</div>
 				</div>
-			</section>
-		<section class="row">
-			<section class="col-md-9">
-				<section id="tableViewport" style="margin-top:10px;">
-					<section class="container-fluid">
-					<section class="row" style="border-bottom:1px solid #C9C9C9">
-						<section class="col-lg-1 col-md-1">
+			<section class="row">
+				<section class="col-md-9">
+					<section id="tableViewport" style="margin-top:10px;">
+						<section class="container-fluid">
+						<section class="row" style="border-bottom:1px solid #C9C9C9">
+							<section class="col-lg-1 col-md-1">
+								
+							</section>
+							<section class="col-lg-6 col-md-6">
+								<p><b class="translate default-font">Name</b></p>
+							</section>
+							<section class="col-lg-2 col-md-2">
+								<p><b class="translate default-font">Owner</b></p>
+							</section>
+							<section class="col-lg-3 col-md-3">
+								<p><b class="translate default-font">Date</b></p>
+							</section>
+						</section>
+						</section>
+						<section id="tableView" class="container-fluid fixed-height-400 auto-scroll-y">
 							
 						</section>
-						<section class="col-lg-6 col-md-6">
-							<p><b class="translate default-font">Name</b></p>
-						</section>
-						<section class="col-lg-2 col-md-2">
-							<p><b class="translate default-font">Owner</b></p>
-						</section>
-						<section class="col-lg-3 col-md-3">
-							<p><b class="translate default-font">Date</b></p>
 						</section>
 					</section>
-					</section>
-					<section id="tableView" class="container-fluid fixed-height-400 auto-scroll-y">
-						
-					</section>
-					</section>
-				</section>
-				<section class="col-md-3 no-margin file-info pre-scrollable">
-					<h3>File Information</h3>
-					<ul id="info-list">
+					<section class="col-md-3 no-margin file-info pre-scrollable">
+						<h3>File Information</h3>
+						<ul id="info-list">
 
-					</ul>
-					<button id="delete-btn" class="btn btn-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span>																					
+						</ul>
+						<button id="delete-btn" class="btn btn-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span>																					
+					</section>
 				</section>
 			</section>
-		</section>
 		</section>
 		<ul id="contextMenu" class="dropdown-menu hidden">
 			<li><a class="translate" id="traceDropdown" tabindex="-1" href="#" data-toggle="modal" data-target="#traceModal">
@@ -169,6 +181,9 @@
 			<li><a class="translate" id="changeAlert" tabindex="-1" href="#"><span class="translate">Notify Me Of Changes</span></a></li>			
 			<li><a class="translate" tabindex="-1" href="#">Something else maybe?</a></li>
 		</ul>
+		</section>
+		</section>
+		<!--M0DALS-->
 		<section class="modal fade" id="traceModal" role="dialog">
 			<section class="modal-dialog">
 				<section class="modal-content">

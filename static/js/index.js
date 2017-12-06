@@ -139,6 +139,12 @@ function handle_upload(upload_type) {
 	request.send(data);
 }
 $(document).ready(function() {
+	$("#sidebarCollapse").on("click", function() {
+		$("#sidebar").toggleClass("active");
+	});
+	$("#project-wizard-btn").click(function() {
+		$("#new-project-wizard").modal("show");
+	});
 	$("#advanced-search-btn").click(function() {
 		var searchJSON = {};
 		$(".search-query").each(function() {
