@@ -381,7 +381,8 @@ def create_form_type_links():
 if __name__ == "__main__":
     if DEVELOPMENT_MODE:
         print ("****************WARNING: DEVELOPMENT MODE IS ACTIVE*******************")
-        shutil.rmtree("uploads")
+        if os.path.exists("uploads"):
+            shutil.rmtree("uploads")
         database_handler.drop_database()
     if not os.path.exists("uploads"):
         os.mkdir("uploads")
