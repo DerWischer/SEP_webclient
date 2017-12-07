@@ -430,6 +430,22 @@ def authenticate_user(code):
 		}
 	return rows
 
+def create_account(id, name, code, privilege):
+	sql = "INSERT INTO users VALUES (%s, %s, %s, %s)"
+	arg = (str(id), name, str(code), str(privilege))
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute(sql, arg)
+		db.commit()
+		return True
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.close()
+
 def update_account(id, name):
 	try:
 		db = get_database()

@@ -154,7 +154,7 @@ $(document).ready(function() {
                     window.location.href = ("http://localhost:8888/account")
                 }
                 else {
-                    alert("You do not have permission to do this ("+data.privilege+")")
+                    alert("You do not have permission to do this: Privilege -> ("+data.privilege+")")
                 }
             },
             error:function() {

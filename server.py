@@ -43,6 +43,7 @@ class AccountHandler(BaseHandler):
     def post(self):
         name = self.get_argument("name")
         success = database_handler.update_account(self.get_current_user(), name)
+        print(success)
         self.write(json.dumps({"success":success}))
         self.redirect("/")
 
@@ -58,6 +59,25 @@ class CheckPrivilege(BaseHandler):
         privilege_level = database_handler.check_privilege(self.get_current_user())
         self.write(json.dumps({"success":True, "privilege":privilege_level["privilege"]}))
 
+class CreateAccoundHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        privilege_level = database_handler.check_privilege(self.get_current_user())
+        check = privilege_level["privilege"]
+        if(check >= "2"):
+            self.render("createAccount.html")
+        else:
+            print("You are not permitted: Privilege -> "+check)
+            self.redirect("/")
+    def post(self):
+        id = self.get_argument("ID")
+        name = self.get_argument("name")
+        code = self.get_argument("code")
+        privilege = self.get_argument("privilege")
+        create_account = database_handler.create_account(id, name, code, privilege)
+        print(create_account)
+        self.write(json.dumps({"success":create_account}))
+        self.redirect("/")
 
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
@@ -285,6 +305,7 @@ def make_app():
             (r"/search", AdvancedSearchHandler),    
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
+            (r"/createAccount", CreateAccoundHandler),
             (r"/newFolder", NewFolderHandler),
             (r"/newCustomer", NewCustomerHandler),
             (r"/newFileName", RenameFileHandler),
