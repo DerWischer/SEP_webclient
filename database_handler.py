@@ -444,3 +444,14 @@ def get_account_details(id):
 	finally:
 		cur.close()
 		db.close()
+
+def check_privilege(id):
+	db = get_database()
+	cur = db.cursor()
+	user = cur.execute("SELECT privilege FROM users WHERE id = %s LIMIT 1", [id])
+	rows = {}
+	for row in cur.fetchall():
+		rows = {
+			"privilege":row[0]
+		}
+	return rows

@@ -29,9 +29,8 @@ class LoginHandler(BaseHandler):
         code = self.get_argument("code")        
         user_info = database_handler.authenticate_user(code)
         username = user_info["name"]
-        user_id = user_info["user_id"] # TODO Resolve username from code
+        user_id = user_info["user_id"]
         self.set_secure_cookie("user", user_id)
-        #print("Secure cookie set for user: "+ username +" with code: " + code)
         self.redirect("/")
 
 class LogoutHandler(BaseHandler):
@@ -52,7 +51,13 @@ class GetAccountDetails(BaseHandler):
     def get(self):
         details = database_handler.get_account_details(self.get_current_user())
         self.write(json.dumps({"success":True, "name":details["name"]}))
-            
+
+class CheckPrivilege(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        privilege_level = database_handler.check_privilege(self.get_current_user())
+        self.write(json.dumps({"success":True, "privilege":privilege_level["privilege"]}))
+
 
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
@@ -273,6 +278,7 @@ def make_app():
             (r"/newFolder", NewFolderHandler),
             (r"/newCustomer", NewCustomerHandler),
             (r"/getAccountDetails", GetAccountDetails),
+            (r"/checkPrivilege", CheckPrivilege),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler), 
             (r"/fileupdateinformation", FileUpdateInformationHandler),     
@@ -374,15 +380,14 @@ def create_form_type_links():
     print ("Created Default Types")
 
 #def scan_filesystem(): 
-    #for entry in filescanner.scan_recursive(ROOT):
+    #for entry in files.scan_recursive(ROOT):
     #    database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 # Main function ---------------------------------------------------------------
 if __name__ == "__main__":
     if DEVELOPMENT_MODE:
         print ("****************WARNING: DEVELOPMENT MODE IS ACTIVE*******************")
-        if os.path.exists("uploads"):
-            shutil.rmtree("uploads")
+        shutil.rmtree("uploads")
         database_handler.drop_database()
     if not os.path.exists("uploads"):
         os.mkdir("uploads")
