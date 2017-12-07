@@ -154,7 +154,6 @@ def get_path_for_upload_type(uploadtype, filename):
         elif (uploadtype == "customer"):
             return os.path.join("uploads", "customers", filename)
         return None
-    
 def manipulate_file_stats_for_upload_type(uploadtype, stats):        
         if uploadtype == "powder":
             stats['form_id'] = database_handler.get_form_type_id_by_name(".powder")
@@ -165,8 +164,6 @@ def manipulate_file_stats_for_upload_type(uploadtype, stats):
         elif uploadtype == "customer":
             stats['form_id'] = database_handler.get_form_type_id_by_name(".customer")
             stats['parent'] = "CUSTOMERS"
-
-
 class NewCustomerHandler(BaseHandler):    
     def post(self):
         """ Add a customer to the database """
@@ -195,7 +192,20 @@ class NewFolderHandler(tornado.web.RequestHandler):
         success = database_handler.create_folder(name, path, parent)
         if (success):
             self.finish(json.dumps({"success":success}))
-
+class RenameFileHandler(BaseHandler):    
+    def post(self):
+        """ Rename File in OS and database """
+        new_file_name = self.get_argument("name")
+        fileId = self.get_argument("fileId")
+        print(new_file_name)
+        print(fileId)
+        path, name, ext = database_handler.get_file_path(fileId)
+        new_file_path = path.replace(name,new_file_name)
+        print(new_file_path)
+        os.rename(path, new_file_path)
+        database_handler.update_file_name(fileId, new_file_name)
+        database_handler.update_filesystem_name(fileId, new_file_name,new_file_path)
+        self.finish(json.dumps({"success":True}))
 class DownloadHandler(tornado.web.RequestHandler):
     def streaming_callback(chunk):
         self.write(chunk)
@@ -277,6 +287,7 @@ def make_app():
             (r"/accountUpdate", AccountHandler),
             (r"/newFolder", NewFolderHandler),
             (r"/newCustomer", NewCustomerHandler),
+            (r"/newFileName", RenameFileHandler),
             (r"/getAccountDetails", GetAccountDetails),
             (r"/checkPrivilege", CheckPrivilege),
             (r"/filesystem", FileSystemHandler),

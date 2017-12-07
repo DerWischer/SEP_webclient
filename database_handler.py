@@ -156,6 +156,20 @@ def get_file_information(fileId):
 		cur.close()
 		db.commit()
 
+def update_file_name(fileId, newName):
+        db = get_database()
+        cur = db.cursor()
+        cur.execute("Update fileinformation set fileinformation.value  = %s WHERE fileinformation.fileid = %s  and type = (select id from types where name = 'name')",  [newName,fileId])
+        cur.close()
+        db.commit()  
+
+def update_filesystem_name(fileId, newName, newPath):
+        db = get_database()
+        cur = db.cursor()
+        cur.execute("Update filesystem set filename  = %s, path = %s WHERE id = %s ",  [newName,newPath,fileId])
+        cur.close()
+        db.commit()  
+
 def create_form_type_to_type_link(formId, type):
 	try:
 		db = get_database()
