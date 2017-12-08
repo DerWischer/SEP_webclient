@@ -186,12 +186,12 @@ function get_powders_ajax() {
 		method:"GET",
 		success:function(data) {
 			if (!data.success) {
-				alert("could not get customers");
+				alert("could not get powders");
 				return;
 			}
-			var holder = $("#new-project-powders")[0];
+			var holder = $("#new-project-powder")[0];
 			$(holder).empty();
-			$.each(data.powders, function(key, value) {
+			$.each(data.customers, function(key, value) {
 				var option = el("option", {value:key, html:value});
 				$(holder).append(option);
 			});
@@ -200,6 +200,7 @@ function get_powders_ajax() {
 }
 $(document).ready(function() {
 	get_customers_ajax();
+	get_powders_ajax();
 	$("#new-project-next").click(function() {
 		switch ($(this).attr("data-stage")) {
 			case "naming":
@@ -342,7 +343,7 @@ $(document).ready(function() {
 					return;
 				}
 				refreshFilesystem();
-				get_customers_ajax();
+				get_customers_ajax();							
 			}
 		});	
 	});	

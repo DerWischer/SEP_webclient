@@ -8,6 +8,9 @@
 #sidebar {
 	min-width:250px;
 	max-width:250px;
+	position: relative;
+
+	z-index: 60;
 	
 }
 #sidebar.active {
@@ -68,7 +71,7 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 	border-right: 1px solid #47748b;
 	height:100%;
-	box-shadow: 5px 15px 5px rgba(0, 0, 0, 0.19);
+	box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.19);
 }
 
 #sidebar .sidebar-header {
@@ -341,6 +344,7 @@ breadcrumb-base span{
 	position:relative;
 	box-shadow: -5px 0px 15px 1px rgba(0, 0, 0, 0.19);
 	z-index:50;
+	padding-top: 25px;
 }
 
 .custom-no-padding {

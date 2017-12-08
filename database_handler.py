@@ -430,6 +430,22 @@ def get_customers():
 	finally:
 		cur.close()
 
+def get_powders():
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT id, filename FROM filesystem where parent = 'powders'")
+		count = cur.rowcount
+		rows = {}
+		for row in cur.fetchall():
+			rows[row[0]] = row[1]
+		return rows
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+
 def delete_from_filesystem(fileid):
 	try:
 		db = get_database()
