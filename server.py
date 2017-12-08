@@ -270,6 +270,25 @@ class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
             path="index"            
         super(AuthStaticFileHandler, self).get(path + ".html")
 
+class CreateNewProject(BaseHandler):
+    @tornado.web.authenticated
+    def post(self):
+        name = self.get_argument("name")
+        customer = self.get_argument("customer")
+        if len(name) == 0 or len(customer) == 0:
+            self.finish(json.dumps({"success":False, "reason":"Missing Values"}))
+            return
+        filepath = os.path.join(ROOT, "uploads", "projects", name)
+        with open(filepath, "w") as file:
+            file.write(json.dumps({"name":name, "customer":customer}))
+        entry = files.get_file_stats("projects", filepath, name)
+        database_handler.file_entry(entry, self.get_current_user())
+        self.finish(json.dumps({"success":True}))
+
+class CustomerHandler(BaseHandler):
+    def get(self):
+        self.finish(json.dumps({"success":True, "customers":database_handler.get_customers()}))
+
 class AdvancedSearchHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):        
@@ -301,11 +320,13 @@ def make_app():
         login_url="/login",
         handlers=[
             (r"/upload", UploadHandler),
-            (r"/types", TypesHandler),        
+            (r"/types", TypesHandler),   
+            (r"/customers", CustomerHandler),        
             (r"/search", AdvancedSearchHandler),    
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
             (r"/createAccount", CreateAccoundHandler),
+            (r"/createNewProject", CreateNewProject),
             (r"/newFolder", NewFolderHandler),
             (r"/newCustomer", NewCustomerHandler),
             (r"/newFileName", RenameFileHandler),

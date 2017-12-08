@@ -156,6 +156,22 @@ def get_file_information(fileId):
 		cur.close()
 		db.commit()
 
+def create_new_project(name, customer):
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("INSERT INTO types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name")
+		data = {}
+		for row in cur.fetchall():
+			data[row[0]] = row[1]
+		return data
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
+		db.commit()
+
 def update_file_name(fileId, newName):
         db = get_database()
         cur = db.cursor()
@@ -380,7 +396,6 @@ def get_fileExt(fileId):
 		return None
 	finally:
 		cur.close()
-		db.commit()
 
 def get_form_id_of_file(fileId):
 	try:
@@ -398,7 +413,22 @@ def get_form_id_of_file(fileId):
 		return None
 	finally:
 		cur.close()
-		db.commit()
+
+def get_customers():
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute("SELECT id, filename FROM filesystem where parent = 'customers'")
+		count = cur.rowcount
+		rows = {}
+		for row in cur.fetchall():
+			rows[row[0]] = row[1]
+		return rows
+	except Exception as ex:
+		print (ex)
+		return None
+	finally:
+		cur.close()
 
 def delete_from_filesystem(fileid):
 	try:

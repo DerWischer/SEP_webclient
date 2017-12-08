@@ -138,7 +138,49 @@ function handle_upload(upload_type) {
 	request.setRequestHeader('Cache-Control', 'no-cache');
 	request.send(data);
 }
+function create_new_project(name, customer) {
+	$.ajax({
+		url:"/createNewProject",
+		dataType:"JSON",
+		method:"POST",
+		data:{"name":name, "customer":customer},
+		success:function(data) {
+			if (!data.success) {
+				alert("Error");
+				return;
+			}
+			refreshFilesystem();
+			alert("Project Created");
+		}
+	});
+}
+function get_customers_ajax() {
+	$.ajax({
+		url:"/customers",
+		dataType:"JSON", 
+		method:"GET",
+		success:function(data) {
+			if (!data.success) {
+				alert("could not get customers");
+				return;
+			}
+			var holder = $("#new-project-customer")[0];
+			$(holder).empty();
+			$.each(data.customers, function(key, value) {
+				var option = el("option", {value:key, html:value});
+				$(holder).append(option);
+			});
+		}
+	})
+}
 $(document).ready(function() {
+	get_customers_ajax();
+	$("#new-project-next").click(function() {
+		var project_name = $("#new-project-name").val();
+		var customer = $("#new-project-customer").val();
+		create_new_project(project_name, customer);
+
+	});
 	$("#btnChangeAccount").on("click", function() {
         $.ajax({
             url:"/checkPrivilege",
@@ -241,6 +283,7 @@ $(document).ready(function() {
 					return;
 				}
 				refreshFilesystem();
+				get_customers_ajax();
 			}
 		});	
 	});	
