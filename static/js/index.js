@@ -94,24 +94,20 @@ function CreateSearchCrumb(searchTerm) {
 	breadcrumb.appendChild(span);
 	holder.append(breadcrumb);
 }
-function handle_upload(upload_type) {
-	var fileInput = $('#file-input');
+function handle_upload(upload_type, file_input_id, parent_folder) {
+	var file_input_id = file_input_id || "file-input";
+	var parent_folder = parent_folder || getFolder();
+	var fileInput = $('#' + file_input_id);
 	data = new FormData();
 	request = new XMLHttpRequest();
-	/*var notify = $.notify('<strong>Uploading</strong>', {
-		type: 'success',
-		allow_dismiss: false,
-		showProgressbar: true
-	});*/
 	for (var i = 0; i < fileInput.prop("files").length; ++i){
 		data.append('file', fileInput.prop("files")[i]);
 	}
 	data.append('upload-type', $("#file-input").attr("data-type"));
 	$("#file-input").attr("data-type", "");
 	data.append('ajax', true);
-	data.append('folder', getFolder());
+	data.append('folder', parent_folder);
 	request.upload.addEventListener('progress', function(event) {
-		// If the event can be calculated.
 		if(event.lengthComputable) {
 			var percent = Math.round((event.loaded / event.total) * 100);
 			//notify.update('progress', percent);
@@ -150,6 +146,8 @@ function create_new_project(name, customer) {
 				return;
 			}
 			refreshFilesystem(data.id);
+			handle_upload(null, "cad-file", data.id);
+			$("#new-project-next").attr("project_id", data.id);
 			change_wizard_tab("uploading-stl-files");
 		}
 	});
@@ -181,6 +179,25 @@ function get_customers_ajax() {
 		}
 	})
 }
+function get_powders_ajax() {
+	$.ajax({
+		url:"/powders",
+		dataType:"JSON", 
+		method:"GET",
+		success:function(data) {
+			if (!data.success) {
+				alert("could not get customers");
+				return;
+			}
+			var holder = $("#new-project-powders")[0];
+			$(holder).empty();
+			$.each(data.powders, function(key, value) {
+				var option = el("option", {value:key, html:value});
+				$(holder).append(option);
+			});
+		}
+	})
+}
 $(document).ready(function() {
 	get_customers_ajax();
 	$("#new-project-next").click(function() {
@@ -192,16 +209,20 @@ $(document).ready(function() {
 				break;
 			case "uploading-stl-files":
 				change_wizard_tab("uploading-magics-files");
+				handle_upload(null, "stl-file", $(this).attr("project_id"));
 				break;
 			case "uploading-magics-files":
 				change_wizard_tab("uploading-slm-files");
+				handle_upload(null, "slm-file", $(this).attr("project_id"));
 				break;
 			case "uploading-slm-files":
 				change_wizard_tab("uploading-image-files");
+				handle_upload(null, "magic-file", $(this).attr("project_id"));
 				break;
 			case "uploading-image-files":
 				change_wizard_tab("additional");
 				$(this).addClass("hidden");
+				handle_upload(null, "image-file", $(this).attr("project_id"));
 				break;
 			case "additonal":
 				change_wizard_tab("goodbye");
