@@ -150,7 +150,10 @@ function create_new_project(name, customer) {
 				return;
 			}
 			refreshFilesystem();
-			alert("Project Created");
+			var result = confirm("Project Created: Would you like to view your project?");
+			if (result) {
+				setFolder(data.id);
+			}
 		}
 	});
 }

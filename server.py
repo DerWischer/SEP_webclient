@@ -279,11 +279,14 @@ class CreateNewProject(BaseHandler):
             self.finish(json.dumps({"success":False, "reason":"Missing Values"}))
             return
         filepath = os.path.join(ROOT, "uploads", "projects", name)
-        with open(filepath, "w") as file:
-            file.write(json.dumps({"name":name, "customer":customer}))
-        entry = files.get_file_stats("projects", filepath, name)
-        database_handler.file_entry(entry, self.get_current_user())
-        self.finish(json.dumps({"success":True}))
+        try:
+            os.makedirs(filepath)
+            entry = files.get_folder_stats("PROJECTS", filepath, name)
+            database_handler.file_entry(entry, self.get_current_user())
+            self.finish(json.dumps({"success":True, "id":entry["id"]}))
+        except Exception as ex:
+            print (ex)
+            self.finish(json.dumps({"success":True}))
 
 class CustomerHandler(BaseHandler):
     def get(self):
