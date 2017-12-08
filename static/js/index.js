@@ -181,8 +181,28 @@ function get_customers_ajax() {
 		}
 	})
 }
+function get_powders_ajax() {
+	$.ajax({
+		url:"/powders",
+		dataType:"JSON", 
+		method:"GET",
+		success:function(data) {
+			if (!data.success) {
+				alert("could not get powders");
+				return;
+			}
+			var holder = $("#new-project-powder")[0];
+			$(holder).empty();
+			$.each(data.customers, function(key, value) {
+				var option = el("option", {value:key, html:value});
+				$(holder).append(option);
+			});
+		}
+	})
+}
 $(document).ready(function() {
 	get_customers_ajax();
+	get_powders_ajax();
 	$("#new-project-next").click(function() {
 		switch ($(this).attr("data-stage")) {
 			case "naming":
@@ -321,7 +341,7 @@ $(document).ready(function() {
 					return;
 				}
 				refreshFilesystem();
-				get_customers_ajax();
+				get_customers_ajax();							
 			}
 		});	
 	});	
