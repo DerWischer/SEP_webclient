@@ -156,6 +156,20 @@ def get_file_information(fileId):
 		cur.close()
 		db.commit()
 
+def update_file_name(fileId, newName):
+        db = get_database()
+        cur = db.cursor()
+        cur.execute("Update fileinformation set fileinformation.value  = %s WHERE fileinformation.fileid = %s  and type = (select id from types where name = 'name')",  [newName,fileId])
+        cur.close()
+        db.commit()  
+
+def update_filesystem_name(fileId, newName, newPath):
+        db = get_database()
+        cur = db.cursor()
+        cur.execute("Update filesystem set filename  = %s, path = %s WHERE id = %s ",  [newName,newPath,fileId])
+        cur.close()
+        db.commit()  
+
 def create_form_type_to_type_link(formId, type):
 	try:
 		db = get_database()
@@ -416,6 +430,22 @@ def authenticate_user(code):
 		}
 	return rows
 
+def create_account(id, name, code, privilege):
+	sql = "INSERT INTO users VALUES (%s, %s, %s, %s)"
+	arg = (str(id), name, str(code), str(privilege))
+	try:
+		db = get_database()
+		cur = db.cursor()
+		cur.execute(sql, arg)
+		db.commit()
+		return True
+	except Exception as ex:
+		print (ex)
+		return False
+	finally:
+		cur.close()
+		db.close()
+
 def update_account(id, name):
 	try:
 		db = get_database()
@@ -444,3 +474,14 @@ def get_account_details(id):
 	finally:
 		cur.close()
 		db.close()
+
+def check_privilege(id):
+	db = get_database()
+	cur = db.cursor()
+	user = cur.execute("SELECT privilege FROM users WHERE id = %s LIMIT 1", [id])
+	rows = {}
+	for row in cur.fetchall():
+		rows = {
+			"privilege":row[0]
+		}
+	return rows

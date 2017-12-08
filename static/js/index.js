@@ -139,6 +139,29 @@ function handle_upload(upload_type) {
 	request.send(data);
 }
 $(document).ready(function() {
+	$("#btnChangeAccount").on("click", function() {
+        $.ajax({
+            url:"/checkPrivilege",
+            method:"GET",
+            dataType:"JSON",
+            success:function(data) {
+                alert(data.privilege)
+                if (!data.success) {
+                    alert("User not found, please contact admin");
+                    return;
+                }
+                if (data.privilege == 3) {
+                    window.location.href = ("http://localhost:8888/account")
+                }
+                else {
+                    alert("You do not have permission to do this: Privilege -> ("+data.privilege+")")
+                }
+            },
+            error:function() {
+                alert("could not reach server");
+            }
+        })
+    });
 	$("#sidebarCollapse").on("click", function() {
 		$("#sidebar").toggleClass("active");
 	});
@@ -200,6 +223,7 @@ $(document).ready(function() {
 			}
 		});	
 	});
+
 	$("#new-customer-btn").click(function() {
 		var name = prompt("Name of new customer:");
 		if (!name) {
@@ -220,6 +244,7 @@ $(document).ready(function() {
 			}
 		});	
 	});	
+
 	$("#file-input").on("change", function() {
 		handle_upload();
 	});
@@ -544,6 +569,28 @@ $(document).ready(function() {
 		 	$("#tableView").remove(a);
 		}
 	});
+
+	$("#dropRename").click(function() {
+		var name = prompt("New name of the file:");
+		if (!name) {
+			return;
+		}
+		$.ajax({
+			url:"/newFileName",
+			method:"POST",
+			dataType:"JSON",
+			data:{"fileId":$("#contextMenu").attr("data-id"),"name":name},
+			success: function(data) {
+				console.log(data.success);
+				if (!data.success) {
+					alert("Could not update file name");
+					return;
+				}
+				refreshFilesystem();
+			}
+		});	
+	});	
+
 	$("#addNewType").on("click", function() {
 		var numOfCriteria = $("#criteria .search-query").length;
 		CRITERIA = count(window.types);
