@@ -149,13 +149,18 @@ function create_new_project(name, customer) {
 				alert("Error");
 				return;
 			}
-			refreshFilesystem();
-			var result = confirm("Project Created: Would you like to view your project?");
-			if (result) {
-				setFolder(data.id);
-			}
+			refreshFilesystem(data.id);
+			change_wizard_tab("uploading-stl-files");
 		}
 	});
+}
+function upload_stl_files() {
+	change_wizard_tab("uploading-magics-files");
+}
+function change_wizard_tab(tab_name) {
+	$(".wizard-tab").addClass("hidden");
+	$(".wizard-tab[data-page='" + tab_name + "']").removeClass("hidden");
+	$("#new-project-next").attr("data-stage", tab_name);
 }
 function get_customers_ajax() {
 	$.ajax({
@@ -179,10 +184,35 @@ function get_customers_ajax() {
 $(document).ready(function() {
 	get_customers_ajax();
 	$("#new-project-next").click(function() {
-		var project_name = $("#new-project-name").val();
-		var customer = $("#new-project-customer").val();
-		create_new_project(project_name, customer);
-
+		switch ($(this).attr("data-stage")) {
+			case undefined:
+				var project_name = $("#new-project-name").val();
+				var customer = $("#new-project-customer").val();
+				create_new_project(project_name, customer);
+				break;
+			case "uploading-stl-files":
+				change_wizard_tab("uploading-magics-files");
+				break;
+			case "uploading-magics-files":
+				change_wizard_tab("uploading-slm-files");
+				break;
+			case "uploading-slm-files":
+				change_wizard_tab("additional");
+				$(this).addClass("hidden");
+				break;
+			case "additonal":
+				change_wizard_tab("goodbye");
+				$("attachedInfoModal").modal("show");
+				break;
+			case "goodbye":
+				break;
+		}
+	});
+	$("#project-wizard-no").click(function() {
+		change_wizard_tab("goodbye");
+	});
+	$("#project-wizard-hide").click(function() {
+		$("#sidebarCollapse").click();
 	});
 	$("#btnChangeAccount").on("click", function() {
         $.ajax({
@@ -209,6 +239,7 @@ $(document).ready(function() {
     });
 	$("#sidebarCollapse").on("click", function() {
 		$("#sidebar").toggleClass("active");
+		$("#new-project-next").removeClass("hidden");
 	});
 	$("#project-wizard-btn").click(function() {
 		$("#new-project-wizard").modal("show");

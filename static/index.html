@@ -47,21 +47,70 @@
 				</section>
 				<section class="row">
 					<section class="col-md-12">
-						<ul class="nav nav-pills nav-stacked">
-							<li class="active">
+						<section class="wizard-tab" data-page="naming">
+							<label>Hey! Looks like you want to create a project! Please fill in the following fields and press next</label>
+							<hr>
+							<section class="form-group">
 								<label for="name">Name</label>
 								<input class="form-control" name="name" id="new-project-name"/>
+							</section>
+							<section class="form-group">
 								<label for="customer">Customer</label>
 								<select class="form-control" name="customer" id="new-project-customer">
 
 								</select>
-								<label>Some file</label>
-								<input type="file" id="file-1"/>
-								<label>Some file</label>
-								<input type="file" id="file-2"/>
-
-							</li>
-						</ul>
+							</section>
+							<section class="form-group">
+								<label for="customer">Material <span class="italic">(optional)</span></label>
+								<select class="form-control" name="material" id="new-project-material">
+									
+								</select>
+							</section>
+							<section class="form-group">
+								<label for="cad-file">Customer PRT files</label>
+								<input type="file" id="cad-file" name="cad-file" multiple/>
+							</section>
+						</section>
+						<section class="wizard-tab hidden" data-page="uploading-stl-files"> 
+							<label>Great! You have created a project, but now you need to add the generated STL files</label>
+							<hr>
+							<section class="form-group">
+								<label>STL files</label>
+								<input type="file" id="cad-file"/>
+							</section>
+						</section>
+						<section class="wizard-tab hidden" data-page="uploading-magics-files"> 
+							<label>Now we are flying, next step is to upload the generated magics files</label>
+							<hr>
+							<section class="form-group">
+								<label>Magic files</label>
+								<input type="file" id="magics-file"/>
+							</section>
+						</section>
+						<section class="wizard-tab hidden" data-page="uploading-slm-files"> 
+							<label>Hot dog, that was fast!, now please upload the new SLM files</label>
+							<hr>
+							<section class="form-group">
+								<label>SLM files</label>
+								<input type="file" id="slm-file"/>
+							</section>
+						</section>
+						<section class="wizard-tab hidden" data-page="additional"> 
+							<label>Wow, amazing!, you have now created an awesome new project, is there anything else you want to add?</label>
+							<hr>
+							<section class="form-group">
+								<button class="btn btn-success btn-block" id="project-wizard-additonal">Yes</button>
+								<button class="btn btn-danger btn-block" id="project-wizard-no">No</button>
+							</section>
+						</section>
+						<section class="wizard-tab hidden" data-page="goodbye"> 
+							<label>It was an honour to serve! Goodbye for now</label>
+							<hr>
+							<section class="form-group">
+								<button class="btn btn-success btn-block" id="project-wizard-hide">Hide</button>
+								<button class="btn btn-danger btn-block" id="project-wizard-create-new-project">Create Another Project</button>
+							</section>
+						</section>
 					</section>	
 					<button class="btn btn-info btn-block" id="new-project-next">Next</button>	
 				</section>

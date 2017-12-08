@@ -85,6 +85,9 @@ a, a:hover, a:focus {
     color: #fff;
     padding: 10px;
 }
+.italic {
+	font-style: italic;
+}
 
 #sidebar ul li a {
     padding: 10px;
