@@ -38,6 +38,7 @@
 	<body class="no-scroll">
 		<input id="file-input" type="file" name="file" class="hidden" multiple/>
 		<section class="wrapper">
+		<!--
 		<nav id="sidebar">
 			<section class="container-fluid">
 				<section class="row">
@@ -67,6 +68,7 @@
 				<button class="btn btn-info btn-block" id="new-project-next">Next</button>	
 			</div>
 		</nav>
+		-->
 		<section class="full-height">
 		<section class="custom-nav">
 			<section class="container-fluid">
@@ -99,15 +101,15 @@
 							</section>
 						</section>
 					</section>
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right navbar-account">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="translate">Account</span><b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="translate account-drop">Account</span><b class="caret"></b></a>
 							<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
 								<li>
 									<div class="row">
 										<div class="col-md-12">
 												<div class="form-group">
-													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate">Change Account</span></button>
+													<button type="submit" id="btnChangeAccount" class="btn btn-info btn-block"><span class="translate btn-info">Change Account</span></button>
 												</div>
 												<div class="form-group">
 													<button type="submit" class="btn btn-danger btn-block"><a href="/logout"><span class="translate">Logout</span></a></button>
@@ -131,8 +133,8 @@
 			<li><a class="translate" href="#">Action</a></li>
 			<li><a class="translate" href="#">Another action</a></li>
 		</ul>
-			<section class="container-fluid">
-				<div class="row no-margin">
+			<section class="container-fluid no-padding-left no-max-height">
+				<div class="row no-margin grey-bg">
 					<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 breadcrumb-element">
 						<div class="custom-breadcrumb custom-breadcrumb-edge custom-base btn myBtn btn-xs">
 							<span>S</span>
@@ -146,7 +148,7 @@
 						</section>
 					</div>
 				</div>
-			<section class="row">
+			<section class="row full-height no-max-height file-area">
 				<section class="col-md-9">
 					<section id="tableViewport" style="margin-top:10px;">
 						<section class="container-fluid">
@@ -170,7 +172,7 @@
 						</section>
 						</section>
 					</section>
-					<section class="col-md-3 no-margin file-info pre-scrollable">
+					<section class="col-md-3 no-margin file-info pre-scrollable no-max-height">
 						<h3>File Information</h3>
 						<ul id="info-list">
 
@@ -190,9 +192,7 @@
 			<li><a class="translate" id="dropDownload" tabindex="-1" href="#" data-toggle="modal">
 				<span class="translate">Download</span></a>
 			</li>
-			<li><a class="translate" id="dropRename" tabindex="-1" href="#"  >
-				<span class="translate">Rename</span></a>
-			</li>
+
 			<li class="divider"></li>
 			<li><a class="translate" id="changeAlert" tabindex="-1" href="#"><span class="translate">Notify Me Of Changes</span></a></li>			
 			<li><a class="translate" tabindex="-1" href="#">Something else maybe?</a></li>
