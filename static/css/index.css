@@ -89,7 +89,8 @@ ul ul a {
 }
 
 .sidebar-footer {
-	position: fixed;
+	justify-content: flex-end;
+	display: flex;
 	bottom:0;
 	text-align: center;
 	padding:0;
