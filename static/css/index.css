@@ -2,6 +2,8 @@
 .wrapper {
 	display:flex;
 	align-items:stretch;
+	height:100%;
+	
 }
 #sidebar {
 	min-width:250px;
@@ -32,6 +34,19 @@
 	
 }
 
+.navbar-account{
+	margin-right:15px;
+}
+
+.account-drop{
+	color:#777
+}
+
+#show-advanced-search {
+	color:#777;
+	
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -48,9 +63,12 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: #7386D5;
-    color: #fff;
+    background: white;
+    
     transition: all 0.3s;
+	border-right: 1px solid #47748b;
+	height:100%;
+	box-shadow: 5px 15px 5px rgba(0, 0, 0, 0.19);
 }
 
 #sidebar .sidebar-header {
@@ -106,8 +124,15 @@ ul ul a {
  * =========================================================
  * ========================================================= */
 
+html, body {
+	margin:0;
+	height:100%;
+
+}
+ 
 body {
 	overflow: hidden;
+	height:100%;
 
 }
 .fa.padding-left-5 {
@@ -130,14 +155,33 @@ body {
 	display:block;
 }
 
-.breadcrumb-element {
-    background-color: #f8f8f8;
-    height: 15mm;
-    width: 100vw;
-    margin-left:-15px;
-	overflow:hidden;
+.grey-bg{
+	color:#f8f8f8;
 }
 
+.no-padding-left{
+	padding-left:0px;
+}
+
+.breadcrumb-element {
+    background-color: #fff;
+    height: 15mm;
+    width: 100vw;
+    margin-left:0px;
+	overflow:hidden;
+	box-shadow: -5px 0px 15px 1px rgba(0, 0, 0, 0.19);
+	
+	z-index: 1;
+    position: relative;
+	
+}
+
+
+.no-max-height{
+	max-height:none;
+	
+	height:100%;
+}
 
 .custom-breadcrumb {
 	-webkit-transform: skew(-20deg);
@@ -150,7 +194,7 @@ body {
 	padding-right:8px;
 	padding-top:8px;
 	padding-bottom:8px;
-	background-color:#f5f5f5;
+	background-color:#fff;
 	border:1px solid #e7e7e7;
 	margin-top:3px;
 	padding-top:15px;
@@ -163,10 +207,12 @@ body {
 	padding:0;
 }
 .file-info {
-    height: 550px;
-    background: #f8f8f8;
-    margin-top:4px;
-    /*border-left: 1px solid #000;*/
+    height: 100%;
+    background: #eee;
+    margin-top:0px;
+	z-index: 0;
+	position: relative;
+	border-left: 3px solid #e1e1e1;
 }
 
 .file-info h3 {
@@ -177,6 +223,10 @@ body {
     color: #9C9B9B;
 }
 
+input#search-box {
+    /* css */
+
+}
 
 
 
@@ -213,9 +263,9 @@ breadcrumb-base span{
 }
 .custom-breadcrumb-edge{
 	background-color:#ccc;
-	margin-right:0px;
-	margin-left:-40px;
-	border:1px solid #aaa;
+	margin-right:5px;
+	margin-left:-30px;
+	border:1px solid #e7e7e7;
 	float:left;
 }
 .custom-breadcrumb-edge span{
@@ -242,7 +292,7 @@ breadcrumb-base span{
 .custom-breadcrumb:first-child {
     padding-top: 15px;
     padding-bottom: 15px;
-    background:#BDAEC6 ;
+    background:#fff ;
 }
 
 .panel-default {
@@ -279,10 +329,13 @@ breadcrumb-base span{
 * ========================================================= */
 .custom-nav {
     width: 100%;
-    background: #BDAEC6;
+    background: #fff;
     color: #fff;
     padding: 1.5mm;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid white;
+	position:relative;
+	box-shadow: -5px 0px 15px 1px rgba(0, 0, 0, 0.19);
+	z-index:50;
 }
 
 .custom-no-padding {
@@ -417,6 +470,10 @@ breadcrumb-base span{
 	float:left;
 	display:inline-block;
 	margin-left:2px;
+}
+
+.file-area{
+	background-color:#eee;
 }
 
 .input-group select {
