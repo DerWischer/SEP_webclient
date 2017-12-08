@@ -292,6 +292,10 @@ class CustomerHandler(BaseHandler):
     def get(self):
         self.finish(json.dumps({"success":True, "customers":database_handler.get_customers()}))
 
+class PowderHandler(BaseHandler):
+    def get(self):
+        self.finish(json.dumps({"success":True, "powders":database_handler.get_powders()}))
+
 class AdvancedSearchHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):        
@@ -325,6 +329,7 @@ def make_app():
             (r"/upload", UploadHandler),
             (r"/types", TypesHandler),   
             (r"/customers", CustomerHandler),        
+            (r"/powders", PowderHandler),
             (r"/search", AdvancedSearchHandler),    
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),

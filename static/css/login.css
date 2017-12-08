@@ -5,7 +5,9 @@ html, body {
 
 
 .custom-logo {
-    width:100%;
+    width:75%;
+    height: 50%;
+    padding-left: 125px;
 }
 
 .main-section {
