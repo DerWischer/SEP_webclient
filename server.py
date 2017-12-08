@@ -29,9 +29,8 @@ class LoginHandler(BaseHandler):
         code = self.get_argument("code")        
         user_info = database_handler.authenticate_user(code)
         username = user_info["name"]
-        user_id = user_info["user_id"] # TODO Resolve username from code
+        user_id = user_info["user_id"]
         self.set_secure_cookie("user", user_id)
-        #print("Secure cookie set for user: "+ username +" with code: " + code)
         self.redirect("/")
 
 class LogoutHandler(BaseHandler):
@@ -44,6 +43,7 @@ class AccountHandler(BaseHandler):
     def post(self):
         name = self.get_argument("name")
         success = database_handler.update_account(self.get_current_user(), name)
+        print(success)
         self.write(json.dumps({"success":success}))
         self.redirect("/")
 
@@ -52,7 +52,32 @@ class GetAccountDetails(BaseHandler):
     def get(self):
         details = database_handler.get_account_details(self.get_current_user())
         self.write(json.dumps({"success":True, "name":details["name"]}))
-            
+
+class CheckPrivilege(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        privilege_level = database_handler.check_privilege(self.get_current_user())
+        self.write(json.dumps({"success":True, "privilege":privilege_level["privilege"]}))
+
+class CreateAccoundHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        privilege_level = database_handler.check_privilege(self.get_current_user())
+        check = privilege_level["privilege"]
+        if(check >= "2"):
+            self.render("createAccount.html")
+        else:
+            print("You are not permitted: Privilege -> "+check)
+            self.redirect("/")
+    def post(self):
+        id = self.get_argument("ID")
+        name = self.get_argument("name")
+        code = self.get_argument("code")
+        privilege = self.get_argument("privilege")
+        create_account = database_handler.create_account(id, name, code, privilege)
+        print(create_account)
+        self.write(json.dumps({"success":create_account}))
+        self.redirect("/")
 
 class FileSystemHandler(BaseHandler):
     """ Queries the file structur and returns the filesystem represented as a JSON String"""
@@ -149,7 +174,6 @@ def get_path_for_upload_type(uploadtype, filename):
         elif (uploadtype == "customer"):
             return os.path.join("uploads", "customers", filename)
         return None
-    
 def manipulate_file_stats_for_upload_type(uploadtype, stats):        
         if uploadtype == "powder":
             stats['form_id'] = database_handler.get_form_type_id_by_name(".powder")
@@ -160,8 +184,6 @@ def manipulate_file_stats_for_upload_type(uploadtype, stats):
         elif uploadtype == "customer":
             stats['form_id'] = database_handler.get_form_type_id_by_name(".customer")
             stats['parent'] = "CUSTOMERS"
-
-
 class NewCustomerHandler(BaseHandler):    
     def post(self):
         """ Add a customer to the database """
@@ -190,7 +212,20 @@ class NewFolderHandler(tornado.web.RequestHandler):
         success = database_handler.create_folder(name, path, parent)
         if (success):
             self.finish(json.dumps({"success":success}))
-
+class RenameFileHandler(BaseHandler):    
+    def post(self):
+        """ Rename File in OS and database """
+        new_file_name = self.get_argument("name")
+        fileId = self.get_argument("fileId")
+        print(new_file_name)
+        print(fileId)
+        path, name, ext = database_handler.get_file_path(fileId)
+        new_file_path = path.replace(name,new_file_name)
+        print(new_file_path)
+        os.rename(path, new_file_path)
+        database_handler.update_file_name(fileId, new_file_name)
+        database_handler.update_filesystem_name(fileId, new_file_name,new_file_path)
+        self.finish(json.dumps({"success":True}))
 class DownloadHandler(tornado.web.RequestHandler):
     def streaming_callback(chunk):
         self.write(chunk)
@@ -270,9 +305,12 @@ def make_app():
             (r"/search", AdvancedSearchHandler),    
             (r"/logout", LogoutHandler),
             (r"/accountUpdate", AccountHandler),
+            (r"/createAccount", CreateAccoundHandler),
             (r"/newFolder", NewFolderHandler),
             (r"/newCustomer", NewCustomerHandler),
+            (r"/newFileName", RenameFileHandler),
             (r"/getAccountDetails", GetAccountDetails),
+            (r"/checkPrivilege", CheckPrivilege),
             (r"/filesystem", FileSystemHandler),
             (r"/subscribe", SubscriptionHandler), 
             (r"/fileupdateinformation", FileUpdateInformationHandler),     
@@ -374,15 +412,14 @@ def create_form_type_links():
     print ("Created Default Types")
 
 #def scan_filesystem(): 
-    #for entry in filescanner.scan_recursive(ROOT):
+    #for entry in files.scan_recursive(ROOT):
     #    database_handler.file_entry(entry['id'], entry['name'], entry['path'], entry['ext'], entry['hashvalue'], entry['size'], entry['created'], entry['updated'],entry['changehash'], entry['isfolder'], entry['parent'])
 
 # Main function ---------------------------------------------------------------
 if __name__ == "__main__":
     if DEVELOPMENT_MODE:
         print ("****************WARNING: DEVELOPMENT MODE IS ACTIVE*******************")
-        if os.path.exists("uploads"):
-            shutil.rmtree("uploads")
+        shutil.rmtree("uploads")
         database_handler.drop_database()
     if not os.path.exists("uploads"):
         os.mkdir("uploads")
