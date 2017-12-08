@@ -109,3 +109,23 @@ def get_file_stats(parentid, filepath, filename):
         'form_id': form_id
     }    
     return file_info
+
+def get_folder_stats(parentid, filepath, filename):    
+    id = str(uuid.uuid4())
+    #filestat = os.stat(filepath)
+    #file_ext = os.path.splitext(filename)[1]
+    #form_id = database_handler.get_form_type_id_by_name(file_ext)
+    folder_info = {
+        'id':id,
+        'name': filename,
+        'path': filepath,
+        'hashvalue': None, #hashlib.md5(open(filepath, 'rb').read()).hexdigest(),
+        'ext': None, #os.path.splitext(filename)[1],
+        'size': None, #filestat.st_size,
+        'created': None,
+        'updated': None,
+        'isfolder':True,
+        'parent':parentid,
+        'form_id': None
+    }    
+    return folder_info

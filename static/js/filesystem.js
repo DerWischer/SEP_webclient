@@ -54,7 +54,7 @@ function el(name, options) {
 	});
 	return el;
 }
-function refreshFilesystem() {
+function refreshFilesystem(id) {
 	$.ajax({
 		url:"/filesystem",
 		method:"GET",
@@ -67,7 +67,7 @@ function refreshFilesystem() {
 			//Here we should set root if root is not statically defined by searching through
 			//the file system and finding the element with no parent
 			filesystem = data.filesystem;
-			setFolder();
+			setFolder(id);
 		}
 	});		
 }
