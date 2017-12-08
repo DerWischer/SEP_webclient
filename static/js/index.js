@@ -124,6 +124,7 @@ function handle_upload(upload_type, file_input_id, parent_folder) {
 			if(this.status == 200) {
 				
 				refreshFilesystem();
+				get_powders_ajax();
 			} else {
 				// Log response status
 			}
@@ -191,7 +192,7 @@ function get_powders_ajax() {
 			}
 			var holder = $("#new-project-powder")[0];
 			$(holder).empty();
-			$.each(data.customers, function(key, value) {
+			$.each(data.powders, function(key, value) {
 				var option = el("option", {value:key, html:value});
 				$(holder).append(option);
 			});
@@ -300,7 +301,7 @@ $(document).ready(function() {
 	$(document).click(function() {
 		HideDropdownElement();
 	});
-	$(".upload-btn").click(function() {
+	$(".upload-btn").click(function() {		
 		$("#file-input").attr("data-type", $(this).attr("data-type")).click();
 	});
 	$("#upload-folder-btn").click(function() {
