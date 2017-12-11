@@ -420,6 +420,7 @@ function countJSONKeys(obj) {
  }
 //emil
 function displayList(parent, childrenObjects) {
+	
 	var holder = $("#tableView")[0];
 	$(holder).empty();
 	var iconName;
@@ -432,9 +433,9 @@ function displayList(parent, childrenObjects) {
 		$("#tableView").append(nofilesmessage);
 		return;
 	}
-    $.each(childrenObjects, function (id, value) {
+    $.each(childrenObjects, function (id, value) {		
         var row = undefined;
-        if (value.file_ext == ".stl") {
+        if (value.ext == ".stl") {
             row = el("section", {
                 "data-id": value.id,
                 class: "row listViewItem",
