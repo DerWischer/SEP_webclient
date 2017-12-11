@@ -143,6 +143,17 @@ body {
 	height:100%;
 
 }
+
+#show-advanced-search a{
+	color:blue;
+	
+}
+
+.caret{
+	color:black;
+	
+}
+
 .fa.padding-left-5 {
 	padding-left:0.5em;
 }
