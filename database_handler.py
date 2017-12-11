@@ -418,7 +418,7 @@ def get_customers():
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT id, filename FROM filesystem where parent = 'customers'")
+		cur.execute("SELECT id, filename FROM filesystem where parent = 'customers' AND deleted = 0")
 		count = cur.rowcount
 		rows = {}
 		for row in cur.fetchall():
@@ -434,7 +434,7 @@ def get_powders():
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT id, filename FROM filesystem where parent = 'powders'")
+		cur.execute("SELECT id, filename FROM filesystem where parent = 'powders' AND deleted = 0")
 		count = cur.rowcount
 		rows = {}
 		for row in cur.fetchall():
