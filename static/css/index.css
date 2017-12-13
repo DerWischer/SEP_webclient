@@ -144,6 +144,37 @@ body {
 
 }
 
+
+#info-list{
+	width:100%;
+	clear:both;
+}
+
+.file-info-value {
+  list-style-type: none;
+  width:100%;
+  margin-top:5px;
+  margin-bottom:5px;
+  
+  color: rgba(0,0,0,.54);
+}
+
+
+
+
+.left-info-span{
+	width:25%;
+	margin:0px;
+}
+
+.right-info-span{
+	color: rgba(0,0,0,.87);
+}
+
+#delete-btn{
+	float:left;
+}
+
 #show-advanced-search a{
 	color:blue;
 	
