@@ -205,6 +205,11 @@ $(document).ready(function() {
 	$("#trace-modal-close").click(function() {
 		$("#traceModal").addClass("hidden");
 	});
+	$("#project-wizard-additonal").click(function() {
+		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
+		$("#new-project-name").val("");
+		change_wizard_tab("naming");
+	});
 	$("#new-project-next").click(function() {
 		switch ($(this).attr("data-stage")) {
 			case "naming":
@@ -228,6 +233,7 @@ $(document).ready(function() {
 				change_wizard_tab("additional");
 				$(this).addClass("hidden");
 				handle_upload(null, "image-file", $(this).attr("project_id"));
+				handle_upload(null, "log-file", $(this).attr("project_id"));
 				break;
 			case "additonal":
 				change_wizard_tab("goodbye");
@@ -299,7 +305,7 @@ $(document).ready(function() {
 	
 		
 		$("#file-info").toggleClass("slideInRight");
-		
+		//$("#new-project-name").val("");
 		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
 		change_wizard_tab("naming");
 		

@@ -73,7 +73,7 @@
 							</section>
 							<section class="form-group">
 								<label for="cad-file">Customer PRT files</label>
-								<input type="file" id="cad-file" name="cad-file" multiple/>
+								<input type="file" id="cad-file" accept=".prt" name="cad-file" multiple/>
 							</section>
 						</section>
 						<section class="wizard-tab hidden" data-page="uploading-stl-files"> 
@@ -81,7 +81,7 @@
 							<hr>
 							<section class="form-group">
 								<label>STL files</label>
-								<input type="file" id="stl-file"/>
+								<input type="file" id="stl-file" accept=".stl"/>
 							</section>
 						</section>
 						<section class="wizard-tab hidden" data-page="uploading-magics-files"> 
@@ -89,7 +89,7 @@
 							<hr>
 							<section class="form-group">
 								<label>Magic files</label>
-								<input type="file" id="magic-file"/>
+								<input type="file" id="magic-file" accept=".magics"/>
 							</section>
 						</section>
 						<section class="wizard-tab hidden" data-page="uploading-slm-files"> 
@@ -97,7 +97,7 @@
 							<hr>
 							<section class="form-group">
 								<label>SLM files</label>
-								<input type="file" id="slm-file"/>
+								<input type="file" id="slm-file" accept=".slm"/>
 							</section>
 						</section>
 						<section class="wizard-tab hidden" data-page="uploading-image-files"> 
@@ -105,15 +105,15 @@
 							<hr>
 							<section class="form-group">
 								<label>Log files</label>
-								<input type="file" id="log-file"/>
+								<input type="file" id="log-file" accept=".log, .txt"/>
 							</section>
 							<section class="form-group">
 								<label>Image files</label>
-								<input type="file" id="image-file"/>
+								<input type="file" id="image-file" accept=".jpg, .png, .jpeg, .gif, .tif"/>
 							</section>
 						</section>
 						<section class="wizard-tab hidden" data-page="additional"> 
-							<label>Wow, amazing!, you have now created an awesome new project, is there anything else you want to add?</label>
+							<label>Wow, amazing!, you have now created an awesome new project, do you want to add another project?</label>
 							<hr>
 							<section class="form-group">
 								<button class="btn btn-success btn-block" id="project-wizard-additonal">Yes</button>
@@ -125,7 +125,6 @@
 							<hr>
 							<section class="form-group">
 								<button class="btn btn-success btn-block" id="project-wizard-hide">Hide</button>
-								<button class="btn btn-danger btn-block" id="project-wizard-create-new-project">Create Another Project</button>
 							</section>
 						</section>
 					</section>	
