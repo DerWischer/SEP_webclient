@@ -273,10 +273,10 @@ def advanced_search(searchParams, matchall):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		sql = "SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
+		sql = "SELECT distinct fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
 		for i in range(len(searchParams)-1):
 			if matchall:
-				sql += " AND (fileinformation.type = %s AND fileinformation.value = %s)"
+				sql += " UNION SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
 			else:
 				sql += " OR (fileinformation.type = %s AND fileinformation.value = %s)"	
 		values = []
@@ -284,10 +284,13 @@ def advanced_search(searchParams, matchall):
 			values.append(key)
 			values.append(searchParams[key])
 		cur.execute(sql, values);
+		print(sql)
+		print(values)
 		rows = []
 		for row in cur.fetchall():
 			rows.append(row)
 		return rows
+
 	except Exception as ex:
 		print (ex)
 		return None
@@ -418,7 +421,7 @@ def get_customers():
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT id, filename FROM filesystem where parent = 'customers'")
+		cur.execute("SELECT id, filename FROM filesystem where parent = 'customers' AND deleted = 0")
 		count = cur.rowcount
 		rows = {}
 		for row in cur.fetchall():
@@ -434,7 +437,7 @@ def get_powders():
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT id, filename FROM filesystem where parent = 'powders'")
+		cur.execute("SELECT id, filename FROM filesystem where parent = 'powders' AND deleted = 0")
 		count = cur.rowcount
 		rows = {}
 		for row in cur.fetchall():
