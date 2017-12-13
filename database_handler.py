@@ -273,7 +273,7 @@ def advanced_search(searchParams, matchall):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		sql = "SELECT  fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
+		sql = "SELECT distinct fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
 		for i in range(len(searchParams)-1):
 			if matchall:
 				sql += " and  fileinformation.fileid in (SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s))"
