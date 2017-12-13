@@ -201,6 +201,16 @@ function get_powders_ajax() {
 $(document).ready(function() {
 	get_customers_ajax();
 	get_powders_ajax();
+	HideDropdownElement();
+	$("#search-box").on('keyup', function(e) {
+		if ($(this).val().length == 0) {
+			setFolder()
+			return;
+		}
+		CreateSearchCrumb($(this).val());
+		searchFileSystem($(this).val());
+	});
+
 	$("#trace-modal-close").click(function() {
 		$("#traceModal").addClass("hidden");
 	});
@@ -269,40 +279,23 @@ $(document).ready(function() {
         })
     });
 	$("#sidebarCollapse").on("click", function() {
-		$("#sidebar").toggleClass("active");
-		
-		
-		
-		
-		if(!$("#file-info").hasClass("hidden")){
-			$("#file-info").addClass("slideOutRight");
-			
-			window.setTimeout( function(){
-                $("#file-info").addClass("hidden");
-				$("#main-file-area").toggleClass("col-md-12");
-				$("#main-file-area").toggleClass("col-sm-12");
-				$("#main-file-area").toggleClass("col-md-9");
-				$("#main-file-area").toggleClass("col-sm-9");
-            }, 250);  
-			
-			
-			
-		}
-		else{
-			$("#file-info").removeClass("slideOutRight");
-			$("#file-info").removeClass("hidden");
-			
-			$("#main-file-area").toggleClass("col-md-12");
-			$("#main-file-area").toggleClass("col-sm-12");
-			$("#main-file-area").toggleClass("col-md-9");
-			$("#main-file-area").toggleClass("col-sm-9");
-		}
-		
-	
-		
+		// if(!$("#sidebar").hasClass("active")){
+		// 	$("#file-info").addClass("slideOutRight");
+		// 	$("#file-info").addClass("hidden");
+		// 	$("#main-file-area").removeClass("col-md-12");
+		// 	$("#main-file-area").removeClass("col-sm-12");
+		// 	$("#main-file-area").removeClass("col-md-9");
+		// 	$("#main-file-area").removeClass("col-sm-9");
+		// }
 		$("#file-info").toggleClass("slideInRight");
 		//$("#new-project-name").val("");
 		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
+		if ($("#sidebar").hasClass("active")) {
+			$("#sidebar").removeClass("active");	
+		}
+		else {
+			$("#sidebar").addClass("active");
+		}
 		change_wizard_tab("naming");
 		
 	});
@@ -335,9 +328,6 @@ $(document).ready(function() {
 				displayList(null, fileObjects);
 			}
 		})
-	});
-	$(document).click(function() {
-		HideDropdownElement();
 	});
 	$(".upload-btn").click(function() {		
 		$("#file-input").attr("data-type", $(this).attr("data-type")).click();
@@ -423,16 +413,6 @@ $(document).ready(function() {
 	RenderBreadCrumbPath(ROOT);
 });
 //peter
-$(document).ready(function() {
-	$("#search-box").on('keyup', function(e) {
-		if ($(this).val().length == 0) {
-			setFolder()
-			return;
-		}
-		CreateSearchCrumb($(this).val());
-		searchFileSystem($(this).val());
-	});
-});
 function searchFileSystem(m) {
 	var found = [];
 	$.each(filesystem, function(key, value) {
@@ -640,14 +620,7 @@ $(document).ready(function() {
 	});
 	$("#tableView").on("click", ".listViewItem", function() {
 		if ($(this).hasClass("selected")) {
-			var fileId = this.getAttribute("data-id");
-			if (setFolder(fileId) == false) {
-				//var a = el("a", {href:("/download/" + fileId), target:"_blank"});
-				//$("#tableView").append(a);
-				//a.click();
-				//$("#tableView").remove(a);
-			}
-			return;
+			setFolder(this.getAttribute("data-id"));
 		}
 		$("#tableView .listViewItem").removeClass("selected");
 		$(this).addClass("selected");
@@ -659,10 +632,10 @@ $(document).ready(function() {
 			dataType:"JSON",
 			success:function(data) {
 				if (!data.success) {
-					alert("nerror getting file informatio");
 					return;
 				}
 				$("#info-list").empty();
+				var len = 0;
 				$.each(data.data, function(key, value) {
 					if (key == "form_id") {
 						return;
@@ -674,7 +647,19 @@ $(document).ready(function() {
 					li.appendChild(key);
 					li.appendChild(key2);
 					$("#info-list").append(li);
+					len++;
 				});
+				if (len == 0) {
+					return;
+				}
+				if ($("#sidebar").hasClass("active")) {
+					//$("#file-info").addClass("slideInRight");
+					$("#file-info").removeClass("hidden");
+					$("#main-file-area").addClass("col-md-12");
+					$("#main-file-area").addClass("col-sm-12");
+					$("#main-file-area").addClass("col-md-9");
+					$("#main-file-area").addClass("col-sm-9");
+				}
 			}
 		});
     });
@@ -825,11 +810,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-	// send email
-	$("#changeAlert").on("click", function() {
-		data_id = $("#contextMenu").attr("data-id");
-		$.post("subscribe", {fileKey: data_id});		
-	});	
 });
 //reem
 function getProjectId(id) {
