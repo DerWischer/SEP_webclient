@@ -202,6 +202,9 @@ function get_powders_ajax() {
 $(document).ready(function() {
 	get_customers_ajax();
 	get_powders_ajax();
+	$("#trace-modal-close").click(function() {
+		$("#traceModal").addClass("hidden");
+	});
 	$("#new-project-next").click(function() {
 		switch ($(this).attr("data-stage")) {
 			case "naming":
@@ -645,8 +648,24 @@ $(document).ready(function() {
         $("#contextMenu").addClass("hidden");
     });
     $("#traceDropdown").on("click", function() {
-        $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
+		renderGraph($("#contextMenu").attr("data-id"));
+		$("#traceModal").attr("data-id", $("#contextMenu").attr("data-id")).removeClass("hidden");
 	});
+	function getTrace(id) {
+		$.ajax({
+			url:"/trace/" + id,
+			method:"POST",
+			dataType:"JSON",
+			data:{"fileId":id},
+			data:function(data) {
+				if (!data.success) {
+					alert("error");
+					return;
+				}
+				renderGraph(data.json)
+			}
+		});
+	}
 	$("#attachedInfoDropdown").on("click", function() {
 		$("#attachedInfoModalBody").empty();			
 		$.ajax({

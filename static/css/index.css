@@ -512,3 +512,13 @@ breadcrumb-base span{
 input.filename {
 	margin-top:5px;
 }
+.fullscreen-overlay {
+	position: fixed;
+	top:0;
+	left:0;
+	min-height:100vh;
+	min-width:100vw;
+	background:#fff;
+	z-index:99999;
+	padding:5px;
+}

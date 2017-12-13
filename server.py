@@ -233,11 +233,15 @@ class DownloadHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self, fileId):
         path, name, ext = database_handler.get_file_path(fileId);
+        print (database_handler.get_file_path(fileId));
+        print (fileId)
         filename = ''.join([name,ext])
         if not os.path.exists(path):
             self.finish()
         else:
             self.set_header('Content-Length', os.path.getsize(path))
+            #I think the following line is what is breaking when it tries to guess the mime type, 
+            #this should be checked and fixed
             self.set_header('Content-Type', mimetypes.guess_type(path)[0])
             self.set_header('Content-Disposition', 'attachment; filename=%s' % filename)
             self.flush()
@@ -258,6 +262,14 @@ class TypesHandler(BaseHandler):
            self.write(json.dumps({"success":False}));
         else: 
             self.write(json.dumps({"success":True, "types":types}));
+        self.finish()
+
+class TraceHandler(BaseHandler):
+    def post(self):
+        fileId = self.get_argument("fileId")
+        filename = database_handler.get_file_information(fileId);
+        print (filename)
+        self.write(json.dumps({"success":True, "types":types}));
         self.finish()
     
 class AuthStaticFileHandler (BaseHandler, tornado.web.StaticFileHandler):
@@ -327,6 +339,7 @@ def make_app():
         login_url="/login",
         handlers=[
             (r"/upload", UploadHandler),
+            (r"/trace/(.*)", TraceHandler),
             (r"/types", TypesHandler),   
             (r"/customers", CustomerHandler),        
             (r"/powders", PowderHandler),
