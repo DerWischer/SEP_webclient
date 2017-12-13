@@ -215,11 +215,11 @@ $(document).ready(function() {
 				break;
 			case "uploading-magics-files":
 				change_wizard_tab("uploading-slm-files");
-				handle_upload(null, "slm-file", $(this).attr("project_id"));
+				handle_upload(null, "magic-file", $(this).attr("project_id"));
 				break;
 			case "uploading-slm-files":
 				change_wizard_tab("uploading-image-files");
-				handle_upload(null, "magic-file", $(this).attr("project_id"));
+				handle_upload(null, "slm-file", $(this).attr("project_id"));
 				break;
 			case "uploading-image-files":
 				change_wizard_tab("additional");
