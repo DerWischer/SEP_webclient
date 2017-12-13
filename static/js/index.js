@@ -243,9 +243,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#project-wizard-no").click(function() {
-		change_wizard_tab("goodbye");
-	});
-	$("#project-wizard-hide").click(function() {
 		$("#sidebarCollapse").click();
 	});
 	$("#btnChangeAccount").on("click", function() {
@@ -667,6 +664,9 @@ $(document).ready(function() {
 				}
 				$("#info-list").empty();
 				$.each(data.data, function(key, value) {
+					if (key == "form_id") {
+						return;
+					}
 					var li = el("section", {class:"file-info-value row"});
 					var key = el("div", {html:key, "class":"left-info-span col-md-6"});
 					var key2 = el("div", {html:value, "class":"right-info-span col-md-6"});

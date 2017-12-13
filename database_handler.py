@@ -3,6 +3,7 @@ import dev_config
 import json
 import uuid
 import os
+import datetime
 
 def get_db_user():
 	return dev_config.DB_USER
@@ -141,13 +142,17 @@ def create_folder(name, path, parent):
 
 def get_file_information(fileId):
 	'''Selects all file data information'''
+	timestamp_fields = ["created", "updated"]
 	try:
 		db = get_database()
 		cur = db.cursor()
 		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name",  [fileId])
 		data = {}
 		for row in cur.fetchall():
-			data[row[0]] = row[1]
+			if row[0] in timestamp_fields:
+				data[row[0]] = datetime.datetime.fromtimestamp(int(row[1])).strftime('%Y-%m-%d %H:%M:%S')
+			else:
+				data[row[0]] = row[1]
 		return data
 	except Exception as ex:
 		print (ex)
@@ -213,7 +218,7 @@ def create_form_type(name):
 		return False
 	finally:
 		cur.close()
-		db.commit()	
+		db.commit()
     
 def get_type_id(name):	
 	'''Returns the id of the type, otherwise type is created and the generated id is returned'''
