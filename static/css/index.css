@@ -296,7 +296,7 @@ input#search-box {
 }
 
 .non-root-crumb {
-    background-color: #ccc !important;
+	color:#9C9B9B;
 }
 
 .custom-breadcrumb-base{
