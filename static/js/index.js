@@ -122,7 +122,6 @@ function handle_upload(upload_type, file_input_id, parent_folder) {
 	request.addEventListener('readystatechange', function(event) {
 		if(this.readyState == 4) {
 			if(this.status == 200) {
-				
 				refreshFilesystem();
 				get_powders_ajax();
 			} else {
