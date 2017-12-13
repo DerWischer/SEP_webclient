@@ -295,8 +295,23 @@ input#search-box {
 	font-family: 'Roboto', sans-serif;
 }
 
+#sidebarCollapse{
+	width:100%;
+}
+
+#new-btn{
+	width:100%;
+}
+
+
 .non-root-crumb {
 	color:#9C9B9B;
+}
+
+.expand-btn{
+	padding-right:0px;
+	
+	
 }
 
 .custom-breadcrumb-base{
