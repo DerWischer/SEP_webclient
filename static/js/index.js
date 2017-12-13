@@ -265,8 +265,37 @@ $(document).ready(function() {
     });
 	$("#sidebarCollapse").on("click", function() {
 		$("#sidebar").toggleClass("active");
+		
+		
+		
+		
+		if(!$("#file-info").hasClass("hidden")){
+			$("#file-info").addClass("slideOutRight");
+			
+			window.setTimeout( function(){
+                $("#file-info").addClass("hidden");
+				$("#main-file-area").toggleClass("col-md-12");
+				$("#main-file-area").toggleClass("col-md-9");
+            }, 250);  
+			
+			
+			
+		}
+		else{
+			$("#file-info").removeClass("slideOutRight");
+			$("#file-info").removeClass("hidden");
+			
+			$("#main-file-area").toggleClass("col-md-12");
+			$("#main-file-area").toggleClass("col-md-9");
+		}
+		
+	
+		
+		$("#file-info").toggleClass("slideInRight");
+		
 		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
 		change_wizard_tab("naming");
+		
 	});
 	$("#project-wizard-btn").click(function() {
 		$("#new-project-wizard").modal("show");
