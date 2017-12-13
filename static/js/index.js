@@ -626,11 +626,12 @@ $(document).ready(function() {
 				}
 				$("#info-list").empty();
 				$.each(data.data, function(key, value) {
-					var li = el("li", {class:"file-info-value"});
-					var key = el("b", {html:key, style:"padding-right:5px"});
-					var value = document.createTextNode(value);
+					var li = el("section", {class:"file-info-value row"});
+					var key = el("div", {html:key, "class":"left-info-span col-md-6"});
+					var key2 = el("div", {html:value, "class":"right-info-span col-md-6"});
+					//var value = document.createTextNode(value);
 					li.appendChild(key);
-					li.appendChild(value);
+					li.appendChild(key2);
 					$("#info-list").append(li);
 				});
 			}
@@ -644,6 +645,30 @@ $(document).ready(function() {
     $(document).on("click", function() {
         $("#contextMenu").addClass("hidden");
     });
+	
+	$("#dropDelete").on("click", function() {
+		
+		files = [];
+		files.push($("#contextMenu").attr("data-id"));
+		
+		$.ajax({
+			url:"/filesystem",
+			method:"DELETE",
+			data:{"files":JSON.stringify(files)},
+			dataType:"JSON",
+			success:function(data) {
+				if (!data.success) {
+					alert("Could not delete that folder");
+					return;
+				}
+				if (count(data.failed_files) >= 1) {
+					alert("Could not delete one or more files");
+				}
+				refreshFilesystem();
+			}
+		});	
+	});
+	
     $("#traceDropdown").on("click", function() {
         $("#traceModal").attr("data-id", $("#contextMenu").attr("data-id"));
 	});
