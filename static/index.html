@@ -29,6 +29,7 @@
 		<script src="/static/js/index.js"></script>
 		<link rel="stylesheet" href="/static/css/index.css"/>
 		<link rel="stylesheet" href="/static/thirdParty/flag-icon-css-master/css/flag-icon.min.css">
+		<link rel="stylesheet" href="/static/css/animate.css"/>
 		<!-- handlebars for alpaca-->			
 		<script src="/static/thirdParty/handlebars/handlebars-v4.0.11.js"></script>		
 		<!-- alpaca -->
@@ -208,7 +209,7 @@
 					</div>
 				</div>
 			<section class="row full-height no-max-height file-area" style="margin-left:0px">
-				<section class="col-md-9">
+				<section class="col-md-12" id="main-file-area">
 					<section id="tableViewport" style="margin-top:10px;">
 						<section class="container-fluid">
 						<section class="row" style="border-bottom:1px solid #C9C9C9">
@@ -231,7 +232,7 @@
 						</section>
 						</section>
 					</section>
-					<section class="col-md-3 no-margin file-info pre-scrollable no-max-height">
+					<section class="col-md-3 no-margin file-info pre-scrollable no-max-height hidden animated" id="file-info">
 						<h3>File Information</h3>
 						<div id="info-list">
 
