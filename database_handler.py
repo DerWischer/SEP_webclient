@@ -276,7 +276,7 @@ def advanced_search(searchParams, matchall):
 		sql = "SELECT distinct fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
 		for i in range(len(searchParams)-1):
 			if matchall:
-				sql += " UNION SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s)"
+				sql += " and  fileinformation.fileid in (SELECT fileinformation.fileid FROM fileinformation WHERE (fileinformation.type = %s AND fileinformation.value = %s))"
 			else:
 				sql += " OR (fileinformation.type = %s AND fileinformation.value = %s)"	
 		values = []

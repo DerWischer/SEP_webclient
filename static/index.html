@@ -33,6 +33,7 @@
 		<link rel="stylesheet" href="/static/css/index.css"/>
 		<link rel="stylesheet" href="/static/css/d3.css"/>
 		<link rel="stylesheet" href="/static/thirdParty/flag-icon-css-master/css/flag-icon.min.css">
+		<link rel="stylesheet" href="/static/css/animate.css"/>
 		<!-- handlebars for alpaca-->			
 		<script src="/static/thirdParty/handlebars/handlebars-v4.0.11.js"></script>		
 		<!-- alpaca -->
@@ -136,33 +137,31 @@
 		<section class="custom-nav">
 			<section class="container-fluid">
 				<section class="row">
-					<section class="col-md-1">
+					<section class="col-md-1 col-sm-1 expand-btn">
 						<button class="btn btn-success btn-lg" id="sidebarCollapse">
 							<i class="fa fa-magic" aria-hidden="true"></i>
 						</button>
 					</section>
-					<section class="col-md-1">
+					<section class="col-md-1 col-sm-2" style="padding-right:0px;">
 						<div id="new-dropdown" class="dropdown">
-							<button id="new-btn" class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Menu</span></button>
+							<button id="new-btn" class="btn btn-primary btn-lg dropdown-toggle"  type="button" data-toggle="dropdown"><span class="translate">Menu</span></button>
 							<ul class="dropdown-menu">
 							<li class="dropdown-header">Upload</li> 
 							<li><a href="#" data-type="file" class="upload-btn">Files</a></li>
 							<li><a href="#" data-type="powder" class="upload-btn">Powder</a></li>
-							<li><a href="#" data-type="project" class="upload-btn">Project</a></li>
-							<!--<li><a href="#" id="upload-folder-btn">Folders</a></li>-->
-							<li class="dropdown-header">Create</li> 
+							<li class="dropdown-header">Create</li>
 							<li><a href="#" id="new-folder-btn">Folder</a></li>
 							<li><a href="#" id="new-customer-btn">Customer</a></li>
 							</ul>
 						</div> 
 					</section>
-					<section class="col-md-6 col-sm-8">
+					<section class="col-md-6 col-sm-7">
 						<section class="row">
-							<section class="col-md-12">
+							<section class="col-md-12 col-sm-8">
 								<input id="search-box" class="form-control input-lg translate" placeholder="Quick Search" type="text"/>
 							</section>
 							<section class="col-md-12">
-								<span id="show-advanced-search" class="pull-right">Cannot find what you are looking for? Try <a>advanced search</a></span>
+								<span id="show-advanced-search" class="pull-left">Cannot find what you are looking for? Try <a>advanced search</a></span>
 							</section>
 						</section>
 					</section>
@@ -214,20 +213,20 @@
 					</div>
 				</div>
 			<section class="row full-height no-max-height file-area" style="margin-left:0px">
-				<section class="col-md-9">
+				<section class="col-md-12 col-sm-12" id="main-file-area">
 					<section id="tableViewport" style="margin-top:10px;">
 						<section class="container-fluid">
 						<section class="row" style="border-bottom:1px solid #C9C9C9">
-							<section class="col-lg-1 col-md-1">
+							<section class="col-lg-2 col-md-2 col-sm-2">
 								
 							</section>
-							<section class="col-lg-6 col-md-6">
+							<section class="col-lg-4 col-md-4 col-sm-4">
 								<p><b class="translate default-font">Name</b></p>
 							</section>
-							<section class="col-lg-2 col-md-2">
+							<section class="col-lg-2 col-md-2 col-sm-2">
 								<p><b class="translate default-font">Owner</b></p>
 							</section>
-							<section class="col-lg-3 col-md-3">
+							<section class="col-lg-3 col-md-3 col-sm-3">
 								<p><b class="translate default-font">Date</b></p>
 							</section>
 						</section>
@@ -237,12 +236,12 @@
 						</section>
 						</section>
 					</section>
-					<section class="col-md-3 no-margin file-info pre-scrollable no-max-height">
+					<section class="col-md-3 no-margin file-info pre-scrollable no-max-height hidden animated" id="file-info">
 						<h3>File Information</h3>
-						<ul id="info-list">
+						<div id="info-list">
 
-						</ul>
-						<button id="delete-btn" class="btn btn-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown"><span class="translate">Delete</span></button>																					
+						</div>
+																											
 					</section>
 				</section>
 			</section>
@@ -261,8 +260,7 @@
 				<span class="translate">Rename</span></a>
 			</li>
 			<li class="divider"></li>
-			<li><a class="translate" id="changeAlert" tabindex="-1" href="#"><span class="translate">Notify Me Of Changes</span></a></li>			
-			<li><a class="translate" tabindex="-1" href="#">Something else maybe?</a></li>
+			<li><a class="translate" id="dropDelete" tabindex="-1" href="#">Delete</a></li>
 		</ul>
 		</section>
 		<!--M0DALS-->

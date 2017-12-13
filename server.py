@@ -442,6 +442,27 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "printing parameter")
     database_handler.create_form_type_to_type_link(formid, "comment")
 
+    formid = database_handler.create_form_type(".prt")
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "SLM name")
+    database_handler.create_form_type_to_type_link(formid, "project name")
+    database_handler.create_form_type_to_type_link(formid, "customer")
+    database_handler.create_form_type_to_type_link(formid, "comment")
+
+    formid = database_handler.create_form_type(".stl")
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "SLM name")
+    database_handler.create_form_type_to_type_link(formid, "project name")
+    database_handler.create_form_type_to_type_link(formid, "customer")
+    database_handler.create_form_type_to_type_link(formid, "comment")
+    
+    formid = database_handler.create_form_type(".magics")
+    database_handler.create_form_type_to_type_link(formid, "name")
+    database_handler.create_form_type_to_type_link(formid, "SLM name")
+    database_handler.create_form_type_to_type_link(formid, "project name")
+    database_handler.create_form_type_to_type_link(formid, "customer")
+    database_handler.create_form_type_to_type_link(formid, "comment")
+
     formid = database_handler.create_form_type("default")
     database_handler.create_form_type_to_type_link(formid, "comment") 
 
