@@ -275,7 +275,9 @@ $(document).ready(function() {
 			window.setTimeout( function(){
                 $("#file-info").addClass("hidden");
 				$("#main-file-area").toggleClass("col-md-12");
+				$("#main-file-area").toggleClass("col-sm-12");
 				$("#main-file-area").toggleClass("col-md-9");
+				$("#main-file-area").toggleClass("col-sm-9");
             }, 250);  
 			
 			
@@ -286,7 +288,9 @@ $(document).ready(function() {
 			$("#file-info").removeClass("hidden");
 			
 			$("#main-file-area").toggleClass("col-md-12");
+			$("#main-file-area").toggleClass("col-sm-12");
 			$("#main-file-area").toggleClass("col-md-9");
+			$("#main-file-area").toggleClass("col-sm-9");
 		}
 		
 	
@@ -484,16 +488,16 @@ function displayList(parent, childrenObjects) {
 		if (value.type == "file") {
 			iconName = "fa fa-file-o fa-3x";
 		}
-		var checkbox = el("section", {class:"col-lg-1 col-md-1"});
+		var checkbox = el("section", {class:"col-lg-1 col-md-1 col-sm-1"});
 		var input = el("input", {type:"checkbox", class:"form-control", "data-id":value.id});
 		input.onclick = function(e) {
 			e.stopPropagation();
 		}
 		checkbox.appendChild(input);
-		var icon = el("section", {class: "col-lg-1 col-md-1"});
+		var icon = el("section", {class: "col-lg-1 col-md-1 col-sm-1"});
 		var fa = el("i", {class: iconName});
 		icon.appendChild(fa);
-		var name = el("section", {class: "col-lg-5 col-md-5"});
+		var name = el("section", {class: "col-lg-4 col-md-4 col-sm-4"});
 		if (typeof value.ext == "string") {
 			var h4 = el("h4", {html: value.name + value.ext});
 		}
@@ -501,10 +505,10 @@ function displayList(parent, childrenObjects) {
 			var h4 = el("h4", {html: value.name});
 		}
 		name.appendChild(h4);
-		var owner = el("section", {class: "col-lg-2 col-md-2"});
+		var owner = el("section", {class: "col-lg-2 col-md-2 col-sm-2"});
 		var h4 = el("h4", {html: value.owner}); 
 		owner.appendChild(h4);
-		var date = el("section", {class: "col-lg-3 col-md-3"});
+		var date = el("section", {class: "col-lg-3 col-md-3 col-sm-3"});
         if (value.type == "file") {
             var h4 = el("h4", {html: moment(value.updated * 1000).format("YYYY-MM-DD")});
             date.appendChild(h4);
