@@ -1,0 +1,2389 @@
+commit 06ca4c9c459f6540ecf7c38135ab4e5b6fabcbfc
+Merge: 346f0be 69b85a4
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Dec 11 12:13:16 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 346f0bedee46ae1122299f22472188883843107e
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Dec 11 12:13:10 2017 +0100
+
+    fix search bug
+
+commit 69b85a49c981baf63a6d109ed4f40de5056c2660
+Author: sodasaft <jagvillha1kaka>
+Date:   Mon Dec 11 11:40:03 2017 +0100
+
+    Changed the string "Change account" to "Update account"
+
+commit 02ea64f0a628738f56655b904c256e05ad9ac3f8
+Merge: e4b0fd7 377eba0
+Author: sodasaft <jagvillha1kaka>
+Date:   Mon Dec 11 11:16:02 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit e4b0fd778028c68da618df9f851127915c35845b
+Author: sodasaft <jagvillha1kaka>
+Date:   Mon Dec 11 11:15:47 2017 +0100
+
+    deleted customers and powders are not selectable in the wizard anymore
+
+commit 377eba080a3db584f1ae6b55c6d3273cdccef8de
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Mon Dec 11 10:58:31 2017 +0100
+
+    Fixed javascript app interface & Visible Caret & Highlighted Search
+
+commit 226b4aa666241f9693f0d3b8391c152729367ffd
+Merge: 9cf72a5 1aac65e
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 11:10:25 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 9cf72a55ad1d60c17b8ef68038858305f185dd2c
+Merge: 8d23294 800dffe
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 11:10:16 2017 +0100
+
+    added some stuff
+
+commit 1aac65e6dee12c5fbb00aba8bb2eea18cf105165
+Merge: 36914f1 800dffe
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Dec 8 11:04:29 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 36914f15ebfa99225c585b7c7c99c9aed434011d
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Dec 8 11:04:27 2017 +0100
+
+    Powders render in select box in wizard
+
+commit 8d23294101d96f6b52ef1863d23d86c0a5f783da
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 11:02:08 2017 +0100
+
+    Can now upload files through the wizard
+
+commit 800dffeadf6f3db38eb6673b5941bdd2f5b85b30
+Merge: 9ed595e d63f921
+Author: rimsh <reemshahin@gmail.com>
+Date:   Fri Dec 8 10:56:52 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 9ed595e349fe89aaef744d20a33d9360f3f0c320
+Author: rimsh <reemshahin@gmail.com>
+Date:   Fri Dec 8 10:56:45 2017 +0100
+
+    update css
+
+commit d63f9218422c698bd22662f09a7e0d6f41c203b8
+Merge: 73e4635 4ddca7d
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Dec 8 10:55:12 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 73e4635405bdf11d9f41f3e600afdef84570b177
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Dec 8 10:55:10 2017 +0100
+
+    Added get_powders_ajax and related functionality
+
+commit 4ddca7df7bf0a950d3a3ccf68a180ccbf6ca2b86
+Merge: 7e24e86 b00c2d7
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Dec 8 10:50:04 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 7e24e86f09e8dfdb8b8a3dd83521f182114026ab
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Dec 8 10:49:51 2017 +0100
+
+    added Smula logo to the login page
+
+commit b00c2d7b0503e139be23ba6940bb7e1280884ac1
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 10:33:29 2017 +0100
+
+    Added Project Wizard
+
+commit 353d756487fd6b6ed8c8bfa9c5990c9404abb90f
+Merge: 8488111 7b2ea32
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 10:10:39 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 848811195b92422ade887e749e2b868e5199b098
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 10:10:33 2017 +0100
+
+    Added different sections to the wizard
+
+commit 7b2ea323eb67433748de6ed2820dc22f2dda4670
+Author: rimsh <reemshahin@gmail.com>
+Date:   Fri Dec 8 09:35:53 2017 +0100
+
+    update index file add rename button
+
+commit 2590be845bae17481ae00ac3133f5fa0276394f9
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 09:26:02 2017 +0100
+
+    Added function where user can quickly navigate to the created project
+
+commit d520654688b1345da4ed83fba6f3c7f2497f79c5
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 08:59:38 2017 +0100
+
+    Projects can now be created using the wizard
+
+commit 66d03abd4ffa3d1ab36388c25048ba29c38124b5
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Fri Dec 8 08:41:43 2017 +0100
+
+    Fixed Merge Conflicts
+
+commit 7dc4202101342e9bf04f080f2e54403523d0e0e7
+Merge: debf2a1 2627113
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Fri Dec 8 08:34:35 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit debf2a1ac18e261347008c13fc4cef0b0cdf1b57
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Fri Dec 8 08:34:13 2017 +0100
+
+    new CSS style
+
+commit 262711306a50e6805aa3a82cb7e6c4aad1f99bd9
+Merge: 4c2b9cf 9210793
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 07:32:08 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 4c2b9cf8c6bb07daadf22b1118dd70e3bb0fa2ea
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Dec 8 07:32:04 2017 +0100
+
+    made index.html fixes
+
+commit 9210793f1b6f0b36418180738796daf081e09fb0
+Author: sodasaft <emil.sundklev@gmail.com>
+Date:   Thu Dec 7 19:30:11 2017 +0100
+
+    Account privilege now restricts the user from accessing the create account page if the users privilege is to low
+
+commit 271b5c790212d8ba9a1e8ce9a67abf3953bedce3
+Merge: b34a769 bd08149
+Author: sodasaft <jagvillha1kaka>
+Date:   Thu Dec 7 13:56:18 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit b34a769ed5a1a5632a464798149c794be83fdcc7
+Author: sodasaft <jagvillha1kaka>
+Date:   Thu Dec 7 13:55:59 2017 +0100
+
+    a start for the levels of privilege for accounts
+
+commit bd08149e174c567d9d553044d352d98a2824000d
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Dec 6 20:41:33 2017 +0100
+
+    rename file
+
+commit ce1101cbacaf440a28f7695b2fe8aa72d17960b3
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Dec 6 09:45:21 2017 +0100
+
+    refactored index.html, removed responsive checkout.css
+
+commit 257eaf576266f8380aef8ec4418abc50b2a678f6
+Merge: 12c5566 a7219f5
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Dec 6 09:39:06 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 12c556648c00b8a515a114df1da4ab5f70cf61d1
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Dec 6 09:38:58 2017 +0100
+
+    removed repeated title tags
+
+commit a7219f5e21857beb4b7c4d30c61f4810273a9e5b
+Merge: 49c4304 e3e4533
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Wed Dec 6 09:25:50 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 49c430477eb8db50bd7490c2a86bc1709f8393d1
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Wed Dec 6 09:25:46 2017 +0100
+
+    Breadcrumb now no longer overlaps into the navbar
+
+commit e3e453329733082f281a2bb94f5ec7656a86ddd6
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Dec 6 09:22:46 2017 +0100
+
+    fixed issue when uploads was not created on startup if it did not exist
+
+commit 7ea36292d4db4e2e1258f1fbfb7c9956dc21de7b
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Dec 6 09:16:33 2017 +0100
+
+    Added sidebar to dashboard
+
+commit 1502a9f990eafdba4cd850e1cd4d418d301b462e
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 29 10:24:42 2017 +0100
+
+    renamed filescanner to files
+
+commit a4f2d713c01ad06609da288f6f1177a4d22f53c9
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 16:23:01 2017 +0100
+
+    Files now reference the id of the form_type (alpaca form)
+
+commit ea80946c4e07dcf2a1e97db0c7142569860231e8
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 15:43:03 2017 +0100
+
+    Added new form_id column to filesystem.
+
+commit 7f6d4a91b951778d410070a17b9eea846fb05494
+Merge: 87f2965 d811441
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 12:40:54 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 87f2965eb3e7eddeac8a0b1e400e5649086e804d
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 12:40:47 2017 +0100
+
+    added mimetypes and size to download
+
+commit d811441c35910eb12ea4060aede51857d9e7228c
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 02:18:24 2017 +0100
+
+    Update css for files
+
+commit abe41815d97c340a768034bdc9ebf69ac5bf1f2a
+Merge: 4926a3d 93eebd2
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 01:22:00 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 93eebd28540377bbaa004b44fedb705bfc1f969c
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 01:21:39 2017 +0100
+
+    Sorted file attributes, sorted alpaca forms, sorted advanced search
+
+commit edcde4bdbdf19590528562a9e46d5dcb0f5226a5
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 01:02:44 2017 +0100
+
+    added file ext to fileview
+
+commit 4926a3dc58b2eb98f81e11985bed04fc1b0c1dda
+Merge: 48d0b1f 4a2a71f
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:53:59 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 48d0b1f84a7dd41d39e3fba011ae139153dc4df0
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:53:54 2017 +0100
+
+    Redirect after updating account
+
+commit 4a2a71f27c893774d4d6b1b35066930807284b8e
+Merge: 4f7d19c 376c58d
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 00:52:53 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 4f7d19ccf878ded644a07f0c99d0f0578cc0ab17
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 00:52:43 2017 +0100
+
+    Added owner field to filelist
+
+commit a9ef44535c4c7628d7b7ac2f1c4bdc24bbed5c56
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:39:51 2017 +0100
+
+    Removed print statement
+
+commit 376c58d2e6593aff542aab45cdd18c1562f2516a
+Merge: 96fb6c2 39fff92
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:34:01 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 96fb6c26584fdc33a0e380e8f9b38ec886807962
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:33:58 2017 +0100
+
+    Add correct timestamp to customer
+
+commit 0e5cdeea5d036f02c4d66db09b73d361dc841989
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 00:27:44 2017 +0100
+
+    Refactored file entry method that Joshua couldn't do!
+
+commit 39fff9207651ef2b6ff74dabae091f568500b62b
+Merge: 8de9104 45d26c7
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 00:22:26 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 8de91049817b919e7fe51b8b290f71a471eac2fd
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Sat Nov 25 00:20:59 2017 +0100
+
+    made some CSS changes
+
+commit 45d26c7c4aabca420f402c9a7ec8a767d1746998
+Merge: 1d6e61a 1d720bf
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:17:25 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 1d6e61a6499c4fe3fb0944ab991dae5bbec5e95a
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Sat Nov 25 00:15:26 2017 +0100
+
+    Added create customer, fixed missing file extension error
+
+commit 1d720bf053970575dc83989eb00503f09a6c7dc3
+Merge: ee08134 d9910a4
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 23:35:28 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit ee08134ffa002240c5ffceb73fadc0db38190d29
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 23:30:22 2017 +0100
+
+    removed delete button next to search
+
+commit d4713e724af34457f7cd389ddb53be53cbf18e92
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 23:29:08 2017 +0100
+
+    DOn't have to press enter button on simple search anymore
+
+commit 0028637aa1cf5c24a6fc1cc22c57b0cadf7722e6
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 23:19:51 2017 +0100
+
+    Added delete file functonality
+
+commit 673820ae1dd0c590e058e28b45060f5cd8e5f113
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 22:32:04 2017 +0100
+
+    Prepare filesystem, database and forms for customer files
+
+commit d9910a418f990414952fb9866aca9fd0a63f8f43
+Merge: 87fb369 662e5eb
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 22:12:57 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 87fb3693801c37e0f41f96b3e22102864e691256
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 22:12:05 2017 +0100
+
+    remove viewtemplatehandler
+
+commit 662e5eba85b6e957b433dd7d1446dc0ea38eea1a
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 22:11:03 2017 +0100
+
+    added delete flag into database, added delete button, added server hook, delete function does not work yet
+
+commit ed8f1140ce3d66f316d5a6efdd2eae07c574d5a6
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 21:40:09 2017 +0100
+
+    added super development mode
+
+commit 5320c107e6308cf7322d8f8ad28e9a90de6446eb
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 21:13:42 2017 +0100
+
+    added new upload types
+
+commit ddcaa8079e846408d752c6a2d7017e219c431581
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 20:53:41 2017 +0100
+
+    moved new folder btn
+
+commit 183e561d9ed017e47b17dcc0d4fd8bf32bb937a0
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 20:49:12 2017 +0100
+
+    Added new button with dropdown for various actions
+
+commit 4ef57cc8f48627cff902b48a499920976bd5e18b
+Merge: f51719c 17e6aaa
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 24 10:54:48 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit f51719c7f602769ea32ebd9e7ddc2f303b414218
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 24 10:54:27 2017 +0100
+
+    cleaned the account.html page
+
+commit 17e6aaa117e16ba695212f96b07be493edf4604b
+Merge: 69ab826 593f254
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:51:39 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 69ab8260722edb76a17a3b32c22383d3da384ac9
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:51:37 2017 +0100
+
+    Fix select file again
+
+commit 593f2546a675badd7c957acf520ce1ddbfb0f72c
+Merge: fe40d5d d2cfbeb
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 10:51:03 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit fe40d5d63add3863af6844969b5d97dd3cdcb903
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 10:48:47 2017 +0100
+
+    fixed user account update
+
+commit d2cfbeb1fca2e75ff20bb02a26849fd2d2557240
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Fri Nov 24 10:47:02 2017 +0100
+
+    Android app download link is now dynamic
+
+commit ce3b89db597386b211edd1647dd34f00bb5f9be4
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:38:39 2017 +0100
+
+    Add build template
+
+commit a13098a9f586bb097803f5bfa48fec248c978a42
+Merge: d458aa8 d27babb
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:32:58 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit d458aa8098dfeb9c59c6c9a42b4c48ea8635a8f9
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:32:50 2017 +0100
+
+    Scrollabel fileinformation
+
+commit d27babb4689effce179ced9ca6cc531e77304b46
+Merge: e1fa1cd 34d2fb8
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 10:32:03 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit e1fa1cd24fe5e5251cc7875a676ab4948ac8745f
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Nov 24 10:31:55 2017 +0100
+
+    had a go had fixing the account details
+
+commit 34d2fb8be6efcfe4384e4915ce16363752868aa6
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:24:04 2017 +0100
+
+    Added slm template and powder template
+
+commit 1db6582366636d6e7232a188eae97c9664c5a887
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Nov 24 10:10:49 2017 +0100
+
+    Render default template if no other template available
+
+commit d480b41eda3d5b4b819946a8426ad8a7656a3e12
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 23:31:55 2017 +0100
+
+    Last crumb is now different color again
+
+commit fbaa571783da9dcec2a1ca1b4e4ed08aca768a33
+Merge: d498dbe 4702df5
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 21:54:34 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit d498dbe18bb31489dfdc951f431dd3277d9673d8
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 21:54:31 2017 +0100
+
+    Purple color scheme
+
+commit 4702df5791895b1802429012c8f115fa3d82fb7f
+Merge: 0549e20 cc0a3c5
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 21:24:56 2017 +0100
+
+    Merging Branch with Master
+
+commit cc0a3c55ef9e23e7373ad52c90c4be259011d70e
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Nov 23 21:01:41 2017 +0100
+
+    Fix lost method
+
+commit 8ba92e992951d48d6e27c7faa711ee5b6eea7f5a
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Nov 23 20:57:59 2017 +0100
+
+    Remove double click download
+
+commit b94e7f17a98233aa8ce85f1eeda7c52c5f9b6720
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Nov 23 20:53:03 2017 +0100
+
+    Fix merge conflicts
+
+commit bc20d7cdcc6049e775e201678b78282f4a835155
+Merge: 65d02ba 2a0ed24
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Nov 23 20:46:49 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 65d02bae024b2ecfc29e1ea1f34155f3bf7c425d
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Nov 23 20:46:34 2017 +0100
+
+    Changed upload functionalities. Upload projects and folders
+
+commit 0549e205751d0700215eedc106f26bfd2d0769a0
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 20:35:33 2017 +0100
+
+    Added flexible forms for materials, added form_types, added form_type links
+
+commit f41d4fbaf6c8f12bdcd51dc52fcfd7ff570292e3
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Nov 23 20:22:58 2017 +0100
+
+    Double click a folder to enter it
+
+commit 2a0ed24de8d609c5a9cd811caf4f411bf0d005a0
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 20:05:00 2017 +0100
+
+    lighter gray for login
+
+commit 9f412b353a0508e1bce8326a4b5f2c87decc65a7
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 20:03:17 2017 +0100
+
+    File Information Style
+
+commit a32c686f54e85ed0989053238f95f7cc7d62495d
+Merge: 3f252b8 edeeaf4
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 19:36:16 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 3f252b8e8cf227afc84ca46704e9a061ec2d59a2
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 19:36:12 2017 +0100
+
+    Login Form Banner Style
+
+commit edeeaf4851917a964aa4dfeab0da2527d6bc2ec9
+Author: rimsh <reemshahin@gmail.com>
+Date:   Thu Nov 23 19:04:36 2017 +0100
+
+    create json
+
+commit 052a23ca5307efc655fb7041b9442bb10b2e785e
+Merge: 0807bb9 c09f40c
+Author: rimsh <reemshahin@gmail.com>
+Date:   Thu Nov 23 18:56:54 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 0807bb9b80b1c00e6f47475846ce19fa7243209a
+Author: rimsh <reemshahin@gmail.com>
+Date:   Thu Nov 23 18:56:51 2017 +0100
+
+    get data
+
+commit c09f40c1057a3b70c8f4017a613cacd5fbf0f490
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 18:49:44 2017 +0100
+
+    Hid Login Incremental Control
+
+commit 7d7def33ffe1932ece298f15ef3062d4482f7bc2
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 18:41:33 2017 +0100
+
+    Updated Login.html style
+
+commit ecee996a1f21a52513a9359a210d6782f0b168ba
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 18:37:57 2017 +0100
+
+    Login page logo
+
+commit 051e6a217856f44bec9d91dfaea2571e0014c509
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 18:03:48 2017 +0100
+
+    fixed issue where files were returned multiple times
+
+commit f88c55782ad9b0c078d353a7863a60f84e4db2c2
+Merge: fa22c5c d745337
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 18:01:16 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit fa22c5c5a057144f2e2f93252b8bed6799742679
+Merge: b4c9ca6 8efd33f
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 18:01:06 2017 +0100
+
+    Added Advanced Search£
+
+commit d745337caa0a631705d84b4dbcc4017b329bb354
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 16:19:38 2017 +0100
+
+    No files panel now proportionally aligned
+
+commit cf8d352995ee767fbf7dcb1bd183529b6e1ed3db
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 23 16:06:51 2017 +0100
+
+    Removed white white pixels on the edge of the breadcrumb
+
+commit b4c9ca649ce7fad54f9bf92dc530c379536d007b
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 15:15:08 2017 +0100
+
+    started file information
+
+commit 8efd33ff482484a675f1d3374bd9f838ea7701ad
+Author: sodasaft <emil.sundklev@gmail.com>
+Date:   Thu Nov 23 15:03:51 2017 +0100
+
+    Sidebar shows file info, download by rightclick file
+
+commit 26d9c6306a4e8aea38d4ed4f703d680958d078c8
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 14:16:02 2017 +0100
+
+    fixed merge conflicts
+
+commit 513383096a9fdcc417319efe869d03c038ba8e2e
+Merge: 4dca3cb 75f931f
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 13:51:51 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 4dca3cb2e52efa0729fb94ce848eec1f76d54aa8
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 23 13:51:44 2017 +0100
+
+    Added file attributes entry
+
+commit 75f931f7f36d99907e868e3966ade9353862efb7
+Author: rimsh <reemshahin@gmail.com>
+Date:   Thu Nov 23 13:38:59 2017 +0100
+
+    update view handler
+
+commit 5be52652261348661bfca88e8e6bc405ff299120
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 22 11:57:19 2017 +0100
+
+    choose the right json file according to its ext
+
+commit 1ac773e14f036d0cc8b12b07d6af99b9fc64e9d2
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 22 11:43:31 2017 +0100
+
+    Refactored get_data
+
+commit 87caf86439479913b116a53f85820bfd602d47d2
+Merge: 0ca14df 7282db6
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 22 11:35:47 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 0ca14dffea2cdba9c93c09e8e5172156dd09a5e6
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 22 11:35:41 2017 +0100
+
+    Refactored server.py
+
+commit 7282db6994d88c67295466dd5796d6ee79b3485c
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 22 11:28:42 2017 +0100
+
+    search alpaca form
+
+commit f90bccda761be4b44170465268aaf73dec207693
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 22 11:25:49 2017 +0100
+
+    search alpaca form
+
+commit 2e738dc36304ef68efb021162088e71678ba111d
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 22 11:20:05 2017 +0100
+
+    added file info uploader
+
+commit e50afbe070029d7751e2a00dff1de82efca36b1e
+Merge: 5cbf3e3 73daadd
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 22 10:32:39 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 5cbf3e32cf1ff453c617c5e18f4e6954929f2c63
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 22 10:32:36 2017 +0100
+
+    check errors
+
+commit 73daadd6e1581f05a7a4239f0ffe21960a3c3e70
+Merge: cdcbb2e b1bb7b4
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 22 10:22:22 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit cdcbb2e9ed64b094930872e0f02e389a6a454c1c
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 22 10:21:43 2017 +0100
+
+    removed consolelog
+
+commit b1bb7b48023c0b1f5f9fd14d290846d23cc3bcff
+Merge: 144b9a6 c0fa1e5
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 22 10:21:09 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 144b9a6e09bcaf974402be1eaaf17f0bfaa8a4a5
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 22 10:13:30 2017 +0100
+
+    alpaca form
+
+commit c0fa1e5c7213f1be6def86d018f7335694af8e74
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Wed Nov 22 10:11:21 2017 +0100
+
+    Prepare storing file information, Add advanced search handler
+
+commit 53735a7e023786c6134bc27781828254b54eefca
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Wed Nov 22 09:14:07 2017 +0100
+
+    Removed print from AuthStaticFileHandler
+
+commit 87d83e86fbd51dcc6a64884124e12a62e0876df2
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 19:04:43 2017 +0100
+
+    Can now download images and other binary data
+
+commit 9108e844a282daa11eb1a97453dc20c18f6bb67a
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 18:49:07 2017 +0100
+
+    fixed bug where files could not be uploaded
+
+commit 35197a6f37cbdd5d57e4223d1e31ac1c319e5acf
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 18:44:34 2017 +0100
+
+    added new folder ability
+
+commit 1b200a713dff38bde65a1022dfb9287dacf97d8b
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 18:22:57 2017 +0100
+
+    FIlesystem fixes
+
+commit f66e2e493b14dc37bc5bfda4dfb1f868861e8104
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 17:28:02 2017 +0100
+
+    FIlesystem fixes
+
+commit 642c8e8de0546a8729ef5cdaf6f152f1d896ef35
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 12:27:22 2017 +0100
+
+    Adding new database, adding login and logout, adding bottom navbar, adding upload to database
+
+commit a64666c3be40f2fbb94ade9dba47527c156cfafb
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 09:08:28 2017 +0100
+
+    fixed import issue
+
+commit 256190acd1165d21ca2b413190e9bfbb7b749063
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Tue Nov 21 00:59:12 2017 +0100
+
+    fixed download file
+
+commit acd3fd3001ed7891b841eaf8d6ae523ba123aab2
+Merge: b228634 770d276
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Tue Nov 21 00:48:24 2017 +0100
+
+    fixed download file
+
+commit b22863429651c1669a48bc29a0c8a9f56c76159d
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Tue Nov 21 00:39:21 2017 +0100
+
+    refactored database_handler
+
+commit 770d27649bd781f08f11b6af20298a615b1419e8
+Merge: 03a9cf2 09152ec
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 00:38:02 2017 +0100
+
+    fixed merge conflicts
+
+commit 03a9cf22665008d8084f7df5a361fc11572b4dba
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Nov 21 00:33:41 2017 +0100
+
+    added downloader
+
+commit 09152ec4688fcdfed8f67b44d2b1356162b950f3
+Author: sodasaft <jagvillha1kaka>
+Date:   Mon Nov 20 09:46:40 2017 +0100
+
+    account creating can now be done in /account
+
+commit 9c1c37a0ecd4962a9d553463ffce80d90496ee30
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 17 12:48:53 2017 +0100
+
+    You can now logout by going to /logout, it will clear the cookie and redirect you to the login page
+
+commit fcfe7f70b8bde9cd296649f110a5a048f26d7733
+Merge: 3ec0f71 f28df0d
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 17 10:35:45 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 3ec0f714e989eaf38a4822aaea928d307ad15226
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 17 10:35:37 2017 +0100
+
+    Cookie is set to be the user_id depending on the code used
+
+commit f28df0dba8c45bc3d4780dd1c1d26c715a500540
+Merge: 34c6da7 2cf7349
+Author: rimsh <reemshahin@gmail.com>
+Date:   Fri Nov 17 09:40:57 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 34c6da750adb8ccae1fffe270d27d6fe528ba4be
+Author: rimsh <reemshahin@gmail.com>
+Date:   Fri Nov 17 09:40:54 2017 +0100
+
+    remove print command
+
+commit 2cf73498c22dfa99b1b793e11a7e235e2adc0082
+Merge: 262b1eb 9dfe76a
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 16 14:15:10 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 262b1eb6ef92426971021c948cdba7a77c2be327
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Nov 16 14:14:57 2017 +0100
+
+    Fixed Uploads
+
+commit 9dfe76ae39cd5dd57b3cfefe7fb3a94b522982be
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Thu Nov 16 14:14:24 2017 +0100
+
+    Removed __pycache__ from version control
+
+commit e7df897050c5ca9f46c5e4bff82539493bcc56f8
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Thu Nov 16 14:06:23 2017 +0100
+
+    Resolved merge conflicts
+
+commit fa772ca3e3577ce850c7336fbc44f44ea718ee2c
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 16 13:17:32 2017 +0100
+
+    No longer crashes the android app
+
+commit c5bc3da583bc52225403ef3a31ae4d020a691cdf
+Merge: f441f79 dba0138
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 15 18:33:43 2017 +0100
+
+    fixed conflict
+
+commit f441f7989d0731b8c264a2f4e1e41ee181fefbac
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 15 18:30:44 2017 +0100
+
+    updated git ignore
+
+commit 386d67ba3592ec811d470e921957b36af93c5982
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 15 18:28:29 2017 +0100
+
+    Added File Uploader
+
+commit 5859a2dc935373fa1069f279b67eaffe609b2b92
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 15 18:28:11 2017 +0100
+
+    Added File Uploader
+
+commit dba0138668fa405b350742d2e28b2d389cc3fc76
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Wed Nov 15 16:30:51 2017 +0100
+
+    Implemented authentication with static file handlers.
+
+commit 47bc08edebb8c47b6f3abc2130e7bacc33b9097a
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 15 12:35:15 2017 +0100
+
+    add submit button in the new form of quesstionaire
+
+commit 33c281a60d5bb64eccd64e2797f19897d057bdbe
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 15 09:47:12 2017 +0100
+
+    choose json file according to extention
+
+commit 9e5a94446ce98405df45cb96993248a7054b1587
+Merge: 3229441 e69a295
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Tue Nov 14 14:16:23 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 322944150351535caabc5263eea4b232de8a96ce
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Tue Nov 14 14:16:13 2017 +0100
+
+    Server provides dummy download link for .STL files
+
+commit e69a2958fbf3ca48826441784f04d1106eb5a00b
+Merge: f9a5ace c2e04a0
+Author: rimsh <reemshahin@gmail.com>
+Date:   Tue Nov 14 13:11:18 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit f9a5acec19e94a592709f3dcc4f85726e0617211
+Author: rimsh <reemshahin@gmail.com>
+Date:   Tue Nov 14 13:10:28 2017 +0100
+
+    update alpaca code
+
+commit c2e04a084bc00ccd52063b5fdc3912807fe83574
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 14 11:37:12 2017 +0100
+
+    Fix default template, Remove hardcoded template
+
+commit 33e8df1c70018c03d272d1ee1994b3e7a2959ec3
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 14 10:58:31 2017 +0100
+
+    Fix rendering of questionnairre
+
+commit 38d1202fa3912e679aa07748240cb812b0e5ef09
+Author: rimsh <reemshahin@gmail.com>
+Date:   Tue Nov 14 10:10:19 2017 +0100
+
+    update a function in server to read templates from files instead of database
+
+commit b5a9d27c60b300202b0fcc5b654134194208d9c9
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 15:00:25 2017 +0100
+
+    Resolve merge conflicts
+
+commit 6f0cef87214671114a8cf9fa42a52e19a9f16265
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 13 14:57:20 2017 +0100
+
+    update file schema function
+
+commit 9be3e0cd7a04968dc859bd0cf3d7b5d129ec4c4d
+Merge: 3fb6f3a c574d6e
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 14:55:35 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 3fb6f3a4f4765efb47f32f00c9d6f6716dd1d10a
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 14:19:46 2017 +0100
+
+    Fix to rendering template
+
+commit c574d6ec6a1cc7d97fb2642d0bf409891ea18339
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 14:19:46 2017 +0100
+
+    Fix to rendering template
+
+commit 47a825e0becba776de3e196b5ecb5af8ee32791d
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 13:42:15 2017 +0100
+
+    Fix 'missing argument' on post request to /fileinformation
+
+commit fcde0d3b5744a272922ff4c1f5451a463f7ff8b8
+Merge: 95446bd cac8f58
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 13:29:22 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit cac8f58ddcf4c1fe96938da46919dba1f89b57f2
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 13 13:29:37 2017 +0100
+
+    upadate column name in jsonschema table
+
+commit 95446bde1958405f00faf6de0e31c79dd6468043
+Merge: ab7799c 3d18731
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 13:25:26 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit ab7799c2e045e1044b5a279cf58bbbabed58e4a2
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 13:25:15 2017 +0100
+
+    Update post attribute name
+
+commit 3d18731502b57588d0b3822f1851db1ac08da4fb
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 13 13:25:07 2017 +0100
+
+    fix errors in getschema function
+
+commit 65ef341106d5f956363e5637422f7e3185332f58
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 13 13:12:31 2017 +0100
+
+    merged last two comments
+
+commit 4b7d6f60febfb9d553236bf16b9e8f8610f4c7ab
+Merge: fdd8d6f aee8e15
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 13 13:03:31 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit fdd8d6fedd984f7c421c660a585cf6a97356bf4e
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 13 12:49:34 2017 +0100
+
+    Goal3 (attach information to files) - work on backend (add handler and database new tables)
+
+commit aee8e15e069f7b287813d0af58ede924825076d5
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 12:18:22 2017 +0100
+
+    Questionnair is rendering a dummy template. Calls to server are in place, but not implemented yet.
+
+commit a961e287e9065353762c00644839347fdedc6e65
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 11:32:13 2017 +0100
+
+    Added handlebars (used by AlpacaJS)
+
+commit 01f3d66e9a96a3f0b21cefe63dc8436013c4e1e8
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 10:50:48 2017 +0100
+
+    Added item in context menu and a modal popup for questionaires
+
+commit b323e88dc5b992f4409152c96fdf59b88fae2f34
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 10:26:11 2017 +0100
+
+    Resolve merge conflict
+
+commit cda54e21977b6045fc6551c499f6f336c7b4e8c5
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Mon Nov 13 10:17:18 2017 +0100
+
+    Update gitignore
+
+commit 711cb30a3c6239325522fc6d9b69dd578df414a0
+Merge: 956d13e a446d95
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Fri Nov 10 14:00:46 2017 +0100
+
+    Merger
+
+commit 956d13edf6df9fbcea912997118701fb750a07fc
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Fri Nov 10 13:59:12 2017 +0100
+
+    Refactor db handler. You require dev_config.py file!
+
+commit d4c5c18cf2f8f040e4c4e7307a851b2dc7b96ee7
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Fri Nov 10 13:58:39 2017 +0100
+
+    Setup gitignore
+
+commit fcd2f76a03d90211231ab8620ac0907e8e77f889
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Fri Nov 10 13:37:38 2017 +0100
+
+    Fix path to root
+
+commit a446d9543169b943790891f11f26f19acb410d75
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 10 09:30:52 2017 +0100
+
+    fixed folders to not have a value on the date column
+
+commit 65baf28c1768faead3f60af5bc1dabdabd35b418
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Nov 10 09:06:15 2017 +0100
+
+    fix fileScanner import
+
+commit 8c832ac3331e1a55879431098a1ebe0699478109
+Merge: 599c942 3e0dc2c
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Fri Nov 10 00:00:35 2017 +0100
+
+    fixed merge conflict
+
+commit 599c942fbb4379ea5e3bc4b5e7ab54bc420e1749
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Thu Nov 9 23:56:13 2017 +0100
+
+    added filesystem scanning
+
+commit 3e0dc2c8e1e2cc12896124bb9b65166ed0d0d3fa
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Thu Nov 9 16:52:55 2017 +0100
+
+    Added '/subscribe' route. Make post request when clicking 'Notify me of changes' to said url.
+
+commit 787ce91966824c96e099449fb4dd878f5478ff47
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Thu Nov 9 16:07:04 2017 +0100
+
+    Added function to send emails.
+
+commit 585ab7d7eda36c375ca66668f1bf4974c295f4c2
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 23:41:22 2017 +0100
+
+    trace modal now has data-id
+
+commit 384d4709807f460e4920d0ff540e77fc8e751c44
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 23:38:48 2017 +0100
+
+    data-id now in context menu
+
+commit cf3e1e2814dbb83a136a4cdfb914ab611691f8d1
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 23:29:59 2017 +0100
+
+    context menu fixed
+
+commit 89646f852c448e7257b5f7a084127fe2d946ec47
+Merge: fa9e2e2 577cde2
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 22:37:09 2017 +0100
+
+    default path fixed
+
+commit fa9e2e24d137782de12ba4416d5d7dce4f58c29e
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 22:35:51 2017 +0100
+
+    default path fixed
+
+commit 577cde2a00f8606b870298fd46e888b8d3b0b194
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Wed Nov 8 21:15:03 2017 +0100
+
+    Fixed static file system routes
+
+commit abdaa809e9816fc1db229f0ae0ef18ad78076e19
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 20:19:37 2017 +0100
+
+    cleaned up ndex.js
+
+commit b51460c8b1ff0ac03dbab96b0549fdd873d043b6
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 20:17:19 2017 +0100
+
+    combined js files into one
+
+commit 0d92866c4a99c4f88402bcf8e1f4a61a5aeb4583
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Wed Nov 8 20:13:24 2017 +0100
+
+    changed server to static file handler
+
+commit ce67953b16966404545837efe0068be7a18e9711
+Author: sodasaft <emil.sundklev@gmail.com>
+Date:   Wed Nov 8 17:09:47 2017 +0100
+
+    Added the StaticFileHandler for index.html
+
+commit 12fcbe185266610e1c37c93a3223768ca4dc1880
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 14:57:29 2017 +0100
+
+    update unicode in the hash function
+
+commit f2b4c6d8def3ad9e07cf242ab01b437c6b51e76c
+Merge: 00d4da2 59e5fc4
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 12:41:51 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 00d4da25d230e5cb3e1a31883248f5cc5cbeb9ae
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 12:41:46 2017 +0100
+
+    add new hash to file table
+
+commit 59e5fc457703aeb83e5ce7e93157b071366bcbbb
+Merge: 019c744 19ae47b
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 8 12:06:04 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 019c74419ae97558325d5a3d02b8efba5d368b0d
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 8 12:05:52 2017 +0100
+
+    removed unused stuff from my js file
+
+commit 19ae47b32c4cc5cddc121008bec2d5d199ee46f0
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 8 11:47:28 2017 +0100
+
+    updated filescanner to ue mysql
+
+commit f96c339af0103bd006da006f5e27a00a180b9888
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 8 11:13:15 2017 +0100
+
+    added filesystem table to database global
+
+commit db9a87e4263856e2f4e9a3445ed6070b4f1642cd
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 8 11:12:26 2017 +0100
+
+    added filesystem table
+
+commit 316189f11f9b0d63d79a9a61b235f715bbbfde08
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 8 11:00:39 2017 +0100
+
+    FIxed Login Functionality
+
+commit 8848520fa2e4e8aaee581731225b5412bdaf50b9
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 09:46:22 2017 +0100
+
+    Move calling building the trees into filesystem file
+
+commit a575cee7d1f560ae8ab820c89ce9e4482cafc220
+Merge: 9a7cd2d 4d46ee4
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 09:43:53 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 9a7cd2dbbcc9929cbbb4da8793c3b71b75a7b9fa
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 09:43:47 2017 +0100
+
+    change insert command
+
+commit 4d46ee4a40bcdcb02d4286030071da2bdc2fee5c
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 8 09:23:50 2017 +0100
+
+    removed the british flag.
+    swapped the static_url method for the files
+
+commit 590f7173cb29ac80f3463727d33b7619c217ef04
+Merge: d357c9d 8fc29e4
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 00:08:35 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit d357c9d58ffce80991138a1d2a9784869fbf35b0
+Author: rimsh <reemshahin@gmail.com>
+Date:   Wed Nov 8 00:08:23 2017 +0100
+
+    create Mysql database from python
+
+commit 8fc29e49439b255b2c8dc8451cbba3ec5d54490e
+Author: sodasaft <emil.sundklev@gmail.com>
+Date:   Tue Nov 7 22:51:01 2017 +0100
+
+    Put in the hacky version for translate that got removed before
+
+commit 02ca75ffef61b009e0943b02f098e9c582cfcad8
+Merge: c06a51f d838e88
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 7 17:39:04 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit c06a51fa083b711dcbb5d2d2c6c0d53e4985feab
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 7 17:36:51 2017 +0100
+
+    Removed random file system generation functions
+
+commit 3a9fa07211a6ccea86c3b94e682b5e95f9aed2b0
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 7 15:34:02 2017 +0100
+
+    Server response with json filesystem to '/filesystem'. Client does a GET-request to read filesystem from server
+
+commit d838e88906f9f33ecf50fa050b236c12e0723e97
+Author: sodasaft <jagvillha1kaka>
+Date:   Tue Nov 7 11:43:21 2017 +0100
+
+    moved the flagbuttons to the account dropdown menu
+
+commit 59f507367597a1362786b6ebe8ead699b6c48aba
+Merge: ab71c13 ddc4a40
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 7 10:14:43 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit ab71c13828b0f1deaea1ae99fdafad703597d9d2
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 7 10:14:34 2017 +0100
+
+    Created filesystem folder. All files that are uploaded to the server shall be stored in there
+
+commit ddc4a4047540c8165807692bb999181a924cd45d
+Author: sodasaft <jagvillha1kaka>
+Date:   Tue Nov 7 10:12:00 2017 +0100
+
+    adding flag folder
+
+commit a42608687c48edb3811eecad1276e625bf49ff08
+Author: sodasaft <jagvillha1kaka>
+Date:   Tue Nov 7 10:07:42 2017 +0100
+
+    moved the flag folder and changed the path string
+
+commit 283d5a870b99a7316e32a7432e01adde5d1f2b2d
+Author: Joshua Jungen <joshua.jungen@outlook.de>
+Date:   Tue Nov 7 09:11:10 2017 +0100
+
+    Merged python server with client
+
+commit 5f1ae2b94218260c1d229ca8a58523f9290b45ba
+Author: rimsh <reemshahin@gmail.com>
+Date:   Mon Nov 6 15:13:53 2017 +0100
+
+    Update ID in (sidebar tree and traceability)
+    
+    Updated all functions to read from JSON instead of array
+
+commit e472a1935361a156d85c949402b50a125d190876
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Mon Nov 6 10:50:37 2017 +0100
+
+    Improved FileSystem
+
+commit 9ae4e749fd2d7e68dd5566f5f8b38ca83343ec02
+Author: sodasaft <jagvillha1kaka>
+Date:   Mon Nov 6 10:34:40 2017 +0100
+
+    Added an english and swedish flag button that changes the language to swedish, so far
+
+commit ab32b7dfabf6718ee60e9d4f88dce6f0db5da7c0
+Author: rimsh <reemshahin@gmail.com>
+Date:   Sun Nov 5 10:16:45 2017 +0000
+
+    Traceability tree
+    
+    Add traceability tree
+
+commit f9049d7e74bc07ba7601e64b287eff991f8c35b3
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 2 17:15:30 2017 +0100
+
+    Uniform formatting
+
+commit d8431ae8a10f4a14e193d55b640ffea38f0c131b
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 2 17:10:21 2017 +0100
+
+    Removed empty CSS files and references to them.
+
+commit 27c4f98b780303ebbba6df840b994e58e8b56a74
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Nov 2 17:07:24 2017 +0100
+
+    Merged CSS styles into one file
+
+commit 02a746cc6c5b95ee44655caa50990480abf3c8eb
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 1 12:01:37 2017 +0100
+
+    added padding class for for the left side-menu
+
+commit 52bc65d188a9d661fe5403d4006dbce43d92f107
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 1 11:53:21 2017 +0100
+
+    Added index.css
+
+commit 9c438fddb3eb17075382258fc095414802a2b003
+Merge: 988d712 5e255a7
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 1 11:43:38 2017 +0100
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 988d712de0e4cc941e395c7dfc67d3c1642073dc
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 1 11:43:06 2017 +0100
+
+    Updated Swedish Translation
+
+commit 5e255a729d07be554b855b5d4b9fe9e71f80a58d
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 1 11:30:34 2017 +0100
+
+    added a few spans for translating
+
+commit 7abba1e440973d45825af0ea4a5899ce78d95655
+Merge: 8ff1bd6 d1e7734
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 1 11:10:44 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 8ff1bd628835de2c237602b6aa60653bfee41e5d
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 1 11:10:37 2017 +0100
+
+    fixed my mess sry peter
+
+commit d1e7734e4726b2b01d20e225025fcd9f5a88c5b7
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 1 11:09:40 2017 +0100
+
+    Added translator.js to index
+
+commit 9585adf2d8b4b69d716d1e7641bff792d0fca471
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Nov 1 11:06:10 2017 +0100
+
+    added spans for translation
+
+commit 3d99cea491ef5b8e22189a73011c46beeffbd0af
+Merge: fef2cc8 2950d9a
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 1 10:50:35 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       index.html
+
+commit fef2cc85adcd1f9c093b3243e79cf15422c0291d
+Author: sodasaft <jagvillha1kaka>
+Date:   Wed Nov 1 10:49:14 2017 +0100
+
+    some finetuning of the index file, tabs and spaces should look better
+    Also added translate class for each text that we want to translate later
+
+commit 2950d9acc986c0ada7b70b054ac6c4f76a7b0aaa
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Oct 31 17:53:09 2017 +0100
+
+    Fixed issue with translate function
+
+commit 8b85912dbd178870b90c9daa48f2f8dd2579a520
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Oct 31 12:04:05 2017 +0100
+
+    Added Translation Function [BROKEN]
+
+commit ec4a1e4de1636bc374c6b4a0c8fbf5ae49da9ffd
+Merge: 844d1c8 00f11de
+Author: sodasaft <jagvillha1kaka>
+Date:   Tue Oct 31 10:39:26 2017 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 844d1c88d30ca5fa66732d2a5b1dec37ae397029
+Author: sodasaft <jagvillha1kaka>
+Date:   Tue Oct 31 10:32:29 2017 +0100
+
+    added alert-changes option when rightclicking a folder/file. Also changed the login dropdown
+
+commit 00f11debacc1c1952a00861d175ee2fe0590798b
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Oct 31 10:23:04 2017 +0100
+
+    fixed issue where details do not appear when retrived from server
+
+commit 16b1d515fb6fb6d0b421275d19df8f88c08a888d
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Oct 31 10:21:52 2017 +0100
+
+    Added Account page
+
+commit 37adea51d80885b5217e8540d6365b61837ceb3a
+Author: sodasaft <emil.sundklev@gmail.com>
+Date:   Mon Oct 30 14:38:03 2017 +0100
+
+    Dropdown menu on the listview/tableview containing the trace function, shows a popup window/modal when clicked
+
+commit 0f135590dd3813a58e552b57acc357e1c50e1a47
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Mon Oct 30 11:35:00 2017 +0100
+
+    Updated ListView, remove Grid View
+
+commit e189a4203fd20e6e5ee649a0eb21ed38f18e4ebf
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Mon Oct 30 10:11:31 2017 +0100
+
+    added login
+
+commit 4de0386e687f75213a72c7f121388973a75b2c43
+Merge: ef8a013 3cfced4
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Oct 20 11:55:14 2017 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit ef8a0136a10fcb8242a3129b7c9f9c524e7d4c17
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Oct 20 11:53:20 2017 +0200
+
+    The rows on the table view are now clickable and shows the correct files etc
+
+commit 3cfced4a993db6aa78b612728b91344fdf255b38
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Sun Oct 15 14:01:45 2017 +0200
+
+    add last modified to tree
+
+commit 4646d3b306419be4d786ee33dc87cfd96231eb94
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Sun Oct 15 12:39:01 2017 +0200
+
+    sidebar tree
+
+commit cae468ba9d72989ba7f86727e8db8a49ae82890b
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 19:03:00 2017 +0200
+
+    Elephants have four knees
+
+commit 8d258e1540d5ee2707f68c3d4091559a24ae6185
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 19:00:56 2017 +0200
+
+    Made Clear btn work again
+
+commit 050f73f7eff443ce3e89ec373d54a79753196200
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:57:54 2017 +0200
+
+    Removed Search Type drop down
+
+commit a29c5502ce555aa82d4d93904f24b6a2f5748ec9
+Merge: bf013e6 a5a3d78
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:53:56 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit bf013e662ac5d724658a8528e3a0e46e1771d2ab
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:53:50 2017 +0200
+
+    Added Random File System
+
+commit a5a3d78ea27dcbcfeeabad5e6fb6bb69f635a3b0
+Author: sodasaft <jagvillha1kaka>
+Date:   Thu Oct 12 18:48:54 2017 +0200
+
+    The rows on the table view are now clickable and shows the correct files etc
+
+commit 26f99ec75dccc7edbd7355897e73d8221e4fe69c
+Merge: 7fa8e18 89e6870
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 18:19:29 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 7fa8e18919ce1d0958ef754379db23278493205b
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 18:19:27 2017 +0200
+
+    squashed filesystem inconsistencies
+
+commit 89e6870a6d0ec20245fc7901d9288abd4ed3e91d
+Merge: e820c77 844765e
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:16:44 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit e820c773eff651803523b74ee7e9408021012fb6
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:16:40 2017 +0200
+
+    Added Search
+
+commit 844765e87b2ec5686c36aebb77652d5c0adf3efc
+Merge: bc8e558 21ecf8d
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 18:16:35 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit bc8e5583cafbae90b1c21953f13467bad40c62de
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 18:16:33 2017 +0200
+
+    Extended dummy filysystem
+
+commit 21ecf8dde5858ff8f37369d72d1d2a6f2c2998c5
+Merge: b95afff c3bf6c7
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:03:12 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit b95afff34923ddf344354772f18332a1a95fce3c
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 18:02:57 2017 +0200
+
+    hidden sidebar
+
+commit c3bf6c736c300c483cfd4bc3e99eaf09070a30fa
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 18:02:43 2017 +0200
+
+    Border for edge crumb
+
+commit 8e33c1180b3c667aee500892d0081728c56986d6
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 17:47:23 2017 +0200
+
+    Highly Requested Search Crumb
+
+commit 8324a59e24ab8f64b338542743c103b0edc05a1f
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 17:39:18 2017 +0200
+
+    Changed breadcrumbs to only show folders
+
+commit df8b22c2e6b857f80b51cc626a77b3e463825985
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 17:29:58 2017 +0200
+
+    changed fileview
+
+commit 74aa9457a3b5f9cddd95b15b07812fe033a9987e
+Merge: 02cc6a5 894b212
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 17:28:29 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 02cc6a56c9fbc49b14fe01ebca584f71d04edf6d
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 17:28:28 2017 +0200
+
+    Clickable dropdown items
+
+commit 894b21285dd91de636d0148b682966979db3a503
+Merge: 4209d99 f290794
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 17:09:42 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 4209d994e5d7dada028d3b0eeea8dccc0998ca61
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 17:09:28 2017 +0200
+
+    Emil.js rewrite, peter.js removal
+
+commit f29079421b3c4a694119c2585478b8df41dad268
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 16:58:54 2017 +0200
+
+    Crumb now fades once again when out of focus
+
+commit 794fce9612a8edb4b168a0466b600720fa443cca
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 16:57:08 2017 +0200
+
+    More pretty filesystem names
+
+commit 1ca5bec26e6c04935b9ddc99e6fe06e6c4551f2e
+Merge: bab4b76 13a48c0
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 16:55:48 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit bab4b76e4a630c0675716ef18dc3ebfdfd6872d8
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 16:55:45 2017 +0200
+
+    Dynamic breadcrumb dropdown menus
+
+commit 13a48c021d7642d1edd285c0557d85d23ff4c8c9
+Merge: efdbefe d5e5191
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Oct 12 16:51:01 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit efdbefeb8107c74ad7edc730e09103841c6ab634
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Oct 12 16:50:55 2017 +0200
+
+    Transparent logo
+
+commit d5e5191be927069096d2e6dbff67d34cdc762a05
+Merge: f7c2801 d57142e
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 16:27:14 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit f7c2801c0b619b08cc28fe36554bf56ab6c36adc
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 16:27:00 2017 +0200
+
+    Changed Emil.js, moved document.ready functions to setFolder
+
+commit d57142edc0d9a9f976f81feb5aedf40e9bb6cd7b
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 16:23:54 2017 +0200
+
+    fix search button padding
+
+commit a899b0e413d6b50daf48b22f3787e58c3ab0a086
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 16:16:19 2017 +0200
+
+    Revert "Breadcrumb invisible when out of focus"
+    
+    This reverts commit 476b849aba98ca85952aef34e58de1cae2433712.
+
+commit 476b849aba98ca85952aef34e58de1cae2433712
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 16:02:34 2017 +0200
+
+    Breadcrumb invisible when out of focus
+
+commit 050e96f37757ccea84e9cf9a324442d4138af7c9
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 15:54:15 2017 +0200
+
+    Initial crumb is hidden
+
+commit 2b251173428d18b4008a19f944852452caf9bbbc
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 15:49:36 2017 +0200
+
+    Fixed glitch
+
+commit 19dc3d0080a0cd61acf238df16b5aa0c6dfa00bd
+Merge: e298063 7bf99c1
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 15:48:29 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit e298063dbb51ec8ad853309cf031183823f5ca49
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 15:48:25 2017 +0200
+
+    Dropdown breadcrumbs
+
+commit 7bf99c141722c227f6c2eca23af23b6a730b3d18
+Merge: a32d492 cec6e0e
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 15:34:41 2017 +0200
+
+    add logos
+
+commit a32d492a7142ef623f0af63a11a03aea36390e0c
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 15:27:50 2017 +0200
+
+    add logos
+
+commit cec6e0e073815603c5819b8fd3c6ed8c16225fe0
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 15:27:25 2017 +0200
+
+    Dropdown
+
+commit 4570220e060781e7cca79e0da7584cdb85b41ed3
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 15:19:35 2017 +0200
+
+    Began work on breadcrumb dropdown
+
+commit b43444fc84f3419d1efb41639156f331257ed44e
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 14:49:10 2017 +0200
+
+    Css rule for the root folder
+
+commit 522ddb09d269e198c316c28b7ffb9c682c274b63
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 14:39:39 2017 +0200
+
+    Fixed breadcrumbs revision
+
+commit de2911bd8a29cec9468a810135172984c308aa62
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 13:59:49 2017 +0200
+
+    Changed Emil.js
+
+commit 7dc107c5724351862c65a1265143a8ea33649939
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:59:51 2017 +0200
+
+    Changed Emil.js
+
+commit 5d4398aabe817159e08a759c677224663402f72c
+Author: sodasaft <jagvillha1kaka>
+Date:   Thu Oct 12 12:53:53 2017 +0200
+
+    removed stuff from peters stuff
+
+commit 59e2a74755d64159e2f55616aceda27bd6899406
+Merge: cf153fe 2671eb7
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:49:26 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit cf153fe642f18a8e1dfb095499c9865d3123817c
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:49:03 2017 +0200
+
+    Peters Changes
+
+commit 2671eb71b981a969a1b4882d993d7d9cbf105aec
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Oct 12 12:33:30 2017 +0200
+
+    Added transparent logo
+
+commit 2205711e10edbab33629a3e3f123dc10d27cb986
+Merge: 33ddfef d971536
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:24:43 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 33ddfef269b02b629c394a7ab24db59554e73fe7
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:24:29 2017 +0200
+
+    changes to the navigation
+
+commit 6510466c65ec222483be5abf60faa7e1a3cfc75c
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:21:19 2017 +0200
+
+    fixed navigation
+
+commit d971536fd9cbe5d54f8c400f9208111f794019f8
+Merge: 2842429 ffbda9b
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 12:15:20 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 28424296a00815bcac2df8ddbe2bc17ca3ab077e
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 12:15:15 2017 +0200
+
+    fix id in filesystem method
+
+commit ffbda9b9e32783d49b109b07061aabaf70b1cd3d
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 12:09:14 2017 +0200
+
+    Applied Hammer to head
+
+commit e6b5c8d08a87fae53247c4c0ba3977236f1477c1
+Merge: a88db4c 6ed0156
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 12:08:28 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit a88db4c7ce6876f0e1e1e38eb0edf269fb0c5576
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 12:08:26 2017 +0200
+
+    Added Hammer.js library
+    
+    It's hammer time!
+
+commit 6ed01562bec2bf1842421aebc484cf13c11d1721
+Merge: 329654c 267318a
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:05:46 2017 +0200
+
+    fixed merging issues
+
+commit 329654c3837cf519ccb8ccb2210e375def41bd9c
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 12:03:45 2017 +0200
+
+    changes to filesystem
+
+commit 267318a1f9ab5f9ef919d696c8ba5124966c6583
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 12:03:00 2017 +0200
+
+    onClick event
+
+commit 8028aa00acc8f6ad09d2e782705812afaa71c6e3
+Merge: 16e6d55 a9d6337
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 11:45:18 2017 +0200
+
+    resolved merge conflict
+
+commit 16e6d552a5f3fb16e21f40a611b4d29c0d247b2a
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 11:41:28 2017 +0200
+
+    fileSystem update
+
+commit a9d6337556d5e4c59f517f69c4fea20437155402
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 11:40:18 2017 +0200
+
+    moved setFolder
+
+commit 2abc4fcf901e8301826b24e03ce61365a6b89089
+Merge: d5e420a 7b12621
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 11:33:38 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit d5e420a37668271bee5777799af3c83f76c4fb5a
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Thu Oct 12 11:31:22 2017 +0200
+
+    make sidebar high level
+
+commit 7b12621e3bc239279ac2b2971f46ffe2d12adc6f
+Merge: 2a72c5d 659d74e
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:59:04 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 2a72c5df8b6b67977d7e9f238900bf5718fe23d9
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:58:45 2017 +0200
+
+    removed sidebbar libraries
+
+commit 659d74e307fb2f583de12c063f9e3fe3afcf9ba5
+Merge: 95684ff b663e03
+Author: sodasaft <jagvillha1kaka>
+Date:   Thu Oct 12 10:47:05 2017 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       js/emil.js
+
+commit 95684ff64e545b4fd7b5e4662743d813245c43a3
+Author: sodasaft <jagvillha1kaka>
+Date:   Thu Oct 12 10:44:28 2017 +0200
+
+    Each row one the table view is now clickable
+
+commit b663e03692b96b5d39a39d21971bf442a90be05b
+Merge: 17ed5ca cbf3504
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 10:41:57 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 17ed5ca0b5c8d17e3eb803583eacdb10ae524a82
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 10:41:52 2017 +0200
+
+    Refactored OnClick Functions
+
+commit cbf3504141a3093d79904ad6fcf768264a87aa01
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:41:33 2017 +0200
+
+    Refactored for bug fix
+
+commit 4564fd67c3ce38795a7320bb697bb35bee3d4201
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:33:42 2017 +0200
+
+    added filesystem.js
+
+commit 6156f5b39340f3baca6d827da6ca515cc19d6cb4
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:30:14 2017 +0200
+
+    remove window.settings
+
+commit 409dc920fb97b0d05871833b7f1e4c67bc74a078
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 10:21:14 2017 +0200
+
+    Recovered filesystem
+    
+    And modfified folder/file names
+
+commit 3e6c7ad22db48bc1dd0578a2a5dc0de0a1602547
+Merge: b68e3fd 59b32eb
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:21:07 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit b68e3fd67c1b9966323805a88b62dbd2bca9568a
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 10:20:52 2017 +0200
+
+    added filesystem helper functions
+
+commit 59b32ebf911c573f5f4c41b737f0dd8e521cfa2f
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 10:17:46 2017 +0200
+
+    ROBOTO font and resized breadcrumbs
+
+commit b023ac2565a6cd57871f5ac4ea57da155bea1f43
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Thu Oct 12 09:50:05 2017 +0200
+
+    Breadcrumb now listens to setfolder
+
+commit d3dcce9b29ebbc851102864a008be904dbc2df7e
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Thu Oct 12 09:46:33 2017 +0200
+
+    added setFolder function
+
+commit 1858734eb92c0e327a94182e63f2041f01e5e7c5
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Thu Oct 12 09:04:08 2017 +0200
+
+    Updated logos to the official ones
+
+commit 2d37c05ff1a9b3891d2a5713af2147668fdafd69
+Author: sodasaft <emil.sundklev@gmail.com>
+Date:   Wed Oct 11 22:08:23 2017 +0200
+
+    the swap between grid and table view should work better now
+
+commit 538c27b7e9b6b7e6864ff9c5dfc72522bfc899c4
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Wed Oct 11 21:41:10 2017 +0200
+
+    DataTables
+
+commit 56996dc2ae37032337c5b87f85ee6898dc1cbfd4
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Tue Oct 10 10:33:12 2017 +0200
+
+    Added Search Type
+
+commit 29473cfb546f4b6a5693dda46d3423cdcac2e9c8
+Merge: 6c5def0 b122e7f
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Tue Oct 10 10:29:40 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 6c5def05d1f2b81de0e8d9cf35e77e5ffe7a85e8
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Tue Oct 10 10:29:27 2017 +0200
+
+    Added some comments
+
+commit b122e7f2a4d2ec21df1071c58c3aa504d23426ca
+Author: sodasaft <jagvillha1kaka>
+Date:   Tue Oct 10 09:41:55 2017 +0200
+
+    Added table for the explorer view, not done yet
+
+commit 99e303005ec1aea173b309cd2614d4bbd589118e
+Merge: 2085d74 e6dde95
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Tue Oct 10 09:34:03 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 2085d74e0518cb76a850412ea8d7790900b13f35
+Author: rim shahin <reemshahin@gmail.com>
+Date:   Tue Oct 10 09:33:32 2017 +0200
+
+    navigation tree
+
+commit e6dde95ebdbfc6a359b7af5e3a00dec624e4851a
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Mon Oct 9 22:38:54 2017 +0200
+
+    Added comments
+
+commit 990d8b4c98d2df250fe0cf3c1cc51c4bb2c65a11
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Mon Oct 9 22:24:32 2017 +0200
+
+    Added the HTML for my breadcrumbs
+
+commit c2155f8e8d7a028f8cb2a3b086bef0b0852e769a
+Merge: 9cc332f 2540465
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Mon Oct 9 22:18:05 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 9cc332f92eda8436c8c2e8d266478a59a4fafce8
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Mon Oct 9 22:17:08 2017 +0200
+
+    Functional Breadcrumb
+
+commit 2540465cf854f1adf147892f26b57696147c6356
+Merge: 9cc43c2 8c4b692
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 12:02:02 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 9cc43c2ea1c269786b1e8c7c63968d673a69025d
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 12:01:56 2017 +0200
+
+    Added changes to the search box
+
+commit 8c4b692a9456ff1219fd851f03d4381fd86bf308
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Oct 6 12:00:28 2017 +0200
+
+    Remove button listener to fix for Emils solution
+
+commit 903db86d7b88b9e28ab349114db06267456c5455
+Merge: 6431a46 ebfd83c
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Oct 6 11:53:22 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+    
+    # Conflicts:
+    #       js/peter.js
+    Added function for the navbar buttons
+
+commit 6431a464fbd3ce75c53df1ea74c9b3b2effa3036
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Oct 6 11:50:29 2017 +0200
+
+    Added function for the buttons on the navbar
+
+commit ebfd83c8e8c1a7d5bfa2c0e32c57dbd467fa5ce6
+Merge: 2f5b6b2 45ec99a
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 11:41:41 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 2f5b6b23d57cadd58790860b66aba6d9f0ec569e
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 11:41:30 2017 +0200
+
+    Started Search Work
+
+commit 45ec99acfaa0bab98b57540db420a270257e01d1
+Merge: a63ac70 75bbab2
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Oct 6 11:36:11 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit a63ac70f1ac0b4538bae5baba6cbd08102be8db3
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Oct 6 11:36:08 2017 +0200
+
+    Fixed drawing file system. Folders now appar below their parent
+
+commit 75bbab29fea46767a675b907143dfc4d9bd8db45
+Merge: 7d30823 1de5257
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Fri Oct 6 11:33:37 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 7d308233a26424546922d049354901b6fd6fdacf
+Author: Calle Persson <callepersson94@telia.com>
+Date:   Fri Oct 6 11:32:05 2017 +0200
+
+    Now converts the file system into a workable tree
+    
+    Does what it says on the tin.
+
+commit 1de52570c9f1bac1d05c40a916100298d38f4356
+Author: sodasaft <jagvillha1kaka>
+Date:   Fri Oct 6 11:30:20 2017 +0200
+
+    added my css and js
+
+commit bde7c63d60da38b5298bb35742857d36272c952f
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 10:32:18 2017 +0200
+
+    Added momentJS
+
+commit b7ec489e1b7bf4e086b76a2312003f0d518c0630
+Merge: 6371992 950b185
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 10:26:35 2017 +0200
+
+    Merge branch 'master' of https://github.com/DerWischer/SEP_webclient
+
+commit 63719921b5475bb21544ee29fd7dd693cba46329
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 10:25:27 2017 +0200
+
+    Moved JS over
+
+commit 18d0e6a6d9ccacb1ae592da00bfcfb9258422a4f
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 10:22:07 2017 +0200
+
+    Moved CSS over
+
+commit 950b1857784da4474b9b5ffe276ecb6174a1888c
+Author: Ionman64 <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 10:19:47 2017 +0200
+
+    Update README.md
+
+commit 6ff2d73f8f5f39a94eee9d88190801d3fada3a72
+Author: Peter Pickerill <peterpickerill2016@gmail.com>
+Date:   Fri Oct 6 10:16:57 2017 +0200
+
+    First Website Commit
+
+commit 77d3fbe7129808fe3dac1621fee7f67a4d0fd32b
+Author: Ionman64 <PeterPickerill2014@gmail.com>
+Date:   Fri Oct 6 10:11:35 2017 +0200
+
+    Create README.md
+
+commit 82a1d936fa5d52083c161e53f5de6b326dbcb2f4
+Author: Joshua <joshua.jungen@outlook.de>
+Date:   Fri Oct 6 09:53:55 2017 +0200
+
+    Initial commit
