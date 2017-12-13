@@ -12,7 +12,7 @@ import MySQLdb
 import shutil
 import mimetypes
 
-DEVELOPMENT_MODE = True #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
+DEVELOPMENT_MODE = False #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
@@ -375,7 +375,6 @@ def resolve_user_mail():
 def create_form_type_links():
     formid = database_handler.create_form_type(".material")
     #Insert default attributes for form_types
-    database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "grade")
     database_handler.create_form_type_to_type_link(formid, "supplier")
     database_handler.create_form_type_to_type_link(formid, "lot no")
@@ -434,7 +433,6 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "temperature")
 
     formid = database_handler.create_form_type(".customer")
-    database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "email")
     database_handler.create_form_type_to_type_link(formid, "phone")    
 
@@ -445,19 +443,16 @@ def create_form_type_links():
     database_handler.create_form_type_to_type_link(formid, "comment")
 
     formid = database_handler.create_form_type(".prt")
-    database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "SLM name")
     database_handler.create_form_type_to_type_link(formid, "customer")
     database_handler.create_form_type_to_type_link(formid, "comment")
 
     formid = database_handler.create_form_type(".stl")
-    database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "SLM name")
     database_handler.create_form_type_to_type_link(formid, "customer")
     database_handler.create_form_type_to_type_link(formid, "comment")
     
     formid = database_handler.create_form_type(".magics")
-    database_handler.create_form_type_to_type_link(formid, "name")
     database_handler.create_form_type_to_type_link(formid, "SLM name")
     database_handler.create_form_type_to_type_link(formid, "customer")
     database_handler.create_form_type_to_type_link(formid, "comment")
