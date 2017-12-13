@@ -28,6 +28,9 @@ class LoginHandler(BaseHandler):
     def post(self):
         code = self.get_argument("code")        
         user_info = database_handler.authenticate_user(code)
+        if (user_info == False):
+            self.redirect("/login?reason=invalidCode")
+            return
         username = user_info["name"]
         user_id = user_info["user_id"]
         self.set_secure_cookie("user", user_id)

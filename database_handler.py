@@ -470,8 +470,10 @@ def delete_from_filesystem(fileid):
 def authenticate_user(code):
 	db = get_database()
 	cur = db.cursor()
-	user = cur.execute("SELECT id, name FROM users WHERE pin = %s", [code])
+	user = cur.execute("SELECT id, name FROM users WHERE pin = %s LIMIT 1", [code])
 	rows = {}
+	if (cur.rowcount == 0):
+    		return False
 	for row in cur.fetchall():
 		rows = {
 			"user_id":row[0],

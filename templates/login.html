@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-  	<script src="/static/thirdParty/jquery/jquery-3.2.1.min.js"></script>
+		<script src="/static/thirdParty/jquery/jquery-3.2.1.min.js"></script>
     <title>Swerea Login Page</title>
-
+		<script>
+			$(document).ready(function() {
+				switch (window.location.search.substr(1).split("=")[1]) {
+					case "invalidCode":
+						$("#failedLogin").removeClass("hidden") 
+						break;
+				}
+			});
+		</script>
     <!-- Bootstrap core CSS -->
     <link href="/static/thirdParty/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 		
@@ -25,7 +33,7 @@
 					<h2 class="form-signin-heading">Please sign in</h2>
                     
 					<label for="operatorCode" class="sr-only">Operator Code</label>
-					<input type="number" name="code" id="operatorCode" class="form-control input-lg" placeholder="Operator Code" required autofocus>
+					<input type="password" pattern="[0-9]*" name="code" id="operatorCode" class="form-control input-lg" placeholder="Operator Code" required autofocus>
 					<section class="panel panel-warning hidden" id="failedLogin" style="margin-top:5px;">
 					<section class="panel-body">
 						Code does not match any operator on the system
