@@ -187,9 +187,6 @@ function ToggleFileInfo(){
 
 function ActivateFileInfo(bool) {
 	if(bool && $("#file-info").hasClass("hidden")){
-		console.log("test");
-		
-		
 		$("#main-file-area").removeClass("col-md-12");
 		$("#main-file-area").removeClass("col-sm-12");
 		
@@ -341,7 +338,6 @@ $(document).ready(function() {
 		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
 		if ($("#sidebar").hasClass("active")) {
 			$("#sidebar").removeClass("active");
-			console.log("test")
 			ActivateFileInfo(false);
 		}
 		else {
@@ -418,6 +414,12 @@ $(document).ready(function() {
 		});	
 	});	
 
+	$("#info-list").on("click", ".file-info-value", function(e) {
+		
+		
+		
+	});
+	
 	$("#file-input").on("change", function() {
 		handle_upload();
 	});
