@@ -11,6 +11,7 @@ import notifier
 import MySQLdb
 import shutil
 import mimetypes
+import shutil
 
 DEVELOPMENT_MODE = False #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -92,6 +93,13 @@ class FileSystemHandler(BaseHandler):
         files = json.loads(self.get_argument("files"))
         failed_files = {}
         for file in files:
+            fpath, name, ext = database_handler.get_file_path(file)
+            if os.path.isfile(fpath):
+              os.remove(fpath)
+            elif os.path.isdir(fpath):
+              shutil.rmtree(fpath)
+            else:
+              raise ValueError("file {} is not a file or dir.")
             if not database_handler.delete_from_filesystem(file):
                 failed_files[file] = {"reason":"Can not delete system file"}
         self.finish(json.dumps({"success":True, "failed_files":failed_files}))
@@ -249,7 +257,9 @@ class DownloadHandler(tornado.web.RequestHandler):
             self.set_header('Content-Length', os.path.getsize(path))
             #I think the following line is what is breaking when it tries to guess the mime type, 
             #this should be checked and fixed
-            self.set_header('Content-Type', mimetypes.guess_type(path)[0])
+            mimetype = mimetypes.guess_type(path)[0]
+            if mimetype is not None:
+                self.set_header('Content-Type', mimetype)
             self.set_header('Content-Disposition', 'attachment; filename=%s' % filename)
             self.flush()
             with open(path, 'rb') as f:
@@ -265,7 +275,7 @@ class TypesHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         types = database_handler.get_types();
-        if (types == None):
+        if (types is None):
            self.write(json.dumps({"success":False}));
         else: 
             self.write(json.dumps({"success":True, "types":types}));

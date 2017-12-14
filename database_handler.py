@@ -49,7 +49,7 @@ def getchildren(id):
 def get_file_system():
 		db = get_database() 
 		cur = db.cursor() 
-		cur.execute("SELECT filesystem.id, filesystem.filename, filesystem.file_ext, filesystem.created, filesystem.updated, filesystem.type, filesystem.parent, users.name FROM filesystem LEFT JOIN users ON users.id = filesystem.owner  WHERE filesystem.deleted != 1")
+		cur.execute("SELECT filesystem.id, filesystem.filename, filesystem.file_ext, filesystem.created, filesystem.updated, filesystem.type, filesystem.parent, users.name FROM filesystem LEFT JOIN users ON users.id = filesystem.owner  WHERE filesystem.deleted != 1 ORDER BY filesystem.filename")
 		# print the first and second columns 
 		rows = {}    
 		for row in cur.fetchall():
@@ -149,7 +149,7 @@ def get_file_information(fileId):
 		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name",  [fileId])
 		data = {}
 		for row in cur.fetchall():
-			if row[0] in timestamp_fields:
+			if (row[0] in timestamp_fields) and row[1] != None:
 				data[row[0]] = datetime.datetime.fromtimestamp(int(row[1])).strftime('%Y-%m-%d %H:%M:%S')
 			else:
 				data[row[0]] = row[1]
