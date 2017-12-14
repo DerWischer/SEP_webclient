@@ -245,7 +245,9 @@ class DownloadHandler(tornado.web.RequestHandler):
             self.set_header('Content-Length', os.path.getsize(path))
             #I think the following line is what is breaking when it tries to guess the mime type, 
             #this should be checked and fixed
-            self.set_header('Content-Type', mimetypes.guess_type(path)[0])
+            mimetype = mimetypes.guess_type(path)[0]
+            if mimetype is not None:
+                self.set_header('Content-Type', mimetype)
             self.set_header('Content-Disposition', 'attachment; filename=%s' % filename)
             self.flush()
             with open(path, 'rb') as f:
@@ -261,7 +263,7 @@ class TypesHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         types = database_handler.get_types();
-        if (types == None):
+        if (types is None):
            self.write(json.dumps({"success":False}));
         else: 
             self.write(json.dumps({"success":True, "types":types}));

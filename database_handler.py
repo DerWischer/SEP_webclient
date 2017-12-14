@@ -149,7 +149,7 @@ def get_file_information(fileId):
 		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name",  [fileId])
 		data = {}
 		for row in cur.fetchall():
-			if row[0] in timestamp_fields:
+			if (row[0] in timestamp_fields) and row[1] != None:
 				data[row[0]] = datetime.datetime.fromtimestamp(int(row[1])).strftime('%Y-%m-%d %H:%M:%S')
 			else:
 				data[row[0]] = row[1]
