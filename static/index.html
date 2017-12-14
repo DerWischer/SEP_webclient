@@ -53,7 +53,7 @@
 				<section class="row">
 					<section class="col-md-12">
 						<section class="wizard-tab" data-page="naming">
-							<label>Hey! Looks like you want to create a project! Please fill in the following fields and press next</label>
+							<label>Hey! I'm Smula, I'm a sentient breadcrumb. Can I help you make a project?</label>
 							<hr>
 							<section class="form-group">
 								<label for="name">Name</label>
@@ -70,62 +70,81 @@
 								<select class="form-control" name="powder" id="new-project-powder">
 									
 								</select>
-							</section>
-							<section class="form-group">
-								<label for="cad-file">Customer PRT files</label>
-								<input type="file" id="cad-file" accept=".prt" name="cad-file" multiple/>
-							</section>
+							</section>							
 						</section>
-						<section class="wizard-tab hidden" data-page="uploading-stl-files"> 
-							<label>Great! You have created a project, but now you need to add the generated STL files</label>
+						<section class="wizard-tab hidden" data-page="phase1"> 
+							<label>Looks like your starting an interesting project! Could you upload your stl, prt and magics files, please.</label>
 							<hr>
 							<section class="form-group">
 								<label>STL files</label>
 								<input type="file" id="stl-file" accept=".stl"/>
 							</section>
-						</section>
-						<section class="wizard-tab hidden" data-page="uploading-magics-files"> 
-							<label>Now we are flying, next step is to upload the generated magics files</label>
-							<hr>
+							<section class="form-group">
+								<label for="cad-file">Customer PRT files</label>
+								<input type="file" id="cad-file" accept=".prt" name="cad-file" multiple/>
+							</section>
 							<section class="form-group">
 								<label>Magic files</label>
 								<input type="file" id="magic-file" accept=".magics"/>
 							</section>
 						</section>
-						<section class="wizard-tab hidden" data-page="uploading-slm-files"> 
-							<label>Hot dog, that was fast!, now please upload the new SLM files</label>
+						<section class="wizard-tab hidden" data-page="phase2"> 
+							<label>Nearly to the printer! Just need your slm files and your print screen from magics. Get ready for fun!</label>
 							<hr>
 							<section class="form-group">
 								<label>SLM files</label>
 								<input type="file" id="slm-file" accept=".slm"/>
 							</section>
-						</section>
-						<section class="wizard-tab hidden" data-page="uploading-image-files"> 
-							<label>Wow, amazing!, you have now created an awesome new project, but I need your log and image files please!</label>
-							<hr>
 							<section class="form-group">
-								<label>Log files</label>
-								<input type="file" id="log-file" accept=".log, .txt"/>
-							</section>
-							<section class="form-group">
-								<label>Image files</label>
-								<input type="file" id="image-file" accept=".jpg, .png, .jpeg, .gif, .tif"/>
+								<label>Print screen from magics</label>
+								<input type="file" id="image-magics" accept=".jpg, .png, .jpeg, .gif, .tif"/>
 							</section>
 						</section>
-						<section class="wizard-tab hidden" data-page="additional"> 
-							<label>Wow, amazing!, you have now created an awesome new project, do you want to add another project?</label>
+						<section class="wizard-tab hidden" data-page="phase3"> 
+							<label>Aaaalright! Looks like you got yourself a fancy new printed product, nice! But can you give me your printer log and image files, please.</label>
 							<hr>
 							<section class="form-group">
-								<button class="btn btn-success btn-block" id="project-wizard-additonal">Yes</button>
-								<button class="btn btn-danger btn-block" id="project-wizard-no">No</button>
+								<label>Printer Log files</label>
+								<input type="file" id="log-printer" accept=".log, .txt"/>
 							</section>
+							<section class="form-group">
+								<label>Printer Image files</label>
+								<input type="file" id="image-printer" accept=".jpg, .png, .jpeg, .gif, .tif"/>
+							</section>
+
+						</section>
+						<section class="wizard-tab hidden" data-page="phase4"> 
+							<label>Hot dog! We're at post printing already! Let's take some fun picture of the parts and steps you want to do with it.</label>
+							<hr>
+							<section class="form-group">
+								<label>Printed parts images</label>
+								<input type="file" id="image-taken" accept=".jpg, .png, .jpeg, .gif, .tif"/>
+							</section>
+							<section class="form-group">
+								<label>Steps to perform</label>
+								<input type="file" id="log-steps" accept=".log, .txt"/>
+							</section>
+							
+						</section>
+						<section class="wizard-tab hidden" data-page="phase5"> 
+							<label>Post processing is the best processing! But there might be nothing to do here, move along...</label>
+							<hr>
+							<section class="form-group">
+								<label>Any file</label>
+								<input type="file" id="any-file"/>
+							</section>							
+						</section>
+						<section class="wizard-tab hidden" data-page="phase6"> 
+							<label>You have the quality, you have the assurance! I need the your quality, I need your assurance! Please give me you QA files.</label>
+							<hr>
+							<section class="form-group">
+								<label>Any file</label>
+								<input type="file" id="qa-file"/>
+							</section>							
 						</section>
 						<section class="wizard-tab hidden" data-page="goodbye"> 
 							<label>It was an honour to serve! Goodbye for now</label>
-							<hr>
-							<section class="form-group">
-								<button class="btn btn-success btn-block" id="project-wizard-hide">Hide</button>
-							</section>
+							<hr>												
 						</section>
 					</section>	
 					<button class="btn btn-info btn-block" id="new-project-next" data-stage="naming">Next</button>	

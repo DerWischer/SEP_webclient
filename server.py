@@ -220,9 +220,13 @@ class NewFolderHandler(tornado.web.RequestHandler):
             self.finish(json.dumps({"success":False, "reason":"path already exists, please check database integrity"}))
             return
         os.mkdir(path)
-        success = database_handler.create_folder(name, path, parent)
-        if (success):
-            self.finish(json.dumps({"success":success}))
+        folder_id = database_handler.create_folder(name, path, parent)
+        if (folder_id is not None):
+            self.finish(json.dumps({"success":True, "folder_id":folder_id}))
+        else:
+            self.finish(json.dumps({"success":False}))
+            
+        
 class RenameFileHandler(BaseHandler):    
     def post(self):
         """ Rename File in OS and database """
@@ -303,15 +307,62 @@ class CreateNewProject(BaseHandler):
         if len(name) == 0 or len(customer) == 0:
             self.finish(json.dumps({"success":False, "reason":"Missing Values"}))
             return
-        filepath = os.path.join(ROOT, "uploads", "projects", name)
+        path_to_project = os.path.join(ROOT, "uploads", "projects", name) 
+
+
+        name_design = "Design"
+        path_to_design = os.path.join(path_to_project, name_design)      
+        name_preprinting = "Pre-printing"
+        path_to_preprinting = os.path.join(path_to_project, name_preprinting)
+        name_printing = "Printing"
+        path_to_printing = os.path.join(path_to_project, name_printing)
+        name_postprinting = "Post-printing"
+        path_to_postprinting = os.path.join(path_to_project, name_postprinting)
+        name_postprocessing = "Post-processing"
+        path_to_postprocessing = os.path.join(path_to_project, name_postprocessing)
+        name_qualityassurance = "Qualtiy Assurance"
+        path_to_qualityassurance = os.path.join(path_to_project, name_qualityassurance)
         try:
-            os.makedirs(filepath)
-            entry = files.get_folder_stats("PROJECTS", filepath, name)
+            os.makedirs(path_to_project)
+            os.makedirs(path_to_design)
+            os.makedirs(path_to_preprinting)
+            os.makedirs(path_to_printing)
+            os.makedirs(path_to_postprinting)
+            os.makedirs(path_to_postprocessing)
+            os.makedirs(path_to_qualityassurance)
+
+            entry = files.get_folder_stats("PROJECTS", path_to_project, name)
             database_handler.file_entry(entry, self.get_current_user())
-            self.finish(json.dumps({"success":True, "id":entry["id"]}))
+
+            entry_design = files.get_folder_stats(entry["id"], path_to_design, name_design)
+            database_handler.file_entry(entry_design, self.get_current_user())
+            
+            entry_preprinting = files.get_folder_stats(entry["id"], path_to_preprinting, name_preprinting)
+            database_handler.file_entry(entry_preprinting, self.get_current_user())
+            
+            entry_printing = files.get_folder_stats(entry["id"], path_to_printing, name_printing)
+            database_handler.file_entry(entry_printing, self.get_current_user())
+            
+            entry_postprinting = files.get_folder_stats(entry["id"], path_to_postprinting, name_postprinting)
+            database_handler.file_entry(entry_postprinting, self.get_current_user())
+            
+            entry_postprocessing =files.get_folder_stats(entry["id"], path_to_postprocessing, name_postprocessing)
+            database_handler.file_entry(entry_postprocessing, self.get_current_user())
+            
+            entry_qualityassurance = files.get_folder_stats(entry["id"], path_to_qualityassurance, name_qualityassurance)
+            database_handler.file_entry(entry_qualityassurance, self.get_current_user())
+
+            self.finish(json.dumps({"success":True, 
+                "id":entry["id"], 
+                "1":entry_design["id"], 
+                "2":entry_preprinting["id"], 
+                "3":entry_printing["id"],
+                "4":entry_postprinting["id"],
+                "5":entry_postprocessing["id"],
+                "6":entry_qualityassurance["id"] }))
         except Exception as ex:
             print (ex)
-            self.finish(json.dumps({"success":True}))
+            self.finish(json.dumps({"success":False}))
 
 class CustomerHandler(BaseHandler):
     def get(self):

@@ -49,7 +49,7 @@ def getchildren(id):
 def get_file_system():
 		db = get_database() 
 		cur = db.cursor() 
-		cur.execute("SELECT filesystem.id, filesystem.filename, filesystem.file_ext, filesystem.created, filesystem.updated, filesystem.type, filesystem.parent, users.name FROM filesystem LEFT JOIN users ON users.id = filesystem.owner  WHERE filesystem.deleted != 1")
+		cur.execute("SELECT filesystem.id, filesystem.filename, filesystem.file_ext, filesystem.created, filesystem.updated, filesystem.type, filesystem.parent, users.name FROM filesystem LEFT JOIN users ON users.id = filesystem.owner  WHERE filesystem.deleted != 1 ORDER BY filesystem.filename")
 		# print the first and second columns 
 		rows = {}    
 		for row in cur.fetchall():
@@ -132,10 +132,10 @@ def create_folder(name, path, parent):
 		cur = db.cursor()
 		id = str(uuid.uuid4())
 		cur.execute("INSERT INTO filesystem (id, filename, path, parent, type) VALUES (%s, %s, %s, %s, 'folder')", [id, name, path, parent])
-		return True
+		return id
 	except Exception as ex:
 		print (ex)
-		return False
+		return None
 	finally:
 		cur.close()
 		db.commit()
