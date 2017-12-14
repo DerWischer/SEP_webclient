@@ -179,6 +179,46 @@ function get_customers_ajax() {
 		}
 	})
 }
+
+function ToggleFileInfo(){
+	ActivateFileInfo($("#file-info").hasClass("hidden"));
+}
+
+function ActivateFileInfo(bool) {
+	if(bool && $("#file-info").hasClass("hidden")){
+		console.log("test");
+		
+		
+		$("#main-file-area").removeClass("col-md-12");
+		$("#main-file-area").removeClass("col-sm-12");
+		
+		$("#main-file-area").addClass("col-md-9");
+		$("#main-file-area").addClass("col-sm-9");
+		$("#file-info").removeClass("hidden");
+		$("#file-info").addClass("slideInRight");
+			;
+
+		
+		window.setTimeout( function(){
+			$("#file-info").removeClass("slideInRight")
+		}, 1000);
+		
+	}
+	else if(!bool){
+		$("#file-info").addClass("slideOutRight");
+		window.setTimeout( function(){
+				
+		
+                $("#file-info").addClass("hidden");
+				$("#main-file-area").addClass("col-md-12");
+				$("#main-file-area").addClass("col-sm-12");
+				$("#main-file-area").removeClass("col-md-9");
+				$("#main-file-area").removeClass("col-sm-9");
+				$("#file-info").removeClass("slideOutRight");
+		}, 250);
+	}
+}
+
 function get_powders_ajax() {
 	$.ajax({
 		url:"/powders",
@@ -279,23 +319,19 @@ $(document).ready(function() {
         })
     });
 	$("#sidebarCollapse").on("click", function() {
-		// if(!$("#sidebar").hasClass("active")){
-		// 	$("#file-info").addClass("slideOutRight");
-		// 	$("#file-info").addClass("hidden");
-		// 	$("#main-file-area").removeClass("col-md-12");
-		// 	$("#main-file-area").removeClass("col-sm-12");
-		// 	$("#main-file-area").removeClass("col-md-9");
-		// 	$("#main-file-area").removeClass("col-sm-9");
-		// }
-		$("#file-info").toggleClass("slideInRight");
+
 		//$("#new-project-name").val("");
 		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
 		if ($("#sidebar").hasClass("active")) {
-			$("#sidebar").removeClass("active");	
+			$("#sidebar").removeClass("active");
+			console.log("test")
+			ActivateFileInfo(false);
 		}
 		else {
 			$("#sidebar").addClass("active");
+			
 		}
+		
 		change_wizard_tab("naming");
 		
 	});
@@ -625,6 +661,10 @@ $(document).ready(function() {
 		$("#tableView .listViewItem").removeClass("selected");
 		$(this).addClass("selected");
 		var fileId = this.getAttribute("data-id");
+		
+		if ($("#sidebar").hasClass("active")) {
+			ActivateFileInfo(true);
+		}
 		$.ajax({
 			method:"GET",
 			url:"/fileinformation",
@@ -652,14 +692,7 @@ $(document).ready(function() {
 				if (len == 0) {
 					return;
 				}
-				if ($("#sidebar").hasClass("active")) {
-					//$("#file-info").addClass("slideInRight");
-					$("#file-info").removeClass("hidden");
-					$("#main-file-area").addClass("col-md-12");
-					$("#main-file-area").addClass("col-sm-12");
-					$("#main-file-area").addClass("col-md-9");
-					$("#main-file-area").addClass("col-sm-9");
-				}
+				
 			}
 		});
     });

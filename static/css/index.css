@@ -64,6 +64,27 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+.close-button{
+	float:right;
+	margin-top:10px;
+	width:50px;
+	height:50px;
+	background-color:#eee;
+}
+
+.close-button:hover{
+	background-color:#eee;
+}
+
+.close-button:selected{
+	background-color:#eee;
+}
+
+.close-button:active{
+	background-color:#eee;
+}
+
+
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
     background: white;
@@ -233,7 +254,7 @@ body {
 	
 	height:100%;
 }
-
+/*
 .col-md-9 {
     -webkit-transition: width 0.3s ease, margin 0.3s ease;
     -moz-transition: width 0.3s ease, margin 0.3s ease;
@@ -261,6 +282,7 @@ body {
     -o-transition: width 0.3s ease, margin 0.3s ease;
     transition: width 0.3s ease, margin 0.3s ease;
 }
+*/
 
 .custom-breadcrumb {
 	-webkit-transform: skew(-20deg);
