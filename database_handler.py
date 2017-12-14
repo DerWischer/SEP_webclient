@@ -288,9 +288,7 @@ def advanced_search(searchParams, matchall):
 		for key in searchParams.keys():
 			values.append(key)
 			values.append(searchParams[key])
-		cur.execute(sql, values);
-		print(sql)
-		print(values)
+		cur.execute(sql, values);		
 		rows = []
 		for row in cur.fetchall():
 			rows.append(row)
