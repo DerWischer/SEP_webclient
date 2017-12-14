@@ -11,6 +11,7 @@ import notifier
 import MySQLdb
 import shutil
 import mimetypes
+import shutil
 
 DEVELOPMENT_MODE = False #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -92,6 +93,13 @@ class FileSystemHandler(BaseHandler):
         files = json.loads(self.get_argument("files"))
         failed_files = {}
         for file in files:
+            fpath, name, ext = database_handler.get_file_path(file)
+            if os.path.isfile(fpath):
+              os.remove(fpath)
+            elif os.path.isdir(fpath):
+              shutil.rmtree(fpath)
+            else:
+              raise ValueError("file {} is not a file or dir.")
             if not database_handler.delete_from_filesystem(file):
                 failed_files[file] = {"reason":"Can not delete system file"}
         self.finish(json.dumps({"success":True, "failed_files":failed_files}))
