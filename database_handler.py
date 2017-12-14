@@ -146,13 +146,13 @@ def get_file_information(fileId):
 	try:
 		db = get_database()
 		cur = db.cursor()
-		cur.execute("SELECT types.name, fileinformation.value FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name",  [fileId])
+		cur.execute("SELECT types.name, fileinformation.value, fileinformation.type FROM types LEFT JOIN fileinformation ON types.id = fileinformation.type WHERE fileinformation.fileid = %s ORDER BY types.name",  [fileId])
 		data = {}
 		for row in cur.fetchall():
 			if (row[0] in timestamp_fields) and row[1] != None:
-				data[row[0]] = datetime.datetime.fromtimestamp(int(row[1])).strftime('%Y-%m-%d %H:%M:%S')
+				data[row[2]] = {"name":row[0], "value":datetime.datetime.fromtimestamp(int(row[1])).strftime('%Y-%m-%d %H:%M:%S')}
 			else:
-				data[row[0]] = row[1]
+				data[row[2]] = {"name":row[0], "value":row[1]}
 		return data
 	except Exception as ex:
 		print (ex)

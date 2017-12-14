@@ -245,6 +245,10 @@ body {
 	
 }
 
+.file-info-value {
+	cursor:pointer;
+	color:#4444dd;
+}
 
 .no-max-height{
 	max-height:none;

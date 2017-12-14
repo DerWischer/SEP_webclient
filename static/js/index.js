@@ -194,9 +194,6 @@ function ActivateFileInfo(bool) {
 		$("#main-file-area").addClass("col-sm-9");
 		$("#file-info").removeClass("hidden");
 		$("#file-info").addClass("slideInRight");
-			;
-
-		
 		window.setTimeout( function(){
 			$("#file-info").removeClass("slideInRight")
 		}, 1000);
@@ -358,25 +355,7 @@ $(document).ready(function() {
 			var value = $(this).find(".search-expression").val();
 			searchJSON[type]= value;
 		});
-		$.ajax({
-			url:"/search",
-			dataType:"JSON",
-			method:"POST",
-			data:{"matchall":$("#match-all").is(":checked") ? 1 : 0, "json":JSON.stringify(searchJSON)},
-			success:function(data) {
-				if (!data.success) {
-					alert("could not complete search");
-					return;
-				}
-				$("#searchModal").modal("hide");
-				fileObjects = [];
-				$.each(data.fileIds, function(key, value){
-					fileObjects.push(filesystem[value]);
-				});
-				CreateSearchCrumb("[Custom]");
-				displayList(null, fileObjects);
-			}
-		})
+		advanced_search_ajax(searchJSON, $("#match-all").is(":checked") ? 1 : 0)
 	});
 	$(".upload-btn").click(function() {		
 		$("#file-input").attr("data-type", $(this).attr("data-type")).click();
@@ -413,13 +392,13 @@ $(document).ready(function() {
 			}
 		});	
 	});	
-
 	$("#info-list").on("click", ".file-info-value", function(e) {
-		
-		
-		
+		var key = $(this).attr("data-key");
+		var value = $(this).attr("data-value");
+		search = {}
+		search[key] = value;
+		advanced_search_ajax(search, 0);
 	});
-	
 	$("#file-input").on("change", function() {
 		handle_upload();
 	});
@@ -455,6 +434,28 @@ $(document).ready(function() {
 	}
 	RenderBreadCrumbPath(ROOT);
 });
+
+function advanced_search_ajax(searchJSON, matchAll) {
+	$.ajax({
+		url:"/search",
+		dataType:"JSON",
+		method:"POST",
+		data:{"matchall":matchAll, "json":JSON.stringify(searchJSON)},
+		success:function(data) {
+			if (!data.success) {
+				alert("could not complete search");
+				return;
+			}
+			$("#searchModal").modal("hide");
+			fileObjects = [];
+			$.each(data.fileIds, function(key, value){
+				fileObjects.push(filesystem[value]);
+			});
+			CreateSearchCrumb("[Custom]");
+			displayList(null, fileObjects);
+		}
+	})
+}
 
 function create_new_folder(name, parent_id, callback) {
 	var parent_id = parent_id || getFolder();
@@ -707,12 +708,12 @@ $(document).ready(function() {
 				$("#info-list").empty();
 				var len = 0;
 				$.each(data.data, function(key, value) {
-					if (key == "form_id") {
+					if (value.name == "form_id") {
 						return;
 					}
-					var li = el("section", {class:"file-info-value row"});
-					var key = el("div", {html:key, "class":"left-info-span col-md-6"});
-					var key2 = el("div", {html:value, "class":"right-info-span col-md-6"});
+					var li = el("section", {class:"file-info-value row", "data-key":key, "data-value":value.value});
+					var key = el("div", {html:value.name, "class":"left-info-span col-md-6"});
+					var key2 = el("div", {html:value.value, "class":"right-info-span col-md-6"});
 					//var value = document.createTextNode(value);
 					li.appendChild(key);
 					li.appendChild(key2);
