@@ -625,6 +625,9 @@ $(document).ready(function() {
 		$("#tableView .listViewItem").removeClass("selected");
 		$(this).addClass("selected");
 		var fileId = this.getAttribute("data-id");
+		if (filesystem[fileId].isFolder == true){
+			return;
+		}
 		$.ajax({
 			method:"GET",
 			url:"/fileinformation",
