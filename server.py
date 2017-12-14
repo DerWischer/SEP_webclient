@@ -13,7 +13,7 @@ import shutil
 import mimetypes
 import shutil
 
-DEVELOPMENT_MODE = False #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
+DEVELOPMENT_MODE = True #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
@@ -333,6 +333,11 @@ class CreateNewProject(BaseHandler):
 
             entry = files.get_folder_stats("PROJECTS", path_to_project, name)
             database_handler.file_entry(entry, self.get_current_user())
+
+            customer_type_id = database_handler.get_type_id("customer")
+            _, customer_name, _ = database_handler.get_file_path(customer)
+            project_fileinfo = {customer_type_id:customer_name}
+            database_handler.store_fileinformation(entry["id"], project_fileinfo)
 
             entry_design = files.get_folder_stats(entry["id"], path_to_design, name_design)
             database_handler.file_entry(entry_design, self.get_current_user())
