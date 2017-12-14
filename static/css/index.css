@@ -177,12 +177,17 @@ body {
 
 
 .left-info-span{
-	width:25%;
+	width:33%;
 	margin:0px;
+	overflow-wrap: break-word;
+	padding-right:0px;
 }
 
 .right-info-span{
+	width:67%;
 	color: rgba(0,0,0,.87);
+	overflow-wrap: break-word;
+	padding-right:0px;
 }
 
 #delete-btn{
