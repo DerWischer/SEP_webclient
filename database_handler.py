@@ -132,10 +132,10 @@ def create_folder(name, path, parent):
 		cur = db.cursor()
 		id = str(uuid.uuid4())
 		cur.execute("INSERT INTO filesystem (id, filename, path, parent, type) VALUES (%s, %s, %s, %s, 'folder')", [id, name, path, parent])
-		return True
+		return id
 	except Exception as ex:
 		print (ex)
-		return False
+		return None
 	finally:
 		cur.close()
 		db.commit()

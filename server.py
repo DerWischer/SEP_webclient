@@ -12,7 +12,7 @@ import MySQLdb
 import shutil
 import mimetypes
 
-DEVELOPMENT_MODE = True #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
+DEVELOPMENT_MODE = False #WARNING:THIS WILL DELETE THE FILESYSTEM AND THE DATABASE EVERY STARTUP
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8888
 
@@ -212,9 +212,13 @@ class NewFolderHandler(tornado.web.RequestHandler):
             self.finish(json.dumps({"success":False, "reason":"path already exists, please check database integrity"}))
             return
         os.mkdir(path)
-        success = database_handler.create_folder(name, path, parent)
-        if (success):
-            self.finish(json.dumps({"success":success}))
+        folder_id = database_handler.create_folder(name, path, parent)
+        if (folder_id is not None):
+            self.finish(json.dumps({"success":True, "folder_id":folder_id}))
+        else:
+            self.finish(json.dumps({"success":False}))
+            
+        
 class RenameFileHandler(BaseHandler):    
     def post(self):
         """ Rename File in OS and database """
@@ -338,7 +342,14 @@ class CreateNewProject(BaseHandler):
             entry_qualityassurance = files.get_folder_stats(entry["id"], path_to_qualityassurance, name_qualityassurance)
             database_handler.file_entry(entry_qualityassurance, self.get_current_user())
 
-            self.finish(json.dumps({"success":True, "id":entry["id"]}))
+            self.finish(json.dumps({"success":True, 
+                "id":entry["id"], 
+                "1":entry_design["id"], 
+                "2":entry_preprinting["id"], 
+                "3":entry_printing["id"],
+                "4":entry_postprinting["id"],
+                "5":entry_postprocessing["id"],
+                "6":entry_qualityassurance["id"] }))
         except Exception as ex:
             print (ex)
             self.finish(json.dumps({"success":False}))

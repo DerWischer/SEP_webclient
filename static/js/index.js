@@ -134,7 +134,7 @@ function handle_upload(upload_type, file_input_id, parent_folder) {
 	request.setRequestHeader('Cache-Control', 'no-cache');
 	request.send(data);
 }
-function create_new_project(name, customer) {
+function create_new_project(name, customer, callback) {
 	$.ajax({
 		url:"/createNewProject",
 		dataType:"JSON",
@@ -144,16 +144,17 @@ function create_new_project(name, customer) {
 			if (!data.success) {
 				alert("Error");
 				return;
-			}
-			refreshFilesystem(data.id);
-			handle_upload(null, "cad-file", data.id);
+			}			
+			refreshFilesystem(data.id);			
 			$("#new-project-next").attr("project_id", data.id);
-			change_wizard_tab("uploading-stl-files");
+			if (callback != undefined){
+				callback(data)
+			}
 		}
 	});
 }
 function upload_stl_files() {
-	change_wizard_tab("uploading-magics-files");
+	change_wizard_tab("phase2");
 }
 function change_wizard_tab(tab_name) {
 	$(".wizard-tab").addClass("hidden");
@@ -214,41 +215,57 @@ $(document).ready(function() {
 	$("#trace-modal-close").click(function() {
 		$("#traceModal").addClass("hidden");
 	});
-	$("#project-wizard-additonal").click(function() {
-		$("#new-project-next").removeClass("hidden").attr("data-stage", null);
-		$("#new-project-name").val("");
-		change_wizard_tab("naming");
-	});
+
 	$("#new-project-next").click(function() {
 		switch ($(this).attr("data-stage")) {
 			case "naming":
+				change_wizard_tab("phase1")
+				
+				break;
+			case "phase1":
+				change_wizard_tab("phase2");		
+				break;
+			case "phase2":
+				change_wizard_tab("phase3");				
+				break;
+			case "phase3":
+				change_wizard_tab("phase4");				
+				break;
+			case "phase4":
+				change_wizard_tab("phase5");				
+				break;
+			case "phase5":
+				change_wizard_tab("phase6");				
+				break;
+			case "phase6":											
+				var callback = function(folder_ids) {					
+					handle_upload(null, "cad-file", folder_ids["1"]);
+					handle_upload(null, "stl-file", folder_ids["1"]);
+					handle_upload(null, "magic-file", folder_ids["1"]);
+
+					handle_upload(null, "slm-file", folder_ids["2"])
+					handle_upload(null, "image-magics", folder_ids["2"])
+
+					handle_upload(null, "log-printer", folder_ids["3"]);
+					handle_upload(null, "image-printer", folder_ids["3"]);
+
+					handle_upload(null, "image-taken", folder_ids["4"]);
+					handle_upload(null, "log-steps", folder_ids["4"]);
+
+					handle_upload(null, "any-file", folder_ids["5"]);
+
+					handle_upload(null, "qa-file", folder_ids["6"]);
+
+					change_wizard_tab("goodbye");
+				};				
 				var project_name = $("#new-project-name").val();
-				var customer = $("#new-project-customer").val();
-				create_new_project(project_name, customer);
-				break;
-			case "uploading-stl-files":
-				change_wizard_tab("uploading-magics-files");
-				handle_upload(null, "stl-file", $(this).attr("project_id"));
-				break;
-			case "uploading-magics-files":
-				change_wizard_tab("uploading-slm-files");
-				handle_upload(null, "magic-file", $(this).attr("project_id"));
-				break;
-			case "uploading-slm-files":
-				change_wizard_tab("uploading-image-files");
-				handle_upload(null, "slm-file", $(this).attr("project_id"));
-				break;
-			case "uploading-image-files":
-				change_wizard_tab("additional");
-				$(this).addClass("hidden");
-				handle_upload(null, "image-file", $(this).attr("project_id"));
-				handle_upload(null, "log-file", $(this).attr("project_id"));
-				break;
-			case "additonal":
-				change_wizard_tab("goodbye");
-				$("attachedInfoModal").modal("show");
+				var customer = $("#new-project-customer").val();							
+				create_new_project(project_name, customer, callback);
 				break;
 			case "goodbye":
+				change_wizard_tab("naming");
+				break;
+			default:
 				break;
 		}
 	});
@@ -340,19 +357,7 @@ $(document).ready(function() {
 		if (!name) {
 			return;
 		}
-		$.ajax({
-			url:"/newFolder",
-			method:"POST",
-			dataType:"JSON",
-			data:{"parent":getFolder(), "name":name},
-			success: function(data) {
-				if (!data.success) {
-					alert("Could not create new folder");
-					return;
-				}
-				refreshFilesystem();
-			}
-		});	
+		create_new_folder(name);	
 	});
 
 	$("#new-customer-btn").click(function() {
@@ -412,6 +417,27 @@ $(document).ready(function() {
 	}
 	RenderBreadCrumbPath(ROOT);
 });
+
+function create_new_folder(name, parent_id, callback) {
+	var parent_id = parent_id || getFolder();
+	var callback = callback || false;
+	$.ajax({
+		url:"/newFolder",
+		method:"POST",
+		dataType:"JSON",
+		data:{"parent":parent_id, "name":name},
+		success: function(data) {
+			if (!data.success) {
+				alert("Could not create new folder");
+				return;
+			}
+			if (callback) {
+				callback(data.folder_id)
+			}
+			refreshFilesystem();
+		}
+	});
+}
 //peter
 function searchFileSystem(m) {
 	var found = [];
