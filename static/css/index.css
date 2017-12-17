@@ -183,6 +183,23 @@ body {
 	padding-right:0px;
 }
 
+.not-hidden{
+	opacity:1.0;
+}
+
+.logout-hidden{
+	opacity:0.0;
+	margin-bottom:-50px;
+}
+
+.form-group{
+	margin-bottom:0px;
+}
+
+#swedish-btn{
+	width:100%;
+}
+
 .right-info-span{
 	width:67%;
 	color: rgba(0,0,0,.87);

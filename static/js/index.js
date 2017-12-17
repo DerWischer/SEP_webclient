@@ -321,7 +321,7 @@ $(document).ready(function() {
                     window.location.href = ("http://localhost:8888/account")
                 }
                 else {
-                    alert("You do not have permission to do this: Privilege -> ("+data.privilege+")")
+                    
                 }
             },
             error:function() {
@@ -712,8 +712,8 @@ $(document).ready(function() {
 						return;
 					}
 					var li = el("section", {class:"file-info-value row", "data-key":key, "data-value":value.value});
-					var key = el("div", {html:value.name, "class":"left-info-span col-md-6"});
-					var key2 = el("div", {html:value.value, "class":"right-info-span col-md-6"});
+					var key = el("div", {html:value.name, "class":"left-info-span col-sm-6 col-md-6"});
+					var key2 = el("div", {html:value.value, "class":"right-info-span col-sm-6 col-md-6"});
 					//var value = document.createTextNode(value);
 					li.appendChild(key);
 					li.appendChild(key2);
